@@ -30,6 +30,16 @@ namespace Schematics {
             auto createHSpace() {
                 return new QSpacerItem{10, 10, QSizePolicy::Expanding, QSizePolicy::Minimum};
             }
+
+            void addGridRow(QGridLayout* grid, QWidget* widget)
+            {
+                grid->addWidget(widget, grid->rowCount(), 0, 1, -1);;
+            }
+
+            void addGridRow(QGridLayout* grid, QLayoutItem* item)
+            {
+                grid->addItem(item, grid->rowCount(), 0, 1, -1);;
+            }
         }
 
         struct MainView {
@@ -41,6 +51,8 @@ namespace Schematics {
             QPushButton *btn_loadScheme = nullptr;
             QPushButton *btn_saveScheme = nullptr;
             QPushButton *btn_applyParams = nullptr;
+            QPushButton *btn_calcScheme = nullptr;
+            QPushButton *btn_applyScheme = nullptr;
             QDoubleSpinBox *scheme_minDiam = nullptr;
             QDoubleSpinBox *scheme_maxDiam = nullptr;
             QDoubleSpinBox *scheme_dwsGap = nullptr;
@@ -73,7 +85,7 @@ namespace Schematics {
                 {
                     QWidget *schemeTab = createEditorTab();
 
-                    tabList->addTab(schemeTab, QString::fromUtf8(u8"Scheme"));
+                    tabList->addTab(schemeTab, QString::fromUtf8(u8"Схема раскроя"));
                 }
 
                 mainBox->addWidget(tabList);
@@ -101,7 +113,6 @@ namespace Schematics {
 
             auto editGroup = new QGroupBox{QString::fromUtf8(u8"Редактор схем")};
             {
-                //editGroup->se
                 auto editBox = new QGridLayout;
                 editGroup->setLayout(editBox);
 
@@ -128,10 +139,10 @@ namespace Schematics {
                     scheme_dwsGap = addSizeEditor(paramBox, "DWS");
                     scheme_pkaGap = addSizeEditor(paramBox, "PKA");
 
-                    btn_applyParams = new QPushButton{"Применить"};
+                    btn_applyParams = new QPushButton{"Применить параметры"};
 
-                    paramBox->addWidget(btn_applyParams, paramBox->rowCount(), 0, 1, -1);
-                    editBox->addWidget(paramGroup, editBox->rowCount(), 0, 1, -1);
+                    tool::addGridRow(paramBox, btn_applyParams);
+                    tool::addGridRow(editBox, paramGroup);
                 }
 
                 auto dws_group = new QGroupBox{"DWS350/PA300"};
@@ -139,9 +150,22 @@ namespace Schematics {
                     auto box = new QGridLayout;
                     dws_group->setLayout(box);
 
-                    editBox->addWidget(dws_group, editBox->rowCount(), 0, 1, -1);
+                    tool::addGridRow(editBox, dws_group);
                 }
-                editBox->addItem(tool::createVSpace(), editBox->rowCount(), 0, -1, -1);
+
+                auto pka_group = new QGroupBox{"PKA350/PA350"};
+                {
+                    auto box = new QGridLayout;
+                    pka_group->setLayout(box);
+
+                    tool::addGridRow(editBox, pka_group);
+                }
+
+                btn_calcScheme = new QPushButton{"Рассчитать координаты"};
+                tool::addGridRow(editBox, btn_calcScheme);
+                btn_applyScheme = new QPushButton{"Выставить оборудование"};
+                tool::addGridRow(editBox, btn_applyScheme);
+                tool::addGridRow(editBox, tool::createVSpace());
             }
 
             schemeBox->addWidget(schemeView);
