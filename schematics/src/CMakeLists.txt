@@ -13,5 +13,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Qt5 COMPONENTS Widgets REQUIRED)
 
-add_executable(schematics main.cxx)
+add_executable(schematics)
+
+target_sources(schematics
+        PRIVATE
+            main.cxx
+            ui/mainwindow.cxx ui/mainwindow.hxx
+        )
 target_link_libraries(schematics PRIVATE schema Qt5::Widgets)
