@@ -53,10 +53,26 @@ namespace Schematics {
             QPushButton *btn_applyParams = nullptr;
             QPushButton *btn_calcScheme = nullptr;
             QPushButton *btn_applyScheme = nullptr;
-            QDoubleSpinBox *scheme_minDiam = nullptr;
-            QDoubleSpinBox *scheme_maxDiam = nullptr;
-            QDoubleSpinBox *scheme_dwsGap = nullptr;
-            QDoubleSpinBox *scheme_pkaGap = nullptr;
+            QDoubleSpinBox *param_minDiam = nullptr;
+            QDoubleSpinBox *param_maxDiam = nullptr;
+            QDoubleSpinBox *param_dwsGap = nullptr;
+            QDoubleSpinBox *param_pkaGap = nullptr;
+
+            QDoubleSpinBox *scheme_dws350_width = nullptr;
+            QDoubleSpinBox *scheme_dws350_height = nullptr;
+            QPushButton *btn_add_dws350 = nullptr;
+
+            QCheckBox* chk_pa300_enable = nullptr;
+            QDoubleSpinBox *scheme_pa300_width = nullptr;
+            QDoubleSpinBox *scheme_pa300_height = nullptr;
+
+            QCheckBox* chk_pka350_enable = nullptr;
+            QDoubleSpinBox *scheme_pka350_width = nullptr;
+            QDoubleSpinBox *scheme_pka350_height = nullptr;
+
+            QCheckBox* chk_pa350_enable = nullptr;
+            QDoubleSpinBox *scheme_pa350_width = nullptr;
+            QDoubleSpinBox *scheme_pa350_height = nullptr;
 
             void buildView(QMainWindow *self);
 
@@ -133,11 +149,11 @@ namespace Schematics {
                     paramGroup->setSizePolicy(def_policy);
 
                     paramBox->addWidget(new QLabel{"Диаметр"});
-                    scheme_minDiam = addSizeEditor(paramBox, "Минимальный");
-                    scheme_maxDiam = addSizeEditor(paramBox, "Максимальный");
+                    param_minDiam = addSizeEditor(paramBox, "Минимальный");
+                    param_maxDiam = addSizeEditor(paramBox, "Максимальный");
                     paramBox->addWidget(new QLabel{"Ширина пропила"});
-                    scheme_dwsGap = addSizeEditor(paramBox, "DWS");
-                    scheme_pkaGap = addSizeEditor(paramBox, "PKA");
+                    param_dwsGap = addSizeEditor(paramBox, "DWS");
+                    param_pkaGap = addSizeEditor(paramBox, "PKA");
 
                     btn_applyParams = new QPushButton{"Применить параметры"};
 
@@ -150,6 +166,17 @@ namespace Schematics {
                     auto box = new QGridLayout;
                     dws_group->setLayout(box);
 
+                    tool::addGridRow(box, new QLabel{"Центральные"});
+                    scheme_dws350_width = addSizeEditor(box, "Ширина");
+                    scheme_dws350_height = addSizeEditor(box, "Толщина");
+                    btn_add_dws350 = new QPushButton{"Добавить"};
+                    tool::addGridRow(box, btn_add_dws350);
+
+                    chk_pa300_enable = new QCheckBox{"Боковые"};
+                    tool::addGridRow(box, chk_pa300_enable);
+                    scheme_pa300_width = addSizeEditor(box, "Ширина");
+                    scheme_pa300_height = addSizeEditor(box, "Толщина");
+
                     tool::addGridRow(editBox, dws_group);
                 }
 
@@ -157,6 +184,16 @@ namespace Schematics {
                 {
                     auto box = new QGridLayout;
                     pka_group->setLayout(box);
+
+                    chk_pka350_enable = new QCheckBox{"Внутренние"};
+                    tool::addGridRow(box, chk_pka350_enable);
+                    scheme_pka350_width = addSizeEditor(box, "Ширина");
+                    scheme_pka350_height = addSizeEditor(box, "Толщина");
+
+                    chk_pa350_enable = new QCheckBox{"Внешние"};
+                    tool::addGridRow(box, chk_pa350_enable);
+                    scheme_pa350_width = addSizeEditor(box, "Ширина");
+                    scheme_pa350_height = addSizeEditor(box, "Толщина");
 
                     tool::addGridRow(editBox, pka_group);
                 }
