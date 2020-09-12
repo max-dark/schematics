@@ -20,6 +20,7 @@
 #include <QDebug>
 
 #include <ui/tools/tool.hxx>
+#include <ui/widgets/scheme/schemeview.hxx>
 
 namespace Schematics {
 
@@ -27,9 +28,7 @@ namespace Schematics {
 
         struct MainView {
             QLabel *lbl_status = nullptr;
-            QGraphicsView *schemeView = nullptr;
-            QGraphicsScene *scheme = nullptr;
-            QGraphicsEllipseItem *circle = nullptr;
+            Widgets::SchemeView *schemeView = nullptr;
             QPushButton *btn_newScheme = nullptr;
             QPushButton *btn_loadScheme = nullptr;
             QPushButton *btn_saveScheme = nullptr;
@@ -96,19 +95,7 @@ namespace Schematics {
             auto schemeTab = new QWidget;
             auto schemeBox = new QHBoxLayout;
 
-            scheme = new QGraphicsScene{};
-            scheme->setBackgroundBrush(Qt::white);
-
-            circle = scheme->addEllipse(0, 0, 200, 200);
-            circle->moveBy(-100, -100);
-            QPen c_pen{};
-            c_pen.setColor(Qt::black);
-            c_pen.setStyle(Qt::DashLine);
-            c_pen.setWidth(5);
-            circle->setPen(c_pen);
-
-            schemeView = new QGraphicsView();
-            schemeView->setScene(scheme);
+            schemeView = new Widgets::SchemeView();
 
             auto editGroup = new QGroupBox{QString::fromUtf8(u8"Редактор схем")};
             {

@@ -20,5 +20,8 @@ target_sources(schematics
             main.cxx
             ui/mainwindow.cxx ui/mainwindow.hxx
             ui/tools/tool.cxx ui/tools/tool.hxx
+
+            ui/widgets/scheme/schemeview.cxx ui/widgets/scheme/schemeview.hxx
+            ui/widgets/scheme/schemescene.cxx ui/widgets/scheme/schemescene.hxx
         )
 target_link_libraries(schematics PRIVATE schema Qt5::Widgets)
