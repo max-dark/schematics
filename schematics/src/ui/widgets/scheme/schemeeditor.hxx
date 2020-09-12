@@ -14,20 +14,23 @@ namespace Schematics::Ui::Widgets
     class SchemeEditor: public QGroupBox
     {
         Q_OBJECT
-    public:
+    public /* methods */:
         explicit SchemeEditor(QWidget* parent = nullptr);
         ~SchemeEditor() override;
+
+    signals:
+        void newScheme();
+        void loadScheme();
+        void saveScheme();
+
+        void calculateSchemeCoords();
+        void applySchemeCoords();
 
     private /* methods */:
         void buildView();
 
     private /* members */:
-        QPushButton *btn_newScheme = nullptr;
-        QPushButton *btn_loadScheme = nullptr;
-        QPushButton *btn_saveScheme = nullptr;
         QPushButton *btn_applyParams = nullptr;
-        QPushButton *btn_calcScheme = nullptr;
-        QPushButton *btn_applyScheme = nullptr;
         QDoubleSpinBox *param_minDiam = nullptr;
         QDoubleSpinBox *param_maxDiam = nullptr;
         QDoubleSpinBox *param_dwsGap = nullptr;

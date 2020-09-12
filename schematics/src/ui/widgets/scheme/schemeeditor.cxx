@@ -47,14 +47,20 @@ namespace Schematics::Ui::Widgets
         auto editBox = new QGridLayout;
         setLayout(editBox);
 
-        btn_newScheme = new QPushButton{"Новая"};
-        btn_loadScheme = new QPushButton{"Загрузить"};
-        btn_saveScheme = new QPushButton{"Сохранить"};
+        // create top buttons
+        {
+            auto btn_newScheme = new QPushButton{"Новая"};
+            auto btn_loadScheme = new QPushButton{"Загрузить"};
+            auto btn_saveScheme = new QPushButton{"Сохранить"};
 
-        editBox->addWidget(btn_newScheme, 0, 0);
-        editBox->addWidget(btn_loadScheme, 0, 1);
-        editBox->addWidget(btn_saveScheme, 0, 2);
+            editBox->addWidget(btn_newScheme, 0, 0);
+            editBox->addWidget(btn_loadScheme, 0, 1);
+            editBox->addWidget(btn_saveScheme, 0, 2);
 
+            connect(btn_newScheme, &QPushButton::clicked, this, &SchemeEditor::newScheme);
+            connect(btn_loadScheme, &QPushButton::clicked, this, &SchemeEditor::loadScheme);
+            connect(btn_saveScheme, &QPushButton::clicked, this, &SchemeEditor::saveScheme);
+        }
         QSizePolicy def_policy{QSizePolicy::Preferred, QSizePolicy::Minimum};
 
         auto paramGroup = new QGroupBox{"Параметры схемы"};
@@ -113,10 +119,16 @@ namespace Schematics::Ui::Widgets
             tool::addGridRow(editBox, pka_group);
         }
 
-        btn_calcScheme = new QPushButton{"Рассчитать координаты"};
-        tool::addGridRow(editBox, btn_calcScheme);
-        btn_applyScheme = new QPushButton{"Выставить оборудование"};
-        tool::addGridRow(editBox, btn_applyScheme);
+        // bottom buttons
+        {
+            auto btn_calcScheme = new QPushButton{"Рассчитать координаты"};
+            auto btn_applyScheme = new QPushButton{"Выставить оборудование"};
+            tool::addGridRow(editBox, btn_calcScheme);
+            tool::addGridRow(editBox, btn_applyScheme);
+
+            connect(btn_calcScheme, &QPushButton::clicked, this, &SchemeEditor::calculateSchemeCoords);
+            connect(btn_applyScheme, &QPushButton::clicked, this, &SchemeEditor::applySchemeCoords);
+        }
         tool::addGridRow(editBox, tool::createVSpace());
     }
 
