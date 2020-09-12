@@ -19,8 +19,8 @@
 #include <QSizePolicy>
 #include <QDebug>
 
-#include <ui/tools/tool.hxx>
 #include <ui/widgets/scheme/schemeview.hxx>
+#include <ui/widgets/scheme/schemeeditor.hxx>
 
 namespace Schematics {
 
@@ -29,39 +29,13 @@ namespace Schematics {
         struct MainView {
             QLabel *lbl_status = nullptr;
             Widgets::SchemeView *schemeView = nullptr;
-            QPushButton *btn_newScheme = nullptr;
-            QPushButton *btn_loadScheme = nullptr;
-            QPushButton *btn_saveScheme = nullptr;
-            QPushButton *btn_applyParams = nullptr;
-            QPushButton *btn_calcScheme = nullptr;
-            QPushButton *btn_applyScheme = nullptr;
-            QDoubleSpinBox *param_minDiam = nullptr;
-            QDoubleSpinBox *param_maxDiam = nullptr;
-            QDoubleSpinBox *param_dwsGap = nullptr;
-            QDoubleSpinBox *param_pkaGap = nullptr;
-
-            QDoubleSpinBox *scheme_dws350_width = nullptr;
-            QDoubleSpinBox *scheme_dws350_height = nullptr;
-            QPushButton *btn_add_dws350 = nullptr;
-
-            QCheckBox* chk_pa300_enable = nullptr;
-            QDoubleSpinBox *scheme_pa300_width = nullptr;
-            QDoubleSpinBox *scheme_pa300_height = nullptr;
-
-            QCheckBox* chk_pka350_enable = nullptr;
-            QDoubleSpinBox *scheme_pka350_width = nullptr;
-            QDoubleSpinBox *scheme_pka350_height = nullptr;
-
-            QCheckBox* chk_pa350_enable = nullptr;
-            QDoubleSpinBox *scheme_pa350_width = nullptr;
-            QDoubleSpinBox *scheme_pa350_height = nullptr;
+            Widgets::SchemeEditor* schemeEditor = nullptr;
 
             void buildView(QMainWindow *self);
 
         private:
             QWidget *createEditorTab();
 
-            static QDoubleSpinBox *addSizeEditor(QGridLayout *box, const QString &title);
         };
 
         void MainView::buildView(QMainWindow *self) {
@@ -97,105 +71,15 @@ namespace Schematics {
 
             schemeView = new Widgets::SchemeView();
 
-            auto editGroup = new QGroupBox{QString::fromUtf8(u8"Редактор схем")};
-            {
-                auto editBox = new QGridLayout;
-                editGroup->setLayout(editBox);
+            schemeEditor = new Widgets::SchemeEditor{};
 
-                btn_newScheme = new QPushButton{"Новая"};
-                btn_loadScheme = new QPushButton{"Загрузить"};
-                btn_saveScheme = new QPushButton{"Сохранить"};
-
-                editBox->addWidget(btn_newScheme, 0, 0);
-                editBox->addWidget(btn_loadScheme, 0, 1);
-                editBox->addWidget(btn_saveScheme, 0, 2);
-
-                QSizePolicy def_policy{QSizePolicy::Preferred, QSizePolicy::Minimum};
-
-                auto paramGroup = new QGroupBox{"Параметры схемы"};
-                {
-                    auto paramBox = new QGridLayout;
-                    paramGroup->setLayout(paramBox);
-                    paramGroup->setSizePolicy(def_policy);
-
-                    paramBox->addWidget(new QLabel{"Диаметр"});
-                    param_minDiam = addSizeEditor(paramBox, "Минимальный");
-                    param_maxDiam = addSizeEditor(paramBox, "Максимальный");
-                    paramBox->addWidget(new QLabel{"Ширина пропила"});
-                    param_dwsGap = addSizeEditor(paramBox, "DWS");
-                    param_pkaGap = addSizeEditor(paramBox, "PKA");
-
-                    btn_applyParams = new QPushButton{"Применить параметры"};
-
-                    tool::addGridRow(paramBox, btn_applyParams);
-                    tool::addGridRow(editBox, paramGroup);
-                }
-
-                auto dws_group = new QGroupBox{"DWS350/PA300"};
-                {
-                    auto box = new QGridLayout;
-                    dws_group->setLayout(box);
-
-                    tool::addGridRow(box, new QLabel{"Центральные"});
-                    scheme_dws350_width = addSizeEditor(box, "Ширина");
-                    scheme_dws350_height = addSizeEditor(box, "Толщина");
-                    btn_add_dws350 = new QPushButton{"Добавить"};
-                    tool::addGridRow(box, btn_add_dws350);
-
-                    chk_pa300_enable = new QCheckBox{"Боковые"};
-                    tool::addGridRow(box, chk_pa300_enable);
-                    scheme_pa300_width = addSizeEditor(box, "Ширина");
-                    scheme_pa300_height = addSizeEditor(box, "Толщина");
-
-                    tool::addGridRow(editBox, dws_group);
-                }
-
-                auto pka_group = new QGroupBox{"PKA350/PA350"};
-                {
-                    auto box = new QGridLayout;
-                    pka_group->setLayout(box);
-
-                    chk_pka350_enable = new QCheckBox{"Внутренние"};
-                    tool::addGridRow(box, chk_pka350_enable);
-                    scheme_pka350_width = addSizeEditor(box, "Ширина");
-                    scheme_pka350_height = addSizeEditor(box, "Толщина");
-
-                    chk_pa350_enable = new QCheckBox{"Внешние"};
-                    tool::addGridRow(box, chk_pa350_enable);
-                    scheme_pa350_width = addSizeEditor(box, "Ширина");
-                    scheme_pa350_height = addSizeEditor(box, "Толщина");
-
-                    tool::addGridRow(editBox, pka_group);
-                }
-
-                btn_calcScheme = new QPushButton{"Рассчитать координаты"};
-                tool::addGridRow(editBox, btn_calcScheme);
-                btn_applyScheme = new QPushButton{"Выставить оборудование"};
-                tool::addGridRow(editBox, btn_applyScheme);
-                tool::addGridRow(editBox, tool::createVSpace());
-            }
 
             schemeBox->addWidget(schemeView);
-            schemeBox->addWidget(editGroup);
+            schemeBox->addWidget(schemeEditor);
             schemeTab->setLayout(schemeBox);
             return schemeTab;
         }
 
-        QDoubleSpinBox *MainView::addSizeEditor(QGridLayout *box, const QString &title) {
-            auto lbl = new QLabel{title};
-            auto edit = new QDoubleSpinBox{};
-            edit->setSuffix(" mm");
-            edit->setDecimals(1);
-            edit->setAlignment(Qt::AlignRight);
-            edit->setMinimum(0.0);
-            edit->setMaximum(1000.0);
-
-            auto last_row = box->rowCount();
-            box->addWidget(lbl, last_row, 0);
-            box->addItem(tool::createHSpace(), last_row, 1);
-            box->addWidget(edit, last_row, 2);
-            return edit;
-        }
     }
 
     MainWindow::MainWindow(QWidget *parent)
