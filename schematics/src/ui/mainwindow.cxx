@@ -19,28 +19,11 @@
 #include <QSizePolicy>
 #include <QDebug>
 
+#include <ui/tools/tool.hxx>
+
 namespace Schematics {
 
     namespace Ui {
-        namespace tool {
-            auto createVSpace() {
-                return new QSpacerItem{10, 10, QSizePolicy::Minimum, QSizePolicy::Expanding};
-            }
-
-            auto createHSpace() {
-                return new QSpacerItem{10, 10, QSizePolicy::Expanding, QSizePolicy::Minimum};
-            }
-
-            void addGridRow(QGridLayout* grid, QWidget* widget)
-            {
-                grid->addWidget(widget, grid->rowCount(), 0, 1, -1);;
-            }
-
-            void addGridRow(QGridLayout* grid, QLayoutItem* item)
-            {
-                grid->addItem(item, grid->rowCount(), 0, 1, -1);;
-            }
-        }
 
         struct MainView {
             QLabel *lbl_status = nullptr;

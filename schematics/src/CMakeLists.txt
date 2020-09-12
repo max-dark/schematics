@@ -19,5 +19,6 @@ target_sources(schematics
         PRIVATE
             main.cxx
             ui/mainwindow.cxx ui/mainwindow.hxx
+            ui/tools/tool.cxx ui/tools/tool.hxx
         )
 target_link_libraries(schematics PRIVATE schema Qt5::Widgets)
