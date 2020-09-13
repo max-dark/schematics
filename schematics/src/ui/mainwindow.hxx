@@ -11,12 +11,19 @@ namespace Schematics {
 
     class MainWindow : public QMainWindow {
     Q_OBJECT
-    public:
+    public /* methods */:
         explicit MainWindow(QWidget *parent = nullptr);
 
         ~MainWindow() override;
 
-    private:
+    private slots:
+        void on_newScheme();
+        void on_loadScheme();
+        void on_saveScheme();
+    private /* methods */:
+        void bindEvents();
+        void bindSchemeEditor();
+    private /* members */:
         Ui::MainView *ui = nullptr;
     };
 

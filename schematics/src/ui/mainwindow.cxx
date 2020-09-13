@@ -86,10 +86,37 @@ namespace Schematics {
             : QMainWindow(parent), ui{new Ui::MainView()} {
         ui->buildView(this);
         setWindowState(Qt::WindowMaximized);
+        bindEvents();
     }
 
     MainWindow::~MainWindow() {
         delete ui;
+    }
+
+    void MainWindow::bindEvents() {
+        bindSchemeEditor();
+    }
+
+    void MainWindow::bindSchemeEditor() {
+        using Schematics::Ui::Widgets::SchemeEditor;
+        connect(ui->schemeEditor, &SchemeEditor::newScheme,
+                this, &MainWindow::on_newScheme);
+        connect(ui->schemeEditor, &SchemeEditor::loadScheme,
+                this, &MainWindow::on_loadScheme);
+        connect(ui->schemeEditor, &SchemeEditor::saveScheme,
+                this, &MainWindow::on_saveScheme);
+    }
+
+    void MainWindow::on_newScheme() {
+
+    }
+
+    void MainWindow::on_loadScheme() {
+
+    }
+
+    void MainWindow::on_saveScheme() {
+
     }
 
 } // namespace Schematics
