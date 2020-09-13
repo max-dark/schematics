@@ -22,6 +22,8 @@
 #include <ui/widgets/scheme/schemeview.hxx>
 #include <ui/widgets/scheme/schemeeditor.hxx>
 
+#include <ui/widgets/coords/coordstab.hxx>
+
 namespace Schematics {
 
     namespace Ui {
@@ -55,9 +57,11 @@ namespace Schematics {
             {
                 auto tabList = new QTabWidget;
                 {
-                    QWidget *schemeTab = createEditorTab();
+                    auto schemeTab = createEditorTab();
+                    auto coordsTab = new Widgets::CoordsTab{};
 
-                    tabList->addTab(schemeTab, QString::fromUtf8(u8"Схема раскроя"));
+                    tabList->addTab(schemeTab, QString::fromUtf8("Схема раскроя"));
+                    tabList->addTab(coordsTab, QString::fromUtf8("Координаты оборудования"));
                 }
 
                 mainBox->addWidget(tabList);

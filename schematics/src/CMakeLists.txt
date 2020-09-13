@@ -24,5 +24,7 @@ target_sources(schematics
             ui/widgets/scheme/schemeview.cxx ui/widgets/scheme/schemeview.hxx
             ui/widgets/scheme/schemescene.cxx ui/widgets/scheme/schemescene.hxx
             ui/widgets/scheme/schemeeditor.cxx ui/widgets/scheme/schemeeditor.hxx
+
+            ui/widgets/coords/coordstab.cxx ui/widgets/coords/coordstab.hxx
         )
 target_link_libraries(schematics PRIVATE schema Qt5::Widgets)
