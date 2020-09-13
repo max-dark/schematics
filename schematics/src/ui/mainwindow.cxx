@@ -30,8 +30,13 @@ namespace Schematics {
 
         struct MainView {
             QLabel *lbl_status = nullptr;
+
+            QTabWidget* tabList = nullptr;
+
             Widgets::SchemeView *schemeView = nullptr;
             Widgets::SchemeEditor* schemeEditor = nullptr;
+
+            Widgets::CoordsTab* coordsTab = nullptr;
 
             void buildView(QMainWindow *self);
 
@@ -55,10 +60,10 @@ namespace Schematics {
             }
             // add tabs
             {
-                auto tabList = new QTabWidget;
+                tabList = new QTabWidget;
                 {
                     auto schemeTab = createEditorTab();
-                    auto coordsTab = new Widgets::CoordsTab{};
+                    coordsTab = new Widgets::CoordsTab{};
 
                     tabList->addTab(schemeTab, QString::fromUtf8("Схема раскроя"));
                     tabList->addTab(coordsTab, QString::fromUtf8("Координаты оборудования"));
