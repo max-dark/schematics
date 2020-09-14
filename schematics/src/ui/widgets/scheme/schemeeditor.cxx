@@ -78,6 +78,8 @@ namespace Schematics::Ui::Widgets
 
     void SchemeEditor::buildView() {
         using namespace Schematics::Ui;
+
+        setTitle("Редактор схем");
         auto editBox = new QGridLayout;
         setLayout(editBox);
 
