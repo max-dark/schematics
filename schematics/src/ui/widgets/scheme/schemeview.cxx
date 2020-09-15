@@ -49,7 +49,7 @@ namespace Schematics::Ui::Widgets
         }
         void setFillColor(const QColor& color)
         {
-            auto bg = QBrush{color, Qt::DiagCrossPattern};
+            auto bg = QBrush{color, Qt::Dense5Pattern};
             setBrush(bg);
         }
     private:
