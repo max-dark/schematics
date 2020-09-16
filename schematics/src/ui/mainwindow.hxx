@@ -20,6 +20,15 @@ namespace Schematics {
         void on_newScheme();
         void on_loadScheme();
         void on_saveScheme();
+
+        void schemeParamChanged();
+
+        void centralWidthChanged(double width);
+        void addCentralBoard(double width, double height);
+
+        void pa300Changed(bool enabled, double width, double height);
+        void pka350Changed(bool enabled, double width, double height);
+        void pa350Changed(bool enabled, double width, double height);
     private /* methods */:
         void bindEvents();
         void bindSchemeEditor();

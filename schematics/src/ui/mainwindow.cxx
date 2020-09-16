@@ -114,10 +114,23 @@ namespace Schematics {
                 this, &MainWindow::on_loadScheme);
         connect(ui->schemeEditor, &SchemeEditor::saveScheme,
                 this, &MainWindow::on_saveScheme);
+
+        connect(ui->schemeEditor, &SchemeEditor::schemeParamChanged,
+                this, &MainWindow::schemeParamChanged);
+        connect(ui->schemeEditor, &SchemeEditor::centralWidthChanged,
+                this, &MainWindow::centralWidthChanged);
+        connect(ui->schemeEditor, &SchemeEditor::addCentralBoard,
+                this, &MainWindow::addCentralBoard);
+        connect(ui->schemeEditor, &SchemeEditor::pa300Changed,
+                this, &MainWindow::pa300Changed);
+        connect(ui->schemeEditor, &SchemeEditor::pka350Changed,
+                this, &MainWindow::pka350Changed);
+        connect(ui->schemeEditor, &SchemeEditor::pa350Changed,
+                this, &MainWindow::pa350Changed);
     }
 
     void MainWindow::on_newScheme() {
-
+        ui->schemeView->clear();
     }
 
     void MainWindow::on_loadScheme() {
@@ -126,6 +139,44 @@ namespace Schematics {
 
     void MainWindow::on_saveScheme() {
 
+    }
+
+    void MainWindow::schemeParamChanged()
+    {
+        ui->schemeView->setDiameter(ui->schemeEditor->minDiam());
+        ui->schemeView->setSawSizes(
+            ui->schemeEditor->dwsSaw(),
+            ui->schemeEditor->pkaSaw()
+            );
+        ui->schemeView->setVertical(ui->schemeEditor->isVertical());
+    }
+
+    void MainWindow::centralWidthChanged(double width)
+    {
+        ui->schemeView->setCentralWidth(width);
+    }
+
+    void MainWindow::addCentralBoard(double width, double height)
+    {
+        ui->schemeView->addCentral(height);
+    }
+
+    void MainWindow::pa300Changed(bool enabled, double width, double height)
+    {
+        ui->schemeView->setPA300Enabled(enabled);
+        ui->schemeView->setPA300Size(width, height);
+    }
+
+    void MainWindow::pka350Changed(bool enabled, double width, double height)
+    {
+        ui->schemeView->setPKA350Enabled(enabled);
+        ui->schemeView->setPKA350Size(width, height);
+    }
+
+    void MainWindow::pa350Changed(bool enabled, double width, double height)
+    {
+        ui->schemeView->setPA350Enabled(enabled);
+        ui->schemeView->setPA350Size(width, height);
     }
 
 } // namespace Schematics
