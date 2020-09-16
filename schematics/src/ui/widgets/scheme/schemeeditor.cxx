@@ -76,6 +76,28 @@ namespace Schematics::Ui::Widgets
         buildView();
     }
 
+    double SchemeEditor::minDiam() const
+    {
+        return param_minDiam->value();
+    }
+
+    double SchemeEditor::maxDiam() const
+    {
+        return param_maxDiam->value();
+    }
+
+    double SchemeEditor::dwsSaw() const
+    {
+        return param_dwsGap->value();
+    }
+
+    double SchemeEditor::pkaSaw() const
+    {
+        return param_pkaGap->value();
+    }
+
+    bool SchemeEditor::isVertical() const { return param_pu2->isChecked(); }
+
     void SchemeEditor::buildView() {
         using namespace Schematics::Ui;
 

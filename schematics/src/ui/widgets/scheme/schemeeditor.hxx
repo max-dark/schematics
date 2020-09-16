@@ -18,6 +18,12 @@ namespace Schematics::Ui::Widgets
         explicit SchemeEditor(QWidget* parent = nullptr);
         ~SchemeEditor() override;
 
+        double minDiam() const;
+        double maxDiam() const;
+        double dwsSaw() const;
+        double pkaSaw() const;
+        bool isVertical() const;
+
     signals:
         void newScheme();
         void loadScheme();
