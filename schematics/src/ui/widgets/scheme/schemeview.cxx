@@ -161,13 +161,10 @@ namespace Schematics::Ui::Widgets
         QGraphicsLineItem* x_axis = nullptr;
         QGraphicsLineItem* y_axis = nullptr;
 
+        double centralWidth = 200.0;
+        double sawDws = 4.8;
+        double sawPka = 5.6;
         bool pkaIsVertical = false;
-
-        double dwsSaw() const
-        { return 4.8; }
-
-        double pkaSaw() const
-        { return 5.6; }
 
         static SchemeItems* create(SchemeScene* gfx)
         {
@@ -218,6 +215,30 @@ namespace Schematics::Ui::Widgets
             return this;
         }
 
+
+        void clear()
+        {
+            qDeleteAll(dws350.begin(), dws350.end());
+            dws350.clear();
+
+            setPA300Visible(false);
+            setPKA350Visible(false);
+            setPA350Visible(false);
+        }
+
+        double dwsSaw() const
+        { return sawDws; }
+
+        double pkaSaw() const
+        { return sawDws; }
+
+        void setSaws(double dws, double pka)
+        {
+            sawDws = dws;
+            sawPka = pka;
+            updateGeometry();
+        }
+
         void setDiameter(double diameter)
         {
             auto radius = diameter / 2;
@@ -229,6 +250,7 @@ namespace Schematics::Ui::Widgets
 
         void setCentralWidth(double width)
         {
+            centralWidth = width;
             for(auto b: dws350)
             {
                 b->setWidth(width);
@@ -236,15 +258,44 @@ namespace Schematics::Ui::Widgets
             updateGeometry();
         }
 
-        auto addCentral(SchemeScene* gfx, double width, double height)
+        bool setCentralHeight(int index, double height)
+        {
+            if (index >= 0 && index < dws350.size())
+            {
+                dws350.at(index)->setHeight(height);
+                updateGeometry();
+                return true;
+            }
+            return false;
+        }
+
+        auto addCentral(SchemeScene* gfx, double height)
         {
             auto b = new DWS350BoardItem{};
-            b->setHeight(height);
+            b->setSize(centralWidth, height);
             gfx->addItem(b);
             dws350.push_back(b);
-            setCentralWidth(width);
 
             return b;
+        }
+
+        bool removeCentral(int idx)
+        {
+            if (idx >= 0 && idx < dws350.size())
+            {
+                auto it = dws350.begin() + idx;
+
+                // autoremove from scene
+                // in QGraphicsItem destructor
+                delete (*it);
+                // remove from central list
+                dws350.erase(it);
+
+                updateGeometry();
+
+                return true;
+            }
+            return false;
         }
 
         void setPA300Size(double width, double height)
@@ -301,7 +352,7 @@ namespace Schematics::Ui::Widgets
         {
             // calc dws rect
             auto dw = 0.0;
-            auto dh = dws350.count() == 0 ? 0.0 : dws350[0]->rect().height();
+            auto dh = dws350.count() == 0 ? 0.0 : centralWidth;
 
             for(auto b: dws350)
             {
@@ -447,19 +498,6 @@ namespace Schematics::Ui::Widgets
         gfx->setBackgroundBrush(Qt::white);
         scheme = SchemeItems::create(gfx);
         setDiameter(200.0);
-
-//        for(auto sz: {35., 60., 35.})
-//        {
-//            scheme->addCentral(gfx, 300.0, sz);
-//        }
-//        scheme->setPA300Size(250., 35.);
-//        scheme->setPA300Visible(true);
-//        scheme->setPKA350Size(200, 25);
-//        //scheme->setPKA350Visible(true);
-//        scheme->setPA350Size(150, 40);
-//        scheme->setPA350Visible(true);
-//        scheme->setVertical(true);
-//        setDiameter(350.0);
     }
 
     void SchemeView::setDiameter(double diameter)
@@ -467,13 +505,73 @@ namespace Schematics::Ui::Widgets
         scheme->setDiameter(diameter);
     }
 
+    void SchemeView::setVertical(bool isVertical)
+    {
+        scheme->setVertical(isVertical);
+    }
+
+    void SchemeView::setSawSizes(double dws, double pka)
+    {
+        scheme->setSaws(dws, pka);
+    }
+
+    void SchemeView::addCentral(double height)
+    {
+        scheme->addCentral(gfx, height);
+    }
+
     void SchemeView::setCentralWidth(double width)
     {
         scheme->setCentralWidth(width);
     }
 
+    void SchemeView::setCentralHeight(int index, double height)
+    {
+        scheme->setCentralHeight(index, height);
+    }
+
+    void SchemeView::removeCentral(int index)
+    {
+        scheme->removeCentral(index);
+    }
+
+    void SchemeView::setPA300Size(double width, double height)
+    {
+        scheme->setPA300Size(width, height);
+    }
+
+    void SchemeView::setPA300Enabled(bool enabled)
+    {
+        scheme->setPA300Visible(enabled);
+    }
+
+    void SchemeView::setPKA350Size(double width, double height)
+    {
+        scheme->setPKA350Size(width, height);
+    }
+
+    void SchemeView::setPKA350Enabled(bool enabled)
+    {
+        scheme->setPKA350Visible(enabled);
+    }
+
+    void SchemeView::setPA350Size(double width, double height)
+    {
+        scheme->setPA350Size(width, height);
+    }
+
+    void SchemeView::setPA350Enabled(bool enabled)
+    {
+        scheme->setPA350Visible(enabled);
+    }
+
     SchemeView::~SchemeView()
     {
         delete scheme;
+    }
+
+    void SchemeView::clear()
+    {
+        scheme->clear();
     }
 } // namespace Schematics::Ui::Widgets
