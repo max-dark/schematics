@@ -518,6 +518,7 @@ namespace Schematics::Ui::Widgets
     void SchemeView::addCentral(double height)
     {
         scheme->addCentral(gfx, height);
+        scheme->updateGeometry();
     }
 
     void SchemeView::setCentralWidth(double width)
