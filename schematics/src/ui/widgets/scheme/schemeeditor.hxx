@@ -59,6 +59,7 @@ namespace Schematics::Ui::Widgets
         QDoubleSpinBox *param_maxDiam = nullptr;
         QDoubleSpinBox *param_dwsGap = nullptr;
         QDoubleSpinBox *param_pkaGap = nullptr;
+        QCheckBox* param_pu2 = nullptr;
 
         QDoubleSpinBox *scheme_dws350_width = nullptr;
         QDoubleSpinBox *scheme_dws350_height = nullptr;

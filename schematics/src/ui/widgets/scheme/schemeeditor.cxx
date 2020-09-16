@@ -117,6 +117,10 @@ namespace Schematics::Ui::Widgets
                 bindEditor(editor, &SchemeEditor::schemeParamChanged);
             }
 
+            param_pu2 = new QCheckBox{"Отключить ПУ №2"};
+            paramBox->addWidget(param_pu2);
+            bindChkBox(param_pu2, &SchemeEditor::schemeParamChanged);
+
             auto btn_applyParams = new QPushButton{"Применить параметры"};
             bindButton(btn_applyParams, &SchemeEditor::applySchemeParams);
 
