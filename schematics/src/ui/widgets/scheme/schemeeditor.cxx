@@ -207,7 +207,9 @@ namespace Schematics::Ui::Widgets
     void SchemeEditor::on_pa300Changed() {
         auto width = scheme_pa300_width->value();
         auto height = scheme_pa300_height->value();
-        auto is_enabled = chk_pa300_enable->isChecked();
+        auto is_enabled = chk_pa300_enable->isChecked()
+                          && (width > 0.0)
+                          && (height > 0.0);
 
         emit pa300Changed(is_enabled, width, height);
     }
@@ -215,7 +217,9 @@ namespace Schematics::Ui::Widgets
     void SchemeEditor::on_pka350Changed() {
         auto width = scheme_pka350_width->value();
         auto height = scheme_pka350_height->value();
-        auto is_enabled = chk_pka350_enable->isChecked();
+        auto is_enabled = chk_pka350_enable->isChecked()
+                          && (width > 0.0)
+                          && (height > 0.0);
 
         emit pka350Changed(is_enabled, width, height);
     }
@@ -223,7 +227,9 @@ namespace Schematics::Ui::Widgets
     void SchemeEditor::on_pa350Changed() {
         auto width = scheme_pa350_width->value();
         auto height = scheme_pa350_height->value();
-        auto is_enabled = chk_pa350_enable->isChecked();
+        auto is_enabled = chk_pa350_enable->isChecked()
+                          && (width > 0.0)
+                          && (height > 0.0);
 
         emit pa350Changed(is_enabled, width, height);
     }
