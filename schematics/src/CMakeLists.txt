@@ -13,7 +13,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Qt5 COMPONENTS Widgets REQUIRED)
 
-add_executable(schematics)
+add_executable(schematics WIN32)
 
 target_sources(schematics
         PRIVATE
