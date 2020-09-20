@@ -105,20 +105,6 @@ namespace Schematics::Ui::Widgets
         auto editBox = new QGridLayout;
         setLayout(editBox);
 
-        // create top buttons
-        {
-            auto btn_newScheme = new QPushButton{"Новая"};
-            auto btn_loadScheme = new QPushButton{"Загрузить"};
-            auto btn_saveScheme = new QPushButton{"Сохранить"};
-
-            editBox->addWidget(btn_newScheme, 0, 0);
-            editBox->addWidget(btn_loadScheme, 0, 1);
-            editBox->addWidget(btn_saveScheme, 0, 2);
-
-            bindButton(btn_newScheme, &SchemeEditor::newScheme);
-            bindButton(btn_loadScheme, &SchemeEditor::loadScheme);
-            bindButton(btn_saveScheme, &SchemeEditor::saveScheme);
-        }
         QSizePolicy def_policy{QSizePolicy::Preferred, QSizePolicy::Minimum};
 
         auto paramGroup = new QGroupBox{"Параметры схемы"};

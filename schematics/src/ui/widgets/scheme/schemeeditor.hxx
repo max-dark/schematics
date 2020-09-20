@@ -25,10 +25,6 @@ namespace Schematics::Ui::Widgets
         bool isVertical() const;
 
     signals:
-        void newScheme();
-        void loadScheme();
-        void saveScheme();
-
         void schemeParamChanged();
 
         void centralWidthChanged(double width);

@@ -108,12 +108,6 @@ namespace Schematics {
 
     void MainWindow::bindSchemeEditor() {
         using Schematics::Ui::Widgets::SchemeEditor;
-        connect(ui->schemeEditor, &SchemeEditor::newScheme,
-                this, &MainWindow::on_newScheme);
-        connect(ui->schemeEditor, &SchemeEditor::loadScheme,
-                this, &MainWindow::on_loadScheme);
-        connect(ui->schemeEditor, &SchemeEditor::saveScheme,
-                this, &MainWindow::on_saveScheme);
 
         connect(ui->schemeEditor, &SchemeEditor::schemeParamChanged,
                 this, &MainWindow::schemeParamChanged);
