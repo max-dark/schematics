@@ -105,6 +105,8 @@ namespace Schematics::Ui::Widgets
         auto editBox = new QGridLayout;
         setLayout(editBox);
 
+        setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Minimum);
+
         QSizePolicy def_policy{QSizePolicy::Preferred, QSizePolicy::Minimum};
 
         auto paramGroup = new QGroupBox{"Параметры схемы"};
