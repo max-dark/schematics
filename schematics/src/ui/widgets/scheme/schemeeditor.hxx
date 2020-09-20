@@ -30,7 +30,6 @@ namespace Schematics::Ui::Widgets
         void saveScheme();
 
         void schemeParamChanged();
-        void applySchemeParams();
 
         void centralWidthChanged(double width);
         void addCentralBoard(double width, double height);

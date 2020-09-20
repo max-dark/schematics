@@ -143,10 +143,6 @@ namespace Schematics::Ui::Widgets
             paramBox->addWidget(param_pu2);
             bindChkBox(param_pu2, &SchemeEditor::schemeParamChanged);
 
-            auto btn_applyParams = new QPushButton{"Применить параметры"};
-            bindButton(btn_applyParams, &SchemeEditor::applySchemeParams);
-
-            tool::addGridRow(paramBox, btn_applyParams);
             tool::addGridRow(editBox, paramGroup);
         }
 
