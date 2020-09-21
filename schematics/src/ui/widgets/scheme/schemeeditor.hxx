@@ -61,12 +61,14 @@ namespace Schematics::Ui::Widgets
         void bindEditor(QDoubleSpinBox* box, void (SchemeEditor::* method)(double)) const;
         void bindChkBox(QCheckBox* box, void (SchemeEditor::* method)()) const;
 
-        void bindGroup(const BoardParams group,
+        void bindGroup(const BoardParams& group,
                        void (SchemeEditor::* method)()) const;
         void bindGroup(QCheckBox* enable,
                        QDoubleSpinBox* width,
                        QDoubleSpinBox* height,
                        void (SchemeEditor::* method)()) const;
+
+        void setBoardParams(BoardParams& group, bool enabled, double width, double height);
 
     private /* members */:
         QDoubleSpinBox *param_minDiam = nullptr;

@@ -62,7 +62,7 @@ namespace Schematics::Ui::Widgets
                          this, method);
     }
 
-    void SchemeEditor::bindGroup(const SchemeEditor::BoardParams group, void (SchemeEditor::*method)()) const
+    void SchemeEditor::bindGroup(const SchemeEditor::BoardParams &group, void (SchemeEditor::*method)()) const
     {
         bindGroup(group.enable, group.width, group.height, method);
     }
@@ -75,6 +75,14 @@ namespace Schematics::Ui::Widgets
         bindChkBox(enable, method);
         bindEditor(width, method);
         bindEditor(height, method);
+    }
+
+    void SchemeEditor::setBoardParams(SchemeEditor::BoardParams &group, bool enabled, double width, double height)
+    {
+        QSignalBlocker block_signals{this};
+        group.enable->setChecked(enabled);
+        group.width->setValue(width);
+        group.height->setValue(height);
     }
 
     SchemeEditor::SchemeEditor(QWidget *parent) : QGroupBox(parent) {
