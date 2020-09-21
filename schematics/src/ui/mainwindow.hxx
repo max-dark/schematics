@@ -31,6 +31,7 @@ namespace Schematics {
         void pa350Changed(bool enabled, double width, double height);
     private /* methods */:
         void bindEvents();
+        void bindMenus();
         void bindSchemeEditor();
     private /* members */:
         Ui::MainView *ui = nullptr;

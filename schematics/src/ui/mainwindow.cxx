@@ -18,6 +18,9 @@
 #include <QSpacerItem>
 #include <QSizePolicy>
 #include <QDebug>
+#include <QMenuBar>
+#include <QMenu>
+#include <QAction>
 
 #include <ui/widgets/scheme/schemeview.hxx>
 #include <ui/widgets/scheme/schemeeditor.hxx>
@@ -29,6 +32,10 @@ namespace Schematics {
     namespace Ui {
 
         struct MainView {
+            QAction* scheme_new = nullptr;
+            QAction* scheme_load = nullptr;
+            QAction* scheme_save = nullptr;
+
             QLabel *lbl_status = nullptr;
 
             QTabWidget* tabList = nullptr;
@@ -42,6 +49,7 @@ namespace Schematics {
 
         private:
             QWidget *createEditorTab();
+            QMenuBar *createMainMenu();
 
         };
 
@@ -71,6 +79,13 @@ namespace Schematics {
 
                 mainBox->addWidget(tabList);
             }
+
+            // add main menu
+            {
+                auto menuBar = createMainMenu();
+                self->setMenuBar(menuBar);
+            }
+
             self->centralWidget()->setLayout(mainBox);
         }
 
@@ -87,6 +102,24 @@ namespace Schematics {
             schemeBox->addWidget(schemeEditor);
             schemeTab->setLayout(schemeBox);
             return schemeTab;
+        }
+
+        QMenuBar *MainView::createMainMenu()
+        {
+            auto mainMenu = new QMenuBar{};
+            {
+                auto schemeMenu = mainMenu->addMenu("Схема");
+
+                scheme_new = new QAction{"Новая"};
+                scheme_load = new QAction{"Загрузить"};
+                scheme_save = new QAction{"Сохранить"};
+
+                schemeMenu->addAction(scheme_new);
+                schemeMenu->addAction(scheme_load);
+                schemeMenu->addAction(scheme_save);
+            }
+
+            return mainMenu;
         }
 
     }
@@ -109,7 +142,18 @@ namespace Schematics {
     }
 
     void MainWindow::bindEvents() {
+        bindMenus();
         bindSchemeEditor();
+    }
+
+    void MainWindow::bindMenus()
+    {
+        connect(ui->scheme_new, &QAction::triggered,
+                this, &MainWindow::on_newScheme);
+        connect(ui->scheme_load, &QAction::triggered,
+                this, &MainWindow::on_loadScheme);
+        connect(ui->scheme_save, &QAction::triggered,
+                this, &MainWindow::on_saveScheme);
     }
 
     void MainWindow::bindSchemeEditor() {
