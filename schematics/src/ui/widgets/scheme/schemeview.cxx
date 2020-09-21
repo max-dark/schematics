@@ -230,7 +230,7 @@ namespace Schematics::Ui::Widgets
         { return sawDws; }
 
         double pkaSaw() const
-        { return sawDws; }
+        { return sawPka; }
 
         void setSaws(double dws, double pka)
         {

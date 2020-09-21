@@ -18,13 +18,25 @@ namespace Schematics::Ui::Widgets
         explicit SchemeEditor(QWidget* parent = nullptr);
         ~SchemeEditor() override;
 
-    signals:
-        void newScheme();
-        void loadScheme();
-        void saveScheme();
+        double minDiam() const;
+        double maxDiam() const;
+        double dwsSaw() const;
+        double pkaSaw() const;
+        bool isVertical() const;
 
+        void setParams(double min_diam, double max_diam,
+                       double dws_saw, double pka_saw,
+                       bool is_vertical);
+
+        void setDWS350(double width, double height);
+        void setPA300(bool enabled, double width, double height);
+        void setPKA350(bool enabled, double width, double height);
+        void setPA350(bool enabled, double width, double height);
+
+        void clearAll();
+
+    signals:
         void schemeParamChanged();
-        void applySchemeParams();
 
         void centralWidthChanged(double width);
         void addCentralBoard(double width, double height);
@@ -41,6 +53,13 @@ namespace Schematics::Ui::Widgets
         void on_pa300Changed();
         void on_pka350Changed();
         void on_pa350Changed();
+    private /* types */:
+        struct BoardParams
+        {
+            QCheckBox* enable = nullptr;
+            QDoubleSpinBox* width = nullptr;
+            QDoubleSpinBox* height = nullptr;
+        };
     private /* methods */:
         void buildView();
 
@@ -49,31 +68,30 @@ namespace Schematics::Ui::Widgets
         void bindEditor(QDoubleSpinBox* box, void (SchemeEditor::* method)(double)) const;
         void bindChkBox(QCheckBox* box, void (SchemeEditor::* method)()) const;
 
+        void bindGroup(const BoardParams& group,
+                       void (SchemeEditor::* method)()) const;
         void bindGroup(QCheckBox* enable,
                        QDoubleSpinBox* width,
                        QDoubleSpinBox* height,
                        void (SchemeEditor::* method)()) const;
+
+        void setBoardParams(BoardParams& group, bool enabled, double width, double height);
 
     private /* members */:
         QDoubleSpinBox *param_minDiam = nullptr;
         QDoubleSpinBox *param_maxDiam = nullptr;
         QDoubleSpinBox *param_dwsGap = nullptr;
         QDoubleSpinBox *param_pkaGap = nullptr;
+        QCheckBox* param_pu2 = nullptr;
 
         QDoubleSpinBox *scheme_dws350_width = nullptr;
         QDoubleSpinBox *scheme_dws350_height = nullptr;
 
-        QCheckBox* chk_pa300_enable = nullptr;
-        QDoubleSpinBox *scheme_pa300_width = nullptr;
-        QDoubleSpinBox *scheme_pa300_height = nullptr;
+        BoardParams pa300;
 
-        QCheckBox* chk_pka350_enable = nullptr;
-        QDoubleSpinBox *scheme_pka350_width = nullptr;
-        QDoubleSpinBox *scheme_pka350_height = nullptr;
+        BoardParams pka350;
 
-        QCheckBox* chk_pa350_enable = nullptr;
-        QDoubleSpinBox *scheme_pa350_width = nullptr;
-        QDoubleSpinBox *scheme_pa350_height = nullptr;
+        BoardParams pa350;
     };
 } // namespace Schematics::Ui::Widgets
 

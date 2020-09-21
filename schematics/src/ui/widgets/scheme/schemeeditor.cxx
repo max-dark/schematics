@@ -62,6 +62,11 @@ namespace Schematics::Ui::Widgets
                          this, method);
     }
 
+    void SchemeEditor::bindGroup(const SchemeEditor::BoardParams &group, void (SchemeEditor::*method)()) const
+    {
+        bindGroup(group.enable, group.width, group.height, method);
+    }
+
     void SchemeEditor::bindGroup(QCheckBox* enable,
                    QDoubleSpinBox* width,
                    QDoubleSpinBox* height,
@@ -72,8 +77,84 @@ namespace Schematics::Ui::Widgets
         bindEditor(height, method);
     }
 
+    void SchemeEditor::setBoardParams(SchemeEditor::BoardParams &group, bool enabled, double width, double height)
+    {
+        QSignalBlocker block_signals{this};
+        group.enable->setChecked(enabled);
+        group.width->setValue(width);
+        group.height->setValue(height);
+    }
+
     SchemeEditor::SchemeEditor(QWidget *parent) : QGroupBox(parent) {
         buildView();
+    }
+
+    double SchemeEditor::minDiam() const
+    {
+        return param_minDiam->value();
+    }
+
+    double SchemeEditor::maxDiam() const
+    {
+        return param_maxDiam->value();
+    }
+
+    double SchemeEditor::dwsSaw() const
+    {
+        return param_dwsGap->value();
+    }
+
+    double SchemeEditor::pkaSaw() const
+    {
+        return param_pkaGap->value();
+    }
+
+    bool SchemeEditor::isVertical() const { return param_pu2->isChecked(); }
+
+    void SchemeEditor::setParams(double min_diam, double max_diam, double dws_saw, double pka_saw, bool is_vertical)
+    {
+        {
+            QSignalBlocker block_signals{this};
+
+            param_minDiam->setValue(min_diam);
+            param_maxDiam->setValue(max_diam);
+            param_dwsGap->setValue(dws_saw);
+            param_pkaGap->setValue(pka_saw);
+            param_pu2->setChecked(is_vertical);
+        }
+        emit schemeParamChanged();
+    }
+
+    void SchemeEditor::setDWS350(double width, double height)
+    {
+        scheme_dws350_width->setValue(width);
+        scheme_dws350_height->setValue(height);
+    }
+
+    void SchemeEditor::setPA300(bool enabled, double width, double height)
+    {
+        setBoardParams(pa300, enabled, width, height);
+        on_pa300Changed();
+    }
+
+    void SchemeEditor::setPKA350(bool enabled, double width, double height)
+    {
+        setBoardParams(pka350, enabled, width, height);
+        on_pka350Changed();
+    }
+
+    void SchemeEditor::setPA350(bool enabled, double width, double height)
+    {
+        setBoardParams(pa350, enabled, width, height);
+        on_pa350Changed();
+    }
+
+    void SchemeEditor::clearAll()
+    {
+        setDWS350(0.0, 0.0);
+        setPA300(false, 0.0, 0.0);
+        setPKA350(false, 0.0, 0.0);
+        setPA350(false, 0.0, 0.0);
     }
 
     void SchemeEditor::buildView() {
@@ -83,20 +164,8 @@ namespace Schematics::Ui::Widgets
         auto editBox = new QGridLayout;
         setLayout(editBox);
 
-        // create top buttons
-        {
-            auto btn_newScheme = new QPushButton{"Новая"};
-            auto btn_loadScheme = new QPushButton{"Загрузить"};
-            auto btn_saveScheme = new QPushButton{"Сохранить"};
+        setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Minimum);
 
-            editBox->addWidget(btn_newScheme, 0, 0);
-            editBox->addWidget(btn_loadScheme, 0, 1);
-            editBox->addWidget(btn_saveScheme, 0, 2);
-
-            bindButton(btn_newScheme, &SchemeEditor::newScheme);
-            bindButton(btn_loadScheme, &SchemeEditor::loadScheme);
-            bindButton(btn_saveScheme, &SchemeEditor::saveScheme);
-        }
         QSizePolicy def_policy{QSizePolicy::Preferred, QSizePolicy::Minimum};
 
         auto paramGroup = new QGroupBox{"Параметры схемы"};
@@ -117,10 +186,10 @@ namespace Schematics::Ui::Widgets
                 bindEditor(editor, &SchemeEditor::schemeParamChanged);
             }
 
-            auto btn_applyParams = new QPushButton{"Применить параметры"};
-            bindButton(btn_applyParams, &SchemeEditor::applySchemeParams);
+            param_pu2 = new QCheckBox{"Отключить ПУ №2"};
+            paramBox->addWidget(param_pu2);
+            bindChkBox(param_pu2, &SchemeEditor::schemeParamChanged);
 
-            tool::addGridRow(paramBox, btn_applyParams);
             tool::addGridRow(editBox, paramGroup);
         }
 
@@ -139,15 +208,12 @@ namespace Schematics::Ui::Widgets
             bindButton(btn_add_dws350, &SchemeEditor::on_addBoardClicked);
             tool::addGridRow(box, btn_add_dws350);
 
-            chk_pa300_enable = new QCheckBox{"Боковые"};
-            tool::addGridRow(box, chk_pa300_enable);
-            scheme_pa300_width = addSizeEditor(box, "Ширина");
-            scheme_pa300_height = addSizeEditor(box, "Толщина");
+            pa300.enable = new QCheckBox{"Боковые"};
+            tool::addGridRow(box, pa300.enable);
+            pa300.width = addSizeEditor(box, "Ширина");
+            pa300.height = addSizeEditor(box, "Толщина");
 
-            bindGroup(chk_pa300_enable,
-                      scheme_pa300_width,
-                      scheme_pa300_height,
-                      &SchemeEditor::on_pa300Changed);
+            bindGroup(pa300, &SchemeEditor::on_pa300Changed);
 
             tool::addGridRow(editBox, dws_group);
         }
@@ -157,25 +223,19 @@ namespace Schematics::Ui::Widgets
             auto box = new QGridLayout;
             pka_group->setLayout(box);
 
-            chk_pka350_enable = new QCheckBox{"Внутренние"};
-            tool::addGridRow(box, chk_pka350_enable);
-            scheme_pka350_width = addSizeEditor(box, "Ширина");
-            scheme_pka350_height = addSizeEditor(box, "Толщина");
+            pka350.enable = new QCheckBox{"Внутренние"};
+            tool::addGridRow(box, pka350.enable);
+            pka350.width = addSizeEditor(box, "Ширина");
+            pka350.height = addSizeEditor(box, "Толщина");
 
-            bindGroup(chk_pka350_enable,
-                      scheme_pka350_width,
-                      scheme_pka350_height,
-                      &SchemeEditor::on_pka350Changed);
+            bindGroup(pka350, &SchemeEditor::on_pka350Changed);
 
-            chk_pa350_enable = new QCheckBox{"Внешние"};
-            tool::addGridRow(box, chk_pa350_enable);
-            scheme_pa350_width = addSizeEditor(box, "Ширина");
-            scheme_pa350_height = addSizeEditor(box, "Толщина");
+            pa350.enable = new QCheckBox{"Внешние"};
+            tool::addGridRow(box, pa350.enable);
+            pa350.width = addSizeEditor(box, "Ширина");
+            pa350.height = addSizeEditor(box, "Толщина");
 
-            bindGroup(chk_pa350_enable,
-                      scheme_pa350_width,
-                      scheme_pa350_height,
-                      &SchemeEditor::on_pa350Changed);
+            bindGroup(pa350, &SchemeEditor::on_pa350Changed);
 
             tool::addGridRow(editBox, pka_group);
         }
@@ -201,25 +261,31 @@ namespace Schematics::Ui::Widgets
     }
 
     void SchemeEditor::on_pa300Changed() {
-        auto width = scheme_pa300_width->value();
-        auto height = scheme_pa300_height->value();
-        auto is_enabled = chk_pa300_enable->isChecked();
+        auto width = pa300.width->value();
+        auto height = pa300.height->value();
+        auto is_enabled = pa300.enable->isChecked()
+                          && (width > 0.0)
+                          && (height > 0.0);
 
         emit pa300Changed(is_enabled, width, height);
     }
 
     void SchemeEditor::on_pka350Changed() {
-        auto width = scheme_pka350_width->value();
-        auto height = scheme_pka350_height->value();
-        auto is_enabled = chk_pka350_enable->isChecked();
+        auto width = pka350.width->value();
+        auto height = pka350.height->value();
+        auto is_enabled = pka350.enable->isChecked()
+                          && (width > 0.0)
+                          && (height > 0.0);
 
         emit pka350Changed(is_enabled, width, height);
     }
 
     void SchemeEditor::on_pa350Changed() {
-        auto width = scheme_pa350_width->value();
-        auto height = scheme_pa350_height->value();
-        auto is_enabled = chk_pa350_enable->isChecked();
+        auto width = pa350.width->value();
+        auto height = pa350.height->value();
+        auto is_enabled = pa350.enable->isChecked()
+                          && (width > 0.0)
+                          && (height > 0.0);
 
         emit pa350Changed(is_enabled, width, height);
     }
