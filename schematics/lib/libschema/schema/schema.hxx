@@ -76,9 +76,20 @@ public:
     Unit calc_dws350_height() const;
     Unit calc_dws350_width() const;
 
+    const PA300 &pa300() const;
     void remove_pa300_poard();
     void set_pa300_board(Unit width, Unit height);
     bool is_pa300_enabled() const;
+
+    const PKA350 &pka350() const;
+    void remove_pka350_poard();
+    void set_pka350_board(Unit width, Unit height);
+    bool is_pka350_enabled() const;
+
+    const PA350 &pa350() const;
+    void remove_pa350_poard();
+    void set_pa350_board(Unit width, Unit height);
+    bool is_pa350_enabled() const;
 signals:
     void schemeChanged();
 private slots:
