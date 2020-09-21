@@ -20,6 +20,8 @@ add_library(schema libschema/libschema.cxx
     libschema/schema/params.hxx
     libschema/schema/units.cxx
     libschema/schema/units.hxx
+    libschema/schema/reader.cxx libschema/schema/reader.hxx
+    libschema/schema/writer.cxx libschema/schema/writer.hxx
 )
 
 target_include_directories(schema PUBLIC libschema)
