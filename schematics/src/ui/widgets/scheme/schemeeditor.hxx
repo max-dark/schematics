@@ -33,6 +33,8 @@ namespace Schematics::Ui::Widgets
         void setPKA350(bool enabled, double width, double height);
         void setPA350(bool enabled, double width, double height);
 
+        void clearAll();
+
     signals:
         void schemeParamChanged();
 

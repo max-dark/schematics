@@ -149,6 +149,14 @@ namespace Schematics::Ui::Widgets
         on_pa350Changed();
     }
 
+    void SchemeEditor::clearAll()
+    {
+        setDWS350(0.0, 0.0);
+        setPA300(false, 0.0, 0.0);
+        setPKA350(false, 0.0, 0.0);
+        setPA350(false, 0.0, 0.0);
+    }
+
     void SchemeEditor::buildView() {
         using namespace Schematics::Ui;
 
