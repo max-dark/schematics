@@ -9,7 +9,7 @@ namespace libschema
 {
     struct Reader
     {
-        virtual Schema* read(QIODevice& input) = 0;
+        virtual bool read(Schema* schema, QIODevice& input) = 0;
         virtual ~Reader();
     };
 } // namespace libschema
