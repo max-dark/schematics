@@ -91,6 +91,11 @@ Unit Schema::calc_dws350_width() const
     return m_dws350.calc_width() + m_dws350.calc_gap(params()->dws_gap());
 }
 
+const Schema::PA300 &Schema::pa300() const
+{
+    return m_pa300;
+}
+
 void Schema::remove_pa300_poard()
 {
     m_pa300.clear();
@@ -106,6 +111,48 @@ void Schema::set_pa300_board(Unit width, Unit height)
 bool Schema::is_pa300_enabled() const
 {
     return m_dws350.validate() and m_pa300.is_valid();
+}
+
+const Schema::PKA350 &Schema::pka350() const
+{
+    return m_pka350;
+}
+
+void Schema::remove_pka350_poard()
+{
+    m_pka350.clear();
+}
+
+void Schema::set_pka350_board(Unit width, Unit height)
+{
+    m_pka350.board_width = width;
+    m_pka350.board_height = height;
+}
+
+bool Schema::is_pka350_enabled() const
+{
+    return pka350().is_valid();
+}
+
+const Schema::PA350 &Schema::pa350() const
+{
+    return m_pa350;
+}
+
+void Schema::remove_pa350_poard()
+{
+    m_pa350.clear();
+}
+
+void Schema::set_pa350_board(Unit width, Unit height)
+{
+    m_pa350.board_width = width;
+    m_pa350.board_height = height;
+}
+
+bool Schema::is_pa350_enabled() const
+{
+    return pa350().is_valid();
 }
 
 
