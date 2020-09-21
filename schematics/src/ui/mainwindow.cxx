@@ -36,6 +36,8 @@ using libschema::Unit;
 
 namespace Schematics {
 
+    static const QString scheme_filter{"Cutting scheme (*.cut)"};
+
     namespace Ui {
 
         struct MainView {
@@ -188,12 +190,26 @@ namespace Schematics {
         ui->schemeEditor->clearAll();
     }
 
-    void MainWindow::on_loadScheme() {
+    void MainWindow::on_loadScheme()
+    {
+        auto fname = QFileDialog::getOpenFileName(
+            this, "Загрузка: Выберите файл схемы раскроя", "",
+            scheme_filter);
+        if (!fname.isEmpty())
+        {
 
+        }
     }
 
-    void MainWindow::on_saveScheme() {
+    void MainWindow::on_saveScheme()
+    {
+        auto fname = QFileDialog::getSaveFileName(
+            this, "Сохранение: Выберите файл схемы раскроя", "",
+            scheme_filter);
+        if (!fname.isEmpty())
+        {
 
+        }
     }
 
     void MainWindow::schemeParamChanged()
