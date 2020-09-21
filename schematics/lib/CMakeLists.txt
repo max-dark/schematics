@@ -23,7 +23,7 @@ add_library(schema libschema/libschema.cxx
     libschema/schema/reader.cxx libschema/schema/reader.hxx
     libschema/schema/writer.cxx libschema/schema/writer.hxx
     libschema/schema/xmltags.cxx libschema/schema/xmltags.hxx
-)
+        libschema/schema/xmlwriter.cxx libschema/schema/xmlwriter.hxx)
 
 target_include_directories(schema PUBLIC libschema)
 
