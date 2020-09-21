@@ -46,6 +46,13 @@ namespace Schematics::Ui::Widgets
         void on_pa300Changed();
         void on_pka350Changed();
         void on_pa350Changed();
+    private /* types */:
+        struct BoardParams
+        {
+            QCheckBox* enable = nullptr;
+            QDoubleSpinBox* width = nullptr;
+            QDoubleSpinBox* height = nullptr;
+        };
     private /* methods */:
         void buildView();
 
@@ -54,6 +61,8 @@ namespace Schematics::Ui::Widgets
         void bindEditor(QDoubleSpinBox* box, void (SchemeEditor::* method)(double)) const;
         void bindChkBox(QCheckBox* box, void (SchemeEditor::* method)()) const;
 
+        void bindGroup(const BoardParams group,
+                       void (SchemeEditor::* method)()) const;
         void bindGroup(QCheckBox* enable,
                        QDoubleSpinBox* width,
                        QDoubleSpinBox* height,
@@ -69,17 +78,11 @@ namespace Schematics::Ui::Widgets
         QDoubleSpinBox *scheme_dws350_width = nullptr;
         QDoubleSpinBox *scheme_dws350_height = nullptr;
 
-        QCheckBox* chk_pa300_enable = nullptr;
-        QDoubleSpinBox *scheme_pa300_width = nullptr;
-        QDoubleSpinBox *scheme_pa300_height = nullptr;
+        BoardParams pa300;
 
-        QCheckBox* chk_pka350_enable = nullptr;
-        QDoubleSpinBox *scheme_pka350_width = nullptr;
-        QDoubleSpinBox *scheme_pka350_height = nullptr;
+        BoardParams pka350;
 
-        QCheckBox* chk_pa350_enable = nullptr;
-        QDoubleSpinBox *scheme_pa350_width = nullptr;
-        QDoubleSpinBox *scheme_pa350_height = nullptr;
+        BoardParams pa350;
     };
 } // namespace Schematics::Ui::Widgets
 
