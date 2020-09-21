@@ -24,6 +24,10 @@ namespace Schematics::Ui::Widgets
         double pkaSaw() const;
         bool isVertical() const;
 
+        void setParams(double min_diam, double max_diam,
+                       double dws_saw, double pka_saw,
+                       bool is_vertical);
+
     signals:
         void schemeParamChanged();
 

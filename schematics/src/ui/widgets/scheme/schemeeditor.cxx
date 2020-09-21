@@ -98,6 +98,20 @@ namespace Schematics::Ui::Widgets
 
     bool SchemeEditor::isVertical() const { return param_pu2->isChecked(); }
 
+    void SchemeEditor::setParams(double min_diam, double max_diam, double dws_saw, double pka_saw, bool is_vertical)
+    {
+        {
+            QSignalBlocker block_signals{this};
+
+            param_minDiam->setValue(min_diam);
+            param_maxDiam->setValue(max_diam);
+            param_dwsGap->setValue(dws_saw);
+            param_pkaGap->setValue(pka_saw);
+            param_pu2->setChecked(is_vertical);
+        }
+        emit schemeParamChanged();
+    }
+
     void SchemeEditor::buildView() {
         using namespace Schematics::Ui;
 
