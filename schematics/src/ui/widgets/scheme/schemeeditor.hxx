@@ -28,6 +28,7 @@ namespace Schematics::Ui::Widgets
                        double dws_saw, double pka_saw,
                        bool is_vertical);
 
+        void setDWS350(double width, double height);
         void setPA300(bool enabled, double width, double height);
         void setPKA350(bool enabled, double width, double height);
         void setPA350(bool enabled, double width, double height);

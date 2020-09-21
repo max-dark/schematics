@@ -125,6 +125,12 @@ namespace Schematics::Ui::Widgets
         emit schemeParamChanged();
     }
 
+    void SchemeEditor::setDWS350(double width, double height)
+    {
+        scheme_dws350_width->setValue(width);
+        scheme_dws350_height->setValue(height);
+    }
+
     void SchemeEditor::setPA300(bool enabled, double width, double height)
     {
         setBoardParams(pa300, enabled, width, height);
