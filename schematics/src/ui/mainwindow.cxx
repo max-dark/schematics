@@ -33,6 +33,7 @@
 #include <schema/units.hxx>
 
 #include <schema/xmlwriter.hxx>
+#include <schema/xmlreader.hxx>
 
 using libschema::Unit;
 
@@ -199,7 +200,14 @@ namespace Schematics {
             scheme_filter);
         if (!fname.isEmpty())
         {
+            QFile input{fname};
+            auto ok = input.open(QIODevice::ReadOnly);
 
+            if(ok)
+            {
+                libschema::XmlReader reader;
+                reader.read(nullptr, input);
+            }
         }
     }
 
