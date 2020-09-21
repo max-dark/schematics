@@ -3,6 +3,12 @@
 
 #include <QMainWindow>
 
+namespace libschema
+{
+    class Schema;
+}
+
+
 namespace Schematics {
 
     namespace Ui {
@@ -35,6 +41,7 @@ namespace Schematics {
         void bindSchemeEditor();
     private /* members */:
         Ui::MainView *ui = nullptr;
+        libschema::Schema* scheme = nullptr;
     };
 
 } // namespace Schematics

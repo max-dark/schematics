@@ -21,11 +21,18 @@
 #include <QMenuBar>
 #include <QMenu>
 #include <QAction>
+#include <QFileDialog>
 
 #include <ui/widgets/scheme/schemeview.hxx>
 #include <ui/widgets/scheme/schemeeditor.hxx>
 
 #include <ui/widgets/coords/coordstab.hxx>
+
+#include <schema/schema.hxx>
+#include <schema/params.hxx>
+#include <schema/units.hxx>
+
+using libschema::Unit;
 
 namespace Schematics {
 
@@ -130,6 +137,9 @@ namespace Schematics {
         setWindowState(Qt::WindowMaximized);
         bindEvents();
 
+        auto params = new libschema::Params{};
+        scheme = new libschema::Schema{this};
+        scheme->set_params(params);
 
         ui->schemeEditor->setParams(
             250, 250,
@@ -188,40 +198,81 @@ namespace Schematics {
 
     void MainWindow::schemeParamChanged()
     {
-        ui->schemeView->setDiameter(ui->schemeEditor->minDiam());
-        ui->schemeView->setSawSizes(
-            ui->schemeEditor->dwsSaw(),
-            ui->schemeEditor->pkaSaw()
+        const auto editor = ui->schemeEditor;
+        const auto view = ui->schemeView;
+        view->setDiameter(editor->minDiam());
+        view->setSawSizes(
+            editor->dwsSaw(),
+            editor->pkaSaw()
             );
-        ui->schemeView->setVertical(ui->schemeEditor->isVertical());
+        view->setVertical(editor->isVertical());
+
+        auto params = scheme->params();
+
+        params->set_diameter(Unit::from_mm(editor->minDiam()));
+        params->set_dws_gap(Unit::from_mm(editor->dwsSaw()));
+        params->set_pka_gap(Unit::from_mm(editor->pkaSaw()));
+        params->set_rot2_mode(editor->isVertical());
     }
 
     void MainWindow::centralWidthChanged(double width)
     {
         ui->schemeView->setCentralWidth(width);
+        scheme->set_dws_board_width(Unit::from_mm(width));
     }
 
-    void MainWindow::addCentralBoard(double width, double height)
+    void MainWindow::addCentralBoard(double /*width*/, double height)
     {
         ui->schemeView->addCentral(height);
+        scheme->add_dws_board(Unit::from_mm(height));
     }
 
     void MainWindow::pa300Changed(bool enabled, double width, double height)
     {
         ui->schemeView->setPA300Enabled(enabled);
         ui->schemeView->setPA300Size(width, height);
+
+        if (enabled)
+        {
+            scheme->set_pa300_board(Unit::from_mm(width),
+                                    Unit::from_mm(height));
+        }
+        else
+        {
+            scheme->remove_pa300_poard();
+        }
     }
 
     void MainWindow::pka350Changed(bool enabled, double width, double height)
     {
         ui->schemeView->setPKA350Enabled(enabled);
         ui->schemeView->setPKA350Size(width, height);
+
+        if (enabled)
+        {
+            scheme->set_pka350_board(Unit::from_mm(width),
+                                    Unit::from_mm(height));
+        }
+        else
+        {
+            scheme->remove_pka350_poard();
+        }
     }
 
     void MainWindow::pa350Changed(bool enabled, double width, double height)
     {
         ui->schemeView->setPA350Enabled(enabled);
         ui->schemeView->setPA350Size(width, height);
+
+        if (enabled)
+        {
+            scheme->set_pa350_board(Unit::from_mm(width),
+                                    Unit::from_mm(height));
+        }
+        else
+        {
+            scheme->remove_pa350_poard();
+        }
     }
 
 } // namespace Schematics
