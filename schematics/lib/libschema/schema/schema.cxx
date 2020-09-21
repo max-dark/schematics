@@ -110,7 +110,7 @@ void Schema::set_pa300_board(Unit width, Unit height)
 
 bool Schema::is_pa300_enabled() const
 {
-    return m_dws350.validate() and m_pa300.is_valid();
+    return m_dws350.validate() && m_pa300.is_valid();
 }
 
 const Schema::PKA350 &Schema::pka350() const
