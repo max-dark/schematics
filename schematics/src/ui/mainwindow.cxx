@@ -188,6 +188,7 @@ namespace Schematics {
     void MainWindow::on_newScheme() {
         ui->schemeView->clear();
         ui->schemeEditor->clearAll();
+        scheme->remove_all();
     }
 
     void MainWindow::on_loadScheme()
