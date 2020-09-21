@@ -96,6 +96,12 @@ namespace Schematics {
         ui->buildView(this);
         setWindowState(Qt::WindowMaximized);
         bindEvents();
+
+
+        ui->schemeEditor->setParams(
+            250, 250,
+            4.8, 5.6,
+            false);
     }
 
     MainWindow::~MainWindow() {
