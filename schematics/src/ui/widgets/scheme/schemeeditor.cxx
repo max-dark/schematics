@@ -125,6 +125,24 @@ namespace Schematics::Ui::Widgets
         emit schemeParamChanged();
     }
 
+    void SchemeEditor::setPA300(bool enabled, double width, double height)
+    {
+        setBoardParams(pa300, enabled, width, height);
+        on_pa300Changed();
+    }
+
+    void SchemeEditor::setPKA350(bool enabled, double width, double height)
+    {
+        setBoardParams(pka350, enabled, width, height);
+        on_pka350Changed();
+    }
+
+    void SchemeEditor::setPA350(bool enabled, double width, double height)
+    {
+        setBoardParams(pa350, enabled, width, height);
+        on_pa350Changed();
+    }
+
     void SchemeEditor::buildView() {
         using namespace Schematics::Ui;
 
