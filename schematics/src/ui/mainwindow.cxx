@@ -32,6 +32,8 @@
 #include <schema/params.hxx>
 #include <schema/units.hxx>
 
+#include <schema/xmlwriter.hxx>
+
 using libschema::Unit;
 
 namespace Schematics {
@@ -208,7 +210,13 @@ namespace Schematics {
             scheme_filter);
         if (!fname.isEmpty())
         {
-
+            QFile output{fname};
+            auto ok = output.open(QIODevice::WriteOnly);
+            if (ok)
+            {
+                libschema::XmlWriter writer;
+                writer.write(scheme, output);
+            }
         }
     }
 
