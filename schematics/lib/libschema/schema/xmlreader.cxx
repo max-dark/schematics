@@ -177,6 +177,12 @@ namespace libschema
                     qDebug() << attr;
                     xml.skipCurrentElement();
                 }
+                else
+                {
+                    xml.raiseError(
+                        QString{"Format error: unknown tag /params/%1"}
+                            .arg(xml.name()));
+                }
             }
         }
         void do_read(Schema* schema, XmlStream& xml)
@@ -194,7 +200,9 @@ namespace libschema
                 }
                 else
                 {
-                    xml.skipCurrentElement();
+                    xml.raiseError(
+                        QString{"Format error: unknown tag /%1"}
+                            .arg(xml.name()));
                 }
             }
         }
