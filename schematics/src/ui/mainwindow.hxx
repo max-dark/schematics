@@ -39,6 +39,8 @@ namespace Schematics {
         void bindEvents();
         void bindMenus();
         void bindSchemeEditor();
+
+        void applyScheme(const libschema::Schema *new_schema);
     private /* members */:
         Ui::MainView *ui = nullptr;
         libschema::Schema* scheme = nullptr;
