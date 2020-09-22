@@ -208,8 +208,73 @@ namespace Schematics {
 
             if(ok)
             {
+                auto tmp_schema = new libschema::Schema{this};
+                tmp_schema->set_params(new libschema::Params{});
                 libschema::XmlReader reader;
-                reader.read(nullptr, input);
+                auto read_ok = reader.read(tmp_schema, input);
+                if (read_ok)
+                {
+                    // clear views
+                    ui->schemeView->clear();
+                    ui->schemeEditor->clearAll();
+
+                    // load params
+                    auto params = tmp_schema->params();
+                    ui->schemeEditor->setParams(
+                        params->diameter().to_mm(),
+                        params->diameter().to_mm(),
+                        params->dws_gap().to_mm(),
+                        params->pka_gap().to_mm(),
+                        params->is_rot2_disabled()
+                        );
+
+                    // load dws350
+                    ui->schemeEditor->setDWS350(
+                        tmp_schema->dws_board_width().to_mm(),
+                        0.0);
+                    for(const auto h: tmp_schema->dws350().boards)
+                    {
+                        ui->schemeView->addCentral(h.to_mm());
+                    }
+
+                    // load pa300
+                    ui->schemeEditor->setPA300(
+                        tmp_schema->pa300().is_valid(),
+                        tmp_schema->pa300().board_width.to_mm(),
+                        tmp_schema->pa300().board_height.to_mm());
+
+                    // load pka350
+                    ui->schemeEditor->setPKA350(
+                        tmp_schema->pka350().is_valid(),
+                        tmp_schema->pka350().board_width.to_mm(),
+                        tmp_schema->pka350().board_height.to_mm());
+
+                    // load pa350
+                    ui->schemeEditor->setPA350(
+                        tmp_schema->pa350().is_valid(),
+                        tmp_schema->pa350().board_width.to_mm(),
+                        tmp_schema->pa350().board_height.to_mm());
+
+                    // set current scheme
+                    std::swap(scheme, tmp_schema);
+                }
+                else
+                {
+                    QMessageBox::critical(
+                        this,
+                        "Ошибка при загрузке файла",
+                        reader.errorMessage());
+                }
+
+                // cleanup
+                tmp_schema->deleteLater();
+            }
+            else
+            {
+                QMessageBox::critical(
+                    this,
+                    "Ошибка при открытии файла",
+                    input.errorString());
             }
         }
     }
