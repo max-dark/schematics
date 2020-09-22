@@ -23,6 +23,8 @@
 #include <QAction>
 #include <QFileDialog>
 
+#include <QMessageBox>
+
 #include <ui/widgets/scheme/schemeview.hxx>
 #include <ui/widgets/scheme/schemeeditor.hxx>
 
@@ -225,6 +227,20 @@ namespace Schematics {
             {
                 libschema::XmlWriter writer;
                 writer.write(scheme, output);
+                if (writer.hasError())
+                {
+                    QMessageBox::critical(
+                        this,
+                        "Ошибка при записи файла",
+                        writer.errorMessage());
+                }
+            }
+            else
+            {
+                QMessageBox::critical(
+                    this,
+                    "Ошибка при открытии файла",
+                    output.errorString());
             }
         }
     }
