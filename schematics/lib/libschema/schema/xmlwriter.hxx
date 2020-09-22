@@ -12,6 +12,9 @@ namespace libschema
     struct XmlWriter: public Writer
     {
         void write(const Schema* schema, QIODevice& output) override;
+        bool hasError() const override;
+        QString errorMessage() const override;
+
         ~XmlWriter() override;
     private:
         XmlOutputStream xml;

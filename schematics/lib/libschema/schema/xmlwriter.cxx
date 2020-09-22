@@ -64,4 +64,14 @@ void XmlWriter::write(const libschema::Schema *schema, QIODevice &output) {
     xml.writeEndDocument();
 }
 
+bool XmlWriter::hasError() const
+{
+    return xml.hasError();
+}
+
+QString XmlWriter::errorMessage() const
+{
+    return xml.device() ? xml.device()->errorString() : "";
+}
+
 } // namespace libschema
