@@ -88,7 +88,7 @@ namespace libschema
                     do_read_sizes(xml, tmp_width, tmp_height, ok);
                     if (ok)
                     {
-                        schema->set_pa300_board(tmp_width, tmp_width);
+                        schema->set_pa300_board(tmp_width, tmp_height);
                     }
                     qDebug() << ok << "pa300" << tmp_width.to_mm() << tmp_height.to_mm();
                 }
