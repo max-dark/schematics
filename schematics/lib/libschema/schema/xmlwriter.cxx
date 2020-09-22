@@ -1,22 +1,19 @@
 #include "xmlwriter.hxx"
 #include "xmltags.hxx"
 
-#include <QXmlStreamWriter>
 
 namespace libschema
 {
 namespace tags = ::libschema::xml::Scheme;
 
-using XmlStream = QXmlStreamWriter;
-
 XmlWriter::~XmlWriter() = default;
 namespace {
-    void write_unit(XmlStream& xml, const QString& tagName, Unit value)
+    void write_unit(XmlOutputStream& xml, const QString& tagName, Unit value)
     {
         xml.writeTextElement(tagName, QString::number(value.units()));
     }
 
-    void write_params(const Params *params, XmlStream &xml) {
+    void write_params(const Params *params, XmlOutputStream &xml) {
         xml.writeStartElement(tags::paramsTag());
         write_unit(xml, tags::diameterTag(), params->diameter());
         xml.writeStartElement(tags::sawsTag());
@@ -28,7 +25,7 @@ namespace {
         xml.writeEndElement();
     }
 
-    void write_group(XmlStream& xml, const QString& name, Unit width, Unit height)
+    void write_group(XmlOutputStream& xml, const QString& name, Unit width, Unit height)
     {
         xml.writeStartElement(name);
         write_unit(xml, tags::widthTag(), width);
@@ -37,7 +34,6 @@ namespace {
     }
 }
 void XmlWriter::write(const libschema::Schema *schema, QIODevice &output) {
-    XmlStream xml;
 
     xml.setDevice(&output);
     xml.setAutoFormatting(true);
