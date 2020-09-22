@@ -10,6 +10,8 @@ namespace libschema
     struct Reader
     {
         virtual bool read(Schema* schema, QIODevice& input) = 0;
+        virtual bool hasError() const = 0;
+        virtual QString errorMessage() const = 0;
         virtual ~Reader();
     };
 } // namespace libschema
