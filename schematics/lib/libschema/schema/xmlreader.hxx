@@ -11,6 +11,8 @@ namespace libschema
     struct XmlReader: public Reader
     {
         bool read(Schema* schema, QIODevice& input) override;
+        bool hasError() const override;
+        QString errorMessage() const override;
         ~XmlReader() override;
     private:
         XmlInputStream xml;

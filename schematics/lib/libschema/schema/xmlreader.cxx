@@ -228,5 +228,22 @@ namespace libschema
         return !xml.hasError();
     }
 
+    bool XmlReader::hasError() const
+    {
+        return xml.hasError();
+    }
+
+    QString XmlReader::errorMessage() const
+    {
+        if (hasError())
+        {
+            return QString{"%1 at [%2, %3]"}
+                .arg(xml.errorString())
+                .arg(xml.lineNumber())
+                .arg(xml.columnNumber());
+        }
+        return {};
+    }
+
     XmlReader::~XmlReader() = default;
 } // namespace libschema
