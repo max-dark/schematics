@@ -3,12 +3,17 @@
 
 #include <schema/reader.hxx>
 
+#include <QXmlStreamReader>
+
 namespace libschema
 {
+    using XmlInputStream = QXmlStreamReader;
     struct XmlReader: public Reader
     {
         bool read(Schema* schema, QIODevice& input) override;
         ~XmlReader() override;
+    private:
+        XmlInputStream xml;
     };
 } // namespace libschema
 

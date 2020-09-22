@@ -2,30 +2,28 @@
 
 #include <schema/xmltags.hxx>
 
-#include <QXmlStreamReader>
 #include <QDebug>
 
 namespace libschema
 {
     namespace tags = xml::Scheme;
-    using XmlStream = QXmlStreamReader;
 
     namespace /*internal*/
     {
-        bool is_file_supported(XmlStream& xml)
+        bool is_file_supported(XmlInputStream& xml)
         {
             return xml.name() == tags::rootTag() &&
                 xml.attributes().value(tags::versionAttr()) == tags::fileVersion();
         }
 
-        Unit do_read_units(XmlStream& xml, bool& ok)
+        Unit do_read_units(XmlInputStream& xml, bool& ok)
         {
             auto str = xml.readElementText();
             auto num = str.toLong(&ok);
             return Unit::from_units(num);
         }
 
-        void do_read_sizes(XmlStream& xml, Unit& width, Unit& height, bool& ok)
+        void do_read_sizes(XmlInputStream& xml, Unit& width, Unit& height, bool& ok)
         {
             bool w_ok = false;
             bool h_ok = false;
@@ -48,7 +46,7 @@ namespace libschema
             ok = w_ok && h_ok;
         }
 
-        void do_read_scheme(Schema* schema, XmlStream& xml)
+        void do_read_scheme(Schema* schema, XmlInputStream& xml)
         {
             bool ok;
             Unit tmp_width, tmp_height;
@@ -116,7 +114,7 @@ namespace libschema
                 }
             }
         }
-        void do_read_params(Schema* schema, XmlStream& xml)
+        void do_read_params(Schema* schema, XmlInputStream& xml)
         {
             bool ok;
             while (xml.readNextStartElement())
@@ -185,7 +183,7 @@ namespace libschema
                 }
             }
         }
-        void do_read(Schema* schema, XmlStream& xml)
+        void do_read(Schema* schema, XmlInputStream& xml)
         {
             while (xml.readNextStartElement())
             {
@@ -209,7 +207,6 @@ namespace libschema
     } // internal
 
     bool XmlReader::read(Schema* schema, QIODevice &input) {
-        XmlStream xml;
 
         Q_ASSERT(schema != nullptr);
         Q_ASSERT(schema->params() != nullptr);
