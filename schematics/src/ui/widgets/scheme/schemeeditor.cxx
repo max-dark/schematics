@@ -253,13 +253,19 @@ namespace Schematics::Ui::Widgets
         tool::addGridRow(editBox, tool::createVSpace());
     }
 
-    void SchemeEditor::on_addBoardClicked() {
+    void SchemeEditor::on_addBoardClicked()
+    {
+        on_addNBoardsClicked(1);
+    }
+
+    void SchemeEditor::on_addNBoardsClicked(size_t count)
+    {
         auto width = scheme_dws350_width->value();
         auto height = scheme_dws350_height->value();
 
         if (width > 0 && height > 0)
         {
-            emit addCentralBoards(height, 1);
+            emit addCentralBoards(height, count);
         }
     }
 

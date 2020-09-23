@@ -50,6 +50,7 @@ namespace Schematics::Ui::Widgets
 
     private slots:
         void on_addBoardClicked();
+        void on_addNBoardsClicked(size_t count);
         void on_pa300Changed();
         void on_pka350Changed();
         void on_pa350Changed();
