@@ -23,6 +23,8 @@
 #include <QAction>
 #include <QFileDialog>
 
+#include <QMessageBox>
+
 #include <ui/widgets/scheme/schemeview.hxx>
 #include <ui/widgets/scheme/schemeeditor.hxx>
 
@@ -31,6 +33,9 @@
 #include <schema/schema.hxx>
 #include <schema/params.hxx>
 #include <schema/units.hxx>
+
+#include <schema/xmlwriter.hxx>
+#include <schema/xmlreader.hxx>
 
 using libschema::Unit;
 
@@ -198,8 +203,85 @@ namespace Schematics {
             scheme_filter);
         if (!fname.isEmpty())
         {
+            QFile input{fname};
+            auto ok = input.open(QIODevice::ReadOnly);
 
+            if(ok)
+            {
+                auto tmp_schema = new libschema::Schema{this};
+                tmp_schema->set_params(new libschema::Params{});
+                libschema::XmlReader reader;
+                auto read_ok = reader.read(tmp_schema, input);
+                if (read_ok)
+                {
+                    applyScheme(tmp_schema);
+
+                    // set current scheme
+                    std::swap(scheme, tmp_schema);
+                }
+                else
+                {
+                    QMessageBox::critical(
+                        this,
+                        "Ошибка при загрузке файла",
+                        reader.errorMessage());
+                }
+
+                // cleanup
+                tmp_schema->deleteLater();
+            }
+            else
+            {
+                QMessageBox::critical(
+                    this,
+                    "Ошибка при открытии файла",
+                    input.errorString());
+            }
         }
+    }
+
+    void MainWindow::applyScheme(const libschema::Schema *new_schema)
+    {
+        // clear views
+        ui->schemeView->clear();
+        ui->schemeEditor->clearAll();
+
+        // load params
+        auto params = new_schema->params();
+        ui->schemeEditor->setParams(
+            params->diameter().to_mm(),
+            params->diameter().to_mm(),
+            params->dws_gap().to_mm(),
+            params->pka_gap().to_mm(),
+            params->is_rot2_disabled()
+            );
+
+        // load dws350
+        ui->schemeEditor->setDWS350(
+            new_schema->dws_board_width().to_mm(),
+            0.0);
+        for(const auto h: new_schema->dws350().boards)
+        {
+            ui->schemeView->addCentral(h.to_mm());
+        }
+
+        // load pa300
+        ui->schemeEditor->setPA300(
+            new_schema->pa300().is_valid(),
+            new_schema->pa300().board_width.to_mm(),
+            new_schema->pa300().board_height.to_mm());
+
+        // load pka350
+        ui->schemeEditor->setPKA350(
+            new_schema->pka350().is_valid(),
+            new_schema->pka350().board_width.to_mm(),
+            new_schema->pka350().board_height.to_mm());
+
+        // load pa350
+        ui->schemeEditor->setPA350(
+            new_schema->pa350().is_valid(),
+            new_schema->pa350().board_width.to_mm(),
+            new_schema->pa350().board_height.to_mm());
     }
 
     void MainWindow::on_saveScheme()
@@ -209,7 +291,27 @@ namespace Schematics {
             scheme_filter);
         if (!fname.isEmpty())
         {
-
+            QFile output{fname};
+            auto ok = output.open(QIODevice::WriteOnly);
+            if (ok)
+            {
+                libschema::XmlWriter writer;
+                writer.write(scheme, output);
+                if (writer.hasError())
+                {
+                    QMessageBox::critical(
+                        this,
+                        "Ошибка при записи файла",
+                        writer.errorMessage());
+                }
+            }
+            else
+            {
+                QMessageBox::critical(
+                    this,
+                    "Ошибка при открытии файла",
+                    output.errorString());
+            }
         }
     }
 
