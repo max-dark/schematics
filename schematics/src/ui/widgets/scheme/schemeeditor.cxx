@@ -18,6 +18,9 @@
 #include <QSpacerItem>
 #include <QSizePolicy>
 
+#include <QMenu>
+#include <QAction>
+
 #include <ui/tools/tool.hxx>
 
 namespace Schematics::Ui::Widgets
@@ -207,8 +210,22 @@ namespace Schematics::Ui::Widgets
             auto btn_add_dws350 = new QPushButton{"Добавить"};
             auto btn_del_dws350 = new QPushButton{"Удалить"};
             auto btn_set_dws350 = new QPushButton{"Заменить"};
-            bindButton(btn_add_dws350, &SchemeEditor::on_addBoardClicked);
 
+            // меню для кнопки "Добавить"
+            {
+                auto add_menu = new QMenu{};
+                for (size_t n = 1; n <= 5; ++n) {
+                    auto add_n = add_menu->addAction(QString{"%1 шт"}.arg(n));
+                    connect(add_n, &QAction::triggered, [this, n]{
+                        on_addNBoardsClicked(n);
+                    });
+                }
+
+                btn_add_dws350->setMenu(add_menu);
+                // при установке меню на кнопку владелец меню не меняется
+                // поэтому подцепим удаление меню на уничтожение кнопки
+                connect(btn_add_dws350, &QPushButton::destroyed, add_menu, &QAction::deleteLater);
+            }
             auto next_row = box->rowCount();
             box->addWidget(btn_add_dws350, next_row, 0);
             box->addWidget(btn_del_dws350, next_row, 1);
