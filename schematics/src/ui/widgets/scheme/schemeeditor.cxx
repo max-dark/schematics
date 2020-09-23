@@ -205,8 +205,14 @@ namespace Schematics::Ui::Widgets
             bindEditor(scheme_dws350_width, &SchemeEditor::centralWidthChanged);
 
             auto btn_add_dws350 = new QPushButton{"Добавить"};
+            auto btn_del_dws350 = new QPushButton{"Удалить"};
+            auto btn_set_dws350 = new QPushButton{"Заменить"};
             bindButton(btn_add_dws350, &SchemeEditor::on_addBoardClicked);
-            tool::addGridRow(box, btn_add_dws350);
+
+            auto next_row = box->rowCount();
+            box->addWidget(btn_add_dws350, next_row, 0);
+            box->addWidget(btn_del_dws350, next_row, 1);
+            box->addWidget(btn_set_dws350, next_row, 2);
 
             pa300.enable = new QCheckBox{"Боковые"};
             tool::addGridRow(box, pa300.enable);
