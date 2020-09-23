@@ -257,7 +257,10 @@ namespace Schematics::Ui::Widgets
         auto width = scheme_dws350_width->value();
         auto height = scheme_dws350_height->value();
 
-        emit addCentralBoard(width, height);
+        if (width > 0 && height > 0)
+        {
+            emit addCentralBoard(width, height);
+        }
     }
 
     void SchemeEditor::on_pa300Changed() {
