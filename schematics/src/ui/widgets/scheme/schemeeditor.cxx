@@ -259,7 +259,7 @@ namespace Schematics::Ui::Widgets
 
         if (width > 0 && height > 0)
         {
-            emit addCentralBoard(width, height);
+            emit addCentralBoards(height, 1);
         }
     }
 

@@ -186,8 +186,8 @@ namespace Schematics {
                 this, &MainWindow::schemeParamChanged);
         connect(ui->schemeEditor, &SchemeEditor::centralWidthChanged,
                 this, &MainWindow::centralWidthChanged);
-        connect(ui->schemeEditor, &SchemeEditor::addCentralBoard,
-                this, &MainWindow::addCentralBoard);
+        connect(ui->schemeEditor, &SchemeEditor::addCentralBoards,
+                this, &MainWindow::addCentralBoards);
         connect(ui->schemeEditor, &SchemeEditor::pa300Changed,
                 this, &MainWindow::pa300Changed);
         connect(ui->schemeEditor, &SchemeEditor::pka350Changed,
@@ -346,10 +346,13 @@ namespace Schematics {
         scheme->set_dws_board_width(Unit::from_mm(width));
     }
 
-    void MainWindow::addCentralBoard(double /*width*/, double height)
+    void MainWindow::addCentralBoards(double height, size_t count)
     {
-        ui->schemeView->addCentral(height);
-        scheme->add_dws_board(Unit::from_mm(height));
+        for(size_t i = 0; i < count; ++i)
+        {
+            ui->schemeView->addCentral(height);
+            scheme->add_dws_board(Unit::from_mm(height));
+        }
     }
 
     void MainWindow::pa300Changed(bool enabled, double width, double height)

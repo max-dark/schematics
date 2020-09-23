@@ -30,7 +30,7 @@ namespace Schematics {
         void schemeParamChanged();
 
         void centralWidthChanged(double width);
-        void addCentralBoard(double width, double height);
+        void addCentralBoards(double height, size_t count);
 
         void pa300Changed(bool enabled, double width, double height);
         void pka350Changed(bool enabled, double width, double height);
