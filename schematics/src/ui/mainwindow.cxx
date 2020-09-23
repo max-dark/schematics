@@ -138,6 +138,15 @@ namespace Schematics {
 
     }
 
+    template<class ObjectT, class MethodT>
+    auto bindAction(QAction* action, ObjectT* object, MethodT method)
+    {
+        return QObject::connect(
+                action, &QAction::triggered,
+                object, method
+        );
+    }
+
     MainWindow::MainWindow(QWidget *parent)
             : QMainWindow(parent), ui{new Ui::MainView()} {
         ui->buildView(this);
@@ -165,12 +174,9 @@ namespace Schematics {
 
     void MainWindow::bindMenus()
     {
-        connect(ui->scheme_new, &QAction::triggered,
-                this, &MainWindow::on_newScheme);
-        connect(ui->scheme_load, &QAction::triggered,
-                this, &MainWindow::on_loadScheme);
-        connect(ui->scheme_save, &QAction::triggered,
-                this, &MainWindow::on_saveScheme);
+        bindAction(ui->scheme_new, this, &MainWindow::on_newScheme);
+        bindAction(ui->scheme_load, this, &MainWindow::on_loadScheme);
+        bindAction(ui->scheme_save, this, &MainWindow::on_saveScheme);
     }
 
     void MainWindow::bindSchemeEditor() {
