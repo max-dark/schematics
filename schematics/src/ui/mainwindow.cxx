@@ -24,6 +24,7 @@
 #include <QFileDialog>
 
 #include <QMessageBox>
+#include <QInputDialog>
 
 #include <ui/widgets/scheme/schemeview.hxx>
 #include <ui/widgets/scheme/schemeeditor.hxx>
@@ -186,8 +187,18 @@ namespace Schematics {
                 this, &MainWindow::schemeParamChanged);
         connect(ui->schemeEditor, &SchemeEditor::centralWidthChanged,
                 this, &MainWindow::centralWidthChanged);
-        connect(ui->schemeEditor, &SchemeEditor::addCentralBoard,
-                this, &MainWindow::addCentralBoard);
+        connect(ui->schemeEditor, &SchemeEditor::addCentralBoards,
+                this, &MainWindow::addCentralBoards);
+        connect(ui->schemeEditor, &SchemeEditor::deleteAllCentralBoards,
+                this, &MainWindow::deleteAllCentralBoards);
+        connect(ui->schemeEditor, &SchemeEditor::deleteCentralBoardByPos,
+                this, &MainWindow::deleteCentralBoardByPos);
+
+        connect(ui->schemeEditor, &SchemeEditor::setAllCentralHeights,
+                this, &MainWindow::setAllCentralHeights);
+        connect(ui->schemeEditor, &SchemeEditor::setCentralHeightByPos,
+                this, &MainWindow::setCentralHeightByPos);
+
         connect(ui->schemeEditor, &SchemeEditor::pa300Changed,
                 this, &MainWindow::pa300Changed);
         connect(ui->schemeEditor, &SchemeEditor::pka350Changed,
@@ -346,10 +357,81 @@ namespace Schematics {
         scheme->set_dws_board_width(Unit::from_mm(width));
     }
 
-    void MainWindow::addCentralBoard(double /*width*/, double height)
+    void MainWindow::addCentralBoards(double height, size_t count)
     {
-        ui->schemeView->addCentral(height);
-        scheme->add_dws_board(Unit::from_mm(height));
+        for(size_t i = 0; i < count; ++i)
+        {
+            ui->schemeView->addCentral(height);
+            scheme->add_dws_board(Unit::from_mm(height));
+        }
+    }
+
+    void MainWindow::deleteAllCentralBoards()
+    {
+        auto count = scheme->dws350().count().units();
+        while (count > 0) {
+            count -= 1;
+            scheme->remove_dws_board(count);
+            ui->schemeView->removeCentral(count);
+        }
+    }
+
+    void MainWindow::deleteCentralBoardByPos()
+    {
+        bool ok;
+        auto count = scheme->dws350().count().units();
+
+        if (count > 0)
+        {
+            auto idx = QInputDialog::getInt(
+                        this,
+                        "Введите номер доски",
+                        "Введите номер доски для удаления (счет идет слева направо)",
+                        1, 1, count, 1, &ok);
+            if (ok)
+            {
+                idx -= 1;
+                scheme->remove_dws_board(idx);
+                ui->schemeView->removeCentral(idx);
+            }
+        }
+    }
+
+    void MainWindow::setAllCentralHeights(double height)
+    {
+        if (height > 0.0)
+        {
+            auto count = scheme->dws350().count().units();
+            while (count > 0) {
+                count -= 1;
+                scheme->set_dws_board_height(count, Unit::from_mm(height));
+                ui->schemeView->setCentralHeight(count, height);
+            }
+        }
+    }
+
+    void MainWindow::setCentralHeightByPos(double height)
+    {
+        if (height > 0.0)
+        {
+            bool ok;
+            auto count = scheme->dws350().count().units();
+
+            if (count > 0)
+            {
+                auto idx = QInputDialog::getInt(
+                            this,
+                            "Введите номер доски",
+                            "Введите номер доски для замены (счет идет слева направо)",
+                            1, 1, count, 1, &ok);
+                if (ok)
+                {
+                    idx -= 1;
+                    scheme->set_dws_board_height(idx, Unit::from_mm(height));
+                    ui->schemeView->setCentralHeight(idx, height);
+                }
+            }
+        }
     }
 
     void MainWindow::pa300Changed(bool enabled, double width, double height)

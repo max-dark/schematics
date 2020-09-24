@@ -39,7 +39,12 @@ namespace Schematics::Ui::Widgets
         void schemeParamChanged();
 
         void centralWidthChanged(double width);
-        void addCentralBoard(double width, double height);
+        void addCentralBoards(double height, size_t count);
+        void deleteAllCentralBoards();
+        void deleteCentralBoardByPos();
+
+        void setAllCentralHeights(double height);
+        void setCentralHeightByPos(double height);
 
         void pa300Changed(bool enabled, double width, double height);
         void pka350Changed(bool enabled, double width, double height);
@@ -50,6 +55,7 @@ namespace Schematics::Ui::Widgets
 
     private slots:
         void on_addBoardClicked();
+        void on_addNBoardsClicked(size_t count);
         void on_pa300Changed();
         void on_pka350Changed();
         void on_pa350Changed();

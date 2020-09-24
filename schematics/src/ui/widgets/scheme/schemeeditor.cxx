@@ -18,6 +18,9 @@
 #include <QSpacerItem>
 #include <QSizePolicy>
 
+#include <QMenu>
+#include <QAction>
+
 #include <ui/tools/tool.hxx>
 
 namespace Schematics::Ui::Widgets
@@ -205,8 +208,56 @@ namespace Schematics::Ui::Widgets
             bindEditor(scheme_dws350_width, &SchemeEditor::centralWidthChanged);
 
             auto btn_add_dws350 = new QPushButton{"Добавить"};
-            bindButton(btn_add_dws350, &SchemeEditor::on_addBoardClicked);
-            tool::addGridRow(box, btn_add_dws350);
+            auto btn_del_dws350 = new QPushButton{"Удалить"};
+            auto btn_set_dws350 = new QPushButton{"Заменить"};
+
+            // меню для кнопки "Добавить"
+            {
+                auto add_menu = new QMenu{};
+                for (size_t n = 1; n <= 5; ++n) {
+                    auto add_n = add_menu->addAction(QString{"%1 шт"}.arg(n));
+                    connect(add_n, &QAction::triggered, [this, n]{
+                        on_addNBoardsClicked(n);
+                    });
+                }
+
+                btn_add_dws350->setMenu(add_menu);
+                // при установке меню на кнопку владелец меню не меняется
+                // поэтому подцепим удаление меню на уничтожение кнопки
+                connect(btn_add_dws350, &QPushButton::destroyed, add_menu, &QAction::deleteLater);
+            }
+            // меню кнопки "удалить"
+            {
+                auto del_menu = new QMenu{};
+                auto del_all = del_menu->addAction("Все");
+                auto del_pos = del_menu->addAction("По позиции");
+
+                connect(del_all, &QAction::triggered, this, &SchemeEditor::deleteAllCentralBoards);
+                connect(del_pos, &QAction::triggered, this, &SchemeEditor::deleteCentralBoardByPos);
+
+                btn_del_dws350->setMenu(del_menu);
+                connect(btn_del_dws350, &QPushButton::destroyed, del_menu, &QAction::deleteLater);
+            }
+            // Меню для кнопки "Заменить"
+            {
+                auto set_menu = new QMenu{};
+                auto set_all = set_menu->addAction("Все");
+                auto set_pos = set_menu->addAction("По позиции");
+
+                connect(set_all, &QAction::triggered, [this]{
+                    emit setAllCentralHeights(scheme_dws350_height->value());
+                });
+                connect(set_pos, &QAction::triggered,  [this]{
+                    emit setCentralHeightByPos(scheme_dws350_height->value());
+                });
+
+                btn_set_dws350->setMenu(set_menu);
+                connect(btn_set_dws350, &QPushButton::destroyed, set_menu, &QAction::deleteLater);
+            }
+            auto next_row = box->rowCount();
+            box->addWidget(btn_add_dws350, next_row, 0);
+            box->addWidget(btn_del_dws350, next_row, 1);
+            box->addWidget(btn_set_dws350, next_row, 2);
 
             pa300.enable = new QCheckBox{"Боковые"};
             tool::addGridRow(box, pa300.enable);
@@ -253,11 +304,20 @@ namespace Schematics::Ui::Widgets
         tool::addGridRow(editBox, tool::createVSpace());
     }
 
-    void SchemeEditor::on_addBoardClicked() {
+    void SchemeEditor::on_addBoardClicked()
+    {
+        on_addNBoardsClicked(1);
+    }
+
+    void SchemeEditor::on_addNBoardsClicked(size_t count)
+    {
         auto width = scheme_dws350_width->value();
         auto height = scheme_dws350_height->value();
 
-        emit addCentralBoard(width, height);
+        if (width > 0 && height > 0)
+        {
+            emit addCentralBoards(height, count);
+        }
     }
 
     void SchemeEditor::on_pa300Changed() {
