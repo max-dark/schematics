@@ -22,12 +22,13 @@
 #include <QAction>
 
 #include <ui/tools/tool.hxx>
+#include <ui/widgets/numbereditor.hxx>
 
 namespace Schematics::Ui::Widgets
 {
     QDoubleSpinBox *addSizeEditor(QGridLayout *box, const QString &title) {
         auto lbl = new QLabel{title};
-        auto edit = new QDoubleSpinBox{};
+        auto edit = new NumberEditor{};
         edit->setSuffix(" mm");
         edit->setDecimals(1);
         edit->setAlignment(Qt::AlignRight);
