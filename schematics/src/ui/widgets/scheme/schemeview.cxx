@@ -164,6 +164,24 @@ namespace Schematics::Ui::Widgets
 
     private:
         int m_index = 0;
+        // BoardItem interface
+    protected:
+        void customPaint(QPainter *painter) override
+        {
+            BoardItem::customPaint(painter);
+            painter->save();
+            {
+                auto r = rect();
+                r.adjust(2, 2, -2, -2);
+
+                auto font = painter->font();
+                font.setPixelSize(9);
+                painter->setFont(font);
+
+                painter->drawText(r, QString::number(m_index + 1));
+            }
+            painter->restore();
+        }
     };
 
     struct PA300BoardItem: public BoardItem
