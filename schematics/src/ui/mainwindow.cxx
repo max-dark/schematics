@@ -24,6 +24,7 @@
 #include <QFileDialog>
 
 #include <QMessageBox>
+#include <QInputDialog>
 
 #include <ui/widgets/scheme/schemeview.hxx>
 #include <ui/widgets/scheme/schemeeditor.hxx>
@@ -188,6 +189,11 @@ namespace Schematics {
                 this, &MainWindow::centralWidthChanged);
         connect(ui->schemeEditor, &SchemeEditor::addCentralBoards,
                 this, &MainWindow::addCentralBoards);
+        connect(ui->schemeEditor, &SchemeEditor::deleteAllCentralBoards,
+                this, &MainWindow::deleteAllCentralBoards);
+        connect(ui->schemeEditor, &SchemeEditor::deleteCentralBoardByPos,
+                this, &MainWindow::deleteCentralBoardByPos);
+
         connect(ui->schemeEditor, &SchemeEditor::pa300Changed,
                 this, &MainWindow::pa300Changed);
         connect(ui->schemeEditor, &SchemeEditor::pka350Changed,
@@ -352,6 +358,34 @@ namespace Schematics {
         {
             ui->schemeView->addCentral(height);
             scheme->add_dws_board(Unit::from_mm(height));
+        }
+    }
+
+    void MainWindow::deleteAllCentralBoards()
+    {
+        auto count = scheme->dws350().count().units();
+        while (count > 0) {
+            count -= 1;
+            scheme->remove_dws_board(count);
+            ui->schemeView->removeCentral(count);
+        }
+    }
+
+    void MainWindow::deleteCentralBoardByPos()
+    {
+        bool ok;
+        auto count = scheme->dws350().count().units();
+
+        if (count > 0)
+        {
+            auto idx = QInputDialog::getInt(
+                        this, "Введите номер доски", "Номер доски слева напрово", 1, 1, count, 1, &ok);
+            if (ok)
+            {
+                idx -= 1;
+                scheme->remove_dws_board(idx);
+                ui->schemeView->removeCentral(idx);
+            }
         }
     }
 
