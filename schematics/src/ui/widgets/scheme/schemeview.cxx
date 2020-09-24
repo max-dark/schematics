@@ -109,6 +109,45 @@ namespace Schematics::Ui::Widgets
         }
     private:
         Orientation m_orientation = Vertical;
+
+        // QGraphicsItem interface
+    public:
+        void paint(QPainter *painter,
+                   const QStyleOptionGraphicsItem *option,
+                   QWidget *widget) override
+        {
+            QGraphicsRectItem::paint(painter, option, widget);
+            customPaint(painter);
+        }
+    protected:
+        virtual void customPaint(QPainter* painter)
+        {
+            painter->save();
+            {
+                auto b = boundingRect();
+                auto center = b.center();
+                auto zero = QPointF{};
+                if (isVertical())
+                {
+                    painter->translate(center);
+                    painter->rotate(90);
+                    b.setSize({b.height(), b.width()});
+                    b.moveCenter(zero);
+                }
+                auto font = painter->font();
+                font.setPixelSize(9);
+                painter->setFont(font);
+                painter->setClipRect(b);
+                auto flags = Qt::AlignCenter | Qt::TextSingleLine;
+                auto rt = painter->fontMetrics()
+                              .boundingRect(b.toRect(), flags, toolTip());
+                auto bg = painter->background();
+                bg.setStyle(Qt::SolidPattern);
+                painter->fillRect(rt, bg);
+                painter->drawText(b, flags, toolTip());
+            }
+            painter->restore();
+        }
     };
 
     struct DWS350BoardItem: public BoardItem
