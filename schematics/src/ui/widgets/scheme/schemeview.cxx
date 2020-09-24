@@ -156,6 +156,14 @@ namespace Schematics::Ui::Widgets
             setFillColor(Qt::green);
             setVisible(true);
         }
+
+        void setIndex(int value)
+        {
+            m_index = value;
+        }
+
+    private:
+        int m_index = 0;
     };
 
     struct PA300BoardItem: public BoardItem
