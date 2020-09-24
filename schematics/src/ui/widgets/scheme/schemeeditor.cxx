@@ -244,8 +244,12 @@ namespace Schematics::Ui::Widgets
                 auto set_all = set_menu->addAction("Все");
                 auto set_pos = set_menu->addAction("По позиции");
 
-                connect(set_all, &QAction::triggered, this, &SchemeEditor::setAllCentralHeights);
-                connect(set_pos, &QAction::triggered, this, &SchemeEditor::setCentralHeightByPos);
+                connect(set_all, &QAction::triggered, [this]{
+                    emit setAllCentralHeights(scheme_dws350_height->value());
+                });
+                connect(set_pos, &QAction::triggered,  [this]{
+                    emit setCentralHeightByPos(scheme_dws350_height->value());
+                });
 
                 btn_set_dws350->setMenu(set_menu);
                 connect(btn_set_dws350, &QPushButton::destroyed, set_menu, &QAction::deleteLater);
