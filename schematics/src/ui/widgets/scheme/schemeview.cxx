@@ -321,6 +321,8 @@ namespace Schematics::Ui::Widgets
         {
             auto b = new DWS350BoardItem{};
             b->setSize(centralWidth, height);
+            b->setIndex(dws350.size());
+
             gfx->addItem(b);
             dws350.push_back(b);
 
@@ -337,7 +339,14 @@ namespace Schematics::Ui::Widgets
                 // in QGraphicsItem destructor
                 delete (*it);
                 // remove from central list
-                dws350.erase(it);
+                auto i = dws350.erase(it);
+
+                // update index
+                while (i != dws350.end()) {
+                    (*i)->setIndex(idx);
+                    ++idx;
+                    ++i;
+                }
 
                 updateGeometry();
 
