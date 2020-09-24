@@ -226,6 +226,18 @@ namespace Schematics::Ui::Widgets
                 // поэтому подцепим удаление меню на уничтожение кнопки
                 connect(btn_add_dws350, &QPushButton::destroyed, add_menu, &QAction::deleteLater);
             }
+            // меню кнопки "удалить"
+            {
+                auto del_menu = new QMenu{};
+                auto del_all = del_menu->addAction("Все");
+                auto del_pos = del_menu->addAction("По позиции");
+
+                connect(del_all, &QAction::triggered, this, &SchemeEditor::deleteAllCentralBoards);
+                connect(del_pos, &QAction::triggered, this, &SchemeEditor::deleteCentralBoardByPos);
+
+                btn_del_dws350->setMenu(del_menu);
+                connect(btn_del_dws350, &QPushButton::destroyed, del_menu, &QAction::deleteLater);
+            }
             auto next_row = box->rowCount();
             box->addWidget(btn_add_dws350, next_row, 0);
             box->addWidget(btn_del_dws350, next_row, 1);

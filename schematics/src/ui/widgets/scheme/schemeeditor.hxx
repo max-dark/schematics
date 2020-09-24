@@ -40,6 +40,8 @@ namespace Schematics::Ui::Widgets
 
         void centralWidthChanged(double width);
         void addCentralBoards(double height, size_t count);
+        void deleteAllCentralBoards();
+        void deleteCentralBoardByPos();
 
         void pa300Changed(bool enabled, double width, double height);
         void pka350Changed(bool enabled, double width, double height);
