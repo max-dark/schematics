@@ -82,22 +82,23 @@ namespace Schematics::Ui::Widgets
         void updatePos()
         {
             auto r = rect();
+            auto w = r.width();
+            auto h = r.height();
 
             switch (orientation()) {
             case Vertical:
                 r.moveTo(r.x(), - r.height() / 2);
+                std::swap(h, w);
                 break;
             case Horisontal:
                 {
-                    auto w = r.width();
-                    r.setX(- w / 2);
-                    r.setWidth(w);
+                    r.moveTo(- w / 2, r.y());
                 }
                 break;
             }
             setToolTip(QString{"%1 x %2"}
-                           .arg(r.width(), 0, 'f', 1)
-                           .arg(r.height(), 0, 'f', 1)
+                           .arg(w, 0, 'f', 1)
+                           .arg(h, 0, 'f', 1)
                        );
             setRect(r);
         }
