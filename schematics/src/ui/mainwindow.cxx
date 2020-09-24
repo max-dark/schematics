@@ -379,7 +379,10 @@ namespace Schematics {
         if (count > 0)
         {
             auto idx = QInputDialog::getInt(
-                        this, "Введите номер доски", "Номер доски слева напрово", 1, 1, count, 1, &ok);
+                        this,
+                        "Введите номер доски",
+                        "Введите номер доски для удаления (счет идет слева направо)",
+                        1, 1, count, 1, &ok);
             if (ok)
             {
                 idx -= 1;
