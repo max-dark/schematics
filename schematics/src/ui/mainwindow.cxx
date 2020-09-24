@@ -194,6 +194,11 @@ namespace Schematics {
         connect(ui->schemeEditor, &SchemeEditor::deleteCentralBoardByPos,
                 this, &MainWindow::deleteCentralBoardByPos);
 
+        connect(ui->schemeEditor, &SchemeEditor::setAllCentralHeights,
+                this, &MainWindow::setAllCentralHeights);
+        connect(ui->schemeEditor, &SchemeEditor::setCentralHeightByPos,
+                this, &MainWindow::setCentralHeightByPos);
+
         connect(ui->schemeEditor, &SchemeEditor::pa300Changed,
                 this, &MainWindow::pa300Changed);
         connect(ui->schemeEditor, &SchemeEditor::pka350Changed,
@@ -388,6 +393,43 @@ namespace Schematics {
                 idx -= 1;
                 scheme->remove_dws_board(idx);
                 ui->schemeView->removeCentral(idx);
+            }
+        }
+    }
+
+    void MainWindow::setAllCentralHeights(double height)
+    {
+        if (height > 0.0)
+        {
+            auto count = scheme->dws350().count().units();
+            while (count > 0) {
+                count -= 1;
+                scheme->set_dws_board_height(count, Unit::from_mm(height));
+                ui->schemeView->setCentralHeight(count, height);
+            }
+        }
+    }
+
+    void MainWindow::setCentralHeightByPos(double height)
+    {
+        if (height > 0.0)
+        {
+            bool ok;
+            auto count = scheme->dws350().count().units();
+
+            if (count > 0)
+            {
+                auto idx = QInputDialog::getInt(
+                            this,
+                            "Введите номер доски",
+                            "Введите номер доски для замены (счет идет слева направо)",
+                            1, 1, count, 1, &ok);
+                if (ok)
+                {
+                    idx -= 1;
+                    scheme->set_dws_board_height(idx, Unit::from_mm(height));
+                    ui->schemeView->setCentralHeight(idx, height);
+                }
             }
         }
     }

@@ -34,6 +34,9 @@ namespace Schematics {
         void deleteAllCentralBoards();
         void deleteCentralBoardByPos();
 
+        void setAllCentralHeights(double height);
+        void setCentralHeightByPos(double height);
+
         void pa300Changed(bool enabled, double width, double height);
         void pka350Changed(bool enabled, double width, double height);
         void pa350Changed(bool enabled, double width, double height);
