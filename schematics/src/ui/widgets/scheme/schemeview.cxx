@@ -82,22 +82,23 @@ namespace Schematics::Ui::Widgets
         void updatePos()
         {
             auto r = rect();
+            auto w = r.width();
+            auto h = r.height();
 
             switch (orientation()) {
             case Vertical:
                 r.moveTo(r.x(), - r.height() / 2);
+                std::swap(h, w);
                 break;
             case Horisontal:
                 {
-                    auto w = r.width();
-                    r.setX(- w / 2);
-                    r.setWidth(w);
+                    r.moveTo(- w / 2, r.y());
                 }
                 break;
             }
             setToolTip(QString{"%1 x %2"}
-                           .arg(r.width(), 0, 'f', 1)
-                           .arg(r.height(), 0, 'f', 1)
+                           .arg(w, 0, 'f', 1)
+                           .arg(h, 0, 'f', 1)
                        );
             setRect(r);
         }
@@ -108,6 +109,45 @@ namespace Schematics::Ui::Widgets
         }
     private:
         Orientation m_orientation = Vertical;
+
+        // QGraphicsItem interface
+    public:
+        void paint(QPainter *painter,
+                   const QStyleOptionGraphicsItem *option,
+                   QWidget *widget) override
+        {
+            QGraphicsRectItem::paint(painter, option, widget);
+            customPaint(painter);
+        }
+    protected:
+        virtual void customPaint(QPainter* painter)
+        {
+            painter->save();
+            {
+                auto b = boundingRect();
+                auto center = b.center();
+                auto zero = QPointF{};
+                if (isVertical())
+                {
+                    painter->translate(center);
+                    painter->rotate(90);
+                    b.setSize({b.height(), b.width()});
+                    b.moveCenter(zero);
+                }
+                auto font = painter->font();
+                font.setPixelSize(9);
+                painter->setFont(font);
+                painter->setClipRect(b);
+                auto flags = Qt::AlignCenter | Qt::TextSingleLine;
+                auto rt = painter->fontMetrics()
+                              .boundingRect(b.toRect(), flags, toolTip());
+                auto bg = painter->background();
+                bg.setStyle(Qt::SolidPattern);
+                painter->fillRect(rt, bg);
+                painter->drawText(b, flags, toolTip());
+            }
+            painter->restore();
+        }
     };
 
     struct DWS350BoardItem: public BoardItem
