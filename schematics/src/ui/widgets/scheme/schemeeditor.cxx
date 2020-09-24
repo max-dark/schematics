@@ -238,6 +238,18 @@ namespace Schematics::Ui::Widgets
                 btn_del_dws350->setMenu(del_menu);
                 connect(btn_del_dws350, &QPushButton::destroyed, del_menu, &QAction::deleteLater);
             }
+            // Меню для кнопки "Заменить"
+            {
+                auto set_menu = new QMenu{};
+                auto set_all = set_menu->addAction("Все");
+                auto set_pos = set_menu->addAction("По позиции");
+
+                connect(set_all, &QAction::triggered, this, &SchemeEditor::setAllCentralHeights);
+                connect(set_pos, &QAction::triggered, this, &SchemeEditor::setCentralHeightByPos);
+
+                btn_set_dws350->setMenu(set_menu);
+                connect(btn_set_dws350, &QPushButton::destroyed, set_menu, &QAction::deleteLater);
+            }
             auto next_row = box->rowCount();
             box->addWidget(btn_add_dws350, next_row, 0);
             box->addWidget(btn_del_dws350, next_row, 1);
