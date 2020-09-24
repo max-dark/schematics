@@ -156,6 +156,32 @@ namespace Schematics::Ui::Widgets
             setFillColor(Qt::green);
             setVisible(true);
         }
+
+        void setIndex(int value)
+        {
+            m_index = value;
+        }
+
+    private:
+        int m_index = 0;
+        // BoardItem interface
+    protected:
+        void customPaint(QPainter *painter) override
+        {
+            BoardItem::customPaint(painter);
+            painter->save();
+            {
+                auto r = rect();
+                r.adjust(2, 2, -2, -2);
+
+                auto font = painter->font();
+                font.setPixelSize(9);
+                painter->setFont(font);
+
+                painter->drawText(r, QString::number(m_index + 1));
+            }
+            painter->restore();
+        }
     };
 
     struct PA300BoardItem: public BoardItem
@@ -313,6 +339,8 @@ namespace Schematics::Ui::Widgets
         {
             auto b = new DWS350BoardItem{};
             b->setSize(centralWidth, height);
+            b->setIndex(dws350.size());
+
             gfx->addItem(b);
             dws350.push_back(b);
 
@@ -329,7 +357,14 @@ namespace Schematics::Ui::Widgets
                 // in QGraphicsItem destructor
                 delete (*it);
                 // remove from central list
-                dws350.erase(it);
+                auto i = dws350.erase(it);
+
+                // update index
+                while (i != dws350.end()) {
+                    (*i)->setIndex(idx);
+                    ++idx;
+                    ++i;
+                }
 
                 updateGeometry();
 
