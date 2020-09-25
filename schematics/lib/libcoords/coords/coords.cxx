@@ -68,7 +68,12 @@ void SchemeCalculator::calculate(const Schema *schema)
     p1_top = infinity;
     if (schema->is_pa350_enabled())
     {
-        //TODO:
+        auto saw = saw_pka;
+        auto& pa = schema->pa350();
+        p1_bottom = (p1Height() - pa.board_width) / two;
+        p1_top = p1Bottom() + pa.board_width;
+
+        p1_width = p1_width + (saw + pa.board_height) * two;
     }
     // calc f2 zone
     fbs2_align = zero;
