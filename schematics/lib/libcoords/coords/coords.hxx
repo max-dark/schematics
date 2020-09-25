@@ -30,6 +30,9 @@ namespace Coords
         Unit p1Bottom() const;
         Unit p1Top() const;
 
+        Unit r2Width() const;
+        Unit r2Height() const;
+
         Unit p2Width() const;
         Unit p2Height() const;
         Unit p2Bottom() const;

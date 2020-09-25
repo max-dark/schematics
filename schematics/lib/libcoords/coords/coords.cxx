@@ -37,18 +37,21 @@ void SchemeCalculator::calculate(const Schema *schema)
         p3_width = p3_width + (saw_dws + w) * two;
     }
 
+    // размер бруса на входе 2го поворотного
+    r2_width = p3_width;
+    r2_height = p3_height;
+    if (do_rotate)
+    {
+        // работает 2е ПУ: поворачиваем брус на бок
+        std::swap(r2_width, r2_height);
+    }
     // calc p2 zone
-    p2_width = p3_width;
-    p2_height = p3_height;
+    p2_width = r2_width;
+    p2_height = r2_height;
     p2_bottom = infinity;
     p2_top = infinity;
     p2_roller_pos = infinity;
     p2_outer_saw = infinity;
-    if (do_rotate)
-    {
-        // работает 2е ПУ: поворачиваем брус на бок
-        std::swap(p2_width, p2_height);
-    }
     if(schema->is_pka350_enabled())
     {
         //TODO
@@ -125,6 +128,16 @@ libschema::Unit SchemeCalculator::p1Bottom() const
 libschema::Unit SchemeCalculator::p1Top() const
 {
     return p1_top;
+}
+
+libschema::Unit SchemeCalculator::r2Width() const
+{
+    return r2_width;
+}
+
+libschema::Unit SchemeCalculator::r2Height() const
+{
+    return r2_height;
 }
 
 // <<<<<<<<<<<<<<<<<
