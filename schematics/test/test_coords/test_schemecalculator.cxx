@@ -135,6 +135,16 @@ void TestSchemeCalculator::checkPA300()
     QCOMPARE(calc.p3Top().units(), rtop);
 }
 
+void TestSchemeCalculator::checkPKA350()
+{
+    QVERIFY2(false, "TODO: write 'checkPKA350' test");
+}
+
+void TestSchemeCalculator::checkPA350()
+{
+    QVERIFY2(false, "TODO: write 'checkPA350' test");
+}
+
 void TestSchemeCalculator::setSchemaParams(
         Schema &schema, millimeter_t diameter,
         millimeter_t dws, millimeter_t pka,

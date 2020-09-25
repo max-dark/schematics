@@ -19,6 +19,10 @@ private slots:
 
     void checkPA300_data();
     void checkPA300();
+
+    void checkPKA350();
+
+    void checkPA350();
 private:
     void setSchemaParams(libschema::Schema& schema,
                          libschema::millimeter_t diameter,
