@@ -28,11 +28,6 @@ namespace Schematics::Ui::Widgets
     NumberEditor *addSizeEditor(QGridLayout *box, const QString &title) {
         auto lbl = new QLabel{title};
         auto edit = new NumberEditor{};
-        edit->setSuffix(" mm");
-        edit->setDecimals(1);
-        edit->setAlignment(Qt::AlignRight);
-        edit->setMinimum(0.0);
-        edit->setMaximum(1000.0);
 
         auto last_row = box->rowCount();
         box->addWidget(lbl, last_row, 0);
