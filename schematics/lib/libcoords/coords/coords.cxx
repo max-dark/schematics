@@ -2,7 +2,7 @@
 
 namespace Coords {
 
-void System::calculte(const Schema *schema)
+void SchemeCalculator::calculate(const Schema *schema)
 {
     //
 }
