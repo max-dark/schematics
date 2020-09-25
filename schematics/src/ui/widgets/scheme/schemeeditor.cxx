@@ -9,7 +9,6 @@
 #include <QPushButton>
 #include <QCheckBox>
 #include <QRadioButton>
-#include <QDoubleSpinBox>
 #include <QLabel>
 #include <QGraphicsView>
 #include <QGraphicsScene>
@@ -22,17 +21,13 @@
 #include <QAction>
 
 #include <ui/tools/tool.hxx>
+#include <ui/widgets/numbereditor.hxx>
 
 namespace Schematics::Ui::Widgets
 {
-    QDoubleSpinBox *addSizeEditor(QGridLayout *box, const QString &title) {
+    NumberEditor *addSizeEditor(QGridLayout *box, const QString &title) {
         auto lbl = new QLabel{title};
-        auto edit = new QDoubleSpinBox{};
-        edit->setSuffix(" mm");
-        edit->setDecimals(1);
-        edit->setAlignment(Qt::AlignRight);
-        edit->setMinimum(0.0);
-        edit->setMaximum(1000.0);
+        auto edit = new NumberEditor{};
 
         auto last_row = box->rowCount();
         box->addWidget(lbl, last_row, 0);
@@ -47,15 +42,15 @@ namespace Schematics::Ui::Widgets
                          this, method);
     }
 
-    void SchemeEditor::bindEditor(QDoubleSpinBox* box, void (SchemeEditor::* method)()) const
+    void SchemeEditor::bindEditor(NumberEditor* box, void (SchemeEditor::* method)()) const
     {
-        QObject::connect(box, qOverload<double>(&QDoubleSpinBox::valueChanged),
+        QObject::connect(box, qOverload<double>(&NumberEditor::valueChanged),
                          this, method);
     }
 
-    void SchemeEditor::bindEditor(QDoubleSpinBox* box, void (SchemeEditor::* method)(double)) const
+    void SchemeEditor::bindEditor(NumberEditor* box, void (SchemeEditor::* method)(double)) const
     {
-        QObject::connect(box, qOverload<double>(&QDoubleSpinBox::valueChanged),
+        QObject::connect(box, qOverload<double>(&NumberEditor::valueChanged),
                          this, method);
     }
 
@@ -71,8 +66,8 @@ namespace Schematics::Ui::Widgets
     }
 
     void SchemeEditor::bindGroup(QCheckBox* enable,
-                   QDoubleSpinBox* width,
-                   QDoubleSpinBox* height,
+                   NumberEditor* width,
+                   NumberEditor* height,
                    void (SchemeEditor::* method)()) const
     {
         bindChkBox(enable, method);
