@@ -5,12 +5,12 @@
 
 QT_BEGIN_NAMESPACE
 class QPushButton;
-class QDoubleSpinBox;
 class QCheckBox;
 QT_END_NAMESPACE
 
 namespace Schematics::Ui::Widgets
 {
+    class NumberEditor;
     class SchemeEditor: public QGroupBox
     {
         Q_OBJECT
@@ -63,35 +63,35 @@ namespace Schematics::Ui::Widgets
         struct BoardParams
         {
             QCheckBox* enable = nullptr;
-            QDoubleSpinBox* width = nullptr;
-            QDoubleSpinBox* height = nullptr;
+            NumberEditor* width = nullptr;
+            NumberEditor* height = nullptr;
         };
     private /* methods */:
         void buildView();
 
         void bindButton(QPushButton* btn, void (SchemeEditor::* method)()) const;
-        void bindEditor(QDoubleSpinBox* box, void (SchemeEditor::* method)()) const;
-        void bindEditor(QDoubleSpinBox* box, void (SchemeEditor::* method)(double)) const;
+        void bindEditor(NumberEditor* box, void (SchemeEditor::* method)()) const;
+        void bindEditor(NumberEditor* box, void (SchemeEditor::* method)(double)) const;
         void bindChkBox(QCheckBox* box, void (SchemeEditor::* method)()) const;
 
         void bindGroup(const BoardParams& group,
                        void (SchemeEditor::* method)()) const;
         void bindGroup(QCheckBox* enable,
-                       QDoubleSpinBox* width,
-                       QDoubleSpinBox* height,
+                       NumberEditor* width,
+                       NumberEditor* height,
                        void (SchemeEditor::* method)()) const;
 
         void setBoardParams(BoardParams& group, bool enabled, double width, double height);
 
     private /* members */:
-        QDoubleSpinBox *param_minDiam = nullptr;
-        QDoubleSpinBox *param_maxDiam = nullptr;
-        QDoubleSpinBox *param_dwsGap = nullptr;
-        QDoubleSpinBox *param_pkaGap = nullptr;
+        NumberEditor *param_minDiam = nullptr;
+        NumberEditor *param_maxDiam = nullptr;
+        NumberEditor *param_dwsGap = nullptr;
+        NumberEditor *param_pkaGap = nullptr;
         QCheckBox* param_pu2 = nullptr;
 
-        QDoubleSpinBox *scheme_dws350_width = nullptr;
-        QDoubleSpinBox *scheme_dws350_height = nullptr;
+        NumberEditor *scheme_dws350_width = nullptr;
+        NumberEditor *scheme_dws350_height = nullptr;
 
         BoardParams pa300;
 

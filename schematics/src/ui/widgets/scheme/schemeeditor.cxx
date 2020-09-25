@@ -9,7 +9,6 @@
 #include <QPushButton>
 #include <QCheckBox>
 #include <QRadioButton>
-#include <QDoubleSpinBox>
 #include <QLabel>
 #include <QGraphicsView>
 #include <QGraphicsScene>
@@ -26,7 +25,7 @@
 
 namespace Schematics::Ui::Widgets
 {
-    QDoubleSpinBox *addSizeEditor(QGridLayout *box, const QString &title) {
+    NumberEditor *addSizeEditor(QGridLayout *box, const QString &title) {
         auto lbl = new QLabel{title};
         auto edit = new NumberEditor{};
         edit->setSuffix(" mm");
@@ -48,15 +47,15 @@ namespace Schematics::Ui::Widgets
                          this, method);
     }
 
-    void SchemeEditor::bindEditor(QDoubleSpinBox* box, void (SchemeEditor::* method)()) const
+    void SchemeEditor::bindEditor(NumberEditor* box, void (SchemeEditor::* method)()) const
     {
-        QObject::connect(box, qOverload<double>(&QDoubleSpinBox::valueChanged),
+        QObject::connect(box, qOverload<double>(&NumberEditor::valueChanged),
                          this, method);
     }
 
-    void SchemeEditor::bindEditor(QDoubleSpinBox* box, void (SchemeEditor::* method)(double)) const
+    void SchemeEditor::bindEditor(NumberEditor* box, void (SchemeEditor::* method)(double)) const
     {
-        QObject::connect(box, qOverload<double>(&QDoubleSpinBox::valueChanged),
+        QObject::connect(box, qOverload<double>(&NumberEditor::valueChanged),
                          this, method);
     }
 
@@ -72,8 +71,8 @@ namespace Schematics::Ui::Widgets
     }
 
     void SchemeEditor::bindGroup(QCheckBox* enable,
-                   QDoubleSpinBox* width,
-                   QDoubleSpinBox* height,
+                   NumberEditor* width,
+                   NumberEditor* height,
                    void (SchemeEditor::* method)()) const
     {
         bindChkBox(enable, method);
