@@ -6,6 +6,15 @@
 using namespace Coords;
 using namespace libschema;
 
+namespace QTest {
+    inline bool qCompare(Unit t1, Unit t2, const char *actual, const char *expected,
+                    const char *file, int line)
+    {
+        return qCompare(t1.units(), t2.units(), actual, expected,
+                        file, line);
+    }
+}
+
 TestSchemeCalculator::TestSchemeCalculator(QObject *parent)
     : QObject(parent)
 {}
