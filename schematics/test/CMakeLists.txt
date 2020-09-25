@@ -27,3 +27,14 @@ target_link_libraries(test_params PRIVATE schema Qt5::Test)
 add_executable(test_schema test_schema.cxx)
 add_test(NAME test_schema COMMAND test_schema)
 target_link_libraries(test_schema PRIVATE schema Qt5::Test)
+
+add_executable(test_calc)
+target_sources(test_calc
+    PRIVATE
+        test_coords/test_calc_main.cxx
+        test_coords/test_schemecalculator.cxx
+        test_coords/test_schemecalculator.hxx
+)
+
+add_test(NAME test_calc COMMAND test_calc)
+target_link_libraries(test_calc PRIVATE schema coords Qt5::Test)
