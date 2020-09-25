@@ -15,11 +15,11 @@ void TestSchemeCalculator::onlyCentralWithRotate()
     SchemeCalculator calc;
     Schema schema;
 
-    schema.set_params(new Params{
-        Unit::from_mm(200),
-        Unit::from_mm(4), Unit::from_mm(6),
+    setSchemaParams(schema,
+        200,
+        4, 6,
         false // активировать поворотное
-    });
+    );
     schema.set_dws_board_width(Unit::from_mm(150));
     schema.add_dws_board(Unit::from_mm(50));
     schema.add_dws_board(Unit::from_mm(50));
@@ -46,11 +46,11 @@ void TestSchemeCalculator::onlyCentralWithoutRotate()
     SchemeCalculator calc;
     Schema schema;
 
-    schema.set_params(new Params{
-        Unit::from_mm(200),
-        Unit::from_mm(4), Unit::from_mm(6),
+    setSchemaParams(schema,
+        200,
+        4, 6,
         true // отключить поворотное
-    });
+    );
     schema.set_dws_board_width(Unit::from_mm(150));
     schema.add_dws_board(Unit::from_mm(50));
     schema.add_dws_board(Unit::from_mm(50));
@@ -108,11 +108,11 @@ void TestSchemeCalculator::checkPA300()
     SchemeCalculator calc;
     Schema schema;
 
-    schema.set_params(new Params{
-        Unit::from_mm(200),
-        Unit::from_mm(4), Unit::from_mm(6),
+    setSchemaParams(schema,
+        200,
+        4, 6,
         true // отключить поворотное
-    });
+    );
     schema.set_dws_board_width(Unit::from_units(cw));
     schema.add_dws_board(Unit::from_units(ch));
     schema.add_dws_board(Unit::from_units(ch));
@@ -124,6 +124,18 @@ void TestSchemeCalculator::checkPA300()
     QCOMPARE(calc.p3Width().units(), rwidth);
     QCOMPARE(calc.p3Bottom().units(), rbottom);
     QCOMPARE(calc.p3Top().units(), rtop);
+}
+
+void TestSchemeCalculator::setSchemaParams(
+        Schema &schema, millimeter_t diameter,
+        millimeter_t dws, millimeter_t pka,
+        bool dont_rotate)
+{
+    schema.set_params(new Params{
+        Unit::from_mm(diameter),
+        Unit::from_mm(dws), Unit::from_mm(pka),
+        dont_rotate
+    });
 }
 
 TestSchemeCalculator::~TestSchemeCalculator() = default;
