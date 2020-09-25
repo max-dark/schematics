@@ -30,3 +30,18 @@ add_library(schema libschema/libschema.cxx
 target_include_directories(schema PUBLIC libschema)
 
 target_link_libraries(schema PRIVATE Qt5::Core)
+
+add_library(coords)
+target_sources(coords
+    PRIVATE
+        libcoords/coords/coords.cxx
+    PUBLIC
+        libcoords/coords/coords.hxx
+        libcoords/coords/positionid.hxx
+)
+
+target_include_directories(coords PUBLIC libcoords)
+target_link_libraries(coords
+    PUBLIC schema
+    PRIVATE Qt5::Core
+)
