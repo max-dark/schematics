@@ -126,6 +126,9 @@ enum PositionId
     /// предустановка ширины центрирующих роликов на выходе
     POS_ID_DWS350_OUT_ROLLERS_WIDTH,
     /// позиция осей многопила
-    POS_ID_DWS350_AXIS_HEIGHT
+    POS_ID_DWS350_AXIS_HEIGHT,
+
+    /// количество позиций
+    POS_ID_COUNT
 };
 } // namespace Coords
