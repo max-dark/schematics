@@ -13,6 +13,8 @@ public:
     ~TestSchemeCalculator() override;
 
 private slots:
+    void initTestCase();
+
     void onlyCentralWithRotate();
     void onlyCentralWithoutRotate();
 

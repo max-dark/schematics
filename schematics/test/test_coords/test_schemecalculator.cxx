@@ -15,9 +15,17 @@ namespace QTest {
     }
 }
 
+Q_DECLARE_METATYPE(libschema::Unit)
+
 TestSchemeCalculator::TestSchemeCalculator(QObject *parent)
     : QObject(parent)
 {}
+
+void TestSchemeCalculator::initTestCase()
+{
+    qRegisterMetaType<libschema::Unit>("libschema::Unit");
+    qRegisterMetaType<Unit>("Unit");
+}
 
 void TestSchemeCalculator::onlyCentralWithRotate()
 {
