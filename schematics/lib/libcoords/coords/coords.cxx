@@ -12,7 +12,6 @@ void SchemeCalculator::calculate(const Schema *schema)
     const auto do_rotate = ! params->is_rot2_disabled();
     const auto diameter = params->diameter();
 
-    const auto infinity = Unit::from_units(-1);
     const auto two = Unit::from_units(2);
     const auto zero = Unit::from_units(0);
     // calc dws zone
@@ -23,8 +22,8 @@ void SchemeCalculator::calculate(const Schema *schema)
     // размер на входе в 3й профилятор
     p3_height = dwsHeight();
     p3_width = dwsWidth();
-    p3_bottom = infinity;
-    p3_top = infinity;
+    p3_bottom = zero;
+    p3_top = zero;
 
     // учтем наличие боковой доски
     if(schema->is_pa300_enabled())
@@ -48,10 +47,10 @@ void SchemeCalculator::calculate(const Schema *schema)
     // calc p2 zone
     p2_width = r2_width;
     p2_height = r2_height;
-    p2_bottom = infinity;
-    p2_top = infinity;
-    p2_roller_pos = infinity;
-    p2_outer_saw = infinity;
+    p2_bottom = zero;
+    p2_top = zero;
+    p2_roller_pos = zero;
+    p2_outer_saw = zero;
     if(schema->is_pka350_enabled())
     {
         auto& pka = schema->pka350();
@@ -72,8 +71,8 @@ void SchemeCalculator::calculate(const Schema *schema)
     // calc p1 zone
     p1_width = p2_width;
     p1_height = p2_height;
-    p1_bottom = infinity;
-    p1_top = infinity;
+    p1_bottom = zero;
+    p1_top = zero;
     if (schema->is_pa350_enabled())
     {
         auto saw = saw_pka;
