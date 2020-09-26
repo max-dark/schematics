@@ -76,6 +76,11 @@ void TestSchemeCalculator::onlyCentralWithoutRotate()
     QCOMPARE(calc.fbs1Width(), calc.fbs2Height());
 }
 
+void TestSchemeCalculator::checkSecondRotator()
+{
+    QVERIFY2(false, "TODO: write 'checkSecondRotator' test");
+}
+
 void TestSchemeCalculator::checkPA300_data()
 {
     QTest::addColumn<unit_t>("cw");
