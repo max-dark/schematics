@@ -18,6 +18,7 @@ private slots:
     void onlyCentralWithRotate();
     void onlyCentralWithoutRotate();
 
+    void checkSecondRotator_data();
     void checkSecondRotator();
 
     void checkPA300_data();

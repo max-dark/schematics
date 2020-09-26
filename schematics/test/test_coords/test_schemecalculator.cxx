@@ -84,8 +84,29 @@ void TestSchemeCalculator::onlyCentralWithoutRotate()
     QCOMPARE(calc.fbs1Width(), calc.fbs2Height());
 }
 
+void TestSchemeCalculator::checkSecondRotator_data()
+{
+    QTest::addColumn<Unit>("out_width");
+    QTest::addColumn<Unit>("out_height");
+    QTest::addColumn<bool>("disabled");
+    QTest::addColumn<Unit>("inp_width");
+    QTest::addColumn<Unit>("inp_height");
+
+    auto width = Unit::from_mm(150);
+    auto height = Unit::from_mm(100);
+
+    QTest::newRow("Rotate is Activated") << width << height << false << height << width;
+    QTest::newRow("Rotate is Disabled" ) << width << height << true  << width  << height;
+}
+
 void TestSchemeCalculator::checkSecondRotator()
 {
+    QFETCH(Unit, out_width);
+    QFETCH(Unit, out_height);
+    QFETCH(bool, disabled);
+    QFETCH(Unit, inp_width);
+    QFETCH(Unit, inp_height);
+
     QVERIFY2(false, "TODO: write 'checkSecondRotator' test");
 }
 
