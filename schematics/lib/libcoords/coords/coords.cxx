@@ -4,7 +4,7 @@ namespace Coords {
 
 // >>>>>>>>>>>>>>>>>
 
-void SchemeCalculator::calculate(const Schema *schema)
+void Geometry::calculate(const Schema *schema)
 {
     const auto* const params = schema->params();
     const auto saw_dws = params->dws_gap();
@@ -95,12 +95,12 @@ void SchemeCalculator::calculate(const Schema *schema)
 // <<<<<<<<<<<<<<<<<
 // >>>>>>>>>>>>>>>>>
 
-Unit SchemeCalculator::fbs1Width() const
+Unit Geometry::fbs1Width() const
 {
     return fbs1_width;
 }
 
-Unit SchemeCalculator::fbs1Height() const
+Unit Geometry::fbs1Height() const
 {
     return fbs1_height;
 }
@@ -108,17 +108,17 @@ Unit SchemeCalculator::fbs1Height() const
 // <<<<<<<<<<<<<<<<<
 // >>>>>>>>>>>>>>>>>
 
-libschema::Unit SchemeCalculator::fbs2Align() const
+libschema::Unit Geometry::fbs2Align() const
 {
     return fbs2_align;
 }
 
-libschema::Unit SchemeCalculator::fbs2Width() const
+libschema::Unit Geometry::fbs2Width() const
 {
     return fbs2_width;
 }
 
-libschema::Unit SchemeCalculator::fbs2Height() const
+libschema::Unit Geometry::fbs2Height() const
 {
     return fbs2_height;
 }
@@ -126,32 +126,32 @@ libschema::Unit SchemeCalculator::fbs2Height() const
 // <<<<<<<<<<<<<<<<<
 // >>>>>>>>>>>>>>>>>
 
-libschema::Unit SchemeCalculator::p1Width() const
+libschema::Unit Geometry::p1Width() const
 {
     return p1_width;
 }
 
-libschema::Unit SchemeCalculator::p1Height() const
+libschema::Unit Geometry::p1Height() const
 {
     return p1_height;
 }
 
-libschema::Unit SchemeCalculator::p1Bottom() const
+libschema::Unit Geometry::p1Bottom() const
 {
     return p1_bottom;
 }
 
-libschema::Unit SchemeCalculator::p1Top() const
+libschema::Unit Geometry::p1Top() const
 {
     return p1_top;
 }
 
-libschema::Unit SchemeCalculator::r2Width() const
+libschema::Unit Geometry::r2Width() const
 {
     return r2_width;
 }
 
-libschema::Unit SchemeCalculator::r2Height() const
+libschema::Unit Geometry::r2Height() const
 {
     return r2_height;
 }
@@ -159,32 +159,32 @@ libschema::Unit SchemeCalculator::r2Height() const
 // <<<<<<<<<<<<<<<<<
 // >>>>>>>>>>>>>>>>>
 
-libschema::Unit SchemeCalculator::p2Width() const
+libschema::Unit Geometry::p2Width() const
 {
     return p2_width;
 }
 
-libschema::Unit SchemeCalculator::p2Height() const
+libschema::Unit Geometry::p2Height() const
 {
     return p2_height;
 }
 
-libschema::Unit SchemeCalculator::p2Bottom() const
+libschema::Unit Geometry::p2Bottom() const
 {
     return p2_bottom;
 }
 
-libschema::Unit SchemeCalculator::p2Top() const
+libschema::Unit Geometry::p2Top() const
 {
     return p2_top;
 }
 
-Unit SchemeCalculator::p2OuterSaw() const
+Unit Geometry::p2OuterSaw() const
 {
     return p2_outer_saw;
 }
 
-Unit SchemeCalculator::p2RollerPos() const
+Unit Geometry::p2RollerPos() const
 {
     return p2_roller_pos;
 }
@@ -192,22 +192,22 @@ Unit SchemeCalculator::p2RollerPos() const
 // <<<<<<<<<<<<<<<<<
 // >>>>>>>>>>>>>>>>>
 
-libschema::Unit SchemeCalculator::p3Width() const
+libschema::Unit Geometry::p3Width() const
 {
     return p3_width;
 }
 
-libschema::Unit SchemeCalculator::p3Height() const
+libschema::Unit Geometry::p3Height() const
 {
     return p3_height;
 }
 
-libschema::Unit SchemeCalculator::p3Bottom() const
+libschema::Unit Geometry::p3Bottom() const
 {
     return p3_bottom;
 }
 
-libschema::Unit SchemeCalculator::p3Top() const
+libschema::Unit Geometry::p3Top() const
 {
     return p3_top;
 }
@@ -215,12 +215,12 @@ libschema::Unit SchemeCalculator::p3Top() const
 // <<<<<<<<<<<<<<<<<
 // >>>>>>>>>>>>>>>>>
 
-libschema::Unit SchemeCalculator::dwsWidth() const
+libschema::Unit Geometry::dwsWidth() const
 {
     return dws_width;
 }
 
-libschema::Unit SchemeCalculator::dwsHeight() const
+libschema::Unit Geometry::dwsHeight() const
 {
     return dws_height;
 }

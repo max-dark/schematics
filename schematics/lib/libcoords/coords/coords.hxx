@@ -2,17 +2,15 @@
 
 #include <schema/schema.hxx>
 
-#include <coords/positionid.hxx>
-
 namespace Coords
 {
     using libschema::Schema;
     using libschema::Unit;
     /**
-     * @brief The SchemeCalculator class
+     * @brief The Geometry class
      *  рассчитывает геометрию схемы
      */
-    class SchemeCalculator
+    class Geometry
     {
     public:
         /// Рассчитывает геометрию да заданной схемы

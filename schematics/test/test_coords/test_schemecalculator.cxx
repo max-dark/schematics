@@ -29,7 +29,7 @@ void TestSchemeCalculator::initTestCase()
 
 void TestSchemeCalculator::onlyCentralWithRotate()
 {
-    SchemeCalculator calc;
+    Geometry calc;
     Schema schema;
 
     setSchemaParams(schema,
@@ -60,7 +60,7 @@ void TestSchemeCalculator::onlyCentralWithRotate()
 
 void TestSchemeCalculator::onlyCentralWithoutRotate()
 {
-    SchemeCalculator calc;
+    Geometry calc;
     Schema schema;
 
     setSchemaParams(schema,
@@ -108,7 +108,7 @@ void TestSchemeCalculator::checkSecondRotator()
     QFETCH(Unit, inp_height);
 
 
-    SchemeCalculator calc;
+    Geometry calc;
     Schema schema;
 
     setSchemaParams(schema,
@@ -163,7 +163,7 @@ void TestSchemeCalculator::checkPA300()
     QFETCH(unit_t, rbottom);
     QFETCH(unit_t, rtop);
 
-    SchemeCalculator calc;
+    Geometry calc;
     Schema schema;
 
     setSchemaParams(schema,
@@ -235,7 +235,7 @@ void TestSchemeCalculator::checkPKA350()
     QFETCH(Unit, p2_top);
     QFETCH(Unit, p2_roller_pos);
 
-    SchemeCalculator calc;
+    Geometry calc;
     Schema schema;
 
     setSchemaParams(schema,
@@ -330,7 +330,7 @@ void TestSchemeCalculator::checkPA350()
     QFETCH(Unit, saw_pos);
     QFETCH(Unit, roller_pos);
 
-    SchemeCalculator calc;
+    Geometry calc;
     calc.calculate(schema);
 
     QCOMPARE(calc.p1Width() , width );
