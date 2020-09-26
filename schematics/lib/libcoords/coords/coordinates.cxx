@@ -162,6 +162,61 @@ void Coordinates::fill_from(const libschema::Schema *schema)
         // second rotator
         setById(POS_ID_P2_PKA350_ROTATOR_HEIGHT, height);
     }
+
+    // P3 / DWS
+    {
+        auto width = g.p3Width();
+        // P3
+        {
+            Unit left_p3, right_p3;
+            Unit top_p3, bottom_p3;
+
+            if (schema->is_pa300_enabled())
+            {
+                auto half = g.dwsWidth() / two;
+                left_p3 = right_p3 = half;
+                bottom_p3 = g.p3Bottom();
+                top_p3 = g.p3Top();
+            }
+            else
+            {
+                // safe positions
+                Unit left_safe_p3, right_safe_p3;
+                Unit bottom_safe_p3, top_safe_p3;
+
+                // move to safe positions
+                left_p3 = left_safe_p3;
+                right_p3 = right_safe_p3;
+                bottom_p3 = bottom_safe_p3;
+                top_p3 = top_safe_p3;
+            }
+
+            setById(POS_ID_P3_PA300_ROLLERS_INP_WIDTH, width);
+
+            setById(POS_ID_P3_PA300_LEFT_BLOCK, left_p3);
+            setById(POS_ID_P3_PA300_RIGHT_BLOCK, right_p3);
+
+            setById(POS_ID_P3_PA300_BOTTOM_LEFT, bottom_p3);
+            setById(POS_ID_P3_PA300_BOTTOM_RIGHT, bottom_p3);
+
+            setById(POS_ID_P3_PA300_TOP_LEFT, top_p3);
+            setById(POS_ID_P3_PA300_TOP_RIGHT, top_p3);
+        }
+
+        // DWS
+        {
+            setById(POS_ID_DWS350_INP_ROLLERS_WIDTH, width);
+
+            setById(POS_ID_DWS350_PRESS1_HEIGHT, g.dwsHeight());
+            setById(POS_ID_DWS350_PRESS2_HEIGHT, g.dwsHeight());
+            setById(POS_ID_DWS350_PRESS3_HEIGHT, g.dwsHeight());
+
+            //TODO: it must depend on saw diameter
+            setById(POS_ID_DWS350_AXIS_HEIGHT, Unit::from_units(0));
+
+            setById(POS_ID_DWS350_OUT_ROLLERS_WIDTH, width);
+        }
+    }
 }
 
 } // namespace Coords
