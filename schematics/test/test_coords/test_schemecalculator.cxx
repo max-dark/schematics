@@ -295,7 +295,14 @@ void TestSchemeCalculator::checkPA350()
     QFETCH(Unit, top);
     QFETCH(Unit, roller_pos);
 
-    QVERIFY2(false, "TODO: write 'checkPA350' test");
+    SchemeCalculator calc;
+    calc.calculate(schema);
+
+    QCOMPARE(calc.p1Width() , width );
+    QCOMPARE(calc.p1Height(), height);
+    QCOMPARE(calc.p1Bottom(), bottom);
+    QCOMPARE(calc.p1Top()   , top   );
+    QCOMPARE(calc.p2RollerPos(), roller_pos);
 }
 
 void TestSchemeCalculator::setSchemaParams(
