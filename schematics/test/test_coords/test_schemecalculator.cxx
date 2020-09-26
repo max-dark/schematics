@@ -107,7 +107,22 @@ void TestSchemeCalculator::checkSecondRotator()
     QFETCH(Unit, inp_width);
     QFETCH(Unit, inp_height);
 
-    QVERIFY2(false, "TODO: write 'checkSecondRotator' test");
+
+    SchemeCalculator calc;
+    Schema schema;
+
+    setSchemaParams(schema,
+        200,
+        4, 6,
+        disabled
+    );
+    schema.set_dws_board_width(out_height);
+    schema.add_dws_board(out_width);
+
+    calc.calculate(&schema);
+
+    QCOMPARE(calc.r2Height(), inp_height);
+    QCOMPARE(calc.r2Width() , inp_width );
 }
 
 void TestSchemeCalculator::checkPA300_data()
