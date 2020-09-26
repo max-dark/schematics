@@ -59,6 +59,14 @@ void SchemeCalculator::calculate(const Schema *schema)
         p2_top = p2Bottom() + pka.board_width;
 
         p2_width = p2_width + (saw_pka + pka.board_height) * two;
+
+        p2_roller_pos = saw_pka + pka.board_height;
+
+        if (schema->is_pa350_enabled())
+        {
+            p2_outer_saw = p2_roller_pos;
+            p2_roller_pos = p2_roller_pos + saw_pka + schema->pa350().board_height;
+        }
     }
 
     // calc p1 zone
