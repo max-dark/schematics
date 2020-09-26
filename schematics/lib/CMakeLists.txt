@@ -35,8 +35,10 @@ add_library(coords)
 target_sources(coords
     PRIVATE
         libcoords/coords/geometry.cxx
+        libcoords/coords/coordinates.cxx
     PUBLIC
         libcoords/coords/geometry.hxx
+        libcoords/coords/coordinates.hxx
         libcoords/coords/positionid.hxx
 )
 
