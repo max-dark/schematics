@@ -29,4 +29,4 @@ target_sources(schematics
 
             ui/widgets/coords/coordstab.cxx ui/widgets/coords/coordstab.hxx
         )
-target_link_libraries(schematics PRIVATE schema Qt5::Widgets)
+target_link_libraries(schematics PRIVATE schema coords Qt5::Widgets)
