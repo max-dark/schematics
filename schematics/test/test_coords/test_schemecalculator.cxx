@@ -256,8 +256,45 @@ void TestSchemeCalculator::checkPKA350()
     QCOMPARE(calc.p2RollerPos(), p2_roller_pos);
 }
 
+void TestSchemeCalculator::checkPA350_data()
+{
+    QTest::addColumn<Schema*>("schema");
+
+    // result
+    QTest::addColumn<Unit>("width");
+    QTest::addColumn<Unit>("height");
+    QTest::addColumn<Unit>("bottom");
+    QTest::addColumn<Unit>("top");
+    QTest::addColumn<Unit>("roller_pos");
+
+    {
+        auto schema = new Schema{this};
+        setSchemaParams(*schema, 200, 4, 6, false);
+        schema->set_dws_board_width(Unit::from_mm(150));
+        schema->add_dws_board(Unit::from_mm(60));
+        schema->set_pa300_board(Unit::from_mm(120), Unit::from_mm(60));
+        schema->set_pka350_board(Unit::from_mm(120), Unit::from_mm(30));
+
+        schema->set_pa350_board(Unit::from_mm(100), Unit::from_mm(30));
+
+        QTest::newRow("Normal mode[with rotate]")
+                << schema
+                << Unit::from_mm(294) << Unit::from_mm(188)
+                << Unit::from_mm( 44) << Unit::from_mm(144)
+                << Unit::from_mm( 72);
+    }
+}
+
 void TestSchemeCalculator::checkPA350()
 {
+    QFETCH(Schema*, schema);
+
+    QFETCH(Unit, width);
+    QFETCH(Unit, height);
+    QFETCH(Unit, bottom);
+    QFETCH(Unit, top);
+    QFETCH(Unit, roller_pos);
+
     QVERIFY2(false, "TODO: write 'checkPA350' test");
 }
 

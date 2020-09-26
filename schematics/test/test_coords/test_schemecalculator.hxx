@@ -27,6 +27,7 @@ private slots:
     void checkPKA350_data();
     void checkPKA350();
 
+    void checkPA350_data();
     void checkPA350();
 private:
     void setSchemaParams(libschema::Schema& schema,
