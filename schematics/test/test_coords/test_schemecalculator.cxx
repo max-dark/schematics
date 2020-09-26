@@ -184,8 +184,57 @@ void TestSchemeCalculator::checkPA300()
     QCOMPARE(calc.p3Top().units(), rtop);
 }
 
+void TestSchemeCalculator::checkPKA350_data()
+{
+    // params
+    QTest::addColumn<Unit>("cb_width");
+    QTest::addColumn<Unit>("cb_height");
+    QTest::addColumn<bool>("disabled");
+    QTest::addColumn<Unit>("pb_width");
+    QTest::addColumn<Unit>("pb_height");
+
+    // result
+    QTest::addColumn<Unit>("p2_width");
+    QTest::addColumn<Unit>("p2_height");
+    QTest::addColumn<Unit>("p2_bottom");
+    QTest::addColumn<Unit>("p2_top");
+    QTest::addColumn<Unit>("p2_roller_pos");
+
+    // ширина центального бруса
+    auto cb_width = Unit::from_mm(150);
+    // высота центрального бруса
+    auto cb_height = Unit::from_mm(120);
+
+    auto b_width = Unit::from_mm(100);
+    auto b_height = Unit::from_mm(30);
+
+    QTest::newRow("Rotate is Activated")
+            << cb_width << cb_height << false << b_width << b_height
+            << Unit::from_mm(192) << Unit::from_mm(150) // размер бруса на входе
+            << Unit::from_mm( 25) << Unit::from_mm(125) // позиция фрез
+            << Unit::from_mm( 36);                      // позиция ролика
+
+    QTest::newRow("Rotate is Disabled" )
+            << cb_width << cb_height << true << b_width << b_height
+            << Unit::from_mm(222) << Unit::from_mm(120) // размер бруса на входе
+            << Unit::from_mm( 10) << Unit::from_mm(110) // позиция фрез
+            << Unit::from_mm( 36);                      // позиция ролика
+}
+
 void TestSchemeCalculator::checkPKA350()
 {
+    QFETCH(Unit, cb_width);
+    QFETCH(Unit, cb_height);
+    QFETCH(bool, disabled);
+    QFETCH(Unit, pb_width);
+    QFETCH(Unit, pb_height);
+
+    QFETCH(Unit, p2_width);
+    QFETCH(Unit, p2_height);
+    QFETCH(Unit, p2_bottom);
+    QFETCH(Unit, p2_top);
+    QFETCH(Unit, p2_roller_pos);
+
     QVERIFY2(false, "TODO: write 'checkPKA350' test");
 }
 

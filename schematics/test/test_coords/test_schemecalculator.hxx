@@ -24,6 +24,7 @@ private slots:
     void checkPA300_data();
     void checkPA300();
 
+    void checkPKA350_data();
     void checkPKA350();
 
     void checkPA350();
