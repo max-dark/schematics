@@ -65,6 +65,103 @@ void Coordinates::fill_from(const libschema::Schema *schema)
         setById(POS_ID_FBS2_LEFT_BLOCK, x_half);
         setById(POS_ID_FBS2_RIGHT_BLOCK, x_half);
     }
+
+    // P1/P2/R2
+    {
+        auto width = g.p1Width();
+        auto height = g.p2Height();
+
+        // P1
+        {
+            Unit left_p1, right_p1;
+            Unit top_p1, bottom_p1;
+
+            if (schema->is_pa350_enabled())
+            {
+                auto half = g.p2Width() / two;
+                left_p1 = right_p1 = half;
+                bottom_p1 = g.p1Bottom();
+                top_p1 = g.p1Top();
+            }
+            else
+            {
+                // safe positions
+                Unit left_safe_p1, right_safe_p1;
+                Unit bottom_safe_p1, top_safe_p1;
+
+                // move to safe positions
+                left_p1 = left_safe_p1;
+                right_p1 = right_safe_p1;
+                bottom_p1 = bottom_safe_p1;
+                top_p1 = top_safe_p1;
+            }
+
+            setById(POS_ID_P1_PA350_ROLLERS_INP_WIDTH, width);
+
+            setById(POS_ID_P1_PA350_LEFT_BLOCK, left_p1);
+            setById(POS_ID_P1_PA350_RIGHT_BLOCK, right_p1);
+
+            setById(POS_ID_P1_PA350_BOTTOM_LEFT, bottom_p1);
+            setById(POS_ID_P1_PA350_BOTTOM_RIGHT, bottom_p1);
+
+            setById(POS_ID_P1_PA350_TOP_LEFT, top_p1);
+            setById(POS_ID_P1_PA350_TOP_RIGHT, top_p1);
+        }
+
+        // P2
+        {
+            Unit left_p2, right_p2;
+            Unit top_p2, bottom_p2;
+
+            if (schema->is_pka350_enabled())
+            {
+                auto half = g.r2Width() / two;
+                left_p2 = right_p2 = half;
+                bottom_p2 = g.p2Bottom();
+                top_p2 = g.p2Top();
+            }
+            else
+            {
+                // safe positions
+                Unit left_safe_p2, right_safe_p2;
+                Unit bottom_safe_p2, top_safe_p2;
+
+                // move to safe positions
+                left_p2 = left_safe_p2;
+                right_p2 = right_safe_p2;
+                bottom_p2 = bottom_safe_p2;
+                top_p2 = top_safe_p2;
+            }
+
+            setById(POS_ID_P2_PKA350_ROLLERS_INP_WIDTH, width);
+
+            setById(POS_ID_P2_PKA350_LEFT_BLOCK, left_p2);
+            setById(POS_ID_P2_PKA350_RIGHT_BLOCK, right_p2);
+
+            setById(POS_ID_P2_PKA350_BOTTOM_LEFT, bottom_p2);
+            setById(POS_ID_P2_PKA350_BOTTOM_RIGHT, bottom_p2);
+
+            setById(POS_ID_P2_PKA350_TOP_LEFT, top_p2);
+            setById(POS_ID_P2_PKA350_TOP_RIGHT, top_p2);
+
+            setById(POS_ID_P2_PKA350_LEFT_HEIGHT, height / two);
+            setById(POS_ID_P2_PKA350_RIGHT_HEIGHT, height / two);
+
+            setById(POS_ID_P2_PKA350_LEFT_SAW, g.p2OuterSaw());
+            setById(POS_ID_P2_PKA350_RIGHT_SAW, g.p2OuterSaw());
+
+            setById(POS_ID_P2_PKA350_LEFT_ROLLER, g.p2RollerPos());
+            setById(POS_ID_P2_PKA350_RIGHT_ROLLER, g.p2RollerPos());
+
+            setById(POS_ID_P2_PKA350_ROLLERS_OUT_WIDTH, width);
+        }
+
+        // seporator
+        setById(POS_ID_P2_PKA350_PRESS_HEIGHT, height);
+
+        // second rotator
+        setById(POS_ID_P2_PKA350_ROTATOR_HEIGHT, height);
+    }
 }
 
 } // namespace Coords
