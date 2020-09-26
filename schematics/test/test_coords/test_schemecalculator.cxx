@@ -1,5 +1,5 @@
 #include "test_schemecalculator.hxx"
-#include <coords/coords.hxx>
+#include <coords/geometry.hxx>
 
 #include <QtTest>
 

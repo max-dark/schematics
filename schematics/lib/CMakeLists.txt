@@ -34,9 +34,9 @@ target_link_libraries(schema PRIVATE Qt5::Core)
 add_library(coords)
 target_sources(coords
     PRIVATE
-        libcoords/coords/coords.cxx
+        libcoords/coords/geometry.cxx
     PUBLIC
-        libcoords/coords/coords.hxx
+        libcoords/coords/geometry.hxx
         libcoords/coords/positionid.hxx
 )
 
