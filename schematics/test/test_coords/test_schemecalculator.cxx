@@ -235,7 +235,25 @@ void TestSchemeCalculator::checkPKA350()
     QFETCH(Unit, p2_top);
     QFETCH(Unit, p2_roller_pos);
 
-    QVERIFY2(false, "TODO: write 'checkPKA350' test");
+    SchemeCalculator calc;
+    Schema schema;
+
+    setSchemaParams(schema,
+        200,
+        4, 6,
+        disabled
+    );
+    schema.set_dws_board_width(cb_height);
+    schema.add_dws_board(cb_width);
+    schema.set_pka350_board(pb_width, pb_height);
+
+    calc.calculate(&schema);
+
+    QCOMPARE(calc.p2Width() , p2_width );
+    QCOMPARE(calc.p2Height(), p2_height);
+    QCOMPARE(calc.p2Bottom(), p2_bottom);
+    QCOMPARE(calc.p2Top()   , p2_top   );
+    QCOMPARE(calc.p2RollerPos(), p2_roller_pos);
 }
 
 void TestSchemeCalculator::checkPA350()
