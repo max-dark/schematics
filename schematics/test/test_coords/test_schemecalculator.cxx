@@ -265,6 +265,7 @@ void TestSchemeCalculator::checkPA350_data()
     QTest::addColumn<Unit>("height");
     QTest::addColumn<Unit>("bottom");
     QTest::addColumn<Unit>("top");
+    QTest::addColumn<Unit>("saw_pos");
     QTest::addColumn<Unit>("roller_pos");
 
     {
@@ -281,7 +282,7 @@ void TestSchemeCalculator::checkPA350_data()
                 << schema
                 << Unit::from_mm(294) << Unit::from_mm(188)
                 << Unit::from_mm( 44) << Unit::from_mm(144)
-                << Unit::from_mm( 72);
+                << Unit::from_mm( 36) << Unit::from_mm( 72);
     }
 
     {
@@ -298,7 +299,7 @@ void TestSchemeCalculator::checkPA350_data()
                 << schema
                 << Unit::from_mm(332) << Unit::from_mm(150)
                 << Unit::from_mm( 25) << Unit::from_mm(125)
-                << Unit::from_mm( 72);
+                << Unit::from_mm( 36) << Unit::from_mm( 72);
     }
 }
 
@@ -310,6 +311,7 @@ void TestSchemeCalculator::checkPA350()
     QFETCH(Unit, height);
     QFETCH(Unit, bottom);
     QFETCH(Unit, top);
+    QFETCH(Unit, saw_pos);
     QFETCH(Unit, roller_pos);
 
     SchemeCalculator calc;
@@ -319,6 +321,7 @@ void TestSchemeCalculator::checkPA350()
     QCOMPARE(calc.p1Height(), height);
     QCOMPARE(calc.p1Bottom(), bottom);
     QCOMPARE(calc.p1Top()   , top   );
+    QCOMPARE(calc.p2OuterSaw() , saw_pos);
     QCOMPARE(calc.p2RollerPos(), roller_pos);
 }
 
