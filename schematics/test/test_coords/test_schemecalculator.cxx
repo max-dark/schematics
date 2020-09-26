@@ -301,6 +301,22 @@ void TestSchemeCalculator::checkPA350_data()
                 << Unit::from_mm( 25) << Unit::from_mm(125)
                 << Unit::from_mm( 36) << Unit::from_mm( 72);
     }
+
+    {
+        auto schema = new Schema{this};
+        setSchemaParams(*schema, 200, 4, 6, true);
+        schema->set_dws_board_width(Unit::from_mm(150));
+        schema->add_dws_board(Unit::from_mm(60));
+        schema->set_pa300_board(Unit::from_mm(120), Unit::from_mm(60));
+
+        schema->set_pa350_board(Unit::from_mm(100), Unit::from_mm(30));
+
+        QTest::newRow("Vertical mode without P2(PKA350)")
+                << schema
+                << Unit::from_mm(260) << Unit::from_mm(150)
+                << Unit::from_mm( 25) << Unit::from_mm(125)
+                << Unit::from_mm(  0) << Unit::from_mm(  0);
+    }
 }
 
 void TestSchemeCalculator::checkPA350()
