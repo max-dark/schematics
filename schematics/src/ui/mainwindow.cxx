@@ -87,6 +87,7 @@ namespace Schematics {
                 {
                     auto schemeTab = createEditorTab();
                     coordsTab = new Widgets::CoordsTab{};
+                    coordsTab->setPreview(schemeView->scene());
 
                     tabList->addTab(schemeTab, QString::fromUtf8("Схема раскроя"));
                     tabList->addTab(coordsTab, QString::fromUtf8("Координаты оборудования"));
@@ -205,6 +206,10 @@ namespace Schematics {
                 this, &MainWindow::pka350Changed);
         connect(ui->schemeEditor, &SchemeEditor::pa350Changed,
                 this, &MainWindow::pa350Changed);
+
+        connect(ui->schemeEditor, &SchemeEditor::calculateSchemeCoords, [this]{
+            ui->coordsTab->fillCoords(scheme);
+        });
     }
 
     void MainWindow::on_newScheme() {
