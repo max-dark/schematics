@@ -40,6 +40,7 @@ namespace Schematics::Ui::Widgets
         /// @brief заполняет список координат по заданной схеме
         void fillCoords(const libschema::Schema* schema);
     private slots:
+        void updatePreviewRect(const QRectF &rect);
     private:
         /// вызывается при изменении координаты в редакторе
         void coordChanged(Coords::PositionId id, libschema::Unit value);

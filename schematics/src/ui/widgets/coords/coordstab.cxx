@@ -153,13 +153,12 @@ namespace Schematics::Ui::Widgets
 
         if (nullptr != oldScene)
         {
-            oldScene->disconnect(preview);
+            oldScene->disconnect(this);
         }
         preview->setScene(scene);
         preview->fitInView(scene->itemsBoundingRect(), Qt::KeepAspectRatio);
-        connect(scene, &QGraphicsScene::sceneRectChanged, [this](const QRectF &rect){
-            preview->fitInView(rect, Qt::KeepAspectRatio);
-        });
+        connect(scene, &QGraphicsScene::sceneRectChanged,
+                this, &CoordsTab::updatePreviewRect);
     }
 
     const Coords::Coordinates &CoordsTab::coordinates() const
@@ -179,6 +178,11 @@ namespace Schematics::Ui::Widgets
             (*p)->setValue(coord.to_mm());
             ++p;
         }
+    }
+
+    void CoordsTab::updatePreviewRect(const QRectF &rect)
+    {
+        preview->fitInView(rect, Qt::KeepAspectRatio);
     }
 
     void CoordsTab::coordChanged(Coords::PositionId id, libschema::Unit value)
