@@ -26,12 +26,16 @@ namespace Schematics::Ui::Widgets
         /// заменяет изображение предпросмотра
         void setPreview(QGraphicsScene* scene);
         /// возвращает список значений координат
+        /// @return coord list
         const Coords::Coordinates &coordinates() const;
     signals:
         /// @brief вызывается когда кликают по кнопке "применить"
         /// @param id coord id
         /// @param value cerent coord value
         void applyCoord(Coords::PositionId id, libschema::Unit value);
+
+        /// @brief запрос на пересчет координат
+        void needCaclculate();
     public slots:
         /// @brief заполняет список координат по заданной схеме
         void fillCoords(const libschema::Schema* schema);

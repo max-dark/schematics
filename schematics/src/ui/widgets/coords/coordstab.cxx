@@ -237,7 +237,12 @@ namespace Schematics::Ui::Widgets
         {
             preview = new QGraphicsView;
             preview->setFixedSize(400, 400);
+            auto calcBtn = new QPushButton{"Рассчитать по схеме"};
+            calcBtn->setFixedHeight(50);
+            connect(calcBtn, &QPushButton::clicked, this, &CoordsTab::needCaclculate);
+
             sideBox->addWidget(preview);
+            sideBox->addWidget(calcBtn);
             sideBox->addItem(tool::createVSpace());
         }
 

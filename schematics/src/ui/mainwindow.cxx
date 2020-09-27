@@ -172,6 +172,7 @@ namespace Schematics {
     void MainWindow::bindEvents() {
         bindMenus();
         bindSchemeEditor();
+        bindCoordsTab();
     }
 
     void MainWindow::bindMenus()
@@ -207,9 +208,15 @@ namespace Schematics {
         connect(ui->schemeEditor, &SchemeEditor::pa350Changed,
                 this, &MainWindow::pa350Changed);
 
-        connect(ui->schemeEditor, &SchemeEditor::calculateSchemeCoords, [this]{
-            ui->coordsTab->fillCoords(scheme);
-        });
+        connect(ui->schemeEditor, &SchemeEditor::calculateSchemeCoords,
+                this, &MainWindow::calculateScheme);
+    }
+
+    void MainWindow::bindCoordsTab()
+    {
+        using Schematics::Ui::Widgets::CoordsTab;
+        connect(ui->coordsTab, &CoordsTab::needCaclculate,
+                this, &MainWindow::calculateScheme);
     }
 
     void MainWindow::on_newScheme() {
@@ -354,6 +361,11 @@ namespace Schematics {
         params->set_dws_gap(Unit::from_mm(editor->dwsSaw()));
         params->set_pka_gap(Unit::from_mm(editor->pkaSaw()));
         params->set_rot2_mode(editor->isVertical());
+    }
+
+    void MainWindow::calculateScheme()
+    {
+        ui->coordsTab->fillCoords(scheme);
     }
 
     void MainWindow::centralWidthChanged(double width)

@@ -29,6 +29,8 @@ namespace Schematics {
 
         void schemeParamChanged();
 
+        void calculateScheme();
+
         void centralWidthChanged(double width);
         void addCentralBoards(double height, size_t count);
         void deleteAllCentralBoards();
@@ -44,6 +46,7 @@ namespace Schematics {
         void bindEvents();
         void bindMenus();
         void bindSchemeEditor();
+        void bindCoordsTab();
 
         void applyScheme(const libschema::Schema *new_schema);
     private /* members */:
