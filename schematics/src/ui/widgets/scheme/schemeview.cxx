@@ -141,7 +141,7 @@ namespace Schematics::Ui::Widgets
                 auto flags = Qt::AlignCenter | Qt::TextSingleLine;
                 auto rt = painter->fontMetrics()
                               .boundingRect(b.toRect(), flags, toolTip());
-                auto bg = painter->background();
+                auto bg = QBrush{Qt::white};
                 bg.setStyle(Qt::SolidPattern);
                 painter->fillRect(rt, bg);
                 painter->drawText(b, flags, toolTip());
