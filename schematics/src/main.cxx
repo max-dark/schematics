@@ -13,6 +13,7 @@ int main(int argc, char** argv)
                           app.applicationDirPath(),
                           "schematics.db");
     // init database service
+    svc.startDatabase();
     // connect to main PLC
     // conncet to secondary PLC
 

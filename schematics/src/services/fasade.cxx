@@ -7,6 +7,8 @@
 
 #include <QDebug>
 
+#include <services/database.hxx>
+
 namespace Schematics::Service
 {
 Fasade::Fasade(QObject *parent) : QObject(parent)
@@ -42,12 +44,27 @@ void Fasade::parseArguments(const QStringList &argv, const QString &defaultPath,
         configPath = defaultPath;
         configFile = defaultFile;
     }
-    qDebug() << ok << databaseFile();
+    qInfo() << "Parse Args" << ok << databaseFile();
 }
 
 QString Fasade::databaseFile()
 {
     return QDir{configPath}.absoluteFilePath(configFile);
+}
+
+void Fasade::startDatabase()
+{
+    if (nullptr == database)
+    {
+        database = new Database{this};
+        auto ok = database->open(databaseFile());
+        qInfo() << "Start db:" << ok;
+        auto valid_db = database->checkStructure();
+        qInfo() << "Validate db:" << valid_db;
+    }
+    else {
+        qWarning() << "db already started";
+    }
 }
 
 Fasade::~Fasade() = default;

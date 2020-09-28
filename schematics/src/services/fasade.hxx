@@ -8,6 +8,8 @@
 namespace Schematics::Service
 {
 
+class Database;
+
 class Fasade : public QObject
 {
     Q_OBJECT
@@ -19,10 +21,13 @@ public:
                            const QString& defaultPath,
                            const QString &defaultFile);
     QString databaseFile();
+
+    void startDatabase();
 signals:
 private:
     QString configPath;
     QString configFile;
+    Database* database = nullptr;
 };
 
 } // namespace Schematics::Service
