@@ -15,12 +15,14 @@ public:
     ~Database() override;
     bool open(const QString& database);
     bool checkStructure();
-    bool getConfigByName(const QString& name, QString& value);
 signals:
 
     // Storage interface
 public:
-    bool getConnectionParams(const QString &name, QString &address, int &interval) override;
+    bool getValueByName(const QString& name, QString& value) override;
+    bool setValueByName(const QString &name, const QString &value) override;
+private:
+    QString db_name;
 };
 
 } // namespace Schematics::Service

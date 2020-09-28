@@ -72,6 +72,45 @@ void Facade::startStorage()
     }
 }
 
+bool Facade::getConnectionParams(const QString &name, QString &address, int &interval)
+{
+    QString str_addr, str_int;
+    int tmp_int;
+    auto ok = storage()->getValueByName("plc/" + name + "/ip", str_addr);
+    ok = ok && storage()->getValueByName("plc/" + name + "/interval", str_int);
+    if (ok)
+    {
+        tmp_int = str_int.toInt(&ok);
+    }
+    if(ok)
+    {
+        address = str_addr;
+        interval = tmp_int;
+    }
+    return ok;
+}
+
+void Facade::startSawPlc()
+{
+    QString addr;
+    int interval = 0;
+    // connect to main PLC
+
+    auto ok = getConnectionParams("sab", addr, interval);
+    qDebug() << ok << addr << interval;
+}
+
+void Facade::startKdoPlc()
+{
+    QString addr;
+    int interval = 0;
+    // connect to secondary PLC
+
+    auto ok = getConnectionParams("kdo", addr, interval);
+    qDebug() << ok << addr << interval;
+
+}
+
 Facade::~Facade() = default;
 
 } // namespace Schematics::Service

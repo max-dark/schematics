@@ -6,9 +6,8 @@ namespace Schematics::Service {
 
 struct Storage
 {
-    virtual bool getConnectionParams(const QString& name,
-                                     QString& address,
-                                     int& interval) = 0;
+    virtual bool getValueByName(const QString &name, QString &value) = 0;
+    virtual bool setValueByName(const QString &name, const QString &value) = 0;
 protected:
     virtual ~Storage();
 };

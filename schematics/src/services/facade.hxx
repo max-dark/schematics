@@ -21,7 +21,9 @@ public:
     ~Facade() override;
 
     Storage *storage() override;
-
+    void startSawPlc() override;
+    void startKdoPlc() override;
+    bool getConnectionParams(const QString &name, QString &address, int &interval) override;
 
     void parseArguments(const QStringList& argv,
                            const QString& defaultPath,

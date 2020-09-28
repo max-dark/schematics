@@ -9,25 +9,20 @@ int main(int argc, char** argv)
 {
     QApplication app{argc, argv};
 
-    Schematics::Service::Facade svc{};
+    auto svc = new Schematics::Service::Facade{&app};
     // parse args
-    svc.parseArguments(app.arguments(),
+    svc->parseArguments(app.arguments(),
                           app.applicationDirPath(),
                           "schematics.db");
     // init database service
-    svc.startStorage();
-    QString addr;
-    int interval = 0;
-    auto s = svc.storage();
+    svc->startStorage();
     // connect to main PLC
     {
-        auto ok = s->getConnectionParams("sab", addr, interval);
-        qDebug() << ok << addr << interval;
+        svc->startSawPlc();
     }
-    // conncet to secondary PLC
+    // connect to secondary PLC
     {
-        auto ok = s->getConnectionParams("kdo", addr, interval);
-        qDebug() << ok << addr << interval;
+        svc->startKdoPlc();
     }
 
     // start UI

@@ -7,16 +7,17 @@
 namespace Schematics::Service
 {
 
-Database::Database(QObject *parent) : QObject(parent)
-{
-
-}
+Database::Database(QObject *parent)
+    : QObject(parent)
+    , Storage()
+    , db_name{"configuration"}
+{}
 
 Database::~Database() = default;
 
 bool Database::open(const QString &database)
 {
-    auto db = QSqlDatabase::addDatabase("QSQLITE");
+    auto db = QSqlDatabase::addDatabase("QSQLITE", db_name);
 
     db.setDatabaseName(database);
     return db.open();
@@ -24,7 +25,7 @@ bool Database::open(const QString &database)
 
 bool Database::checkStructure()
 {
-    auto db = QSqlDatabase::database();
+    auto db = QSqlDatabase::database(db_name);
 
     auto ok = db.isValid() && db.isOpen();
     if (ok)
@@ -42,7 +43,7 @@ bool Database::checkStructure()
     return ok;
 }
 
-bool Database::getConfigByName(const QString &name, QString &value)
+bool Database::getValueByName(const QString &name, QString &value)
 {
     QSqlQuery get_value;
 
@@ -60,22 +61,8 @@ bool Database::getConfigByName(const QString &name, QString &value)
     return ok;
 }
 
-bool Database::getConnectionParams(const QString &name, QString &address, int &interval)
-{
-    QString str_addr, str_int;
-    int tmp_int;
-    auto ok = getConfigByName("plc/" + name + "/ip", str_addr);
-    ok = ok && getConfigByName("plc/" + name + "/interval", str_int);
-    if (ok)
-    {
-        tmp_int = str_int.toInt(&ok);
-    }
-    if(ok)
-    {
-        address = str_addr;
-        interval = tmp_int;
-    }
-    return ok;
+bool Database::setValueByName(const QString &name, const QString &value) {
+    return false;
 }
 
 } // namespace Schematics::Service
