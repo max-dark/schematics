@@ -5,6 +5,8 @@
 #include <QString>
 #include <QStringList>
 
+#include <services/application.hxx>
+
 namespace Schematics::Service
 {
 
