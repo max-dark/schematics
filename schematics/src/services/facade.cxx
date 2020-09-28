@@ -1,4 +1,4 @@
-#include "fasade.hxx"
+#include "facade.hxx"
 
 #include <QCommandLineOption>
 #include <QCommandLineParser>
@@ -11,17 +11,17 @@
 
 namespace Schematics::Service
 {
-Fasade::Fasade(QObject *parent)
+Facade::Facade(QObject *parent)
     : QObject(parent)
     , Application{}
     {};
 
-Storage *Fasade::storage()
+Storage *Facade::storage()
 {
     return database;
 }
 
-void Fasade::parseArguments(const QStringList &argv, const QString &defaultPath, const QString &defaultFile)
+void Facade::parseArguments(const QStringList &argv, const QString &defaultPath, const QString &defaultFile)
 {
     QCommandLineOption config{
         QStringList{} << "C" << "config",
@@ -52,12 +52,12 @@ void Fasade::parseArguments(const QStringList &argv, const QString &defaultPath,
     qInfo() << "Parse Args" << ok << databaseFile();
 }
 
-QString Fasade::databaseFile()
+QString Facade::databaseFile()
 {
     return QDir{configPath}.absoluteFilePath(configFile);
 }
 
-void Fasade::startStorage()
+void Facade::startStorage()
 {
     if (nullptr == database)
     {
@@ -72,6 +72,6 @@ void Fasade::startStorage()
     }
 }
 
-Fasade::~Fasade() = default;
+Facade::~Facade() = default;
 
 } // namespace Schematics::Service

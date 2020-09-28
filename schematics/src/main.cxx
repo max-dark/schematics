@@ -1,7 +1,7 @@
 #include <QApplication>
 #include "ui/mainwindow.hxx"
 
-#include "services/fasade.hxx"
+#include "services/facade.hxx"
 
 #include <QtDebug>
 
@@ -9,7 +9,7 @@ int main(int argc, char** argv)
 {
     QApplication app{argc, argv};
 
-    Schematics::Service::Fasade svc{};
+    Schematics::Service::Facade svc{};
     // parse args
     svc.parseArguments(app.arguments(),
                           app.applicationDirPath(),

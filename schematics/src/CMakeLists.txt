@@ -24,7 +24,7 @@ target_sources(schematics
             services/application.cxx services/application.hxx
             services/storage.cxx services/storage.hxx
 
-            services/fasade.cxx services/fasade.hxx
+            services/facade.cxx services/facade.hxx
             services/database.cxx services/database.hxx
 
             ui/widgets/numbereditor.cxx ui/widgets/numbereditor.hxx

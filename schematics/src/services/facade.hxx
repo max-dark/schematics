@@ -13,12 +13,12 @@ namespace Schematics::Service
 
 class Database;
 
-class Fasade : public QObject, public Application
+class Facade : public QObject, public Application
 {
     Q_OBJECT
 public:
-    explicit Fasade(QObject *parent = nullptr);
-    ~Fasade() override;
+    explicit Facade(QObject *parent = nullptr);
+    ~Facade() override;
 
     Storage *storage() override;
 
