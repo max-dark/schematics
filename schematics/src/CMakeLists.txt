@@ -22,6 +22,8 @@ target_sources(schematics
             ui/tools/tool.cxx ui/tools/tool.hxx
 
             services/application.cxx services/application.hxx
+            services/storage.cxx services/storage.hxx
+
             services/fasade.cxx services/fasade.hxx
             services/database.cxx services/database.hxx
 
