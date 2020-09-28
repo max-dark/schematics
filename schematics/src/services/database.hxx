@@ -15,6 +15,7 @@ public:
     ~Database() override;
     bool open(const QString& database);
     bool checkStructure();
+    bool getConfigByName(const QString& name, QString& value);
 signals:
 
     // Storage interface

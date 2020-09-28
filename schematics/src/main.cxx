@@ -3,6 +3,8 @@
 
 #include "services/fasade.hxx"
 
+#include <QtDebug>
+
 int main(int argc, char** argv)
 {
     QApplication app{argc, argv};
@@ -14,8 +16,19 @@ int main(int argc, char** argv)
                           "schematics.db");
     // init database service
     svc.startStorage();
+    QString addr;
+    int interval = 0;
+    auto s = svc.storage();
     // connect to main PLC
+    {
+        auto ok = s->getConnectionParams("sab", addr, interval);
+        qDebug() << ok << addr << interval;
+    }
     // conncet to secondary PLC
+    {
+        auto ok = s->getConnectionParams("kdo", addr, interval);
+        qDebug() << ok << addr << interval;
+    }
 
     // start UI
     Schematics::MainWindow view{};
