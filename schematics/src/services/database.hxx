@@ -2,10 +2,12 @@
 
 #include <QObject>
 
+#include <services/storage.hxx>
+
 namespace Schematics::Service
 {
 
-class Database : public QObject
+class Database : public QObject, public Storage
 {
     Q_OBJECT
 public:
