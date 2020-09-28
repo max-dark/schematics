@@ -21,6 +21,8 @@ target_sources(schematics
             ui/mainwindow.cxx ui/mainwindow.hxx
             ui/tools/tool.cxx ui/tools/tool.hxx
 
+            services/fasade.cxx services/fasade.hxx
+
             ui/widgets/numbereditor.cxx ui/widgets/numbereditor.hxx
 
             ui/widgets/scheme/schemeview.cxx ui/widgets/scheme/schemeview.hxx
