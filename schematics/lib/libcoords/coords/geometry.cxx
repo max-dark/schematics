@@ -75,12 +75,27 @@ void Geometry::calculate(const Schema *schema)
     p1_top = zero;
     if (schema->is_pa350_enabled())
     {
-        auto saw = saw_pka;
+        // проверим на "вертикальный" режим с отключенным 2м профилятором
+        auto need_patch_size =(
+            // второе поворотное отключено
+            (!!! do_rotate) &&
+            // 2й профилятор не используется
+            (!!! schema->is_pka350_enabled())
+            );
+
+        // выбор размера пил
+        auto saw = need_patch_size ? saw_dws : saw_pka;
         auto& pa = schema->pa350();
         p1_bottom = (p1Height() - pa.board_width) / two;
         p1_top = p1Bottom() + pa.board_width;
 
         p1_width = p1_width + (saw + pa.board_height) * two;
+
+        if (need_patch_size)
+        {
+            // в этом режиме доска P1(PA350) отделяется в многопиле
+            r2_width = p3_width = p1_width;
+        }
     }
     // calc f2 zone
     fbs2_align = zero;

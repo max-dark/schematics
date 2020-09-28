@@ -267,6 +267,10 @@ void TestSchemeCalculator::checkPA350_data()
     QTest::addColumn<Unit>("top");
     QTest::addColumn<Unit>("saw_pos");
     QTest::addColumn<Unit>("roller_pos");
+    QTest::addColumn<Unit>("r2_width");
+    QTest::addColumn<Unit>("r2_height");
+    QTest::addColumn<Unit>("p3_width");
+    QTest::addColumn<Unit>("dws_width");
 
     {
         auto schema = new Schema{this};
@@ -282,7 +286,9 @@ void TestSchemeCalculator::checkPA350_data()
                 << schema
                 << Unit::from_mm(294) << Unit::from_mm(188)
                 << Unit::from_mm( 44) << Unit::from_mm(144)
-                << Unit::from_mm( 36) << Unit::from_mm( 72);
+                << Unit::from_mm( 36) << Unit::from_mm( 72)
+                << Unit::from_mm(150) << Unit::from_mm(188)
+                << Unit::from_mm(188) << Unit::from_mm( 60);
     }
 
     {
@@ -299,7 +305,9 @@ void TestSchemeCalculator::checkPA350_data()
                 << schema
                 << Unit::from_mm(332) << Unit::from_mm(150)
                 << Unit::from_mm( 25) << Unit::from_mm(125)
-                << Unit::from_mm( 36) << Unit::from_mm( 72);
+                << Unit::from_mm( 36) << Unit::from_mm( 72)
+                << Unit::from_mm(188) << Unit::from_mm(150)
+                << Unit::from_mm(188) << Unit::from_mm( 60);
     }
 
     {
@@ -313,9 +321,13 @@ void TestSchemeCalculator::checkPA350_data()
 
         QTest::newRow("Vertical mode without P2(PKA350)")
                 << schema
-                << Unit::from_mm(260) << Unit::from_mm(150)
+                // в этом режиме должны использоваться пилы DWS
+                << Unit::from_mm(256) << Unit::from_mm(150)
                 << Unit::from_mm( 25) << Unit::from_mm(125)
-                << Unit::from_mm(  0) << Unit::from_mm(  0);
+                << Unit::from_mm(  0) << Unit::from_mm(  0)
+                // А так же нужно увеличить ширину роликов P3/DWS
+                << Unit::from_mm(256) << Unit::from_mm(150)
+                << Unit::from_mm(256) << Unit::from_mm( 60);
     }
 }
 
@@ -329,6 +341,10 @@ void TestSchemeCalculator::checkPA350()
     QFETCH(Unit, top);
     QFETCH(Unit, saw_pos);
     QFETCH(Unit, roller_pos);
+    QFETCH(Unit, r2_width);
+    QFETCH(Unit, r2_height);
+    QFETCH(Unit, p3_width);
+    QFETCH(Unit, dws_width);
 
     Geometry calc;
     calc.calculate(schema);
@@ -339,6 +355,10 @@ void TestSchemeCalculator::checkPA350()
     QCOMPARE(calc.p1Top()   , top   );
     QCOMPARE(calc.p2OuterSaw() , saw_pos);
     QCOMPARE(calc.p2RollerPos(), roller_pos);
+    QCOMPARE(calc.r2Width() , r2_width );
+    QCOMPARE(calc.r2Height(), r2_height);
+    QCOMPARE(calc.p3Width() , p3_width );
+    QCOMPARE(calc.dwsWidth(), dws_width);
 }
 
 void TestSchemeCalculator::setSchemaParams(
