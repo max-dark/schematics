@@ -57,7 +57,7 @@ QString Fasade::databaseFile()
     return QDir{configPath}.absoluteFilePath(configFile);
 }
 
-void Fasade::startDatabase()
+void Fasade::startStorage()
 {
     if (nullptr == database)
     {

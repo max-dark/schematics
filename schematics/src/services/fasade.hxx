@@ -26,10 +26,11 @@ public:
     void parseArguments(const QStringList& argv,
                            const QString& defaultPath,
                            const QString &defaultFile);
-    QString databaseFile();
 
-    void startDatabase();
+    void startStorage();
 signals:
+private /* methods */:
+    QString databaseFile();
 private:
     QString configPath;
     QString configFile;
