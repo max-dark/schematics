@@ -17,6 +17,9 @@ public:
     bool checkStructure();
 signals:
 
+    // Storage interface
+public:
+    bool getConnectionParams(const QString &name, QString &address, int &interval) override;
 };
 
 } // namespace Schematics::Service

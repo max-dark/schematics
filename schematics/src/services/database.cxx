@@ -40,4 +40,9 @@ bool Database::checkStructure()
     return ok;
 }
 
+bool Database::getConnectionParams(const QString &name, QString &address, int &interval)
+{
+    return false;
+}
+
 } // namespace Schematics::Service
