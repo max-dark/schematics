@@ -11,9 +11,14 @@
 
 namespace Schematics::Service
 {
-Fasade::Fasade(QObject *parent) : QObject(parent)
-{
+Fasade::Fasade(QObject *parent)
+    : QObject(parent)
+    , Application{}
+    {};
 
+Storage *Fasade::storage()
+{
+    return database;
 }
 
 void Fasade::parseArguments(const QStringList &argv, const QString &defaultPath, const QString &defaultFile)
