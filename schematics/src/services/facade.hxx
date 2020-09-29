@@ -25,8 +25,9 @@ public:
 
     Storage *storage() override;
     OffsetRepository* offsets() override;
-    void startSawPlc();
-    void startKdoPlc();
+
+    bool applyCoordById(Coords::PositionId id, libschema::Unit value) override;
+    bool applyCoordinates(const Coords::Coordinates& coords) override;
     bool getConnectionParams(const QString &name, QString &address, int &interval) override;
 
     void parseArguments(const QStringList& argv,
@@ -34,6 +35,8 @@ public:
                            const QString &defaultFile);
 
     void startStorage();
+    void startSawPlc();
+    void startKdoPlc();
 signals:
 private /* methods */:
     QString databaseFile();

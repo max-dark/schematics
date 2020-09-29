@@ -111,10 +111,32 @@ void Facade::startKdoPlc()
 
 }
 
-    OffsetRepository *Facade::offsets() {
-        return database;
-    }
+OffsetRepository *Facade::offsets() {
+    return database;
+}
 
-    Facade::~Facade() = default;
+bool Facade::applyCoordById(PositionId id, libschema::Unit value)
+{
+    // get offset by id
+    // get address by id
+    // convert to plc format
+    // send value to plc
+    // send "apply" command
+    return false;
+}
+
+bool Facade::applyCoordinates(const Coordinates &coords)
+{
+    // get offsets
+    // get coord addr list
+    // get addr of "apply" bits
+    // for each offset
+    //  convert coord to plc varible
+    //  send coord variable to plc
+    //  send "apply" command
+    return false;
+}
+
+Facade::~Facade() = default;
 
 } // namespace Schematics::Service
