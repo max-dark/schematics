@@ -27,25 +27,33 @@ target_sources(services
         services/database.cxx services/database.hxx
 )
 
+add_library(ui STATIC)
+
+target_link_libraries(ui
+    PUBLIC schema coords Qt5::Widgets
+)
+
+target_sources(ui
+    PUBLIC
+        ui/tools/tool.cxx ui/tools/tool.hxx
+        ui/widgets/numbereditor.cxx ui/widgets/numbereditor.hxx
+
+        ui/widgets/scheme/schemeview.cxx ui/widgets/scheme/schemeview.hxx
+        ui/widgets/scheme/schemescene.cxx ui/widgets/scheme/schemescene.hxx
+        ui/widgets/scheme/schemeeditor.cxx ui/widgets/scheme/schemeeditor.hxx
+
+        ui/widgets/coords/coordstab.cxx ui/widgets/coords/coordstab.hxx
+)
 
 add_executable(schematics WIN32)
 
 target_sources(schematics
-        PRIVATE
-            main.cxx
-            ui/mainwindow.cxx ui/mainwindow.hxx
-            ui/tools/tool.cxx ui/tools/tool.hxx
-
-            ui/widgets/numbereditor.cxx ui/widgets/numbereditor.hxx
-
-            ui/widgets/scheme/schemeview.cxx ui/widgets/scheme/schemeview.hxx
-            ui/widgets/scheme/schemescene.cxx ui/widgets/scheme/schemescene.hxx
-            ui/widgets/scheme/schemeeditor.cxx ui/widgets/scheme/schemeeditor.hxx
-
-            ui/widgets/coords/coordstab.cxx ui/widgets/coords/coordstab.hxx
-        )
+    PRIVATE
+        main.cxx
+        ui/mainwindow.cxx ui/mainwindow.hxx
+)
 
 target_link_libraries(schematics
     PRIVATE
-        schema coords services Qt5::Widgets
+        schema coords services ui
 )
