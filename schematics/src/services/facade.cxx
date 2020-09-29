@@ -16,11 +16,6 @@ Facade::Facade(QObject *parent)
     , Application{}
     {};
 
-Storage *Facade::storage()
-{
-    return database;
-}
-
 void Facade::parseArguments(const QStringList &argv, const QString &defaultPath, const QString &defaultFile)
 {
     QCommandLineOption config{
@@ -76,8 +71,8 @@ bool Facade::getConnectionParams(const QString &name, QString &address, int &int
 {
     QString str_addr, str_int;
     int tmp_int;
-    auto ok = storage()->getValueByName("plc/" + name + "/ip", str_addr);
-    ok = ok && storage()->getValueByName("plc/" + name + "/interval", str_int);
+    auto ok = database->getValueByName("plc/" + name + "/ip", str_addr);
+    ok = ok && database->getValueByName("plc/" + name + "/interval", str_int);
     if (ok)
     {
         tmp_int = str_int.toInt(&ok);
@@ -90,7 +85,7 @@ bool Facade::getConnectionParams(const QString &name, QString &address, int &int
     return ok;
 }
 
-void Facade::startSawPlc()
+void Facade::startSabPlc()
 {
     QString addr;
     int interval = 0;
@@ -109,10 +104,6 @@ void Facade::startKdoPlc()
     auto ok = getConnectionParams("kdo", addr, interval);
     qDebug() << ok << addr << interval;
 
-}
-
-OffsetRepository *Facade::offsets() {
-    return database;
 }
 
 bool Facade::applyCoordById(PositionId id, libschema::Unit value)

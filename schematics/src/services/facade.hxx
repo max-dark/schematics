@@ -14,7 +14,9 @@ namespace Schematics::Service
 {
 
 using namespace Coords;
+
 class Database;
+class Machine;
 
 class Facade : public QObject, public Application
 {
@@ -22,9 +24,6 @@ class Facade : public QObject, public Application
 public:
     explicit Facade(QObject *parent = nullptr);
     ~Facade() override;
-
-    Storage *storage() override;
-    OffsetRepository* offsets() override;
 
     bool applyCoordById(Coords::PositionId id, libschema::Unit value) override;
     bool applyCoordinates(const Coords::Coordinates& coords) override;
@@ -35,7 +34,7 @@ public:
                            const QString &defaultFile);
 
     void startStorage();
-    void startSawPlc();
+    void startSabPlc();
     void startKdoPlc();
 signals:
 private /* methods */:
@@ -44,6 +43,7 @@ private:
     QString configPath;
     QString configFile;
     Database* database = nullptr;
+    Machine* sab = nullptr;
 };
 
 } // namespace Schematics::Service
