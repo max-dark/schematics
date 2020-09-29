@@ -27,12 +27,14 @@ target_sources(services
 
         services/facade.cxx
         services/database.cxx
+        services/machine.cxx
     PUBLIC
         services/application.hxx
         services/storage.hxx
 
         services/facade.hxx
         services/database.hxx
+        services/machine.hxx
 )
 
 add_library(ui STATIC)
