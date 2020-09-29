@@ -7,3 +7,4 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 enable_testing(true)
 
 add_subdirectory(schematics)
+add_subdirectory(vendor)
