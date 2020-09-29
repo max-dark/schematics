@@ -31,14 +31,16 @@ target_include_directories(schema PUBLIC libschema)
 
 target_link_libraries(schema PRIVATE Qt5::Core)
 
-add_library(coords)
+add_library(coords  STATIC)
 target_sources(coords
     PRIVATE
         libcoords/coords/geometry.cxx
         libcoords/coords/coordinates.cxx
+        libcoords/coords/offset.cxx
     PUBLIC
         libcoords/coords/geometry.hxx
         libcoords/coords/coordinates.hxx
+        libcoords/coords/offset.hxx
         libcoords/coords/positionid.hxx
 )
 
