@@ -11,6 +11,7 @@ namespace Schematics::Service
 Database::Database(QObject *parent)
     : QObject(parent)
     , Storage()
+    , OffsetRepository{}
     , db_name{"configuration"}
 {}
 
@@ -82,6 +83,60 @@ bool Database::setValueByName(const QString &name, const QString &value)
         set_query.bindValue(":value", value);
         ok = set_query.exec();
     }
+    return ok;
+}
+
+bool Database::try_save(PositionId id, OffsetType type, int32_t offset, double per_mm)
+{
+    QSqlQuery save;
+    auto ok = save.prepare(
+            "update offsets"
+            "   set offset = :offset, type = :type, per_mm = :per_mm"
+            "   where id = :id");
+    if (ok)
+    {
+        save.bindValue(":offset", offset);
+        save.bindValue(":type", type);
+        save.bindValue(":per_mm", per_mm);
+        save.bindValue(":id", id);
+        ok = save.exec();
+    }
+    return ok;
+}
+
+bool Database::try_load(OffsetList &list)
+{
+    QSqlQuery load;
+    OffsetList tmp;
+    auto ok = load.prepare("select id, type, offset, per_mm from offsets");
+
+    if (ok)
+    {
+        ok = load.exec();
+        while (ok && load.next())
+        {
+            auto id = static_cast<PositionId>(load.value("id").toInt());
+            auto type = load.value("type").toInt() == 0 ? UNIT_OFFSET : DIGIT_OFFSET;
+            auto offset = load.value("offset").toInt();
+            auto  per_mm = load.value("per_mm").toDouble();
+            Offset* ptr = nullptr;
+            switch (type) {
+                case Coords::DIGIT_OFFSET:
+                    ptr = createDigit(offset, per_mm);
+                    break;
+                case UNIT_OFFSET:
+                    ptr = createUnit(offset);
+                    break;
+            }
+            tmp[id] = ptr;
+        }
+        if (ok)
+        {
+            std::swap(tmp, list);
+        }
+    }
+
+    clear(tmp);
     return ok;
 }
 

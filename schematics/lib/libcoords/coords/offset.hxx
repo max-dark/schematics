@@ -38,6 +38,7 @@ namespace Coords
     {
         bool try_save(PositionId id, const Offset& offset);
         OffsetList offsets();
+        void clear(OffsetList &list);
         Offset* createUnit(int32_t offset);
         Offset* createDigit(int32_t offset, double per_mm);
     protected:

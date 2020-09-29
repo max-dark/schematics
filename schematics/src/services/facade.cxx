@@ -111,6 +111,10 @@ void Facade::startKdoPlc()
 
 }
 
-Facade::~Facade() = default;
+    OffsetRepository *Facade::offsets() {
+        return database;
+    }
+
+    Facade::~Facade() = default;
 
 } // namespace Schematics::Service

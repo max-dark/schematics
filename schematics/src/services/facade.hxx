@@ -8,9 +8,12 @@
 #include <services/application.hxx>
 #include <services/storage.hxx>
 
+#include <coords/offset.hxx>
+
 namespace Schematics::Service
 {
 
+using namespace Coords;
 class Database;
 
 class Facade : public QObject, public Application
@@ -21,8 +24,9 @@ public:
     ~Facade() override;
 
     Storage *storage() override;
-    void startSawPlc() override;
-    void startKdoPlc() override;
+    OffsetRepository* offsets() override;
+    void startSawPlc();
+    void startKdoPlc();
     bool getConnectionParams(const QString &name, QString &address, int &interval) override;
 
     void parseArguments(const QStringList& argv,

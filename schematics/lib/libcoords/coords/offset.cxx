@@ -52,4 +52,12 @@ namespace Coords
         o->offset = offset;
         return o;
     }
+
+    void OffsetRepository::clear(OffsetList &list) {
+        for(auto p: list)
+        {
+            delete p.second;
+        }
+        list.clear();
+    }
 }// namespace Coords
