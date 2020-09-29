@@ -27,7 +27,7 @@ bool Database::open(const QString &database)
 
 bool Database::checkStructure()
 {
-    auto db = QSqlDatabase::database(db_name);
+    auto db = database();
 
     auto ok = db.isValid() && db.isOpen();
     if (ok)
@@ -52,7 +52,7 @@ bool Database::checkStructure()
 
 bool Database::getValueByName(const QString &name, QString &value)
 {
-    QSqlQuery get_value;
+    QSqlQuery get_value{database()};
 
     auto ok = get_value.prepare(
         "select value from config where name = :var_name"
@@ -72,7 +72,7 @@ bool Database::getValueByName(const QString &name, QString &value)
 
 bool Database::setValueByName(const QString &name, const QString &value)
 {
-    QSqlQuery set_query;
+    QSqlQuery set_query{database()};
 
     auto ok = set_query.prepare(
         "update config set value = :value where name = :name"
@@ -88,7 +88,7 @@ bool Database::setValueByName(const QString &name, const QString &value)
 
 bool Database::try_save(PositionId id, OffsetType type, int32_t offset, double per_mm)
 {
-    QSqlQuery save;
+    QSqlQuery save{database()};
     auto ok = save.prepare(
             "update offsets"
             "   set offset = :offset, type = :type, per_mm = :per_mm"
@@ -106,7 +106,7 @@ bool Database::try_save(PositionId id, OffsetType type, int32_t offset, double p
 
 bool Database::try_load(OffsetList &list)
 {
-    QSqlQuery load;
+    QSqlQuery load{database()};
     OffsetList tmp;
     auto ok = load.prepare("select id, type, offset, per_mm from offsets");
 
@@ -138,6 +138,11 @@ bool Database::try_load(OffsetList &list)
 
     clear(tmp);
     return ok;
+}
+
+QSqlDatabase Database::database()
+{
+    return QSqlDatabase::database(db_name);
 }
 
 } // namespace Schematics::Service

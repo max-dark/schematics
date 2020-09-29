@@ -6,6 +6,8 @@
 
 #include <coords/offset.hxx>
 
+#include <QSqlDatabase>
+
 namespace Schematics::Service
 {
     using namespace Coords;
@@ -30,6 +32,7 @@ protected:
     bool try_save(PositionId id, OffsetType type, int32_t offset, double per_mm) override;
     bool try_load(OffsetList &list) override;
 private:
+    QSqlDatabase database();
     QString db_name;
 };
 
