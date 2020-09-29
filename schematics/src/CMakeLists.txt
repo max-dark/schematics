@@ -16,15 +16,23 @@ find_package(Qt5 COMPONENTS Core Widgets Sql REQUIRED)
 add_library(services STATIC)
 
 target_link_libraries(services
-        PUBLIC schema coords Qt5::Core Qt5::Sql)
+    PUBLIC schema coords Qt5::Core Qt5::Sql
+    PRIVATE snap7_micro_client
+)
 
 target_sources(services
-    PUBLIC
-        services/application.cxx services/application.hxx
-        services/storage.cxx services/storage.hxx
+    PRIVATE
+        services/application.cxx
+        services/storage.cxx
 
-        services/facade.cxx services/facade.hxx
-        services/database.cxx services/database.hxx
+        services/facade.cxx
+        services/database.cxx
+    PUBLIC
+        services/application.hxx
+        services/storage.hxx
+
+        services/facade.hxx
+        services/database.hxx
 )
 
 add_library(ui STATIC)

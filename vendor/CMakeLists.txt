@@ -12,7 +12,7 @@ set(SNAP7_INCLUDE_DIRS
         "${SNAP7_SRC_CORE_DIR}"
         "${SNAP7_SRC_SYS_DIR}"
         )
-include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+
 # OS Detect
 
 set(SNAP7_SYS_DEPS)
