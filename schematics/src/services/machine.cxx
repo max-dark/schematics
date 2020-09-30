@@ -67,7 +67,7 @@ struct Machine::Connection: protected TSnap7MicroClient
     }
 
     int lastError() const { return last_op; }
-    bool hasError() const { return !ok(); }
+    bool hasError() const { return error(); }
     QString errorMessage() const
     {
         QByteArray tmp{512, '\0'};
@@ -80,6 +80,7 @@ private:
         last_op = status;
         return ok();
     }
+    bool error() const { return !ok(); };
     bool ok() const { return 0 == last_op; }
     int last_op = 0;
 };
