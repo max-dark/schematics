@@ -44,15 +44,24 @@ target_link_libraries(ui
 )
 
 target_sources(ui
-    PUBLIC
-        ui/tools/tool.cxx ui/tools/tool.hxx
-        ui/widgets/numbereditor.cxx ui/widgets/numbereditor.hxx
+    PRIVATE
+        ui/tools/tool.cxx
+        ui/widgets/numbereditor.cxx
 
-        ui/widgets/scheme/schemeview.cxx ui/widgets/scheme/schemeview.hxx
-        ui/widgets/scheme/schemescene.cxx ui/widgets/scheme/schemescene.hxx
-        ui/widgets/scheme/schemeeditor.cxx ui/widgets/scheme/schemeeditor.hxx
+        ui/widgets/scheme/schemeview.cxx
+        ui/widgets/scheme/schemescene.cxx
+        ui/widgets/scheme/schemeeditor.cxx
 
-        ui/widgets/coords/coordstab.cxx ui/widgets/coords/coordstab.hxx
+        ui/widgets/coords/coordstab.cxx
+    INTERFACE
+        ui/tools/tool.hxx
+        ui/widgets/numbereditor.hxx
+
+        ui/widgets/scheme/schemeview.hxx
+        ui/widgets/scheme/schemescene.hxx
+        ui/widgets/scheme/schemeeditor.hxx
+
+        ui/widgets/coords/coordstab.hxx
 )
 
 add_executable(schematics WIN32)
