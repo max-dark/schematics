@@ -12,9 +12,20 @@ class Machine: public QObject
 public:
     explicit Machine(QObject* parent = nullptr);
     ~Machine() override;
-private:
+    bool connect(const QString& address) const
+    { return connect(address, 0, 2); }
+    bool connect(const QString& address, int rack, int slot) const;
+    bool connected() const;
+    void disconnect() const;
+    bool hasError() const;
+    int lastError() const;
+    QString errorMessage() const;
+private /* types */:
     struct Connection;
-    Connection* self = nullptr;
+private /* methods */:
+    Connection* self() const;
+private /* members */:
+    Connection* selfptr = nullptr;
 };
 
 } // namespace Schematics::Service
