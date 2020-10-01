@@ -269,6 +269,28 @@ void Alpha::initCoordMap()
             .coord = {.area = area, .db = 0, .byte = 724},
             .apply = {.area = area, .db = 0, .byte = 46, .bit = 4}};
     }
+
+    // DWS
+    {
+        coord_map[POS_ID_DWS350_PRESS1_HEIGHT] = {
+            .coord = {.area = area, .db = 0, .byte = 238},
+            .apply = {.area = area, .db = 0, .byte = 29, .bit = 0}};
+        coord_map[POS_ID_DWS350_PRESS2_HEIGHT] = {
+            .coord = {.area = area, .db = 0, .byte = 242},
+            .apply = {.area = area, .db = 0, .byte = 29, .bit = 1}};
+        coord_map[POS_ID_DWS350_PRESS3_HEIGHT] = {
+            .coord = {.area = area, .db = 0, .byte = 246},
+            .apply = {.area = area, .db = 0, .byte = 29, .bit = 2}};
+        coord_map[POS_ID_DWS350_INP_ROLLERS_WIDTH] = {
+            .coord = {.area = area, .db = 0, .byte = 726},
+            .apply = {.area = area, .db = 0, .byte = 46, .bit = 5}};
+        coord_map[POS_ID_DWS350_OUT_ROLLERS_WIDTH] = {
+            .coord = {.area = area, .db = 0, .byte = 728},
+            .apply = {.area = area, .db = 0, .byte = 46, .bit = 6}};
+        coord_map[POS_ID_DWS350_AXIS_HEIGHT] = {
+            .coord = {.area = area, .db = 0, .byte = 742},
+            .apply = {.area = area, .db = 0, .byte = 47, .bit = 2}};
+    }
 }
 
 } // namespace Schematics::Service
