@@ -116,9 +116,59 @@ void Alpha::initCoordMap()
     using namespace Coords;
     constexpr auto area = Tag::Area::MEMORY;
     if (!coord_map.empty()) return;
-    coord_map[POS_ID_FBS1_LEFT_BLOCK] = {
-        .coord = {.area = area, .db = 0, .byte = 0},
-        .apply = {.area = area, .db = 0, .byte = 0, .bit = 0}};
+
+    // FBS1
+    {
+        coord_map[POS_ID_FBS1_LEFT_BLOCK] = {
+            .coord = {.area = area, .db = 0, .byte = 66},
+            .apply = {.area = area, .db = 0, .byte = 31, .bit = 0}};
+        coord_map[POS_ID_FBS1_RIGHT_BLOCK] = {
+            .coord = {.area = area, .db = 0, .byte = 70},
+            .apply = {.area = area, .db = 0, .byte = 31, .bit = 1}};
+        coord_map[POS_ID_FBS1_PRESS1_HEIGHT] = {
+            .coord = {.area = area, .db = 0, .byte = 700},
+            .apply = {.area = area, .db = 0, .byte = 45, .bit = 0}};
+        coord_map[POS_ID_FBS1_PRESS2_HEIGHT] = {
+            .coord = {.area = area, .db = 0, .byte = 702},
+            .apply = {.area = area, .db = 0, .byte = 45, .bit = 1}};
+        coord_map[POS_ID_FBS1_ROTATOR_HEIGHT] = {
+            .coord = {.area = area, .db = 0, .byte = 714},
+            .apply = {.area = area, .db = 0, .byte = 45, .bit = 7}};
+        coord_map[POS_ID_FBS1_ROTATOR_INP_WIDTH] = {
+            .coord = {.area = area, .db = 0, .byte = 710},
+            .apply = {.area = area, .db = 0, .byte = 45, .bit = 5}};
+        coord_map[POS_ID_FBS1_ROTATOR_OUT_WIDTH] = {
+            .coord = {.area = area, .db = 0, .byte = 712},
+            .apply = {.area = area, .db = 0, .byte = 45, .bit = 6}};
+    }
+
+    // FBS2
+    {
+        coord_map[POS_ID_FBS2_LEFT_BLOCK] = {
+            .coord = {.area = area, .db = 0, .byte = 74},
+            .apply = {.area = area, .db = 0, .byte = 31, .bit = 5}};
+        coord_map[POS_ID_FBS2_RIGHT_BLOCK] = {
+            .coord = {.area = area, .db = 0, .byte = 78},
+            .apply = {.area = area, .db = 0, .byte = 31, .bit = 6}};
+        coord_map[POS_ID_FBS2_ALIGN1] = {
+            .coord = {.area = area, .db = 0, .byte = 82},
+            .apply = {.area = area, .db = 0, .byte = 32, .bit = 2}};
+        coord_map[POS_ID_FBS2_ALIGN2] = {
+            .coord = {.area = area, .db = 0, .byte = 86},
+            .apply = {.area = area, .db = 0, .byte = 32, .bit = 3}};
+        coord_map[POS_ID_FBS2_ALIGN3] = {
+            .coord = {.area = area, .db = 0, .byte = 90},
+            .apply = {.area = area, .db = 0, .byte = 32, .bit = 4}};
+        coord_map[POS_ID_FBS2_PRESS1_HEIGHT] = {
+            .coord = {.area = area, .db = 0, .byte = 704},
+            .apply = {.area = area, .db = 0, .byte = 45, .bit = 2}};
+        coord_map[POS_ID_FBS2_PRESS2_HEIGHT] = {
+            .coord = {.area = area, .db = 0, .byte = 706},
+            .apply = {.area = area, .db = 0, .byte = 45, .bit = 3}};
+        coord_map[POS_ID_FBS2_PRESS3_HEIGHT] = {
+            .coord = {.area = area, .db = 0, .byte = 708},
+            .apply = {.area = area, .db = 0, .byte = 45, .bit = 4}};
+    }
 }
 
 } // namespace Schematics::Service
