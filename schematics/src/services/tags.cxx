@@ -212,7 +212,7 @@ TagAddress TagAddress::from_string(const std::string &tag, bool& ok)
     std::istringstream parser{tag};
     parser >> code >> addr.db >> any_char >> addr.byte;
     addr.area = tool::from_char(code, ok);
-    ok = ok && parser.good();
+    ok = ok && (parser.good() || parser.eof());
 
     return addr;
 }
@@ -231,7 +231,8 @@ BitAddress BitAddress::from_string(const std::string &tag, bool &ok)
     std::istringstream parser{tag};
     parser >> code >> addr.db >> any_char >> addr.byte >> any_char >> addr.bit;
     addr.area = tool::from_char(code, ok);
-    ok = ok && parser.good();
+    ok = ok && (parser.good() || parser.eof());
+
     return addr;
 }
 
