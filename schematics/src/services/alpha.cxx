@@ -244,6 +244,31 @@ void Alpha::initCoordMap()
             .coord = {.area = area, .db = 0, .byte = 738},
             .apply = {.area = area, .db = 0, .byte = 47, .bit = 1}};
     }
+
+    // P3 / PA300
+    {
+        coord_map[POS_ID_P3_PA300_LEFT_BLOCK] = {
+            .coord = {.area = area, .db = 0, .byte = 214},
+            .apply = {.area = area, .db = 0, .byte = 37, .bit = 7}};
+        coord_map[POS_ID_P3_PA300_RIGHT_BLOCK] = {
+            .coord = {.area = area, .db = 0, .byte = 218},
+            .apply = {.area = area, .db = 0, .byte = 38, .bit = 0}};
+        coord_map[POS_ID_P3_PA300_TOP_LEFT] = {
+            .coord = {.area = area, .db = 0, .byte = 230},
+            .apply = {.area = area, .db = 0, .byte = 38, .bit = 6}};
+        coord_map[POS_ID_P3_PA300_TOP_RIGHT] = {
+            .coord = {.area = area, .db = 0, .byte = 234},
+            .apply = {.area = area, .db = 0, .byte = 38, .bit = 7}};
+        coord_map[POS_ID_P3_PA300_BOTTOM_LEFT] = {
+            .coord = {.area = area, .db = 0, .byte = 222},
+            .apply = {.area = area, .db = 0, .byte = 38, .bit = 4}};
+        coord_map[POS_ID_P3_PA300_BOTTOM_RIGHT] = {
+            .coord = {.area = area, .db = 0, .byte = 226},
+            .apply = {.area = area, .db = 0, .byte = 38, .bit = 5}};
+        coord_map[POS_ID_P3_PA300_ROLLERS_INP_WIDTH] = {
+            .coord = {.area = area, .db = 0, .byte = 724},
+            .apply = {.area = area, .db = 0, .byte = 46, .bit = 4}};
+    }
 }
 
 } // namespace Schematics::Service
