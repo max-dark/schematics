@@ -77,7 +77,7 @@ namespace Schematics {
             {
                 auto topBox = new QHBoxLayout;
 
-                lbl_status = new QLabel{QString::fromUtf8(u8"test")};
+                lbl_status = new QLabel{QString::fromUtf8("test")};
                 topBox->addWidget(lbl_status);
                 mainBox->addLayout(topBox);
             }
