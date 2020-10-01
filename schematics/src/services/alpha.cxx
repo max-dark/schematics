@@ -26,7 +26,7 @@ struct OffsetWriter: public Coords::OffsetVisitor
     }
     bool write(const Tag& coord, const BoolTag& apply)
     {
-        if constexpr(false)
+        if constexpr(false) // TODO: remove it
         {
             return m->writeTag(coord) &&
                    m->writeTag(apply);
