@@ -5,6 +5,11 @@
 
 namespace Schematics::Service
 {
+namespace Const
+{
+static const BitAddress axisStartInit{ .area = Tag::Area::MEMORY, .db = 0, .byte =30, .bit = 0 };
+static const BitAddress axisInitDone{ .area = Tag::Area::MEMORY, .db = 0, .byte = 30, .bit = 1 };
+}
 
 struct OffsetWriter: public Coords::OffsetVisitor
 {
@@ -19,7 +24,7 @@ struct OffsetWriter: public Coords::OffsetVisitor
         o->accept(*this);
         return ok;
     }
-    bool write(const Tag& coord, const BoolTag apply)
+    bool write(const Tag& coord, const BoolTag& apply)
     {
         if constexpr(false)
         {
@@ -35,14 +40,8 @@ struct OffsetWriter: public Coords::OffsetVisitor
     }
     void visit(const Coords::UnitOffset& offset) override
     {
-        DIntTag coord{
-            a.coord.area, a.coord.byte, a.coord.db
-        };
-        BoolTag apply{
-            a.apply.area,
-            a.apply.byte, a.apply.bit,
-            a.apply.db
-        };
+        DIntTag coord{a.coord};
+        BoolTag apply{a.apply};
         coord.set(v.units() + offset.offset);
         apply.set(true);
 
@@ -50,14 +49,8 @@ struct OffsetWriter: public Coords::OffsetVisitor
     }
     void visit(const Coords::DigitOffset& offset) override
     {
-        IntTag coord{
-            a.coord.area, a.coord.byte, a.coord.db
-        };
-        BoolTag apply{
-            a.apply.area,
-            a.apply.byte, a.apply.bit,
-            a.apply.db
-        };
+        IntTag coord{a.coord};
+        BoolTag apply{a.apply};
         coord.set(v.to_digits(offset.per_mm) + offset.offset);
         apply.set(true);
 
@@ -108,7 +101,7 @@ bool Alpha::applyCoordinates(const Coords::Coordinates &coords)
         auto coordValue = coords.byId(o.first);
         //if (false)
         {
-            CoordAddress a{};
+            const auto& a = coord_map[o.first];
             OffsetWriter{a, coordValue, this}.write(o.second);
         }
     }

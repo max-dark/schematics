@@ -29,6 +29,7 @@ target_sources(services
         services/facade.cxx
         services/database.cxx
         services/machine.cxx
+        services/tags.cxx
     PUBLIC
         services/application.hxx
         services/storage.hxx
@@ -37,6 +38,7 @@ target_sources(services
         services/facade.hxx
         services/database.hxx
         services/machine.hxx
+        services/tags.hxx
 )
 
 add_library(ui STATIC)

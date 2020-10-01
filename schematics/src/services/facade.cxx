@@ -95,22 +95,9 @@ void Facade::startSabPlc()
     auto ok = getConnectionParams("sab", addr, interval);
     if (ok)
     {
-        applyCoordById(
-            Coords::POS_ID_FBS1_LEFT_BLOCK,
-            Unit::from_mm(100)
-        );
         qInfo() << "try connect to" << addr;
         ok = sab->connect(addr);
-        qInfo() << sab->errorMessage();
-        if (ok)
-        {
-            BoolTag init{Tag::Area::MEMORY, 30, 0};
-            BoolTag done{Tag::Area::MEMORY, 30, 1};
-            ok = sab->readTag(init) && sab->readTag(done);
-            qInfo() << "ok" << ok << sab->errorMessage();
-            qInfo() << "start" << init.get();
-            qInfo() << "done" << done.get();
-        }
+        qInfo() << ok << sab->errorMessage();
     }
     qDebug() << ok << addr << interval;
 }
