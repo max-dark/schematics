@@ -8,6 +8,9 @@ namespace libschema
     class Schema;
 }
 
+namespace Schematics::Service {
+struct Application;
+}
 
 namespace Schematics {
 
@@ -18,7 +21,7 @@ namespace Schematics {
     class MainWindow : public QMainWindow {
     Q_OBJECT
     public /* methods */:
-        explicit MainWindow(QWidget *parent = nullptr);
+        explicit MainWindow(Service::Application* app, QWidget *parent = nullptr);
 
         ~MainWindow() override;
 
@@ -52,6 +55,7 @@ namespace Schematics {
     private /* members */:
         Ui::MainView *ui = nullptr;
         libschema::Schema* scheme = nullptr;
+        Service::Application* app = nullptr;
     };
 
 } // namespace Schematics

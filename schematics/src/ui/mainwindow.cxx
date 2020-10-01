@@ -38,6 +38,8 @@
 #include <schema/xmlwriter.hxx>
 #include <schema/xmlreader.hxx>
 
+#include <services/application.hxx>
+
 using libschema::Unit;
 
 namespace Schematics {
@@ -149,8 +151,11 @@ namespace Schematics {
         );
     }
 
-    MainWindow::MainWindow(QWidget *parent)
-            : QMainWindow(parent), ui{new Ui::MainView()} {
+    MainWindow::MainWindow(Service::Application *app, QWidget *parent)
+        : QMainWindow(parent),
+        ui{new Ui::MainView()}
+    {
+        this->app = app;
         ui->buildView(this);
         setWindowState(Qt::WindowMaximized);
         bindEvents();

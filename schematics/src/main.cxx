@@ -26,7 +26,7 @@ int main(int argc, char** argv)
     }
 
     // start UI
-    Schematics::MainWindow view{};
+    Schematics::MainWindow view{svc};
     view.show();
 
     return app.exec();

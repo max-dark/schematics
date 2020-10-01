@@ -82,12 +82,17 @@ bool Alpha::applyCoordById(Coords::PositionId id, libschema::Unit value)
 {
     auto ok = false;
     auto offsets = offsetList->offsets();
+
+    // debug
+    {
+        qDebug() << "offsets size == " << offsets.size();
+    }
     auto o = offsets.find(id);
     if (o != offsets.end())
     {
         //if (false)
         {
-            CoordAddress a{};
+            const auto& a = coord_map[id];
             ok = OffsetWriter{a, value, this}.write(o->second);
         }
     }

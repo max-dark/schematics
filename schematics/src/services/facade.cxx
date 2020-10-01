@@ -95,7 +95,7 @@ void Facade::startSabPlc()
     auto ok = getConnectionParams("sab", addr, interval);
     if (ok)
     {
-        sab->applyCoordById(
+        applyCoordById(
             Coords::POS_ID_FBS1_LEFT_BLOCK,
             Unit::from_mm(100)
         );
@@ -133,7 +133,7 @@ bool Facade::applyCoordById(PositionId id, libschema::Unit value)
     // convert to plc format
     // send value to plc
     // send "apply" command
-    return false;
+    return sab->applyCoordById(id, value);
 }
 
 bool Facade::applyCoordinates(const Coordinates &coords)
@@ -145,7 +145,7 @@ bool Facade::applyCoordinates(const Coordinates &coords)
     //  convert coord to plc varible
     //  send coord variable to plc
     //  send "apply" command
-    return false;
+    return sab->applyCoordinates(coords);
 }
 
 Facade::~Facade() = default;
