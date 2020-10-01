@@ -192,6 +192,58 @@ void Alpha::initCoordMap()
             .coord = {.area = area, .db = 0, .byte = 716},
             .apply = {.area = area, .db = 0, .byte = 46, .bit = 0}};
     }
+
+    // P2 / PKA350
+    {
+        coord_map[POS_ID_P2_PKA350_LEFT_BLOCK] = {
+            .coord = {.area = area, .db = 0, .byte = 190},
+            .apply = {.area = area, .db = 0, .byte = 36, .bit = 0}};
+        coord_map[POS_ID_P2_PKA350_RIGHT_BLOCK] = {
+            .coord = {.area = area, .db = 0, .byte = 194},
+            .apply = {.area = area, .db = 0, .byte = 36, .bit = 1}};
+        coord_map[POS_ID_P2_PKA350_TOP_LEFT] = {
+            .coord = {.area = area, .db = 0, .byte = 182},
+            .apply = {.area = area, .db = 0, .byte = 35, .bit = 1}};
+        coord_map[POS_ID_P2_PKA350_TOP_RIGHT] = {
+            .coord = {.area = area, .db = 0, .byte = 186},
+            .apply = {.area = area, .db = 0, .byte = 35, .bit = 2}};
+        coord_map[POS_ID_P2_PKA350_BOTTOM_LEFT] = {
+            .coord = {.area = area, .db = 0, .byte = 174},
+            .apply = {.area = area, .db = 0, .byte = 34, .bit = 7}};
+        coord_map[POS_ID_P2_PKA350_BOTTOM_RIGHT] = {
+            .coord = {.area = area, .db = 0, .byte = 178},
+            .apply = {.area = area, .db = 0, .byte = 35, .bit = 0}};
+        coord_map[POS_ID_P2_PKA350_LEFT_ROLLER] = {
+            .coord = {.area = area, .db = 0, .byte = 198},
+            .apply = {.area = area, .db = 0, .byte = 36, .bit = 5}};
+        coord_map[POS_ID_P2_PKA350_RIGHT_ROLLER] = {
+            .coord = {.area = area, .db = 0, .byte = 202},
+            .apply = {.area = area, .db = 0, .byte = 36, .bit = 6}};
+        coord_map[POS_ID_P2_PKA350_LEFT_SAW] = {
+            .coord = {.area = area, .db = 0, .byte = 206},
+            .apply = {.area = area, .db = 0, .byte = 37, .bit = 2}};
+        coord_map[POS_ID_P2_PKA350_RIGHT_SAW] = {
+            .coord = {.area = area, .db = 0, .byte = 210},
+            .apply = {.area = area, .db = 0, .byte = 37, .bit = 3}};
+        coord_map[POS_ID_P2_PKA350_ROLLERS_INP_WIDTH] = {
+            .coord = {.area = area, .db = 0, .byte = 718},
+            .apply = {.area = area, .db = 0, .byte = 46, .bit = 1}};
+        coord_map[POS_ID_P2_PKA350_ROLLERS_OUT_WIDTH] = {
+            .coord = {.area = area, .db = 0, .byte = 720},
+            .apply = {.area = area, .db = 0, .byte = 46, .bit = 2}};
+        coord_map[POS_ID_P2_PKA350_ROTATOR_HEIGHT] = {
+            .coord = {.area = area, .db = 0, .byte = 722},
+            .apply = {.area = area, .db = 0, .byte = 46, .bit = 3}};
+        coord_map[POS_ID_P2_PKA350_LEFT_HEIGHT] = {
+            .coord = {.area = area, .db = 0, .byte = 730},
+            .apply = {.area = area, .db = 0, .byte = 46, .bit = 7}};
+        coord_map[POS_ID_P2_PKA350_RIGHT_HEIGHT] = {
+            .coord = {.area = area, .db = 0, .byte = 734},
+            .apply = {.area = area, .db = 0, .byte = 47, .bit = 0}};
+        coord_map[POS_ID_P2_PKA350_PRESS_HEIGHT] = {
+            .coord = {.area = area, .db = 0, .byte = 738},
+            .apply = {.area = area, .db = 0, .byte = 47, .bit = 1}};
+    }
 }
 
 } // namespace Schematics::Service
