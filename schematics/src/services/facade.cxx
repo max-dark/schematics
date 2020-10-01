@@ -8,6 +8,7 @@
 #include <QDebug>
 
 #include <services/database.hxx>
+#include <services/alpha.hxx>
 
 namespace Schematics::Service
 {
@@ -90,8 +91,27 @@ void Facade::startSabPlc()
     QString addr;
     int interval = 0;
     // connect to main PLC
-
+    sab = new Alpha{database, this};
     auto ok = getConnectionParams("sab", addr, interval);
+    if (ok)
+    {
+        sab->applyCoordById(
+            Coords::POS_ID_FBS1_LEFT_BLOCK,
+            Unit::from_mm(100)
+        );
+        qInfo() << "try connect to" << addr;
+        ok = sab->connect(addr);
+        qInfo() << sab->errorMessage();
+        if (ok)
+        {
+            BoolTag init{Tag::Area::MEMORY, 30, 0};
+            BoolTag done{Tag::Area::MEMORY, 30, 1};
+            ok = sab->readTag(init) && sab->readTag(done);
+            qInfo() << "ok" << ok << sab->errorMessage();
+            qInfo() << "start" << init.get();
+            qInfo() << "done" << done.get();
+        }
+    }
     qDebug() << ok << addr << interval;
 }
 
