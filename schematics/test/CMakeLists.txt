@@ -43,7 +43,7 @@ add_executable(test_tags)
 target_sources(test_tags PRIVATE test_services/test_tags.cxx)
 target_link_libraries(test_tags
     PRIVATE
-        #services
+        services
         Qt5::Test
 )
 add_test(NAME test_tags COMMAND test_tags)

@@ -41,6 +41,8 @@ target_sources(services
         services/tags.hxx
 )
 
+target_include_directories(services PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+
 add_library(ui STATIC)
 
 target_link_libraries(ui
@@ -67,6 +69,8 @@ target_sources(ui
 
         ui/widgets/coords/coordstab.hxx
 )
+
+target_include_directories(ui PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
 add_executable(schematics WIN32)
 
