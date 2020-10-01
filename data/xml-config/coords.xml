@@ -1,0 +1,123 @@
+﻿<coords>
+	<coord id="0" shift = "-28750"  area="flag" address="66" description ="ФБС1_Положение Фрезы Слева" vartype="32"/><!-- shift+x отвести на х влево, shift-x свести на х к центральной оси -->
+	
+	<coord id="1" shift = "-92650"  area="flag" address="70" description ="ФБС1_Положение Фрезы Справа" vartype="32"/><!-- shift+x отвести на х вправо, shift-x свести на х к центральной оси -->
+
+	<coord id="2" shift = "0"  area="flag" address="700" description ="ФБС1_Высота прижима 1" vartype="16"/><!-- shift+x опустить на х, shift-x поднять на х-->
+
+	<coord id="3" shift = "0"  area="flag" address="702" description ="ФБС1_Высота прижима 2" vartype="16"/><!-- shift+x опустить на х, shift-x поднять на х-->
+
+	<coord id="4" shift = "0"  area="flag" address="714" description ="Высота поворотного устройства 1" vartype="16"/><!-- shift+x поднять на х, shift-x опустить на х-->
+
+	<coord id="5" shift = "0"  area="flag" address="710" description ="Ширина 1 роликов поворотного утройства 1" vartype="16"/><!-- shift+x развести на х, shift-x свести на х -->
+	
+	<coord id="6" shift = "0"  area="flag" address="712" description ="Ширина 2 роликов поворотного утройства 1" vartype="16"/><!-- shift+x развести на х, shift-x свести на х -->
+
+	<coord id="7" shift = "-27725"  area="flag" address="74" description ="ФБС2_Положение фрезы слева" vartype="32"/><!-- shift+x отвести на х влево, shift-x свести на х к центральной оси -->
+
+	<coord id="8" shift = "-89130"  area="flag" address="78" description ="ФБС2_Положение фрезы справа" vartype="32"/><!-- shift+x отвести на х вправо, shift-x свести на х к центральной оси -->
+
+	<coord id="9" shift = "13899"  area="flag" address="82" description ="ФБС2_Выравнивающие ролики 1" vartype="32"/>
+
+	<coord id="10" shift = "13808"  area="flag" address="86" description ="ФБС2_Выравнивающие ролики 2" vartype="32"/>
+
+	<coord id="11" shift = "14533"  area="flag" address="90" description ="ФБС2_Выравнивающие ролики 3" vartype="32"/>
+
+	<coord id="12" shift = "0"  area="flag" address="704" description ="ФБС2_Высота прижима 1" vartype="16"/><!-- shift+x опустить на х, shift-x поднять на х-->
+
+	<coord id="13" shift = "0"  area="flag" address="706" description ="ФБС2_Высота прижима 2" vartype="16"/><!-- shift+x опустить на х, shift-x поднять на х-->
+	
+	<coord id="14" shift = "0"  area="flag" address="708" description ="ФБС2_Высота прижима 3" vartype="16"/><!-- shift+x опустить на х, shift-x поднять на х-->
+	
+	
+	<coord id="15" shift = "-28727"  area="flag" address="150" description ="PA350_Положение левой части" vartype="32"/><!-- shift+x отвести на х влево, shift-x свести на х к центральной оси -->
+
+	<coord id="16" shift = "-122324"  area="flag" address="154" description ="PA350_Положение правой части" vartype="32"/><!-- shift+x отвести на х вправо, shift-x свести на х к центральной оси -->
+	
+	
+	
+	<coord id="17" shift = "-3332"  area="flag" address="166" description ="PA350_Высота левой верхней фрезы" vartype="32"/><!-- shift+x поднять на х, shift-x опустить на х-->
+	
+	<coord id="18" shift = "-3278"  area="flag" address="170" description ="PA350_Высота правой верхней фрезы" vartype="32"/><!-- shift+x поднять на х, shift-x опустить на х-->
+	
+	
+	<coord id="19" shift = "4191"  area="flag" address="158" description ="PA350_Высота левой нижней фрезы" vartype="32"/><!-- shift+x поднять на х, shift-x опустить на х-->
+
+	<coord id="20" shift = "4195"  area="flag" address="162" description ="PA350_Высота правой нижней фрезы" vartype="32"/><!-- shift+x поднять на х, shift-x опустить на х-->
+	
+	
+	<coord id="21" shift = "0"  area="flag" address="716" description ="PA350_Ширина центрирующих роликов" vartype="16"/>
+	
+	
+
+	<coord id="22" shift = "-29750"  area="flag" address="190" description ="PKA350_Положение левой части" vartype="32"/><!-- shift+x отвести на х влево, shift-x свести на х к центральной оси --><!-- было -29889-->
+
+	<coord id="23" shift = "-123019"  area="flag" address="194" description ="PKA350_Положение правой части" vartype="32"/><!-- shift+x отвести на х вправо, shift-x свести на х к центральной оси --><!-- было -122524-->
+	
+	
+	
+	<coord id="24" shift = "-3482"  area="flag" address="182" description ="PKA350_Высота левой верхней фрезы" vartype="32"/><!-- shift+x поднять на х, shift-x опустить на х-->
+	
+	<coord id="25" shift = "-3030"  area="flag" address="186" description ="PKA350_Высота правой верхней фрезы" vartype="32"/><!-- shift+x поднять на х, shift-x опустить на х-->
+	
+	
+	<coord id="26" shift = "4191"  area="flag" address="174" description ="PKA350_Высота левой нижней фрезы" vartype="32"/><!-- shift+x поднять на х, shift-x опустить на х-->
+	
+	<coord id="27" shift = "4700"  area="flag" address="178" description ="PKA350_Высота правой нижней фрезы" vartype="32"/><!-- shift+x поднять на х, shift-x опустить на х-->
+	
+	
+	
+	<coord id="28" shift = "-17669"  area="flag" address="198" description ="PKA350_Ширина роликов боковых досок слева" vartype="32"/><!-- shift+x отвести на х влево, shift-x свести на х к центральной оси -->
+
+	<coord id="29" shift = "-17710"  area="flag" address="202" description ="PKA350_Ширина роликов боковых досок справа" vartype="32"/><!-- shift+x отвести на х вправо, shift-x свести на х к центральной оси -->
+	
+	<coord id="30" shift = "-10200"  area="flag" address="206" description ="PKA350_Ширина пилы слева" vartype="32"/><!-- shift+x отвести на х влево, shift-x свести на х к центральной оси -->
+
+	<coord id="31" shift = "-10270"  area="flag" address="210" description ="PKA350_Ширина пилы справа" vartype="32"/><!-- shift+x отвести на х вправо, shift-x свести на х к центральной оси -->
+	
+	<coord id="32" shift = "0"  area="flag" address="718" description ="PKA350_Ширина центрирующих роликов" vartype="16"/>
+
+	<coord id="33" shift = "0"  area="flag" address="720" description ="PKA350_Ширина выходных роликов" vartype="16"/>
+	
+	<coord id="34" shift = "0"  area="flag" address="722" description ="Высота поворотного устройства 2" vartype="16"/><!-- shift+x поднять на х, shift-x опустить на х-->
+	
+	<coord id="35" shift = "0"  area="flag" address="730" description ="PKA350_Высота пил слева" vartype="32"/><!-- shift+x поднять на х, shift-x опустить на х-->
+
+	<coord id="36" shift = "0"  area="flag" address="734" description ="PKA350_Высота пил справа" vartype="32"/><!-- shift+x поднять на х, shift-x опустить на х-->
+	
+	<coord id="37" shift = "5000"  area="flag" address="738" description ="PKA350_Высота прижима" vartype="32"/><!-- shift+x опустить на х, shift-x поднять на х-->
+	
+	
+	<coord id="38" shift = "-28100"  area="flag" address="214" description ="PA300_Положение левой части" vartype="32"/><!-- shift+x отвести на х влево, shift-x свести на х к центральной оси -->
+	
+	<coord id="39" shift = "-121500"  area="flag" address="218" description ="PA300_Положение правой части" vartype="32"/><!-- shift+x отвести на х вправо, shift-x свести на х к центральной оси -->
+	
+	
+	
+	<coord id="40" shift = "-3081"  area="flag" address="230" description ="PA300_Высота левой верхней фрезы" vartype="32"/><!-- shift+x поднять на х, shift-x опустить на х-->
+	
+	<coord id="41" shift = "-2916"  area="flag" address="234" description ="PA300_Высота правой верхней фрезы" vartype="32"/><!-- shift+x поднять на х, shift-x опустить на х-->
+	
+	
+	
+	<coord id="42" shift = "4100"  area="flag" address="222" description ="PA300_Высота левой нижней фрезы" vartype="32"/><!-- shift+x поднять на х, shift-x опустить на х-->
+
+	<coord id="43" shift = "4231"  area="flag" address="226" description ="PA300_Высота правой нижней фрезы" vartype="32"/><!-- shift+x поднять на х, shift-x опустить на х-->
+	
+	
+	
+	<coord id="44" shift = "0"  area="flag" address="724" description ="PA300_Ширина центрирующих роликов" vartype="16"/>
+
+	<coord id="45" shift = "-40714"  area="flag" address="238" description ="DWS350_Высота прижима 1" vartype="32"/><!-- shift+x поднять на х, shift-x опустить на х--><!-- было -39914-->
+	
+	<coord id="46" shift = "-40613"  area="flag" address="242" description ="DWS350_Высота прижима 2" vartype="32"/><!-- shift+x поднять на х, shift-x опустить на х--><!-- было -39913-->
+	
+	<coord id="47" shift = "-41279"  area="flag" address="246" description ="DWS350_Высота прижима 3" vartype="32"/><!-- shift+x поднять на х, shift-x опустить на х--><!-- было -39879-->
+	
+	<coord id="48" shift = "0"  area="flag" address="726" description ="DWS350_Ширина центрирующих роликов" vartype="16"/>
+
+	<coord id="49" shift = "0"  area="flag" address="728" description ="DWS350_Ширина выходных роликов" vartype="16"/>
+	
+	<coord id="50" shift = "0"  area="flag" address="742" description ="DWS350_Высота пил снизу" vartype="32"/>
+
+</coords>

@@ -1,0 +1,67 @@
+<speeds>
+	<speed id="0" address="382" base="3859" description ="Бревнотаска" vartype="16"/>
+	
+	<speed id="1" address="384" base="3971" description ="Ролики поворотного устройства" vartype="16"/>
+
+	<speed id="2" address="386" base="4005" description ="Цепная лента_8" vartype="16"/>
+	
+	<speed id="3" address="388" base="4346" description ="Ролики выгрузки_9" vartype="16"/>
+	
+	<speed id="4" address="390" base="3589" description ="Цепная лента_10" vartype="16"/>
+
+	<!--<speed id="5" address="378" bit="0" bitaddress = "-1" description ="ADDR__SPD_ROTATOR_DEVICE" vartype="16"/>-->
+	<speed id="5" address="438" base="4000" shift="4600" description ="Входные ролики поворотного устройства" vartype="16"/>
+	
+	<speed id="6" address="392" base="4313" description ="Рольганг_12" vartype="16"/>
+	
+	<speed id="7" address="394" base="4267" description ="Центрирующие ролики_13" vartype="16"/>
+
+	<speed id="8" address="396" base="4267" description ="Цепная лента_13" vartype="16"/>
+	
+	<speed id="9" address="398" base="4463" description ="Ролики выгрузки_14" vartype="16"/>
+
+	<speed id="10" address="400" base="4425" description ="Рольганг_15" vartype="16"/>
+
+	<speed id="11" address="402" base="4122" description ="Центрирующие ролики_16" vartype="16"/>
+
+	<speed id="12" address="404" base="4122" description ="Центрирующие ролики_17" vartype="16"/>
+
+	<speed id="13" address="406" base="3960" description ="Ролики боковых досок_17" vartype="16"/>
+
+	<speed id="14" address="408" base="4412" description ="Ролики выгрузки_17" vartype="16"/>
+
+	<speed id="15" address="410" base="4445" description ="Отделитель боковых досок" vartype="16"/>
+
+	<speed id="16" address="412" base="4142" description ="Ролики поворотного устройства_19" vartype="16"/>
+
+	<!--<speed id="3" address="380" bit="0" bitaddress = "-1" description ="ADDR__SPD_ROTATOR_DEVICE_19" vartype="16"/>-->
+
+	<speed id="17" address="440" base="2798" shift="4600" description ="Входные ролики поворотного устройства_19" vartype="16"/>
+
+	<speed id="18" address="414" base="4596" description ="Рольганг_20" vartype="16"/>
+
+	<speed id="19" address="416" base="4376" description ="Центрирующие ролики_21" vartype="16"/>
+
+	<speed id="20" address="418" base="4376" description ="Центрирующие ролики_22" vartype="16"/>
+
+	<speed id="21" address="420" base="4168" description ="Ролики_23" vartype="16"/>
+
+	<speed id="22" address="422" base="4168" description ="Прижимные ролики_23" vartype="16"/>
+
+	<speed id="23" address="424" base="4168" description ="Ролики выгрузки_23" vartype="16"/>
+
+	<speed id="24" address="426" base="4895" description ="Рольганг_24" vartype="16"/>
+
+	<speed id="25" address="436" base="6144" description ="Сбрасыватель" vartype="16"/>
+
+	<speed id="26" address="428" base="4096" description ="Конвейер сбрасывателя" vartype="16"/>
+
+	<speed id="27" address="430" base="4096" description ="Конвейер боковых досок_1" vartype="16"/>
+
+	<speed id="28" address="432" base="4096" description ="Конвейер боковых досок_2" vartype="16"/>
+
+	<speed id="29" address="434" base="4096" description ="Цепной конвейер" vartype="16"/>
+	
+	<speed id="30" address="442" base="2270" description ="Бревнотаска подачи в цех" vartype="16"/>
+
+</speeds>

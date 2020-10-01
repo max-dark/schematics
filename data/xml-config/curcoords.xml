@@ -1,0 +1,104 @@
+<coords>
+	<coord id="0" address="250" description ="ADDR_CUR_FBS1_LeftMillerWidth" vartype="32"/>
+	
+	<coord id="1" address="254" description ="ADDR_CUR_FBS1_RightMillerWidth" vartype="32"/>
+
+	<coord id="2" address="-1" description ="ADDR_CUR_FBS1_PressHeight1" vartype="0"/>
+
+	<coord id="3" address="-1" description ="ADDR_CUR_FBS1_PressHeight2" vartype="0"/>
+
+	<coord id="4" address="-1" description ="ADDR_CUR_FBS1_RotatorHeight" vartype="0"/>
+
+	<coord id="5" address="-1" description ="ADDR_CUR_FBS1_RotatorRollsWidth1" vartype="0"/>
+	
+	<coord id="6" address="-1" description ="ADDR_CUR_FBS1_RotatorRollsWidth2" vartype="0"/>
+
+	<coord id="7" address="258" description ="ADDR_CUR_FBS2_LeftMillerWidth" vartype="32"/>
+
+	<coord id="8" address="262" description ="ADDR_CUR_FBS2_RightMillerWidth" vartype="32"/>
+
+	<coord id="9" address="266" description ="ADDR_CUR_FBS2_EqualRolls1" vartype="32"/>
+
+	<coord id="10" address="270" description ="ADDR_CUR_FBS2_EqualRolls2" vartype="32"/>
+
+	<coord id="11" address="274" description ="ADDR_CUR_FBS2_EqualRolls3" vartype="32"/>
+
+	<coord id="12" address="-1" description ="ADDR_CUR_FBS2_PressHeight1" vartype="0"/>
+
+	<coord id="13" address="-1" description ="ADDR_CUR_FBS2_PressHeight2" vartype="0"/>
+	
+	<coord id="14" address="-1" description ="ADDR_CUR_FBS2_PressHeight3" vartype="0"/>
+	
+	<coord id="15" address="278" description ="ADDR_CUR_PA350_LeftMillerWidth" vartype="32"/>
+
+	<coord id="16" address="282" description ="ADDR_CUR_PA350_RightMillerWidth" vartype="32"/>
+	
+	<coord id="17" address="294" description ="ADDR_CUR_PA350_TopLeftMillerHeight" vartype="32"/>
+	
+	<coord id="18" address="298" description ="ADDR_CUR_PA350_TopRightMillerHeight" vartype="32"/>
+	
+	<coord id="19" address="286" description ="ADDR_CUR_PA350_BotLeftMillerHeight" vartype="32"/>
+
+	<coord id="20" address="290" description ="ADDR_CUR_PA350_BotRightMillerHeight" vartype="32"/>
+	
+	<coord id="21" address="-1" description ="ADDR_CUR_PA350_CenterRollsWidth" vartype="0"/>
+
+	<coord id="22" address="318" description ="ADDR_CUR_PKA350_LeftMillerWidth" vartype="32"/>
+
+	<coord id="23" address="322" description ="ADDR_CUR_PKA350_RightMillerWidth" vartype="32"/>
+	
+	<coord id="24" address="310" description ="ADDR_CUR_PKA350_TopLeftMillerHeight" vartype="32"/>
+	
+	<coord id="25" address="314" description ="ADDR_CUR_PKA350_TopRightMillerHeight" vartype="32"/>
+	
+	<coord id="26" address="302" description ="ADDR_CUR_PKA350_BotLeftMillerHeight" vartype="32"/>
+	
+	<coord id="27" address="306" description ="ADDR_CUR_PKA350_BotRightMillerHeight" vartype="32"/>
+	
+	<coord id="28" address="326" description ="ADDR_CUR_PKA350_SideLeftRollWidth" vartype="32"/>
+
+	<coord id="29" address="330" description ="ADDR_CUR_PKA350_SideRightRollWidth" vartype="32"/>
+	
+	<coord id="30" address="334" description ="ADDR_CUR_PKA350_LeftSawsWidth" vartype="32"/>
+
+	<coord id="31" address="338" description ="ADDR_CUR_PKA350_RightSawsWidth" vartype="32"/>
+	
+	<coord id="32" address="-1" description ="ADDR_CUR_PKA350_CenterRollsWidth" vartype="0"/>
+
+	<coord id="33" address="-1" description ="ADDR_CUR_PKA350_OutRollsWidth" vartype="0"/>
+	
+	<coord id="34" address="-1" description ="ADDR_CUR_PKA350_RotatorHeight" vartype="0"/>
+	
+	<coord id="35" address="-1" description ="ADDR_CUR_PKA350_LeftSawsHeight" vartype="0"/>
+
+	<coord id="36" address="-1" description ="ADDR_CUR_PKA350_RightSawsHeight" vartype="0"/>
+	
+	<coord id="37" address="-1" description ="ADDR_CUR_PKA350_TopPressHeight" vartype="0"/>
+	
+	<coord id="38" address="342" description ="ADDR_CUR_PA300_LeftMillerWidth" vartype="32"/>
+	
+	<coord id="39" address="346" description ="ADDR_CUR_PA300_RightMillerWidth" vartype="32"/>
+	
+	<coord id="40" address="358" description ="ADDR_CUR_PA300_TopLeftMillerHeight" vartype="32"/>
+	
+	<coord id="41" address="362" description ="ADDR_CUR_PA300_TopRightMillerHeight" vartype="32"/>
+	
+	<coord id="42" address="350" description ="ADDR_CUR_PA300_BotLeftMillerHeight" vartype="32"/>
+
+	<coord id="43" address="354" description ="ADDR_CUR_PA300_BotRightMillerHeight" vartype="32"/>
+	
+	<coord id="44" address="-1" description ="ADDR_CUR_PA300_CenterRollsWidth" vartype="0"/>
+
+	<coord id="45" address="366" description ="ADDR_CUR_DWS350_PressHeight1" vartype="32"/>
+	
+	<coord id="46" address="370" description ="ADDR_CUR_DWS350_PressHeight2" vartype="32"/>
+	
+	<coord id="47" address="374" description ="ADDR_CUR_DWS350_PressHeight3" vartype="32"/>
+	
+	<coord id="48" address="-1" description ="ADDR_CUR_DWS350_CenterRollsWidth" vartype="0"/>
+
+	<coord id="49" address="-1" description ="ADDR_CUR_DWS350_OutRollsWidth" vartype="0"/>
+	
+	<coord id="50" address="-1" description ="ADDR_CUR_DWS350_BotSawsHeight" vartype="0"/>
+
+</coords>

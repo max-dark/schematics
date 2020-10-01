@@ -1,0 +1,7 @@
+<bits>
+	<bit id="0" address = "125" bit="0" area="output" min="0" max="1" description ="Отходы 1" vartype="1"/>
+	<bit id="1" address = "124" bit="6" area="output" min="0" max="1" description ="Отходы 2" vartype="1"/>
+	<bit id="2" address = "125" bit="7"  area="output" min="0" max="1" description ="Отходы 3" vartype="1"/>
+	<bit id="3" address = "125" bit="3"  area="output" min="0" max="1" description ="Отходы 4" vartype="1"/>
+	<bit id="4" address = "124" bit="5"  area="output" min="0" max="1" description ="Отходы 5" vartype="1"/>
+</bits>
