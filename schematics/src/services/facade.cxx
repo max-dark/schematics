@@ -96,7 +96,7 @@ void Facade::startSabPlc()
     if (ok)
     {
         qInfo() << "try connect to" << addr;
-        ok = sab->connect(addr);
+        ok = false && sab->connect(addr);
         qInfo() << ok << sab->errorMessage();
     }
     qDebug() << ok << addr << interval;
@@ -108,9 +108,16 @@ void Facade::startKdoPlc()
     int interval = 0;
     // connect to secondary PLC
 
+    kdo = new Machine{this};
     auto ok = getConnectionParams("kdo", addr, interval);
     qDebug() << ok << addr << interval;
 
+    if (ok)
+    {
+        qInfo() << "try connect to" << addr;
+        ok = false && kdo->connect(addr);
+        qInfo() << ok << kdo->errorMessage();
+    }
 }
 
 bool Facade::applyCoordById(PositionId id, libschema::Unit value)

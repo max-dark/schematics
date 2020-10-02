@@ -17,6 +17,7 @@ using namespace Coords;
 
 class Database;
 class Alpha;
+class Machine;
 
 class Facade : public QObject, public Application
 {
@@ -44,6 +45,7 @@ private:
     QString configFile;
     Database* database = nullptr;
     Alpha* sab = nullptr;
+    Machine* kdo = nullptr;
 };
 
 } // namespace Schematics::Service
