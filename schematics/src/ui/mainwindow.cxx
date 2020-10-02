@@ -215,6 +215,8 @@ namespace Schematics {
 
         connect(ui->schemeEditor, &SchemeEditor::calculateSchemeCoords,
                 this, &MainWindow::calculateScheme);
+        connect(ui->schemeEditor, &SchemeEditor::applySchemeCoords,
+                this, &MainWindow::applyCoords);
     }
 
     void MainWindow::bindCoordsTab()
@@ -222,6 +224,8 @@ namespace Schematics {
         using Schematics::Ui::Widgets::CoordsTab;
         connect(ui->coordsTab, &CoordsTab::needCaclculate,
                 this, &MainWindow::calculateScheme);
+        connect(ui->coordsTab, &CoordsTab::applyCoord,
+                this, &MainWindow::applyCoordById);
     }
 
     void MainWindow::on_newScheme() {
@@ -371,6 +375,16 @@ namespace Schematics {
     void MainWindow::calculateScheme()
     {
         ui->coordsTab->fillCoords(scheme);
+    }
+
+    void MainWindow::applyCoordById(Coords::PositionId id, libschema::Unit value)
+    {
+        app->applyCoordById(id, value);
+    }
+
+    void MainWindow::applyCoords()
+    {
+        app->applyCoordinates(ui->coordsTab->coordinates());
     }
 
     void MainWindow::centralWidthChanged(double width)

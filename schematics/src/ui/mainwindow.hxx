@@ -3,6 +3,9 @@
 
 #include <QMainWindow>
 
+#include <coords/positionid.hxx>
+#include <schema/units.hxx>
+
 namespace libschema
 {
     class Schema;
@@ -33,6 +36,9 @@ namespace Schematics {
         void schemeParamChanged();
 
         void calculateScheme();
+
+        void applyCoordById(Coords::PositionId id, libschema::Unit value);
+        void applyCoords();
 
         void centralWidthChanged(double width);
         void addCentralBoards(double height, size_t count);
