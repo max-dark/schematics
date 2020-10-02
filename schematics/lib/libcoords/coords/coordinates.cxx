@@ -223,9 +223,13 @@ void Coordinates::fill_from(const libschema::Schema *schema)
         {
             setById(POS_ID_DWS350_INP_ROLLERS_WIDTH, width);
 
-            setById(POS_ID_DWS350_PRESS1_HEIGHT, g.dwsHeight());
-            setById(POS_ID_DWS350_PRESS2_HEIGHT, g.dwsHeight());
-            setById(POS_ID_DWS350_PRESS3_HEIGHT, g.dwsHeight());
+            {
+                auto o10mm = Unit::from_mm(10.0);
+                auto h = g.dwsHeight() + o10mm;
+                setById(POS_ID_DWS350_PRESS1_HEIGHT, h);
+                setById(POS_ID_DWS350_PRESS2_HEIGHT, h);
+                setById(POS_ID_DWS350_PRESS3_HEIGHT, h);
+            }
 
             //TODO: it must depend on saw diameter
             setById(POS_ID_DWS350_AXIS_HEIGHT, Unit::from_units(0));
