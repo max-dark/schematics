@@ -21,20 +21,21 @@ struct OffsetWriter: public Coords::OffsetVisitor
     }
     bool write(const Coords::Offset* o)
     {
+        qDebug() << "value mm" << v.to_mm();
         o->accept(*this);
         return ok;
     }
     bool write(const Tag& coord, const BoolTag& apply)
     {
+        //else
+        {
+            qDebug() << "Write coord to" << (coord.address() >> 3)
+                     << "Write apply to" << (apply.address() >> 3) << (apply.address() & 3);
+        }
         if constexpr(false) // TODO: remove it
         {
             return m->writeTag(coord) &&
                    m->writeTag(apply);
-        }
-        else
-        {
-            qDebug() << "Write coord to" << coord.address()
-                     << "Write apply to" << apply.address();
         }
         return false;
     }
@@ -45,6 +46,7 @@ struct OffsetWriter: public Coords::OffsetVisitor
         coord.set(v.units() + offset.offset);
         apply.set(true);
 
+        qDebug() << "32 value" << coord.get();
         ok = write(coord, apply);
     }
     void visit(const Coords::DigitOffset& offset) override
@@ -54,6 +56,7 @@ struct OffsetWriter: public Coords::OffsetVisitor
         coord.set(v.to_digits(offset.per_mm) + offset.offset);
         apply.set(true);
 
+        qDebug() << "16 value" << coord.get();
         ok = write(coord, apply);
     }
 private:
