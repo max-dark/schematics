@@ -147,7 +147,7 @@ ByteTag::ByteTag(Tag::Area area_id,
 {
     area = area_id;
     type = Type::BYTE;
-    start = byte_no << 3;
+    start = byte_no;
     block = block_no;
     value = 0;
 }
@@ -161,7 +161,7 @@ IntTag::IntTag(Tag::Area area_id, int byte_no, int block_no)
 {
     area = area_id;
     type = Type::INT;
-    start = byte_no << 3;
+    start = byte_no;
     block = block_no;
     value = 0;
 }
@@ -185,7 +185,7 @@ DIntTag::DIntTag(Tag::Area area_id, int byte_no, int block_no)
 {
     area = area_id;
     type = Type::DINT;
-    start = byte_no << 3;
+    start = byte_no;
     block = block_no;
     value = 0;
 }
