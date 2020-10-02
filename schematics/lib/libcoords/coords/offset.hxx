@@ -45,6 +45,7 @@ namespace Coords
         Offset* createUnit(int32_t offset);
         Offset* createDigit(int32_t offset, double per_mm);
         Offset* createBroken(int32_t offset, double per_mm);
+        Offset* createOffset(int type_id, int32_t offset, double per_mm);
     protected:
         virtual bool try_save(PositionId id, OffsetType type, int32_t offset, double per_mm) = 0;
         virtual bool try_load(OffsetList &list) = 0;

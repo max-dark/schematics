@@ -74,7 +74,21 @@ namespace Coords
         list.clear();
     }
 
-    void BrokenOffset::accept(OffsetVisitor &visitor) const
+Offset *OffsetRepository::createOffset(int type_id, int32_t offset, double per_mm)
+{
+    auto type =  (type_id >=0 && type_id <=2)
+                 ? OffsetType(type_id)
+                 : BROKEN_OFFSET;
+
+    switch (type) {
+    case DIGIT_OFFSET: return createDigit(offset, per_mm);
+    case UNIT_OFFSET: return createUnit(offset);
+    case BROKEN_OFFSET: return createBroken(offset, per_mm);
+    }
+    return nullptr;
+}
+
+void BrokenOffset::accept(OffsetVisitor &visitor) const
     {
         visitor.visit(*this);
     }
