@@ -170,7 +170,7 @@ void Coordinates::fill_from(const libschema::Schema *schema)
             setById(POS_ID_P2_PKA350_ROLLERS_OUT_WIDTH, width);
         }
 
-        // seporator
+        // separator
         setById(POS_ID_P2_PKA350_PRESS_HEIGHT, height);
 
         // second rotator
