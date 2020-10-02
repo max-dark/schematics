@@ -93,10 +93,10 @@ void Facade::startSabPlc()
     // connect to main PLC
     sab = new Alpha{database, this};
     auto ok = getConnectionParams("sab", addr, interval);
-    if (ok)
+    if (ok && false)
     {
         qInfo() << "try connect to" << addr;
-        ok = false && sab->connect(addr);
+        ok = sab->connect(addr);
         qInfo() << ok << sab->errorMessage();
     }
     qDebug() << ok << addr << interval;
@@ -112,11 +112,32 @@ void Facade::startKdoPlc()
     auto ok = getConnectionParams("kdo", addr, interval);
     qDebug() << ok << addr << interval;
 
-    if (ok)
+    if (ok && false)
     {
         qInfo() << "try connect to" << addr;
-        ok = false && kdo->connect(addr);
+        ok = kdo->connect(addr);
         qInfo() << ok << kdo->errorMessage();
+
+        bool parse_ok;
+        auto num_addr = TagAddress::from_string("M0:42", parse_ok);
+        qInfo() << "parse num" << parse_ok;
+        auto bit_addr = BitAddress::from_string("M0:40.0", parse_ok);
+        qInfo() << "parse bit" << parse_ok;
+        {
+            DIntTag num{num_addr};
+            BoolTag bit{bit_addr};
+            num.set(0);
+            bit.set(false);
+            auto ok = kdo->writeTag(num) && kdo->writeTag(bit);
+            qInfo() << "write" << ok << kdo->errorMessage();
+        }
+
+        {
+            DIntTag num{num_addr};
+            BoolTag bit{bit_addr};
+            auto ok = kdo->readTag(num) && kdo->readTag(bit);
+            qInfo() << "read" << ok << num.get() << bit.get();
+        }
     }
 }
 

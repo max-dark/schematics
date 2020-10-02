@@ -27,12 +27,11 @@ struct OffsetWriter: public Coords::OffsetVisitor
     }
     bool write(const Tag& coord, const BoolTag& apply)
     {
-        //else
         {
-            qDebug() << "Write coord to" << (coord.address() >> 3)
+            qDebug() << "Write coord to" << (coord.address())
                      << "Write apply to" << (apply.address() >> 3) << (apply.address() & 3);
         }
-        if constexpr(false) // TODO: remove it
+        //if constexpr(false) // TODO: remove it
         {
             return m->writeTag(coord) &&
                    m->writeTag(apply);
