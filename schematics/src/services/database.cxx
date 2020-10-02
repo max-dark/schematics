@@ -116,7 +116,10 @@ bool Database::try_load(OffsetList &list)
         while (ok && load.next())
         {
             auto id = static_cast<PositionId>(load.value("id").toInt());
-            auto type = load.value("type").toInt() == 0 ? UNIT_OFFSET : DIGIT_OFFSET;
+            auto type_id = load.value("type").toInt();
+            auto type =  (type_id >=0 && type_id <=2)
+                            ? OffsetType(type_id)
+                            : BROKEN_OFFSET;
             auto offset = load.value("offset").toInt();
             auto  per_mm = load.value("per_mm").toDouble();
             Offset* ptr = nullptr;
@@ -126,6 +129,9 @@ bool Database::try_load(OffsetList &list)
                     break;
                 case UNIT_OFFSET:
                     ptr = createUnit(offset);
+                    break;
+                case BROKEN_OFFSET:
+                    ptr = createBroken(offset, per_mm);
                     break;
             }
             tmp[id] = ptr;

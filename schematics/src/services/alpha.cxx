@@ -59,6 +59,16 @@ struct OffsetWriter: public Coords::OffsetVisitor
         qDebug() << "16 value" << coord.get();
         ok = write(coord, apply);
     }
+    void visit(const Coords::BrokenOffset& offset) override
+    {
+        DIntTag coord{a.coord};
+        BoolTag apply{a.apply};
+        coord.set(v.to_digits(offset.per_mm) + offset.offset);
+        apply.set(true);
+
+        qDebug() << "32 broken value" << coord.get();
+        ok = write(coord, apply);
+    }
 private:
     CoordAddress a;
     libschema::Unit v;

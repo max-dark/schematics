@@ -31,6 +31,11 @@ namespace Coords
         current_status = try_save(current_id, DIGIT_OFFSET, offset.offset, offset.per_mm);
     }
 
+    void OffsetRepository::visit(const BrokenOffset &offset)
+    {
+        current_status = try_save(current_id, BROKEN_OFFSET, offset.offset, offset.per_mm);
+    }
+
     OffsetList OffsetRepository::offsets() {
         Coords::OffsetList list;
         if (try_load(list))
@@ -42,6 +47,14 @@ namespace Coords
 
     Offset *OffsetRepository::createDigit(int32_t offset, double per_mm) {
         auto o = new DigitOffset{};
+        o->offset = offset;
+        o->per_mm = per_mm;
+        return o;
+    }
+
+    Offset *OffsetRepository::createBroken(int32_t offset, double per_mm)
+    {
+        auto o = new BrokenOffset{};
         o->offset = offset;
         o->per_mm = per_mm;
         return o;
@@ -60,4 +73,10 @@ namespace Coords
         }
         list.clear();
     }
+
+    void BrokenOffset::accept(OffsetVisitor &visitor) const
+    {
+        visitor.visit(*this);
+    }
+
 }// namespace Coords
