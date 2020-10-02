@@ -31,6 +31,7 @@ void Coordinates::fill_from(const libschema::Schema *schema)
     g.calculate(schema);
 
     const auto two = Unit::from_units(2);
+    const auto safe_offset = Unit::from_mm(50);
 
     // FBS1
     {
@@ -71,6 +72,11 @@ void Coordinates::fill_from(const libschema::Schema *schema)
         auto width = g.p1Width();
         auto height = g.p2Height();
 
+        auto use_outer_saw = (
+                schema->is_pka350_enabled() &&
+                schema->is_pa350_enabled()
+                );
+
         // P1
         {
             Unit left_p1, right_p1;
@@ -86,8 +92,10 @@ void Coordinates::fill_from(const libschema::Schema *schema)
             else
             {
                 // safe positions
-                Unit left_safe_p1, right_safe_p1;
-                Unit bottom_safe_p1, top_safe_p1;
+                const Unit left_safe_p1 = (width / two) + safe_offset;
+                const Unit right_safe_p1 = Unit::from_mm(1000.0);
+                const Unit bottom_safe_p1 = Unit::from_units(0) - safe_offset;
+                const Unit top_safe_p1 = height + safe_offset;
 
                 // move to safe positions
                 left_p1 = left_safe_p1;
@@ -123,8 +131,10 @@ void Coordinates::fill_from(const libschema::Schema *schema)
             else
             {
                 // safe positions
-                Unit left_safe_p2, right_safe_p2;
-                Unit bottom_safe_p2, top_safe_p2;
+                const Unit left_safe_p2 = (width / two) + safe_offset;
+                const Unit right_safe_p2 = Unit::from_mm(1000.0);
+                const Unit bottom_safe_p2 = Unit::from_units(0) - safe_offset;
+                const Unit top_safe_p2 = height + safe_offset;
 
                 // move to safe positions
                 left_p2 = left_safe_p2;
@@ -147,8 +157,12 @@ void Coordinates::fill_from(const libschema::Schema *schema)
             setById(POS_ID_P2_PKA350_LEFT_HEIGHT, height / two);
             setById(POS_ID_P2_PKA350_RIGHT_HEIGHT, height / two);
 
-            setById(POS_ID_P2_PKA350_LEFT_SAW, g.p2OuterSaw());
-            setById(POS_ID_P2_PKA350_RIGHT_SAW, g.p2OuterSaw());
+            // внешняя пила 2го профилятора
+            {
+                Unit saw_pos = use_outer_saw ? g.p2OuterSaw() : Unit::from_mm(100.0);
+                setById(POS_ID_P2_PKA350_LEFT_SAW, saw_pos);
+                setById(POS_ID_P2_PKA350_RIGHT_SAW, saw_pos);
+            }
 
             setById(POS_ID_P2_PKA350_LEFT_ROLLER, g.p2RollerPos());
             setById(POS_ID_P2_PKA350_RIGHT_ROLLER, g.p2RollerPos());
@@ -181,8 +195,10 @@ void Coordinates::fill_from(const libschema::Schema *schema)
             else
             {
                 // safe positions
-                Unit left_safe_p3, right_safe_p3;
-                Unit bottom_safe_p3, top_safe_p3;
+                const Unit left_safe_p3 = (width / two) + safe_offset;
+                const Unit right_safe_p3 = Unit::from_mm(1000.0);
+                const Unit bottom_safe_p3 = Unit::from_units(0) - safe_offset;
+                const Unit top_safe_p3 = g.dwsHeight() + safe_offset;
 
                 // move to safe positions
                 left_p3 = left_safe_p3;
