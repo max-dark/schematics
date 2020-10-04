@@ -40,9 +40,11 @@ public:
 signals:
 private /* methods */:
     QString databaseFile();
+    bool isProductionMode() const noexcept;
 private:
     QString configPath;
     QString configFile;
+    bool is_prod_mode = false;
     Database* database = nullptr;
     Alpha* sab = nullptr;
     Machine* kdo = nullptr;
