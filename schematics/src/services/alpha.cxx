@@ -10,7 +10,8 @@ namespace Const
 static const BitAddress axisStartInit{ .area = Tag::Area::MEMORY, .db = 0, .byte =30, .bit = 0 };
 static const BitAddress axisInitDone{ .area = Tag::Area::MEMORY, .db = 0, .byte = 30, .bit = 1 };
 
-static const BitAddress disableRotator{ .area = Tag::Area::MEMORY, .db = 0, .byte = 30, .bit = 1 };
+/// %M2044.6 отключить 2е поворотное устройство
+static const BitAddress disableRotator{ .area = Tag::Area::MEMORY, .db = 0, .byte = 2044, .bit = 6 };
 }
 
 struct OffsetWriter: public Coords::OffsetVisitor
