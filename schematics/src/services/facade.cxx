@@ -91,11 +91,11 @@ bool Facade::getConnectionParams(const QString &name, QString &address, int &int
     if (ok)
     {
         tmp_int = str_int.toInt(&ok);
-    }
-    if(ok)
-    {
-        address = str_addr;
-        interval = tmp_int;
+        if(ok)
+        {
+            address = str_addr;
+            interval = tmp_int;
+        }
     }
     return ok;
 }
