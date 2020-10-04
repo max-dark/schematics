@@ -53,8 +53,9 @@ void Facade::parseArguments(const QStringList &argv, const QString &defaultPath,
         configFile = defaultFile;
         is_prod_mode = false;
     }
-    qInfo() << "Parse Args" << ok << databaseFile();
-    qInfo() << "runing mode:" << (isProductionMode() ? "production" : "testing");
+    qInfo() << "Parse args ok?" << ok;
+    qInfo() << "Using database" << databaseFile();
+    qInfo() << "Runing mode:" << (isProductionMode() ? "production" : "testing");
 }
 
 QString Facade::databaseFile()
