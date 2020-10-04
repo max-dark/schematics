@@ -1,0 +1,52 @@
+BEGIN TRANSACTION;
+CREATE TABLE IF NOT EXISTS "motors" (
+	"id"	INTEGER NOT NULL UNIQUE,
+	"address"	TEXT NOT NULL,
+	"description"	TEXT NOT NULL,
+	PRIMARY KEY("id")
+);
+CREATE TABLE IF NOT EXISTS "sensors" (
+	"id"	INTEGER NOT NULL UNIQUE,
+	"address"	TEXT NOT NULL,
+	"description"	TEXT NOT NULL,
+	PRIMARY KEY("id")
+);
+CREATE TABLE IF NOT EXISTS "delays" (
+	"id"	INTEGER NOT NULL UNIQUE,
+	"address"	TEXT NOT NULL,
+	"base"	INTEGER NOT NULL DEFAULT 0,
+	"offset"	INTEGER NOT NULL DEFAULT 0,
+	"description"	TEXT NOT NULL,
+	PRIMARY KEY("id")
+);
+CREATE TABLE IF NOT EXISTS "speeds" (
+	"id"	INTEGER NOT NULL UNIQUE,
+	"address"	TEXT NOT NULL,
+	"base"	INTEGER NOT NULL,
+	"offset"	INTEGER NOT NULL,
+	"description"	TEXT NOT NULL,
+	PRIMARY KEY("id")
+);
+CREATE TABLE IF NOT EXISTS "alarms" (
+	"id"	INTEGER NOT NULL UNIQUE,
+	"address"	TEXT NOT NULL,
+	"description"	TEXT NOT NULL,
+	PRIMARY KEY("id")
+);
+CREATE TABLE IF NOT EXISTS "offsets" (
+	"id"	INTEGER NOT NULL UNIQUE,
+	"type"	INTEGER NOT NULL DEFAULT 0,
+	"zone_id"	INTEGER NOT NULL DEFAULT 0,
+	"address"	TEXT NOT NULL,
+	"apply_bit"	TEXT NOT NULL,
+	"per_mm"	REAL NOT NULL DEFAULT 100,
+	"offset"	INTEGER NOT NULL DEFAULT 0,
+	"description"	TEXT NOT NULL,
+	PRIMARY KEY("id")
+);
+CREATE TABLE IF NOT EXISTS "config" (
+	"name"	TEXT NOT NULL UNIQUE,
+	"value"	TEXT NOT NULL,
+	PRIMARY KEY("name")
+);
+COMMIT;
