@@ -10,6 +10,9 @@ namespace Const
 static const BitAddress axisStartInit{ .area = Tag::Area::MEMORY, .db = 0, .byte =30, .bit = 0 };
 static const BitAddress axisInitDone{ .area = Tag::Area::MEMORY, .db = 0, .byte = 30, .bit = 1 };
 
+/// %M2000.3 - статус КДО:
+/// разрешить подачу в цех, если КДО запущено
+static const BitAddress kdoIsRunning{ .area = Tag::Area::MEMORY, .db = 0, .byte = 2000, .bit = 3 };
 /// %M2044.6 отключить 2е поворотное устройство
 static const BitAddress disableRotator{ .area = Tag::Area::MEMORY, .db = 0, .byte = 2044, .bit = 6 };
 }
