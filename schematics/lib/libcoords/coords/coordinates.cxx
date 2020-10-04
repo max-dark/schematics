@@ -30,6 +30,8 @@ void Coordinates::fill_from(const libschema::Schema *schema)
     Geometry g;
     g.calculate(schema);
 
+    isVertical = schema->params()->is_rot2_disabled();
+
     const auto two = Unit::from_units(2);
     /// безопасный отступ для отключенных фрез
     const auto safe_offset = Unit::from_mm(50);
@@ -242,6 +244,11 @@ void Coordinates::fill_from(const libschema::Schema *schema)
             setById(POS_ID_DWS350_OUT_ROLLERS_WIDTH, width);
         }
     }
+}
+
+bool Coordinates::isVerticalMode() const noexcept
+{
+    return isVertical;
 }
 
 } // namespace Coords
