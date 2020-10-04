@@ -111,7 +111,7 @@ bool Alpha::applyCoordById(Coords::PositionId id, libschema::Unit value)
     return ok;
 }
 
-bool Alpha::applyCoordinates(const Coords::Coordinates &coords, bool verticalMode)
+bool Alpha::applyCoordinates(const Coords::Coordinates &coords)
 {
     auto offsets = offsetList->offsets();
     bool ok = true;
@@ -132,7 +132,7 @@ bool Alpha::applyCoordinates(const Coords::Coordinates &coords, bool verticalMod
     if (ok)
     {
         BoolTag disable_rotator{Const::disableRotator};
-        disable_rotator.set(verticalMode);
+        disable_rotator.set(coords.isVerticalMode());
         ok = writeTag(disable_rotator);
     }
     return ok;

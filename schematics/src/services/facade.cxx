@@ -151,7 +151,7 @@ bool Facade::applyCoordById(PositionId id, libschema::Unit value)
     return sab->applyCoordById(id, value);
 }
 
-bool Facade::applyCoordinates(const Coordinates &coords, bool verticalMode)
+bool Facade::applyCoordinates(const Coordinates &coords)
 {
     // get offsets
     // get coord addr list
@@ -160,7 +160,7 @@ bool Facade::applyCoordinates(const Coordinates &coords, bool verticalMode)
     //  convert coord to plc varible
     //  send coord variable to plc
     //  send "apply" command
-    return sab->applyCoordinates(coords, verticalMode);
+    return sab->applyCoordinates(coords);
 }
 
 Facade::~Facade() = default;
