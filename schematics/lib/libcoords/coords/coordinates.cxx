@@ -31,7 +31,12 @@ void Coordinates::fill_from(const libschema::Schema *schema)
     g.calculate(schema);
 
     const auto two = Unit::from_units(2);
+    /// безопасный отступ для отключенных фрез
     const auto safe_offset = Unit::from_mm(50);
+    /// позиция для отключенной внешней пилы
+    const auto safe_saw_pos = Unit::from_mm(95.0);
+    /// позиция для отключенных блоков(правая сторона)
+    const auto safe_block_pos = Unit::from_mm(1000.0);
 
     // FBS1
     {
@@ -93,7 +98,7 @@ void Coordinates::fill_from(const libschema::Schema *schema)
             {
                 // safe positions
                 const Unit left_safe_p1 = (width / two) + safe_offset;
-                const Unit right_safe_p1 = Unit::from_mm(1000.0);
+                const Unit right_safe_p1 = safe_block_pos;
                 const Unit bottom_safe_p1 = Unit::from_units(0) - safe_offset;
                 const Unit top_safe_p1 = height + safe_offset;
 
@@ -132,7 +137,7 @@ void Coordinates::fill_from(const libschema::Schema *schema)
             {
                 // safe positions
                 const Unit left_safe_p2 = (width / two) + safe_offset;
-                const Unit right_safe_p2 = Unit::from_mm(1000.0);
+                const Unit right_safe_p2 = safe_block_pos;
                 const Unit bottom_safe_p2 = Unit::from_units(0) - safe_offset;
                 const Unit top_safe_p2 = height + safe_offset;
 
@@ -159,7 +164,7 @@ void Coordinates::fill_from(const libschema::Schema *schema)
 
             // внешняя пила 2го профилятора
             {
-                Unit saw_pos = use_outer_saw ? g.p2OuterSaw() : Unit::from_mm(100.0);
+                Unit saw_pos = use_outer_saw ? g.p2OuterSaw() : safe_saw_pos;
                 setById(POS_ID_P2_PKA350_LEFT_SAW, saw_pos);
                 setById(POS_ID_P2_PKA350_RIGHT_SAW, saw_pos);
             }
@@ -196,7 +201,7 @@ void Coordinates::fill_from(const libschema::Schema *schema)
             {
                 // safe positions
                 const Unit left_safe_p3 = (width / two) + safe_offset;
-                const Unit right_safe_p3 = Unit::from_mm(1000.0);
+                const Unit right_safe_p3 = safe_block_pos;
                 const Unit bottom_safe_p3 = Unit::from_units(0) - safe_offset;
                 const Unit top_safe_p3 = g.dwsHeight() + safe_offset;
 
