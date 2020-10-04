@@ -9,6 +9,8 @@ namespace Const
 {
 static const BitAddress axisStartInit{ .area = Tag::Area::MEMORY, .db = 0, .byte =30, .bit = 0 };
 static const BitAddress axisInitDone{ .area = Tag::Area::MEMORY, .db = 0, .byte = 30, .bit = 1 };
+
+static const BitAddress disableRotator{ .area = Tag::Area::MEMORY, .db = 0, .byte = 30, .bit = 1 };
 }
 
 struct OffsetWriter: public Coords::OffsetVisitor
@@ -105,20 +107,31 @@ bool Alpha::applyCoordById(Coords::PositionId id, libschema::Unit value)
     return ok;
 }
 
-bool Alpha::applyCoordinates(const Coords::Coordinates &coords)
+bool Alpha::applyCoordinates(const Coords::Coordinates &coords, bool verticalMode)
 {
     auto offsets = offsetList->offsets();
+    bool ok = true;
     for(const auto& o: offsets)
     {
         auto coordValue = coords.byId(o.first);
         //if (false)
         {
             const auto& a = coord_map[o.first];
-            OffsetWriter{a, coordValue, this}.write(o.second);
+            ok = OffsetWriter{a, coordValue, this}.write(o.second);
+            if (!ok)
+            {
+                break;
+            }
         }
     }
     offsetList->clear(offsets);
-    return false;
+    if (ok)
+    {
+        BoolTag disable_rotator{Const::disableRotator};
+        disable_rotator.set(verticalMode);
+        ok = writeTag(disable_rotator);
+    }
+    return ok;
 }
 
 void Alpha::initCoordMap()

@@ -384,7 +384,8 @@ namespace Schematics {
 
     void MainWindow::applyCoords()
     {
-        app->applyCoordinates(ui->coordsTab->coordinates());
+        app->applyCoordinates(ui->coordsTab->coordinates(),
+                              scheme->params()->is_rot2_disabled());
     }
 
     void MainWindow::centralWidthChanged(double width)

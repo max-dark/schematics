@@ -27,7 +27,7 @@ public:
     ~Facade() override;
 
     bool applyCoordById(Coords::PositionId id, libschema::Unit value) override;
-    bool applyCoordinates(const Coords::Coordinates& coords) override;
+    bool applyCoordinates(const Coords::Coordinates& coords, bool verticalMode) override;
     bool getConnectionParams(const QString &name, QString &address, int &interval) override;
 
     void parseArguments(const QStringList& argv,

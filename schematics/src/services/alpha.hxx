@@ -23,7 +23,7 @@ public:
           QObject* parent = nullptr);
 
     bool applyCoordById(Coords::PositionId id, libschema::Unit value);
-    bool applyCoordinates(const Coords::Coordinates& coords);
+    bool applyCoordinates(const Coords::Coordinates& coords, bool verticalMode);
 private:
     void initCoordMap();
     Coords::OffsetRepository* offsetList = nullptr;
