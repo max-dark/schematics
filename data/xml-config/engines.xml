@@ -1,0 +1,56 @@
+<bits>
+	<bit id="0" address = "10" bit="0" area="flag" min="0" max="1" description ="Автомат поз 3-6" ledx="166" ledy="2060" vartype="1"/>
+	<bit id="1" address = "10" bit="1" area="flag" min="0" max="1" description ="Автомат поз 3-6 запущен" vartype="1"/>
+	<bit id="2" address = "10" bit="2" area="flag" min="0" max="1" description ="Бревнотаска поз 6 автомат" ledx="217" ledy="1540" vartype="1"/>
+	<bit id="3" address = "10" bit="3" area="flag" min="0" max="1" description ="Автомат поз 8-12" ledx="166" ledy="1240"  vartype="1"/>
+	<bit id="4" address = "10" bit="4" area="flag" min="0" max="1" description ="Автомат поз 8-12 запущен" vartype="1"/>
+	<bit id="5" address = "10" bit="5" area="flag" min="0" max="1" description ="ФБС1 Фреза слева автомат" ledx="100" ledy="1240" vartype="1"/>
+	<bit id="6" address = "10" bit="6" area="flag" min="0" max="1" description ="ФБС1 Фреза справа автомат" ledx="230" ledy="1240" vartype="1"/>
+	<bit id="7" address = "10" bit="7" area="flag" min="0" max="1" description ="Поворотные ролики поз 8 автомат" ledx="160" ledy="1400" vartype="1"/>
+	<bit id="8" address = "11" bit="0" area="flag" min="0" max="1" description ="Цепная лента поз 8 автомат" ledx="160" ledy="1320" vartype="1"/>
+	<bit id="9" address = "11" bit="1" area="flag" min="0" max="1" description ="Ролики выгрузки поз 9 автомат" ledx="160" ledy="1180" vartype="1"/>
+	<bit id="10" address = "11" bit="2" area="flag" min="0" max="1" description ="Цепная лента поз 10 автомат" ledx="200" ledy="1100" vartype="1"/>
+	<bit id="11" address = "11" bit="3" area="flag" min="0" max="1" description ="Рольганг поз 12 автомат" ledx="210" ledy="667" vartype="1"/>
+	<bit id="12" address = "11" bit="4" area="flag" min="0" max="1" description ="Автомат поз 13-15" ledx="210" ledy="635" vartype="1"/>
+	<bit id="13" address = "11" bit="5" area="flag" min="0" max="1" description ="Автомат поз 13-15 запущен" vartype="1"/>
+	<bit id="14" address = "11" bit="6" area="flag" min="0" max="1" description ="Привод поворотного устройства поз 11 автомат" ledx="165" ledy="1070" vartype="1"/>
+	<bit id="15" address = "11" bit="7" area="flag" min="0" max="1" description ="ФБС2 Фреза слева автомат" ledx="100" ledy="380" vartype="1"/>
+	<bit id="16" address = "12" bit="0" area="flag" min="0" max="1" description ="ФБС2 Фреза справа автомат" ledx="230" ledy="386" vartype="1"/>
+	<bit id="17" address = "12" bit="1" area="flag" min="0" max="1" description ="Центрирующие ролики поз 13 автомат" ledx="165" ledy="560" vartype="1"/>
+	<bit id="18" address = "12" bit="2" area="flag" min="0" max="1" description ="Цепная лента поз 13 автомат" ledx="165" ledy="450" vartype="1"/>
+	<bit id="19" address = "12" bit="3" area="flag" min="0" max="1" description ="Ролики выгрузки поз 14 автомат" ledx="165" ledy="325" vartype="1"/>
+	<bit id="20" address = "12" bit="4" area="flag" min="0" max="1" description ="Рольганг поз 15 автомат" ledx="500" ledy="2080" vartype="1"/>
+	<bit id="21" address = "12" bit="5" area="flag" min="0" max="1" description ="Автомат поз 16-20" ledx="550" ledy="2080" vartype="1"/>
+	<bit id="22" address = "12" bit="6" area="flag" min="0" max="1" description ="Автомат поз 16-20 запущен" vartype="1"/>
+	<bit id="23" address = "12" bit="7" area="flag" min="0" max="1" description ="Центрирующие ролики поз 16 автомат" ledx="550" ledy="2020" vartype="1"/>
+	<bit id="24" address = "13" bit="0" area="flag" min="0" max="1" description ="Центрирующие ролики поз 17 автомат" ledx="550" ledy="1910" vartype="1"/>
+	<bit id="25" address = "13" bit="1" area="flag" min="0" max="1" description ="Ролики боковых досок поз 17 автомат" ledx="550" ledy="1840" vartype="1"/>
+	<bit id="26" address = "13" bit="2" area="flag" min="0" max="1" description ="Ролики выгрузки поз 17 автомат" ledx="550" ledy="1750" vartype="1"/>
+	<bit id="27" address = "13" bit="3" area="flag" min="0" max="1" description ="Отделитель досок поз 18 автомат" ledx="550" ledy="1610" vartype="1"/>
+	<bit id="28" address = "13" bit="4" area="flag" min="0" max="1" description ="Опорные ролики поворотного устройства поз 19 автомат" ledx="550" ledy="1230" vartype="1"/>
+	<bit id="29" address = "13" bit="5" area="flag" min="0" max="1" description ="Привод поворотного устройства поз 19 автомат" ledx="570" ledy="1260" vartype="1"/>
+	<bit id="30" address = "13" bit="6" area="flag" min="0" max="1" description ="Рольганг поз 20 автомат" ledx="500" ledy="805" vartype="1"/>
+	<bit id="31" address = "13" bit="7" area="flag" min="0" max="1" description ="Автомат поз 21-24" ledx="550" ledy="700" vartype="1"/>
+	<bit id="32" address = "14" bit="0" area="flag" min="0" max="1" description ="Автомат поз 21-24 запущен" vartype="1"/>
+	<bit id="33" address = "14" bit="1" area="flag" min="0" max="1" description ="Центрирующие ролики поз 21 автомат" ledx="550" ledy="750" vartype="1"/>
+	<bit id="34" address = "14" bit="2" area="flag" min="0" max="1" description ="Центрирующие ролики поз 22 автомат" ledx="550" ledy="650" vartype="1"/>
+	<bit id="35" address = "14" bit="3" area="flag" min="0" max="1" description ="Опорные ролики поз 23 автомат" ledx="530" ledy="530" vartype="1"/>
+	<bit id="36" address = "14" bit="4" area="flag" min="0" max="1" description ="Прижимные ролики поз 23 автомат" ledx="570" ledy="530" vartype="1"/>
+	<bit id="37" address = "14" bit="5" area="flag" min="0" max="1" description ="Ролики выгрузки поз 23 автомат" ledx="550" ledy="500" vartype="1"/>
+	<bit id="38" address = "14" bit="6" area="flag" min="0" max="1" description ="Рольганг поз 24 автомат" ledx="540" ledy="460" vartype="1"/>
+	<bit id="39" address = "14" bit="7" area="flag" min="0" max="1" description ="Автомат лента" ledx="385" ledy="1460" vartype="1"/>
+	<bit id="40" address = "14" bit="0" area="flag" min="0" max="1" description ="Автомат лента запущен" vartype="1"/>
+	<bit id="41" address = "15" bit="1" area="flag" min="0" max="1" description ="Автомат гидростанция" ledx="720" ledy="2000" vartype="1"/>
+	<bit id="42" address = "15" bit="2" area="flag" min="0" max="1" description ="Автомат гидростанция запущен" vartype="1"/>
+	<bit id="43" address = "15" bit="3" area="flag" min="0" max="1" description ="Поперечный транспортёр боковых досок поз 25 автомат" ledx="450" ledy="1480" vartype="1"/>
+	<bit id="44" address = "15" bit="4" area="flag" min="0" max="1" description ="Конвейерная лента боковых досок 1 поз 25 автомат" ledx="390" ledy="1300" vartype="1"/>
+	<bit id="45" address = "15" bit="5" area="flag" min="0" max="1" description ="Конвейерная лента боковых досок 2 поз 25 автомат" ledx="390" ledy="1250" vartype="1"/>
+	<bit id="46" address = "15" bit="6" area="flag" min="0" max="1" description ="Цепной транспортёр поз 25 автомат" ledx="390" ledy="220" vartype="1"/>
+	<bit id="47" address = "15" bit="7" area="flag" min="0" max="1" description ="Поперечный отвод поз 24 автомат" ledx="550" ledy="215" vartype="1"/>
+	<bit id="48" address = "16" bit="0" area="flag" min="0" max="1" description ="Поворотное устройство поз 19 влево" ledx="510" ledy="1210" vartype="1"/>
+	<bit id="49" address = "16" bit="1" area="flag" min="0" max="1" description ="Поворотное устройство поз 19 вправо" ledx="585" ledy="1210" vartype="1"/>
+	<bit id="50" address = "16" bit="2" area="flag" min="0" max="1" description ="Поворотное устройство поз 11 влево" ledx="110" ledy="1090" vartype="1"/>
+	<bit id="51" address = "16" bit="3" area="flag" min="0" max="1" description ="Поворотное устройство поз 11 вправо" ledx="220" ledy="1090" vartype="1"/>
+	<!--<bit id="52" address = "16" bit="4" area="flag" min="0" max="1" description ="Бревнотаска подачи в цех" ledx="220" ledy="1090" vartype="1"/>-->
+</bits>
+	

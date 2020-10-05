@@ -1,0 +1,42 @@
+<bits>
+	<bit id="0" address = "100" bit="0" area="flag" min="0" max="1" description ="ADDR__ALARM_WOODPULLER_POS6" vartype="1"/>
+	<bit id="1" address = "100" bit="1" area="flag" min="0" max="1" description ="ADDR__ALARM_FBS1_MILLER_LEFT" vartype="1"/>
+	<bit id="2" address = "100" bit="2"  area="flag" min="0" max="1" description ="ADDR__ALARM_FBS1_MILLER_RIGHT" vartype="1"/>
+	<bit id="3" address = "100" bit="3"  area="flag" min="0" max="1" description ="ADDR__ALARM_ROTATOR_ROLLS_POS8" vartype="1"/>
+	<bit id="4" address = "100" bit="4"  area="flag" min="0" max="1" description ="ADDR__ALARM_CHAIN_POS8" vartype="1"/>
+	<bit id="5" address = "100" bit="5"  area="flag" min="0" max="1" description ="ADDR__ALARM_OUT_ROLLS_POS9" vartype="1"/>
+	<bit id="6" address = "100" bit="6"  area="flag" min="0" max="1" description ="ADDR__ALARM_CHAIN_POS10" vartype="1"/>
+	<bit id="7" address = "100" bit="7"  area="flag" min="0" max="1" description ="ADDR__ALARM_ROLLGANG_POS12" vartype="1"/>
+	
+	<bit id="8" address = "101" bit="0" area="flag" min="0" max="1"  description ="ADDR__ALARM_FBS2_MILLER_LEFT" vartype="1"/>
+	<bit id="9" address = "101" bit="1"  area="flag" min="0" max="1" description ="ADDR__ALARM_FBS2_MILLER_RIGHT" vartype="1"/>
+	<bit id="10" address = "101" bit="2"  area="flag" min="0" max="1" description ="ADDR__ALARM_CENTER_ROLLS_POS13" vartype="1"/>
+	<bit id="11" address = "101" bit="3"  area="flag" min="0" max="1" description ="ADDR__ALARM_CHAIN_POS13" vartype="1"/>
+	<bit id="12" address = "101" bit="4"  area="flag" min="0" max="1" description ="ADDR__ALARM_OUT_ROLLS_POS14" vartype="1"/>
+	<bit id="13" address = "101" bit="5" area="flag" min="0" max="1"  description ="ADDR__ALARM_ROLLGANG_POS15" vartype="1"/>
+	<bit id="14" address = "101" bit="6" area="flag" min="0" max="1"  description ="ADDR__ALARM_CENTER_ROLLS_POS16" vartype="1"/>
+	<bit id="15" address = "101" bit="7" area="flag" min="0" max="1"  description ="ADDR__ALARM_CENTER_ROLLS_POS17" vartype="1"/>
+	
+	<bit id="16" address = "102" bit="0" area="flag" min="0" max="1"  description ="ADDR__ALARM_SIDE_ROLLS_POS17" vartype="1"/>
+	<bit id="17" address = "102" bit="1" area="flag" min="0" max="1"  description ="ADDR__ALARM_OUT_ROLLS_POS17" vartype="1"/>
+	<bit id="18" address = "102" bit="2" area="flag" min="0" max="1"  description ="ADDR__ALARM_DIVIDER_POS18" vartype="1"/>
+	<bit id="19" address = "102" bit="3" area="flag" min="0" max="1"  description ="ADDR__ALARM_ROTATOR_ROLLS_POS19" vartype="1"/>
+	<bit id="20" address = "102" bit="4" area="flag" min="0" max="1"  description ="ADDR__ALARM_ROLLGANG_POS20" vartype="1"/>
+	<bit id="21" address = "102" bit="5" area="flag" min="0" max="1"  description ="ADDR__ALARM_CENTER_ROLLS_POS20" vartype="1"/>
+	<bit id="22" address = "102" bit="6" area="flag" min="0" max="1"  description ="ADDR__ALARM_CENTER_ROLLS_POS21" vartype="1"/>
+	<bit id="23" address = "102" bit="7" area="flag" min="0" max="1"  description ="ADDR__ALARM_BOT_ROLLS_POS23" vartype="1"/>
+	
+	<bit id="24" address = "103" bit="0" area="flag" min="0" max="1"  description ="ADDR__ALARM_PRESS_ROLLS_POS23" vartype="1"/>
+	<bit id="25" address = "103" bit="1" area="flag" min="0" max="1"  description ="ADDR__ALARM_OUT_ROLLS_POS23" vartype="1"/>
+	<bit id="26" address = "103" bit="2" area="flag" min="0" max="1"  description ="ADDR__ALARM_ROLLGANG_POS24" vartype="1"/>
+	<bit id="27" address = "103" bit="3" area="flag" min="0" max="1"  description ="ADDR__ALARM_PERP_SIDE_TRANS_POS25" vartype="1"/>
+	<bit id="28" address = "103" bit="4" area="flag" min="0" max="1"  description ="ADDR__ALARM_SIDE_CONWAYER1_POS25" vartype="1"/>
+	<bit id="29" address = "103" bit="5" area="flag" min="0" max="1"  description ="ADDR__ALARM_SIDE_CONWAYER2_POS25" vartype="1"/>
+	<bit id="30" address = "103" bit="6" area="flag" min="0" max="1"  description ="ADDR__ALARM_CHAIN_TRANS_POS25" vartype="1"/>
+	<bit id="31" address = "103" bit="7" area="flag" min="0" max="1"  description ="ADDR__ALARM_PERP_OUT_POS24" vartype="1"/>
+	
+	<bit id="32" address = "104" bit="0" area="flag" min="0" max="1"  description ="ADDR__ALARM_ROTATOR_POS19" vartype="1"/>
+	<bit id="33" address = "104" bit="1" area="flag" min="0" max="1"  description ="ADDR__ALARM_ROTATOR_POS11" vartype="1"/>
+	<bit id="34" address = "104" bit="2" area="flag" min="0" max="1"  description ="Бревнотаска подачи в цех" vartype="1"/>
+</bits>
+	

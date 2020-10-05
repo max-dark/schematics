@@ -38,6 +38,8 @@
 #include <schema/xmlwriter.hxx>
 #include <schema/xmlreader.hxx>
 
+#include <services/application.hxx>
+
 using libschema::Unit;
 
 namespace Schematics {
@@ -77,7 +79,7 @@ namespace Schematics {
             {
                 auto topBox = new QHBoxLayout;
 
-                lbl_status = new QLabel{QString::fromUtf8(u8"test")};
+                lbl_status = new QLabel{QString::fromUtf8("test")};
                 topBox->addWidget(lbl_status);
                 mainBox->addLayout(topBox);
             }
@@ -149,8 +151,11 @@ namespace Schematics {
         );
     }
 
-    MainWindow::MainWindow(QWidget *parent)
-            : QMainWindow(parent), ui{new Ui::MainView()} {
+    MainWindow::MainWindow(Service::Application *app, QWidget *parent)
+        : QMainWindow(parent),
+        ui{new Ui::MainView()}
+    {
+        this->app = app;
         ui->buildView(this);
         setWindowState(Qt::WindowMaximized);
         bindEvents();
@@ -210,6 +215,8 @@ namespace Schematics {
 
         connect(ui->schemeEditor, &SchemeEditor::calculateSchemeCoords,
                 this, &MainWindow::calculateScheme);
+        connect(ui->schemeEditor, &SchemeEditor::applySchemeCoords,
+                this, &MainWindow::applyCoords);
     }
 
     void MainWindow::bindCoordsTab()
@@ -217,6 +224,8 @@ namespace Schematics {
         using Schematics::Ui::Widgets::CoordsTab;
         connect(ui->coordsTab, &CoordsTab::needCaclculate,
                 this, &MainWindow::calculateScheme);
+        connect(ui->coordsTab, &CoordsTab::applyCoord,
+                this, &MainWindow::applyCoordById);
     }
 
     void MainWindow::on_newScheme() {
@@ -366,6 +375,16 @@ namespace Schematics {
     void MainWindow::calculateScheme()
     {
         ui->coordsTab->fillCoords(scheme);
+    }
+
+    void MainWindow::applyCoordById(Coords::PositionId id, libschema::Unit value)
+    {
+        app->applyCoordById(id, value);
+    }
+
+    void MainWindow::applyCoords()
+    {
+        app->applyCoordinates(ui->coordsTab->coordinates());
     }
 
     void MainWindow::centralWidthChanged(double width)

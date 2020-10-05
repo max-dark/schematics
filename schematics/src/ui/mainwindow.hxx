@@ -3,11 +3,17 @@
 
 #include <QMainWindow>
 
+#include <coords/positionid.hxx>
+#include <schema/units.hxx>
+
 namespace libschema
 {
     class Schema;
 }
 
+namespace Schematics::Service {
+struct Application;
+}
 
 namespace Schematics {
 
@@ -18,7 +24,7 @@ namespace Schematics {
     class MainWindow : public QMainWindow {
     Q_OBJECT
     public /* methods */:
-        explicit MainWindow(QWidget *parent = nullptr);
+        explicit MainWindow(Service::Application* app, QWidget *parent = nullptr);
 
         ~MainWindow() override;
 
@@ -30,6 +36,9 @@ namespace Schematics {
         void schemeParamChanged();
 
         void calculateScheme();
+
+        void applyCoordById(Coords::PositionId id, libschema::Unit value);
+        void applyCoords();
 
         void centralWidthChanged(double width);
         void addCentralBoards(double height, size_t count);
@@ -52,6 +61,7 @@ namespace Schematics {
     private /* members */:
         Ui::MainView *ui = nullptr;
         libschema::Schema* scheme = nullptr;
+        Service::Application* app = nullptr;
     };
 
 } // namespace Schematics

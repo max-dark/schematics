@@ -7,10 +7,10 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Qt5 COMPONENTS Core Test REQUIRED)
+find_package(Qt5 COMPONENTS Core Widgets Xml Test REQUIRED)
 
 enable_testing(true)
 
@@ -38,3 +38,12 @@ target_sources(test_calc
 
 add_test(NAME test_calc COMMAND test_calc)
 target_link_libraries(test_calc PRIVATE schema coords Qt5::Test)
+
+add_executable(test_tags)
+target_sources(test_tags PRIVATE test_services/test_tags.cxx)
+target_link_libraries(test_tags
+    PRIVATE
+        services
+        Qt5::Test
+)
+add_test(NAME test_tags COMMAND test_tags)

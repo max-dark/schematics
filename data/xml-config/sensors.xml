@@ -1,0 +1,45 @@
+<bits>
+	<bit id="0" address = "72" bit="0" area="input" min="0" max="1" description ="Управление Центрирующие ролики Pos.8" vartype="1"/>
+	<bit id="1" address = "72" bit="1" area="input" min="0" max="1" description ="Управление Приёмные ролики Pos.8" vartype="1"/>
+	<bit id="2" address = "72" bit="2" area="input" min="0" max="1" description ="Блокировка Перестановка ширины Pos.9" vartype="1"/>
+	<bit id="3" address = "73" bit="3" area="input" min="0" max="1" description ="Управление Ролики выгрузки Pos.9" vartype="1"/>
+	<bit id="4" address = "73" bit="4" area="input" min="0" max="1" description ="Управление Поворотные ролики впереди Поворотное устройство Pos.11" vartype="1"/>
+	<bit id="5" address = "73" bit="5" area="input" min="0" max="1" description ="Тормоза слева Поворотное устройство Pos.11" vartype="1"/>
+	<bit id="6" address = "73" bit="6" area="input" min="0" max="1" description ="Исходное положение слева Поворотное устройство Pos.11" vartype="1"/>
+	<bit id="7" address = "73" bit="7" area="input" min="0" max="1" description ="Тормоза направо Поворотное устройство Pos.11" vartype="1"/>
+	<bit id="8" address = "74" bit="0" area="input" min="0" max="1" description ="Исходное положение направо Поворотное устройство Pos.11" vartype="1"/>
+	<bit id="9" address = "74" bit="1" area="input" min="0" max="1" description ="Управление Поворотные ролики сзади Поворотное устройство Pos.11" vartype="1"/>
+	<bit id="10" address = "80" bit="1" area="input" min="0" max="1" description ="Управление Центрирующие ролики Pos.13" vartype="1"/>
+	<bit id="11" address = "80" bit="2" area="input" min="0" max="1" description ="Управление Приёмные ролики Pos.13" vartype="1"/>
+	<bit id="12" address = "80" bit="3" area="input" min="0" max="1" description ="Блокировка Перестановка ширины Pos.14" vartype="1"/>
+	<bit id="13" address = "81" bit="4" area="input" min="0" max="1" description ="Блокировка Перестановка ширины Pos.14" vartype="1"/>
+	<bit id="14" address = "82" bit="1" area="input" min="0" max="1" description ="Термостат Управление Охлаждение Pos.26" vartype="1"/>
+	<bit id="15" address = "82" bit="2" area="input" min="0" max="1" description ="Термостат Аварийное отключение 70C Pos.26" vartype="1"/>
+	<bit id="16" address = "82" bit="3" area="input" min="0" max="1" description ="Уровень минимальный уровень заполнения Гидравлика Pos.26" vartype="1"/>
+	<bit id="17" address = "82" bit="4" area="input" min="0" max="1" description ="Контакт давления Загрязнение Циркуляционный фильтр Pos.26" vartype="1"/>
+	<bit id="18" address = "82" bit="5" area="input" min="0" max="1" description ="Контакт давления Загрязнение Напорный фильтр Pos.26" vartype="1"/>
+	<bit id="19" address = "82" bit="6" area="input" min="0" max="1" description ="Контакт давления Такт Смазка 1 Pos.27" vartype="1"/>
+	<bit id="20" address = "82" bit="7" area="input" min="0" max="1" description ="Контакт давления Такт Смазка 2 Pos.27" vartype="1"/>
+	<bit id="21" address = "83" bit="0" area="input" min="0" max="1" description ="Резерв Напорный фильтр Pos.26" vartype="1"/>
+	<bit id="22" address = "83" bit="1" area="input" min="0" max="1" description ="Резерв Напорный фильтр Pos.26" vartype="1"/>
+	<bit id="23" address = "88" bit="0" area="input" min="0" max="1" description ="Центрирующие ролики закрывать Pos.16" vartype="1"/>
+	<bit id="24" address = "88" bit="1" area="input" min="0" max="1" description ="Центрирующие ролики открывать Pos.16" vartype="1"/>
+	<bit id="25" address = "88" bit="2" area="input" min="0" max="1" description ="Центрирующие ролики закрывать Pos.17" vartype="1"/>
+	<bit id="26" address = "88" bit="3" area="input" min="0" max="1" description ="Центрирующие ролики открывать Pos.17" vartype="1"/>
+	<bit id="27" address = "88" bit="4" area="input" min="0" max="1" description ="Управление Выгрузка Pos.17" vartype="1"/>
+	<bit id="28" address = "89" bit="1" area="input" min="0" max="1" description ="Управление Ролики боковых досок Pos.18" vartype="1"/>
+	<bit id="29" address = "89" bit="2" area="input" min="0" max="1" description ="Выталкиватель досок Pos.18" vartype="1"/>
+	<bit id="30" address = "89" bit="3" area="input" min="0" max="1" description ="Управление Поворотное устройство Pos.19" vartype="1"/>
+	<bit id="31" address = "89" bit="4" area="input" min="0" max="1" description ="Поворотное устройство Конечное положение направо Pos.19" vartype="1"/>
+	<bit id="32" address = "89" bit="5" area="input" min="0" max="1" description ="Поворотное устройство Конечное положение слева Pos.19" vartype="1"/>
+	<bit id="33" address = "89" bit="6" area="input" min="0" max="1" description ="Поворотное устройство Исходное положение Pos.19" vartype="1"/>
+	<bit id="34" address = "89" bit="7" area="input" min="0" max="1" description ="Поворотные ролики закрывать Поворотное устройство Pos.19" vartype="1"/>
+	<bit id="35" address = "96" bit="1" area="input" min="0" max="1" description ="Центрирующие ролики закрывать Pos.21" vartype="1"/>
+	<bit id="36" address = "96" bit="2" area="input" min="0" max="1" description ="Центрирующие ролики открывать Pos.21" vartype="1"/>
+	<bit id="37" address = "96" bit="3" area="input" min="0" max="1" description ="Центрирующие ролики закрывать Pos.22" vartype="1"/>
+	<bit id="38" address = "96" bit="4" area="input" min="0" max="1" description ="Центрирующие ролики открывать Pos.22" vartype="1"/>
+	<bit id="39" address = "96" bit="5" area="input" min="0" max="1" description ="Управлене Ролики выгрузки Pos.23" vartype="1"/>
+	<bit id="40" address = "96" bit="6" area="input" min="0" max="1" description ="Управление Поперечный отвод Pos.24" vartype="1"/>
+	<bit id="41" address = "96" bit="7" area="input" min="0" max="1" description ="Исходное положене Поперечный отвод Pos.24" vartype="1"/>
+</bits>
+	

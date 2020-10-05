@@ -37,8 +37,10 @@ public:
 
     /// Заполняет список координат по заданной схеме
     void fill_from(const Schema* schema);
+    bool isVerticalMode() const noexcept;
 private:
     container coords;
+    bool isVertical = false;
 };
 
 } // namespace Coords

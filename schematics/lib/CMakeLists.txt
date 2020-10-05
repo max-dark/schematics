@@ -8,7 +8,7 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Qt5 COMPONENTS Core REQUIRED)
@@ -31,14 +31,16 @@ target_include_directories(schema PUBLIC libschema)
 
 target_link_libraries(schema PRIVATE Qt5::Core)
 
-add_library(coords)
+add_library(coords  STATIC)
 target_sources(coords
     PRIVATE
         libcoords/coords/geometry.cxx
         libcoords/coords/coordinates.cxx
+        libcoords/coords/offset.cxx
     PUBLIC
         libcoords/coords/geometry.hxx
         libcoords/coords/coordinates.hxx
+        libcoords/coords/offset.hxx
         libcoords/coords/positionid.hxx
 )
 
