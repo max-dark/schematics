@@ -136,6 +136,19 @@ bool Machine::writeTag(const Tag &tag) const
         tag.itemCount(),
         tag.typeCode(),
         tag.pointer()
+                );
+}
+
+bool Machine::readBlock(const TagAddress &address, size_t size, void *block) const
+{
+    ByteTag tmp{address};
+    return self()->read(
+        tmp.areaCode(),
+        tmp.blockNo(),
+        tmp.address(),
+        size,
+        tmp.typeCode(),
+        block
         );
 }
 

@@ -23,6 +23,8 @@ public:
     bool readTag(Tag& tag) const;
     bool writeTag(const Tag& tag) const;
 
+    bool readBlock(const TagAddress& address, std::size_t size, void* block) const;
+
     bool hasError() const;
     int lastError() const;
     QString errorMessage() const;
