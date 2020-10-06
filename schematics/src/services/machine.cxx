@@ -7,6 +7,7 @@
 #include <unordered_map>
 #include <cstdint>
 #include <stdexcept>
+#include <type_traits>
 
 char * ErrCliText(int Error, char* Result, int TextLen);
 
@@ -104,7 +105,7 @@ struct MemoryArea
 struct Machine::Memory
 {
     static constexpr std::size_t BLOCK_SIZE = 64 * 1024u;
-    using Block = std::array<std::int8_t, BLOCK_SIZE>;
+    using Block = std::array<std::uint8_t, BLOCK_SIZE>;
     using BlockMap = std::unordered_map<int, Block>;
     using AreaList = std::vector<MemoryArea>;
 
@@ -113,20 +114,56 @@ struct Machine::Memory
     Block flags{};
     BlockMap data{};
     AreaList areaList{};
-    void * pointer(const TagAddress& address)
+    const Block &fromAddress(Tag::Area area, int db) const
     {
-        switch (address.area)
+        switch (area)
         {
         case Tag::Area::INPUT:
-            return inputs.data() + address.byte;
+            return inputs;
         case Tag::Area::OUTPUT:
-            return outputs.data() + address.byte;
+            return outputs;
         case Tag::Area::MEMORY:
-            return flags.data() + address.byte;
+            return flags;
         case Tag::Area::DATA:
-            return data.at(address.db).data() + address.byte;
+            return data.at(db);
         }
         throw std::invalid_argument("Unknown area in Machine::Memory::pointer");
+    }
+
+    Block &fromAddress(Tag::Area area, int db)
+    {
+        switch (area)
+        {
+        case Tag::Area::INPUT:
+            return inputs;
+        case Tag::Area::OUTPUT:
+            return outputs;
+        case Tag::Area::MEMORY:
+            return flags;
+        case Tag::Area::DATA:
+            return data.at(db);
+        }
+        throw std::invalid_argument("Unknown area in Machine::Memory::pointer");
+    }
+    const Block &fromAddress(const TagAddress& address) const
+    {
+        return fromAddress(address.area, address.db);
+    }
+    Block &fromAddress(const TagAddress& address)
+    {
+        return fromAddress(address.area, address.db);
+    }
+    const Block &fromAddress(const BitAddress& address) const
+    {
+        return fromAddress(address.area, address.db);
+    }
+    Block &fromAddress(const BitAddress& address)
+    {
+        return fromAddress(address.area, address.db);
+    }
+    void * pointer(const TagAddress& address)
+    {
+        return fromAddress(address).data()+ address.byte;
     }
 };
 
@@ -242,6 +279,17 @@ bool Machine::updateCache() const
         }
     }
     return true;
+}
+
+Tag::Byte Machine::readCachedByte(const TagAddress &address) const
+{
+    return cache->fromAddress(address).at(address.byte);
+}
+
+bool Machine::readCachedBit(const BitAddress &address) const
+{
+    auto byte = cache->fromAddress(address).at(address.byte);
+    return 0 != (byte & (1u << static_cast<unsigned>(address.bit)));
 }
 
 } // namespace Schematics::Service

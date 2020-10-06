@@ -22,6 +22,8 @@ public:
 
     void registerCacheArea(const TagAddress& start, std::size_t length) const;
     bool updateCache() const;
+    Tag::Byte readCachedByte(const TagAddress& address) const;
+    bool readCachedBit(const BitAddress& address) const;
 
     bool readTag(Tag& tag) const;
     bool writeTag(const Tag& tag) const;
