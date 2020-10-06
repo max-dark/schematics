@@ -13,6 +13,7 @@ struct Application
     virtual bool applyCoordById(Coords::PositionId id, libschema::Unit value) = 0;
     virtual bool applyCoordinates(const Coords::Coordinates& coords) = 0;
     virtual bool getConnectionParams(const QString &name, QString &address, int &interval) = 0;
+    virtual void getConnectionState(bool& sab, bool& kdo) = 0;
 protected:
     virtual ~Application();
 };

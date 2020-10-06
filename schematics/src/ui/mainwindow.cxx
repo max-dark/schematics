@@ -19,6 +19,7 @@
 #include <QSizePolicy>
 #include <QDebug>
 #include <QMenuBar>
+#include <QFrame>
 #include <QMenu>
 #include <QAction>
 #include <QFileDialog>
@@ -30,6 +31,8 @@
 #include <ui/widgets/scheme/schemeeditor.hxx>
 
 #include <ui/widgets/coords/coordstab.hxx>
+#include <ui/widgets/leds.hxx>
+#include <ui/tools/tool.hxx>
 
 #include <schema/schema.hxx>
 #include <schema/params.hxx>
@@ -40,6 +43,8 @@
 
 #include <services/application.hxx>
 
+#include <QVector>
+
 using libschema::Unit;
 
 namespace Schematics {
@@ -48,12 +53,17 @@ namespace Schematics {
 
     namespace Ui {
 
+        using LedVector = QVector<Widgets::Led*>;
+
         struct MainView {
             QAction* scheme_new = nullptr;
             QAction* scheme_load = nullptr;
             QAction* scheme_save = nullptr;
 
-            QLabel *lbl_status = nullptr;
+            Widgets::Led* sab_plc = nullptr;
+            Widgets::Led* kdo_plc = nullptr;
+            LedVector sab_leds;
+            LedVector kdo_leds;
 
             QTabWidget* tabList = nullptr;
 
@@ -65,10 +75,17 @@ namespace Schematics {
             void buildView(QMainWindow *self);
 
         private:
+            QLabel* createLabel(const QString& title);
             QWidget *createEditorTab();
             QMenuBar *createMainMenu();
 
         };
+        QLabel* MainView::createLabel(const QString& title)
+        {
+            auto label = new QLabel{title};
+            label->setAlignment(Qt::AlignVCenter);
+            return label;
+        }
 
         void MainView::buildView(QMainWindow *self) {
             self->setCentralWidget(new QWidget);
@@ -77,10 +94,60 @@ namespace Schematics {
 
             // add top panel
             {
+                using namespace Ui::Widgets;
                 auto topBox = new QHBoxLayout;
 
-                lbl_status = new QLabel{QString::fromUtf8("test")};
-                topBox->addWidget(lbl_status);
+                {
+                    topBox->addWidget(createLabel("Лесопиление: "));
+                    sab_plc = new Led{};
+                    sab_plc->setColor(Led::RED);
+                    topBox->addWidget(sab_plc);
+                    topBox->addWidget(createLabel("PLC"));
+
+                    auto led_names = QStringList{}
+                                     << "Подача" << "ФБС1" << "ФБС2"
+                                     << "PA350 / PKA350" << "PA300 / DWS350"
+                                     << "Боковой конвейер";
+                    sab_leds.reserve(led_names.size());
+                    for (auto& name : led_names)
+                    {
+                        auto led = new Led{};
+                        topBox->addWidget(led);
+                        sab_leds.push_back(led);
+                        auto lbl = createLabel(name);
+                        lbl->setWordWrap(true);
+                        topBox->addWidget(lbl);
+
+                    }
+                }
+                auto vline = new QFrame{};
+                vline->setFrameShape(QFrame::VLine);
+                vline->setFrameShadow(QFrame::Sunken);
+                topBox->addWidget(vline);
+
+                {
+                    topBox->addWidget(createLabel("КДО: "));
+                    kdo_plc = new Led{};
+                    kdo_plc->setColor(Led::RED);
+                    topBox->addWidget(kdo_plc);
+                    topBox->addWidget(createLabel("PLC"));
+
+                    auto led_names = QStringList{}
+                                     << "Улица / щепа" << "Улица / опилки"
+                                     << "ФБС"
+                                     << "Профиляторы" << "Многопил";
+                    kdo_leds.reserve(led_names.size());
+                    for (auto& name : led_names)
+                    {
+                        auto led = new Led{};
+                        topBox->addWidget(led);
+                        kdo_leds.push_back(led);
+                        auto lbl = createLabel(name);
+                        lbl->setWordWrap(true);
+                        topBox->addWidget(lbl);
+
+                    }
+                }
                 mainBox->addLayout(topBox);
             }
             // add tabs
@@ -157,7 +224,7 @@ namespace Schematics {
     {
         this->app = app;
         ui->buildView(this);
-        setWindowState(Qt::WindowMaximized);
+        //setWindowState(Qt::WindowMaximized);
         bindEvents();
 
         auto params = new libschema::Params{};
@@ -168,6 +235,8 @@ namespace Schematics {
             250, 250,
             4.8, 5.6,
             false);
+
+        updateViews();
     }
 
     MainWindow::~MainWindow() {
@@ -226,6 +295,26 @@ namespace Schematics {
                 this, &MainWindow::calculateScheme);
         connect(ui->coordsTab, &CoordsTab::applyCoord,
                 this, &MainWindow::applyCoordById);
+    }
+
+    void MainWindow::updateViews()
+    {
+        bool sab, kdo;
+        app->getConnectionState(sab, kdo);
+        updateSab(sab);
+        updateKdo(kdo);
+    }
+
+    void MainWindow::updateSab(bool is_connected)
+    {
+        using namespace Ui::Widgets;
+        ui->sab_plc->setColor(is_connected ? Led::GREEN : Led::RED);
+    }
+
+    void MainWindow::updateKdo(bool is_connected)
+    {
+        using namespace Ui::Widgets;
+        ui->kdo_plc->setColor(is_connected ? Led::GREEN : Led::RED);
     }
 
     void MainWindow::on_newScheme() {

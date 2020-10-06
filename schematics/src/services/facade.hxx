@@ -29,6 +29,7 @@ public:
     bool applyCoordById(Coords::PositionId id, libschema::Unit value) override;
     bool applyCoordinates(const Coords::Coordinates& coords) override;
     bool getConnectionParams(const QString &name, QString &address, int &interval) override;
+    void getConnectionState(bool& sab, bool& kdo) override;
 
     void parseArguments(const QStringList& argv,
                            const QString& defaultPath,

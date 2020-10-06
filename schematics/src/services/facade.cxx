@@ -101,6 +101,12 @@ bool Facade::getConnectionParams(const QString &name, QString &address, int &int
     return ok;
 }
 
+void Facade::getConnectionState(bool &sab, bool &kdo)
+{
+    sab = this->sab->connected() && (!this->sab->hasError());
+    kdo = this->kdo->connected() && (!this->kdo->hasError());
+}
+
 void Facade::startSabPlc()
 {
     QString addr;

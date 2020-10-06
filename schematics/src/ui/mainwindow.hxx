@@ -57,6 +57,10 @@ namespace Schematics {
         void bindSchemeEditor();
         void bindCoordsTab();
 
+        void updateViews();
+        void updateSab(bool is_connected);
+        void updateKdo(bool is_connected);
+
         void applyScheme(const libschema::Schema *new_schema);
     private /* members */:
         Ui::MainView *ui = nullptr;
