@@ -25,6 +25,8 @@ struct Tag
     {
         BIT, BYTE, WORD, DWORD, INT, DINT
     };
+    Area area() const;
+    Type type() const;
     int areaCode() const;
     int typeCode() const;
     int address() const;
@@ -37,8 +39,8 @@ struct Tag
     static int typeCode(Type type);
 protected:
     virtual ~Tag();
-    Area area = Area::MEMORY;
-    Type type = Type::BIT;
+    Area areaId = Area::MEMORY;
+    Type typeId = Type::BIT;
     int start = 0;
     int count = 1;
     int block = 0;

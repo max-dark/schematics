@@ -87,12 +87,12 @@ Tag::Area from_char(char code, bool& ok)
 
 int Tag::areaCode() const
 {
-    return areaCode(area);
+    return areaCode(areaId);
 }
 
 int Tag::typeCode() const
 {
-    return typeCode(type);
+    return typeCode(typeId);
 }
 
 int Tag::address() const
@@ -134,14 +134,24 @@ int Tag::typeCode(Tag::Type type)
     return 0;
 }
 
+Tag::Area Tag::area() const
+{
+    return areaId;
+}
+
+Tag::Type Tag::type() const
+{
+    return typeId;
+}
+
 Tag::~Tag() = default;
 
 BoolTag::BoolTag(Tag::Area area_id,
                  int byte_no, int bit_no, int block_no)
         : Tag{}
 {
-    area = area_id;
-    type = Type::BIT;
+    areaId = area_id;
+    typeId = Type::BIT;
     start = byte_no << 3 | bit_no;
     block = block_no;
     value = false;
@@ -155,8 +165,8 @@ ByteTag::ByteTag(Tag::Area area_id,
                  int byte_no, int block_no)
         : Tag{}
 {
-    area = area_id;
-    type = Type::BYTE;
+    areaId = area_id;
+    typeId = Type::BYTE;
     start = byte_no;
     block = block_no;
     value = 0;
@@ -169,8 +179,8 @@ ByteTag::ByteTag(const TagAddress &address)
 IntTag::IntTag(Tag::Area area_id, int byte_no, int block_no)
         : Tag{}
 {
-    area = area_id;
-    type = Type::INT;
+    areaId = area_id;
+    typeId = Type::INT;
     start = byte_no;
     block = block_no;
     value = 0;
@@ -193,8 +203,8 @@ Tag::Int IntTag::get() const
 DIntTag::DIntTag(Tag::Area area_id, int byte_no, int block_no)
         : Tag{}
 {
-    area = area_id;
-    type = Type::DINT;
+    areaId = area_id;
+    typeId = Type::DINT;
     start = byte_no;
     block = block_no;
     value = 0;
