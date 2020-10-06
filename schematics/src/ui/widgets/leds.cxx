@@ -26,6 +26,7 @@ Led::Led(QWidget *parent)
     : QLabel(parent)
 {
     setFixedSize(21, 21);
+    setAlignment(Qt::AlignCenter);
     applyColor(GRAY);
 }
 
