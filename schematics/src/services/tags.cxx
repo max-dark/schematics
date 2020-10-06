@@ -87,26 +87,12 @@ Tag::Area from_char(char code, bool& ok)
 
 int Tag::areaCode() const
 {
-    switch (area) {
-    case Area::DATA  : return S7AreaDB;
-    case Area::INPUT : return S7AreaPE;
-    case Area::MEMORY: return S7AreaMK;
-    case Area::OUTPUT: return S7AreaPA;
-    }
-    return 0;
+    return areaCode(area);
 }
 
 int Tag::typeCode() const
 {
-    switch (type) {
-    case Type::BIT: return S7WLBit;
-    case Type::BYTE: return S7WLByte;
-    case Type::INT: return S7WLInt;
-    case Type::WORD: return S7WLWord;
-    case Type::DINT: return S7WLDInt;
-    case Type::DWORD: return S7WLDWord;
-    }
-    return 0;
+    return typeCode(type);
 }
 
 int Tag::address() const
@@ -122,6 +108,30 @@ int Tag::blockNo() const
 int Tag::itemCount() const
 {
     return count;
+}
+
+int Tag::areaCode(Tag::Area area)
+{
+    switch (area) {
+    case Area::DATA  : return S7AreaDB;
+    case Area::INPUT : return S7AreaPE;
+    case Area::MEMORY: return S7AreaMK;
+    case Area::OUTPUT: return S7AreaPA;
+    }
+    return 0;
+}
+
+int Tag::typeCode(Tag::Type type)
+{
+    switch (type) {
+    case Type::BIT: return S7WLBit;
+    case Type::BYTE: return S7WLByte;
+    case Type::INT: return S7WLInt;
+    case Type::WORD: return S7WLWord;
+    case Type::DINT: return S7WLDInt;
+    case Type::DWORD: return S7WLDWord;
+    }
+    return 0;
 }
 
 Tag::~Tag() = default;

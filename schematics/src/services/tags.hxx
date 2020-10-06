@@ -32,6 +32,9 @@ struct Tag
     int itemCount() const;
     virtual const void* pointer() const = 0;
     virtual void* pointer() = 0;
+
+    static int areaCode(Area area);
+    static int typeCode(Type type);
 protected:
     virtual ~Tag();
     Area area = Area::MEMORY;
