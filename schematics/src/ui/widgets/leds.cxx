@@ -2,6 +2,12 @@
 
 #include <vector>
 
+
+static void initResources()
+{
+    Q_INIT_RESOURCE(ledpix);
+}
+
 namespace Schematics::Ui::Widgets
 {
 
@@ -11,7 +17,7 @@ QPixmap &Led::getPixmap(Led::Color color)
 
     if (cache.empty())
     {
-        Q_INIT_RESOURCE(ledpix);
+        initResources();
         cache.emplace_back(":/led/gray.png");
         cache.emplace_back(":/led/green.png");
         cache.emplace_back(":/led/yellow.png");
