@@ -141,13 +141,12 @@ bool Machine::writeTag(const Tag &tag) const
 
 bool Machine::readBlock(const TagAddress &address, size_t size, void *block) const
 {
-    ByteTag tmp{address};
     return self()->read(
-        tmp.areaCode(),
-        tmp.blockNo(),
-        tmp.address(),
+        Tag::areaCode(address.area),
+        address.db,
+        address.byte,
         size,
-        tmp.typeCode(),
+        Tag::typeCode(Tag::Type::BYTE),
         block
         );
 }
