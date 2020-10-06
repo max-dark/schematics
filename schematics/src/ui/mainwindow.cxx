@@ -60,6 +60,8 @@ namespace Schematics {
             QAction* scheme_load = nullptr;
             QAction* scheme_save = nullptr;
 
+            Widgets::Led* sab_plc = nullptr;
+            Widgets::Led* kdo_plc = nullptr;
             LedVector sab_leds;
             LedVector kdo_leds;
 
@@ -97,9 +99,9 @@ namespace Schematics {
 
                 {
                     topBox->addWidget(createLabel("Лесопиление: "));
-                    auto led = new Led{};
-                    led->setColor(Led::GREEN);
-                    topBox->addWidget(led);
+                    sab_plc = new Led{};
+                    sab_plc->setColor(Led::RED);
+                    topBox->addWidget(sab_plc);
                     topBox->addWidget(createLabel("PLC"));
 
                     auto led_names = QStringList{}
@@ -125,9 +127,9 @@ namespace Schematics {
 
                 {
                     topBox->addWidget(createLabel("КДО: "));
-                    auto led = new Led{};
-                    led->setColor(Led::RED);
-                    topBox->addWidget(led);
+                    kdo_plc = new Led{};
+                    kdo_plc->setColor(Led::RED);
+                    topBox->addWidget(kdo_plc);
                     topBox->addWidget(createLabel("PLC"));
 
                     auto led_names = QStringList{}
