@@ -20,6 +20,9 @@ public:
     bool connected() const;
     void disconnect() const;
 
+    void registerCacheArea(const TagAddress& start, std::size_t length) const;
+    bool updateCache() const;
+
     bool readTag(Tag& tag) const;
     bool writeTag(const Tag& tag) const;
 
@@ -30,10 +33,12 @@ public:
     QString errorMessage() const;
 private /* types */:
     struct Connection;
+    struct Memory;
 private /* methods */:
     Connection* self() const;
 private /* members */:
     Connection* selfptr = nullptr;
+    Memory* cache = nullptr;
 };
 
 } // namespace Schematics::Service

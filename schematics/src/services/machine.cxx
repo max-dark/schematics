@@ -2,6 +2,12 @@
 
 #include <s7_micro_client.h>
 
+#include <vector>
+#include <array>
+#include <unordered_map>
+#include <cstdint>
+#include <stdexcept>
+
 char * ErrCliText(int Error, char* Result, int TextLen);
 
 namespace Schematics::Service
@@ -85,9 +91,49 @@ private:
     int last_op = 0;
 };
 
+struct MemoryArea
+{
+    MemoryArea(const TagAddress &start, std::size_t length) noexcept
+            : start(start), length(length)
+    {}
+
+    TagAddress start;
+    std::size_t length;
+};
+
+struct Machine::Memory
+{
+    static constexpr std::size_t BLOCK_SIZE = 64 * 1024u;
+    using Block = std::array<std::int8_t, BLOCK_SIZE>;
+    using BlockMap = std::unordered_map<int, Block>;
+    using AreaList = std::vector<MemoryArea>;
+
+    Block inputs{};
+    Block outputs{};
+    Block flags{};
+    BlockMap data{};
+    AreaList areaList{};
+    void * pointer(const TagAddress& address)
+    {
+        switch (address.area)
+        {
+        case Tag::Area::INPUT:
+            return inputs.data() + address.byte;
+        case Tag::Area::OUTPUT:
+            return outputs.data() + address.byte;
+        case Tag::Area::MEMORY:
+            return flags.data() + address.byte;
+        case Tag::Area::DATA:
+            return data.at(address.db).data() + address.byte;
+        }
+        throw std::invalid_argument("Unknown area in Machine::Memory::pointer");
+    }
+};
+
 Machine::Machine(QObject *parent)
         : QObject(parent)
         , selfptr{new Connection{}}
+        , cache{new Memory{}}
 {}
 
 Machine::~Machine()
@@ -169,6 +215,33 @@ QString Machine::errorMessage() const
 Machine::Connection *Machine::self() const
 {
     return selfptr;
+}
+
+void Machine::registerCacheArea(const TagAddress &start, std::size_t length) const
+{
+    if (Tag::Area::DATA == start.area)
+    {
+        cache->data.try_emplace(start.db, Memory::Block{});
+    }
+    cache->areaList.emplace_back(start, length);
+}
+
+bool Machine::updateCache() const
+{
+    if (!connected()) return false;
+
+    for (const auto& area: cache->areaList)
+    {
+        auto ok = readBlock(
+                area.start, area.length,
+                cache->pointer(area.start)
+        );
+        if (!ok)
+        {
+            return false;
+        }
+    }
+    return true;
 }
 
 } // namespace Schematics::Service
