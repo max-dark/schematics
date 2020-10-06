@@ -235,6 +235,8 @@ namespace Schematics {
             250, 250,
             4.8, 5.6,
             false);
+
+        updateViews();
     }
 
     MainWindow::~MainWindow() {
@@ -297,18 +299,22 @@ namespace Schematics {
 
     void MainWindow::updateViews()
     {
-        updateSab();
-        updateKdo();
+        bool sab, kdo;
+        app->getConnectionState(sab, kdo);
+        updateSab(sab);
+        updateKdo(kdo);
     }
 
-    void MainWindow::updateSab()
+    void MainWindow::updateSab(bool is_connected)
     {
-        //
+        using namespace Ui::Widgets;
+        ui->sab_plc->setColor(is_connected ? Led::GREEN : Led::RED);
     }
 
-    void MainWindow::updateKdo()
+    void MainWindow::updateKdo(bool is_connected)
     {
-        //
+        using namespace Ui::Widgets;
+        ui->kdo_plc->setColor(is_connected ? Led::GREEN : Led::RED);
     }
 
     void MainWindow::on_newScheme() {

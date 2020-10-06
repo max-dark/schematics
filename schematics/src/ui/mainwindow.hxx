@@ -58,8 +58,8 @@ namespace Schematics {
         void bindCoordsTab();
 
         void updateViews();
-        void updateSab();
-        void updateKdo();
+        void updateSab(bool is_connected);
+        void updateKdo(bool is_connected);
 
         void applyScheme(const libschema::Schema *new_schema);
     private /* members */:
