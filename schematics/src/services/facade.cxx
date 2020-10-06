@@ -130,6 +130,17 @@ void Facade::startKdoPlc()
     // connect to secondary PLC
 
     kdo = new Machine{this};
+    {
+        // CPU 313C IO
+        kdo->registerCacheArea({.area = Tag::Area::INPUT , .byte = 124}, 3);
+        kdo->registerCacheArea({.area = Tag::Area::OUTPUT, .byte = 124}, 2);
+        // CPU 313C retentive memory:
+        // конфигурация, флаги состояния
+        // %MB10 занят под "Clock Memory"
+        kdo->registerCacheArea({.area = Tag::Area::MEMORY, .byte = 0}, 16);
+        // DI16xDC24V
+        kdo->registerCacheArea({.area = Tag::Area::INPUT , .byte = 0}, 2);
+    }
     auto ok = getConnectionParams("kdo", addr, interval);
     qDebug() << ok << addr << interval;
 
