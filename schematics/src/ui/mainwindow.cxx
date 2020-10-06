@@ -295,6 +295,22 @@ namespace Schematics {
                 this, &MainWindow::applyCoordById);
     }
 
+    void MainWindow::updateViews()
+    {
+        updateSab();
+        updateKdo();
+    }
+
+    void MainWindow::updateSab()
+    {
+        //
+    }
+
+    void MainWindow::updateKdo()
+    {
+        //
+    }
+
     void MainWindow::on_newScheme() {
         ui->schemeView->clear();
         ui->schemeEditor->clearAll();
