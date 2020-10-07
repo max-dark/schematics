@@ -26,6 +26,7 @@ public:
     bool applyCoordinates(const Coords::Coordinates& coords);
 private:
     void initCoordMap();
+    void initMemoryMap();
     Coords::OffsetRepository* offsetList = nullptr;
     CoordMap coord_map;
 };

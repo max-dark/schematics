@@ -87,6 +87,7 @@ Alpha::Alpha(Coords::OffsetRepository *offsets,
     , offsetList{offsets}
 {
     initCoordMap();
+    initMemoryMap();
 }
 
 bool Alpha::applyCoordById(Coords::PositionId id, libschema::Unit value)
@@ -319,6 +320,80 @@ void Alpha::initCoordMap()
         coord_map[POS_ID_DWS350_AXIS_HEIGHT] = {
             .coord = {.area = area, .db = 0, .byte = 742},
             .apply = {.area = area, .db = 0, .byte = 47, .bit = 2}};
+    }
+}
+
+void Alpha::initMemoryMap()
+{
+    // Дискретные входы и выходы по шкафам
+    // Большинство сигналов не интересно
+    // Поэтому регистрация прописана, но закоментирована
+
+    // Щитовая операторской
+    {
+        // SS01 / питание и пускатели
+        // SS20
+        registerCacheArea({.area = Tag::Area::INPUT, .byte = 10}, 3);
+        // registerCacheArea({.area = Tag::Area::OUTPUT, .byte = 10}, 1);
+        // SS40
+        registerCacheArea({.area = Tag::Area::INPUT, .byte = 16}, 6);
+        // registerCacheArea({.area = Tag::Area::OUTPUT, .byte = 16}, 2);
+        // SS41
+        registerCacheArea({.area = Tag::Area::INPUT, .byte = 24}, 3);
+        // registerCacheArea({.area = Tag::Area::INPUT, .byte = 256}, 4 * sizeof(Tag::Word)); // измерение тока
+        // registerCacheArea({.area = Tag::Area::OUTPUT, .byte = 24}, 1);
+        // SS42
+        registerCacheArea({.area = Tag::Area::INPUT, .byte = 30}, 3);
+        // registerCacheArea({.area = Tag::Area::INPUT, .byte = 264}, 4 * sizeof(Tag::Word)); // измерение тока
+        // registerCacheArea({.area = Tag::Area::OUTPUT, .byte = 30}, 1);
+        // SS44
+        registerCacheArea({.area = Tag::Area::INPUT, .byte = 38}, 3);
+        // registerCacheArea({.area = Tag::Area::INPUT, .byte = 272}, 4 * sizeof(Tag::Word)); // измерение тока
+        // registerCacheArea({.area = Tag::Area::OUTPUT, .byte = 38}, 1);
+        // SS52
+        registerCacheArea({.area = Tag::Area::INPUT, .byte = 42}, 5);
+        // registerCacheArea({.area = Tag::Area::INPUT, .byte = 280}, 6 * sizeof(Tag::Word)); // измерение тока
+        // registerCacheArea({.area = Tag::Area::OUTPUT, .byte = 42}, 2);
+    }
+
+    // Пульты операторской
+    {
+        // добавлено просто чтобы было)
+
+        // BP01 / пульт слева
+        // registerCacheArea({.area = Tag::Area::INPUT , .byte = 120}, 11);
+        // registerCacheArea({.area = Tag::Area::OUTPUT, .byte = 120}, 3);
+        // BP02 пульт справа
+        // registerCacheArea({.area = Tag::Area::INPUT , .byte = 140}, 10);
+        // registerCacheArea({.area = Tag::Area::OUTPUT, .byte = 140}, 4);
+    }
+
+    // Щиты на линии
+    {
+        // KK10 и KK11 не установлены, пропустим их
+
+        // KK20 / FBS1
+        registerCacheArea({.area = Tag::Area::INPUT, .byte = 72}, 6);
+        // registerCacheArea({.area = Tag::Area::INPUT, .byte = 412}, 1 * sizeof(Tag::DWord)); // энкодер
+        // registerCacheArea({.area = Tag::Area::INPUT, .byte = 308}, 6 * sizeof(Tag::Word)); // положение
+        // registerCacheArea({.area = Tag::Area::OUTPUT, .byte = 72}, 7);
+
+        // KK30 / FBS2
+        registerCacheArea({.area = Tag::Area::INPUT, .byte = 80}, 4);
+        // registerCacheArea({.area = Tag::Area::INPUT, .byte = 324}, 4 * sizeof(Tag::Word)); // положение
+        // registerCacheArea({.area = Tag::Area::OUTPUT, .byte = 80}, 7);
+
+        // KK40 / PA350+PKA350
+        registerCacheArea({.area = Tag::Area::INPUT, .byte = 88}, 2);
+        // registerCacheArea({.area = Tag::Area::INPUT, .byte = 424}, 3 * sizeof(Tag::DWord)); // положение
+        // registerCacheArea({.area = Tag::Area::INPUT, .byte = 336}, 4 * sizeof(Tag::Word)); // положение
+        // registerCacheArea({.area = Tag::Area::OUTPUT, .byte = 88}, 8);
+
+        // KK50 / PA300+DWS350
+        registerCacheArea({.area = Tag::Area::INPUT, .byte = 96}, 4);
+        // registerCacheArea({.area = Tag::Area::INPUT, .byte = 448}, 1 * sizeof(Tag::DWord)); // положение
+        // registerCacheArea({.area = Tag::Area::INPUT, .byte = 348}, 8 * sizeof(Tag::Word)); // положение
+        // registerCacheArea({.area = Tag::Area::OUTPUT, .byte = 96}, 5);
     }
 }
 
