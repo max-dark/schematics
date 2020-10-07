@@ -116,9 +116,12 @@ void Facade::startSabPlc()
     auto ok = getConnectionParams("sab", addr, interval);
     if (ok && isProductionMode())
     {
-        qInfo() << "try connect to" << addr;
         ok = sab->connect(addr);
-        qInfo() << ok << sab->errorMessage();
+        qInfo() << "try connect to" << addr
+                << ok << sab->errorMessage();
+        ok = sab->updateCache();
+        qInfo() << "Try update:" << sab->errorMessage()
+                << sab->readCachedBit({.area = Tag::Area::MEMORY, .byte = 30, .bit = 1});
     }
     qDebug() << ok << addr << interval;
 }
