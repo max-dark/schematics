@@ -177,6 +177,7 @@ Machine::~Machine()
 {
     disconnect();
     delete self();
+    delete cache;
 }
 
 bool Machine::connect(const QString &address,
