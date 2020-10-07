@@ -395,6 +395,14 @@ void Alpha::initMemoryMap()
         // registerCacheArea({.area = Tag::Area::INPUT, .byte = 348}, 8 * sizeof(Tag::Word)); // положение
         // registerCacheArea({.area = Tag::Area::OUTPUT, .byte = 96}, 5);
     }
+
+    // Управляющие флаги
+    {
+        // аварии
+        registerCacheArea({.area = Tag::Area::MEMORY, .byte = 100}, 16);
+        // запуск двигателей
+        registerCacheArea({.area = Tag::Area::MEMORY, .byte = 10}, 16);
+    }
 }
 
 } // namespace Schematics::Service
