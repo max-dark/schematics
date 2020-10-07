@@ -1,45 +1,45 @@
 <bits>
-	<bit id="0" address = "72" bit="0" area="input" min="0" max="1" description ="Óïðàâëåíèå Öåíòðèðóþùèå ðîëèêè Pos.8" vartype="1"/>
-	<bit id="1" address = "72" bit="1" area="input" min="0" max="1" description ="Óïðàâëåíèå Ïðè¸ìíûå ðîëèêè Pos.8" vartype="1"/>
-	<bit id="2" address = "72" bit="2" area="input" min="0" max="1" description ="Áëîêèðîâêà Ïåðåñòàíîâêà øèðèíû Pos.9" vartype="1"/>
-	<bit id="3" address = "73" bit="3" area="input" min="0" max="1" description ="Óïðàâëåíèå Ðîëèêè âûãðóçêè Pos.9" vartype="1"/>
-	<bit id="4" address = "73" bit="4" area="input" min="0" max="1" description ="Óïðàâëåíèå Ïîâîðîòíûå ðîëèêè âïåðåäè Ïîâîðîòíîå óñòðîéñòâî Pos.11" vartype="1"/>
-	<bit id="5" address = "73" bit="5" area="input" min="0" max="1" description ="Òîðìîçà ñëåâà Ïîâîðîòíîå óñòðîéñòâî Pos.11" vartype="1"/>
-	<bit id="6" address = "73" bit="6" area="input" min="0" max="1" description ="Èñõîäíîå ïîëîæåíèå ñëåâà Ïîâîðîòíîå óñòðîéñòâî Pos.11" vartype="1"/>
-	<bit id="7" address = "73" bit="7" area="input" min="0" max="1" description ="Òîðìîçà íàïðàâî Ïîâîðîòíîå óñòðîéñòâî Pos.11" vartype="1"/>
-	<bit id="8" address = "74" bit="0" area="input" min="0" max="1" description ="Èñõîäíîå ïîëîæåíèå íàïðàâî Ïîâîðîòíîå óñòðîéñòâî Pos.11" vartype="1"/>
-	<bit id="9" address = "74" bit="1" area="input" min="0" max="1" description ="Óïðàâëåíèå Ïîâîðîòíûå ðîëèêè ñçàäè Ïîâîðîòíîå óñòðîéñòâî Pos.11" vartype="1"/>
-	<bit id="10" address = "80" bit="1" area="input" min="0" max="1" description ="Óïðàâëåíèå Öåíòðèðóþùèå ðîëèêè Pos.13" vartype="1"/>
-	<bit id="11" address = "80" bit="2" area="input" min="0" max="1" description ="Óïðàâëåíèå Ïðè¸ìíûå ðîëèêè Pos.13" vartype="1"/>
-	<bit id="12" address = "80" bit="3" area="input" min="0" max="1" description ="Áëîêèðîâêà Ïåðåñòàíîâêà øèðèíû Pos.14" vartype="1"/>
-	<bit id="13" address = "81" bit="4" area="input" min="0" max="1" description ="Áëîêèðîâêà Ïåðåñòàíîâêà øèðèíû Pos.14" vartype="1"/>
-	<bit id="14" address = "82" bit="1" area="input" min="0" max="1" description ="Òåðìîñòàò Óïðàâëåíèå Îõëàæäåíèå Pos.26" vartype="1"/>
-	<bit id="15" address = "82" bit="2" area="input" min="0" max="1" description ="Òåðìîñòàò Àâàðèéíîå îòêëþ÷åíèå 70C Pos.26" vartype="1"/>
-	<bit id="16" address = "82" bit="3" area="input" min="0" max="1" description ="Óðîâåíü ìèíèìàëüíûé óðîâåíü çàïîëíåíèÿ Ãèäðàâëèêà Pos.26" vartype="1"/>
-	<bit id="17" address = "82" bit="4" area="input" min="0" max="1" description ="Êîíòàêò äàâëåíèÿ Çàãðÿçíåíèå Öèðêóëÿöèîííûé ôèëüòð Pos.26" vartype="1"/>
-	<bit id="18" address = "82" bit="5" area="input" min="0" max="1" description ="Êîíòàêò äàâëåíèÿ Çàãðÿçíåíèå Íàïîðíûé ôèëüòð Pos.26" vartype="1"/>
-	<bit id="19" address = "82" bit="6" area="input" min="0" max="1" description ="Êîíòàêò äàâëåíèÿ Òàêò Ñìàçêà 1 Pos.27" vartype="1"/>
-	<bit id="20" address = "82" bit="7" area="input" min="0" max="1" description ="Êîíòàêò äàâëåíèÿ Òàêò Ñìàçêà 2 Pos.27" vartype="1"/>
-	<bit id="21" address = "83" bit="0" area="input" min="0" max="1" description ="Ðåçåðâ Íàïîðíûé ôèëüòð Pos.26" vartype="1"/>
-	<bit id="22" address = "83" bit="1" area="input" min="0" max="1" description ="Ðåçåðâ Íàïîðíûé ôèëüòð Pos.26" vartype="1"/>
-	<bit id="23" address = "88" bit="0" area="input" min="0" max="1" description ="Öåíòðèðóþùèå ðîëèêè çàêðûâàòü Pos.16" vartype="1"/>
-	<bit id="24" address = "88" bit="1" area="input" min="0" max="1" description ="Öåíòðèðóþùèå ðîëèêè îòêðûâàòü Pos.16" vartype="1"/>
-	<bit id="25" address = "88" bit="2" area="input" min="0" max="1" description ="Öåíòðèðóþùèå ðîëèêè çàêðûâàòü Pos.17" vartype="1"/>
-	<bit id="26" address = "88" bit="3" area="input" min="0" max="1" description ="Öåíòðèðóþùèå ðîëèêè îòêðûâàòü Pos.17" vartype="1"/>
-	<bit id="27" address = "88" bit="4" area="input" min="0" max="1" description ="Óïðàâëåíèå Âûãðóçêà Pos.17" vartype="1"/>
-	<bit id="28" address = "89" bit="1" area="input" min="0" max="1" description ="Óïðàâëåíèå Ðîëèêè áîêîâûõ äîñîê Pos.18" vartype="1"/>
-	<bit id="29" address = "89" bit="2" area="input" min="0" max="1" description ="Âûòàëêèâàòåëü äîñîê Pos.18" vartype="1"/>
-	<bit id="30" address = "89" bit="3" area="input" min="0" max="1" description ="Óïðàâëåíèå Ïîâîðîòíîå óñòðîéñòâî Pos.19" vartype="1"/>
-	<bit id="31" address = "89" bit="4" area="input" min="0" max="1" description ="Ïîâîðîòíîå óñòðîéñòâî Êîíå÷íîå ïîëîæåíèå íàïðàâî Pos.19" vartype="1"/>
-	<bit id="32" address = "89" bit="5" area="input" min="0" max="1" description ="Ïîâîðîòíîå óñòðîéñòâî Êîíå÷íîå ïîëîæåíèå ñëåâà Pos.19" vartype="1"/>
-	<bit id="33" address = "89" bit="6" area="input" min="0" max="1" description ="Ïîâîðîòíîå óñòðîéñòâî Èñõîäíîå ïîëîæåíèå Pos.19" vartype="1"/>
-	<bit id="34" address = "89" bit="7" area="input" min="0" max="1" description ="Ïîâîðîòíûå ðîëèêè çàêðûâàòü Ïîâîðîòíîå óñòðîéñòâî Pos.19" vartype="1"/>
-	<bit id="35" address = "96" bit="1" area="input" min="0" max="1" description ="Öåíòðèðóþùèå ðîëèêè çàêðûâàòü Pos.21" vartype="1"/>
-	<bit id="36" address = "96" bit="2" area="input" min="0" max="1" description ="Öåíòðèðóþùèå ðîëèêè îòêðûâàòü Pos.21" vartype="1"/>
-	<bit id="37" address = "96" bit="3" area="input" min="0" max="1" description ="Öåíòðèðóþùèå ðîëèêè çàêðûâàòü Pos.22" vartype="1"/>
-	<bit id="38" address = "96" bit="4" area="input" min="0" max="1" description ="Öåíòðèðóþùèå ðîëèêè îòêðûâàòü Pos.22" vartype="1"/>
-	<bit id="39" address = "96" bit="5" area="input" min="0" max="1" description ="Óïðàâëåíå Ðîëèêè âûãðóçêè Pos.23" vartype="1"/>
-	<bit id="40" address = "96" bit="6" area="input" min="0" max="1" description ="Óïðàâëåíèå Ïîïåðå÷íûé îòâîä Pos.24" vartype="1"/>
-	<bit id="41" address = "96" bit="7" area="input" min="0" max="1" description ="Èñõîäíîå ïîëîæåíå Ïîïåðå÷íûé îòâîä Pos.24" vartype="1"/>
+	<bit id="0" address = "72" bit="0" area="input" min="0" max="1" description ="Ð£Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ Ð¦ÐµÐ½Ñ‚Ñ€Ð¸Ñ€ÑƒÑŽÑ‰Ð¸Ðµ Ñ€Ð¾Ð»Ð¸ÐºÐ¸ Pos.8" vartype="1"/>
+	<bit id="1" address = "72" bit="1" area="input" min="0" max="1" description ="Ð£Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ ÐŸÑ€Ð¸Ñ‘Ð¼Ð½Ñ‹Ðµ Ñ€Ð¾Ð»Ð¸ÐºÐ¸ Pos.8" vartype="1"/>
+	<bit id="2" address = "72" bit="2" area="input" min="0" max="1" description ="Ð‘Ð»Ð¾ÐºÐ¸Ñ€Ð¾Ð²ÐºÐ° ÐŸÐµÑ€ÐµÑÑ‚Ð°Ð½Ð¾Ð²ÐºÐ° ÑˆÐ¸Ñ€Ð¸Ð½Ñ‹ Pos.9" vartype="1"/>
+	<bit id="3" address = "73" bit="3" area="input" min="0" max="1" description ="Ð£Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ Ð Ð¾Ð»Ð¸ÐºÐ¸ Ð²Ñ‹Ð³Ñ€ÑƒÐ·ÐºÐ¸ Pos.9" vartype="1"/>
+	<bit id="4" address = "73" bit="4" area="input" min="0" max="1" description ="Ð£Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ ÐŸÐ¾Ð²Ð¾Ñ€Ð¾Ñ‚Ð½Ñ‹Ðµ Ñ€Ð¾Ð»Ð¸ÐºÐ¸ Ð²Ð¿ÐµÑ€ÐµÐ´Ð¸ ÐŸÐ¾Ð²Ð¾Ñ€Ð¾Ñ‚Ð½Ð¾Ðµ ÑƒÑÑ‚Ñ€Ð¾Ð¹ÑÑ‚Ð²Ð¾ Pos.11" vartype="1"/>
+	<bit id="5" address = "73" bit="5" area="input" min="0" max="1" description ="Ð¢Ð¾Ñ€Ð¼Ð¾Ð·Ð° ÑÐ»ÐµÐ²Ð° ÐŸÐ¾Ð²Ð¾Ñ€Ð¾Ñ‚Ð½Ð¾Ðµ ÑƒÑÑ‚Ñ€Ð¾Ð¹ÑÑ‚Ð²Ð¾ Pos.11" vartype="1"/>
+	<bit id="6" address = "73" bit="6" area="input" min="0" max="1" description ="Ð˜ÑÑ…Ð¾Ð´Ð½Ð¾Ðµ Ð¿Ð¾Ð»Ð¾Ð¶ÐµÐ½Ð¸Ðµ ÑÐ»ÐµÐ²Ð° ÐŸÐ¾Ð²Ð¾Ñ€Ð¾Ñ‚Ð½Ð¾Ðµ ÑƒÑÑ‚Ñ€Ð¾Ð¹ÑÑ‚Ð²Ð¾ Pos.11" vartype="1"/>
+	<bit id="7" address = "73" bit="7" area="input" min="0" max="1" description ="Ð¢Ð¾Ñ€Ð¼Ð¾Ð·Ð° Ð½Ð°Ð¿Ñ€Ð°Ð²Ð¾ ÐŸÐ¾Ð²Ð¾Ñ€Ð¾Ñ‚Ð½Ð¾Ðµ ÑƒÑÑ‚Ñ€Ð¾Ð¹ÑÑ‚Ð²Ð¾ Pos.11" vartype="1"/>
+	<bit id="8" address = "74" bit="0" area="input" min="0" max="1" description ="Ð˜ÑÑ…Ð¾Ð´Ð½Ð¾Ðµ Ð¿Ð¾Ð»Ð¾Ð¶ÐµÐ½Ð¸Ðµ Ð½Ð°Ð¿Ñ€Ð°Ð²Ð¾ ÐŸÐ¾Ð²Ð¾Ñ€Ð¾Ñ‚Ð½Ð¾Ðµ ÑƒÑÑ‚Ñ€Ð¾Ð¹ÑÑ‚Ð²Ð¾ Pos.11" vartype="1"/>
+	<bit id="9" address = "74" bit="1" area="input" min="0" max="1" description ="Ð£Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ ÐŸÐ¾Ð²Ð¾Ñ€Ð¾Ñ‚Ð½Ñ‹Ðµ Ñ€Ð¾Ð»Ð¸ÐºÐ¸ ÑÐ·Ð°Ð´Ð¸ ÐŸÐ¾Ð²Ð¾Ñ€Ð¾Ñ‚Ð½Ð¾Ðµ ÑƒÑÑ‚Ñ€Ð¾Ð¹ÑÑ‚Ð²Ð¾ Pos.11" vartype="1"/>
+	<bit id="10" address = "80" bit="1" area="input" min="0" max="1" description ="Ð£Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ Ð¦ÐµÐ½Ñ‚Ñ€Ð¸Ñ€ÑƒÑŽÑ‰Ð¸Ðµ Ñ€Ð¾Ð»Ð¸ÐºÐ¸ Pos.13" vartype="1"/>
+	<bit id="11" address = "80" bit="2" area="input" min="0" max="1" description ="Ð£Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ ÐŸÑ€Ð¸Ñ‘Ð¼Ð½Ñ‹Ðµ Ñ€Ð¾Ð»Ð¸ÐºÐ¸ Pos.13" vartype="1"/>
+	<bit id="12" address = "80" bit="3" area="input" min="0" max="1" description ="Ð‘Ð»Ð¾ÐºÐ¸Ñ€Ð¾Ð²ÐºÐ° ÐŸÐµÑ€ÐµÑÑ‚Ð°Ð½Ð¾Ð²ÐºÐ° ÑˆÐ¸Ñ€Ð¸Ð½Ñ‹ Pos.14" vartype="1"/>
+	<bit id="13" address = "81" bit="4" area="input" min="0" max="1" description ="Ð‘Ð»Ð¾ÐºÐ¸Ñ€Ð¾Ð²ÐºÐ° ÐŸÐµÑ€ÐµÑÑ‚Ð°Ð½Ð¾Ð²ÐºÐ° ÑˆÐ¸Ñ€Ð¸Ð½Ñ‹ Pos.14" vartype="1"/>
+	<bit id="14" address = "82" bit="1" area="input" min="0" max="1" description ="Ð¢ÐµÑ€Ð¼Ð¾ÑÑ‚Ð°Ñ‚ Ð£Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ ÐžÑ…Ð»Ð°Ð¶Ð´ÐµÐ½Ð¸Ðµ Pos.26" vartype="1"/>
+	<bit id="15" address = "82" bit="2" area="input" min="0" max="1" description ="Ð¢ÐµÑ€Ð¼Ð¾ÑÑ‚Ð°Ñ‚ ÐÐ²Ð°Ñ€Ð¸Ð¹Ð½Ð¾Ðµ Ð¾Ñ‚ÐºÐ»ÑŽÑ‡ÐµÐ½Ð¸Ðµ 70C Pos.26" vartype="1"/>
+	<bit id="16" address = "82" bit="3" area="input" min="0" max="1" description ="Ð£Ñ€Ð¾Ð²ÐµÐ½ÑŒ Ð¼Ð¸Ð½Ð¸Ð¼Ð°Ð»ÑŒÐ½Ñ‹Ð¹ ÑƒÑ€Ð¾Ð²ÐµÐ½ÑŒ Ð·Ð°Ð¿Ð¾Ð»Ð½ÐµÐ½Ð¸Ñ Ð“Ð¸Ð´Ñ€Ð°Ð²Ð»Ð¸ÐºÐ° Pos.26" vartype="1"/>
+	<bit id="17" address = "82" bit="4" area="input" min="0" max="1" description ="ÐšÐ¾Ð½Ñ‚Ð°ÐºÑ‚ Ð´Ð°Ð²Ð»ÐµÐ½Ð¸Ñ Ð—Ð°Ð³Ñ€ÑÐ·Ð½ÐµÐ½Ð¸Ðµ Ð¦Ð¸Ñ€ÐºÑƒÐ»ÑÑ†Ð¸Ð¾Ð½Ð½Ñ‹Ð¹ Ñ„Ð¸Ð»ÑŒÑ‚Ñ€ Pos.26" vartype="1"/>
+	<bit id="18" address = "82" bit="5" area="input" min="0" max="1" description ="ÐšÐ¾Ð½Ñ‚Ð°ÐºÑ‚ Ð´Ð°Ð²Ð»ÐµÐ½Ð¸Ñ Ð—Ð°Ð³Ñ€ÑÐ·Ð½ÐµÐ½Ð¸Ðµ ÐÐ°Ð¿Ð¾Ñ€Ð½Ñ‹Ð¹ Ñ„Ð¸Ð»ÑŒÑ‚Ñ€ Pos.26" vartype="1"/>
+	<bit id="19" address = "82" bit="6" area="input" min="0" max="1" description ="ÐšÐ¾Ð½Ñ‚Ð°ÐºÑ‚ Ð´Ð°Ð²Ð»ÐµÐ½Ð¸Ñ Ð¢Ð°ÐºÑ‚ Ð¡Ð¼Ð°Ð·ÐºÐ° 1 Pos.27" vartype="1"/>
+	<bit id="20" address = "82" bit="7" area="input" min="0" max="1" description ="ÐšÐ¾Ð½Ñ‚Ð°ÐºÑ‚ Ð´Ð°Ð²Ð»ÐµÐ½Ð¸Ñ Ð¢Ð°ÐºÑ‚ Ð¡Ð¼Ð°Ð·ÐºÐ° 2 Pos.27" vartype="1"/>
+	<bit id="21" address = "83" bit="0" area="input" min="0" max="1" description ="Ð ÐµÐ·ÐµÑ€Ð² ÐÐ°Ð¿Ð¾Ñ€Ð½Ñ‹Ð¹ Ñ„Ð¸Ð»ÑŒÑ‚Ñ€ Pos.26" vartype="1"/>
+	<bit id="22" address = "83" bit="1" area="input" min="0" max="1" description ="Ð ÐµÐ·ÐµÑ€Ð² ÐÐ°Ð¿Ð¾Ñ€Ð½Ñ‹Ð¹ Ñ„Ð¸Ð»ÑŒÑ‚Ñ€ Pos.26" vartype="1"/>
+	<bit id="23" address = "88" bit="0" area="input" min="0" max="1" description ="Ð¦ÐµÐ½Ñ‚Ñ€Ð¸Ñ€ÑƒÑŽÑ‰Ð¸Ðµ Ñ€Ð¾Ð»Ð¸ÐºÐ¸ Ð·Ð°ÐºÑ€Ñ‹Ð²Ð°Ñ‚ÑŒ Pos.16" vartype="1"/>
+	<bit id="24" address = "88" bit="1" area="input" min="0" max="1" description ="Ð¦ÐµÐ½Ñ‚Ñ€Ð¸Ñ€ÑƒÑŽÑ‰Ð¸Ðµ Ñ€Ð¾Ð»Ð¸ÐºÐ¸ Ð¾Ñ‚ÐºÑ€Ñ‹Ð²Ð°Ñ‚ÑŒ Pos.16" vartype="1"/>
+	<bit id="25" address = "88" bit="2" area="input" min="0" max="1" description ="Ð¦ÐµÐ½Ñ‚Ñ€Ð¸Ñ€ÑƒÑŽÑ‰Ð¸Ðµ Ñ€Ð¾Ð»Ð¸ÐºÐ¸ Ð·Ð°ÐºÑ€Ñ‹Ð²Ð°Ñ‚ÑŒ Pos.17" vartype="1"/>
+	<bit id="26" address = "88" bit="3" area="input" min="0" max="1" description ="Ð¦ÐµÐ½Ñ‚Ñ€Ð¸Ñ€ÑƒÑŽÑ‰Ð¸Ðµ Ñ€Ð¾Ð»Ð¸ÐºÐ¸ Ð¾Ñ‚ÐºÑ€Ñ‹Ð²Ð°Ñ‚ÑŒ Pos.17" vartype="1"/>
+	<bit id="27" address = "88" bit="4" area="input" min="0" max="1" description ="Ð£Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ Ð’Ñ‹Ð³Ñ€ÑƒÐ·ÐºÐ° Pos.17" vartype="1"/>
+	<bit id="28" address = "89" bit="1" area="input" min="0" max="1" description ="Ð£Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ Ð Ð¾Ð»Ð¸ÐºÐ¸ Ð±Ð¾ÐºÐ¾Ð²Ñ‹Ñ… Ð´Ð¾ÑÐ¾Ðº Pos.18" vartype="1"/>
+	<bit id="29" address = "89" bit="2" area="input" min="0" max="1" description ="Ð’Ñ‹Ñ‚Ð°Ð»ÐºÐ¸Ð²Ð°Ñ‚ÐµÐ»ÑŒ Ð´Ð¾ÑÐ¾Ðº Pos.18" vartype="1"/>
+	<bit id="30" address = "89" bit="3" area="input" min="0" max="1" description ="Ð£Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ ÐŸÐ¾Ð²Ð¾Ñ€Ð¾Ñ‚Ð½Ð¾Ðµ ÑƒÑÑ‚Ñ€Ð¾Ð¹ÑÑ‚Ð²Ð¾ Pos.19" vartype="1"/>
+	<bit id="31" address = "89" bit="4" area="input" min="0" max="1" description ="ÐŸÐ¾Ð²Ð¾Ñ€Ð¾Ñ‚Ð½Ð¾Ðµ ÑƒÑÑ‚Ñ€Ð¾Ð¹ÑÑ‚Ð²Ð¾ ÐšÐ¾Ð½ÐµÑ‡Ð½Ð¾Ðµ Ð¿Ð¾Ð»Ð¾Ð¶ÐµÐ½Ð¸Ðµ Ð½Ð°Ð¿Ñ€Ð°Ð²Ð¾ Pos.19" vartype="1"/>
+	<bit id="32" address = "89" bit="5" area="input" min="0" max="1" description ="ÐŸÐ¾Ð²Ð¾Ñ€Ð¾Ñ‚Ð½Ð¾Ðµ ÑƒÑÑ‚Ñ€Ð¾Ð¹ÑÑ‚Ð²Ð¾ ÐšÐ¾Ð½ÐµÑ‡Ð½Ð¾Ðµ Ð¿Ð¾Ð»Ð¾Ð¶ÐµÐ½Ð¸Ðµ ÑÐ»ÐµÐ²Ð° Pos.19" vartype="1"/>
+	<bit id="33" address = "89" bit="6" area="input" min="0" max="1" description ="ÐŸÐ¾Ð²Ð¾Ñ€Ð¾Ñ‚Ð½Ð¾Ðµ ÑƒÑÑ‚Ñ€Ð¾Ð¹ÑÑ‚Ð²Ð¾ Ð˜ÑÑ…Ð¾Ð´Ð½Ð¾Ðµ Ð¿Ð¾Ð»Ð¾Ð¶ÐµÐ½Ð¸Ðµ Pos.19" vartype="1"/>
+	<bit id="34" address = "89" bit="7" area="input" min="0" max="1" description ="ÐŸÐ¾Ð²Ð¾Ñ€Ð¾Ñ‚Ð½Ñ‹Ðµ Ñ€Ð¾Ð»Ð¸ÐºÐ¸ Ð·Ð°ÐºÑ€Ñ‹Ð²Ð°Ñ‚ÑŒ ÐŸÐ¾Ð²Ð¾Ñ€Ð¾Ñ‚Ð½Ð¾Ðµ ÑƒÑÑ‚Ñ€Ð¾Ð¹ÑÑ‚Ð²Ð¾ Pos.19" vartype="1"/>
+	<bit id="35" address = "96" bit="1" area="input" min="0" max="1" description ="Ð¦ÐµÐ½Ñ‚Ñ€Ð¸Ñ€ÑƒÑŽÑ‰Ð¸Ðµ Ñ€Ð¾Ð»Ð¸ÐºÐ¸ Ð·Ð°ÐºÑ€Ñ‹Ð²Ð°Ñ‚ÑŒ Pos.21" vartype="1"/>
+	<bit id="36" address = "96" bit="2" area="input" min="0" max="1" description ="Ð¦ÐµÐ½Ñ‚Ñ€Ð¸Ñ€ÑƒÑŽÑ‰Ð¸Ðµ Ñ€Ð¾Ð»Ð¸ÐºÐ¸ Ð¾Ñ‚ÐºÑ€Ñ‹Ð²Ð°Ñ‚ÑŒ Pos.21" vartype="1"/>
+	<bit id="37" address = "96" bit="3" area="input" min="0" max="1" description ="Ð¦ÐµÐ½Ñ‚Ñ€Ð¸Ñ€ÑƒÑŽÑ‰Ð¸Ðµ Ñ€Ð¾Ð»Ð¸ÐºÐ¸ Ð·Ð°ÐºÑ€Ñ‹Ð²Ð°Ñ‚ÑŒ Pos.22" vartype="1"/>
+	<bit id="38" address = "96" bit="4" area="input" min="0" max="1" description ="Ð¦ÐµÐ½Ñ‚Ñ€Ð¸Ñ€ÑƒÑŽÑ‰Ð¸Ðµ Ñ€Ð¾Ð»Ð¸ÐºÐ¸ Ð¾Ñ‚ÐºÑ€Ñ‹Ð²Ð°Ñ‚ÑŒ Pos.22" vartype="1"/>
+	<bit id="39" address = "96" bit="5" area="input" min="0" max="1" description ="Ð£Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ðµ Ð Ð¾Ð»Ð¸ÐºÐ¸ Ð²Ñ‹Ð³Ñ€ÑƒÐ·ÐºÐ¸ Pos.23" vartype="1"/>
+	<bit id="40" address = "96" bit="6" area="input" min="0" max="1" description ="Ð£Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ ÐŸÐ¾Ð¿ÐµÑ€ÐµÑ‡Ð½Ñ‹Ð¹ Ð¾Ñ‚Ð²Ð¾Ð´ Pos.24" vartype="1"/>
+	<bit id="41" address = "96" bit="7" area="input" min="0" max="1" description ="Ð˜ÑÑ…Ð¾Ð´Ð½Ð¾Ðµ Ð¿Ð¾Ð»Ð¾Ð¶ÐµÐ½Ðµ ÐŸÐ¾Ð¿ÐµÑ€ÐµÑ‡Ð½Ñ‹Ð¹ Ð¾Ñ‚Ð²Ð¾Ð´ Pos.24" vartype="1"/>
 </bits>
 	
