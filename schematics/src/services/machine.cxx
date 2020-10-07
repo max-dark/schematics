@@ -268,16 +268,47 @@ bool Machine::updateCache() const
 {
     if (!connected()) return false;
 
-    for (const auto& area: cache->areaList)
+    if constexpr ((false))
     {
-        auto ok = readBlock(
+        for (const auto& area: cache->areaList)
+        {
+            auto ok = readBlock(
                 area.start, area.length,
                 cache->pointer(area.start)
-        );
-        if (!ok)
-        {
-            return false;
+                );
+            if (!ok)
+            {
+                return false;
+            }
         }
+    }
+    else
+    {
+        auto cnt = cache->areaList.size();
+        TS7DataItem data[MaxVars];
+        PS7DataItem ptr = data;
+
+        for (const auto& area: cache->areaList)
+        {
+            ptr->Area = Tag::areaCode(area.start.area);
+            ptr->WordLen = Tag::typeCode(Tag::Type::BYTE);
+            ptr->Amount = area.length;
+            ptr->Start = area.start.byte;
+            ptr->DBNumber = area.start.db;
+            ptr->pdata = cache->pointer(area.start);
+            ptr->Result = 0;
+            ++ptr;
+        }
+
+        auto ok = self()->readMany(data, cnt);
+        auto idx = 0u;
+        while (ok && (idx < cnt))
+        {
+            ok = 0 == data[idx].Result;
+            ++idx;
+        }
+
+        return ok;
     }
     return true;
 }
