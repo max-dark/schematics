@@ -402,6 +402,8 @@ void Alpha::initMemoryMap()
         registerCacheArea({.area = Tag::Area::MEMORY, .byte = 100}, 16);
         // запуск двигателей
         registerCacheArea({.area = Tag::Area::MEMORY, .byte = 10}, 16);
+        // статус инициализации "осей"
+        registerCacheArea({.area = Tag::Area::MEMORY, .byte = 30}, 16);
     }
 }
 
