@@ -60,6 +60,16 @@ namespace Schematics {
             QAction* scheme_load = nullptr;
             QAction* scheme_save = nullptr;
 
+            QAction* cfg_coords = nullptr;
+            QAction* cfg_speeds = nullptr;
+            QAction* cfg_delays = nullptr;
+
+            QAction *a_connect = nullptr;
+            QAction *a_init = nullptr;
+
+            QAction* help_about = nullptr;
+            QAction* help_qt = nullptr;
+
             Widgets::Led* sab_plc = nullptr;
             Widgets::Led* kdo_plc = nullptr;
             LedVector sab_leds;
@@ -192,16 +202,35 @@ namespace Schematics {
         QMenuBar *MainView::createMainMenu()
         {
             auto mainMenu = new QMenuBar{};
+            // schema
             {
-                auto schemeMenu = mainMenu->addMenu("Схема");
+                auto menu = mainMenu->addMenu("Схема");
 
-                scheme_new = new QAction{"Новая"};
-                scheme_load = new QAction{"Загрузить"};
-                scheme_save = new QAction{"Сохранить"};
+                scheme_new =  menu->addAction("Новая");
+                scheme_load =  menu->addAction("Загрузить");
+                scheme_save = menu->addAction("Сохранить");
+            }
 
-                schemeMenu->addAction(scheme_new);
-                schemeMenu->addAction(scheme_load);
-                schemeMenu->addAction(scheme_save);
+            // tools
+            {
+                auto menu = mainMenu->addMenu("Инструменты");
+
+                menu->addSection("Калибровка");
+                cfg_coords = menu->addAction("Координаты");
+                cfg_speeds = menu->addAction("Скорости");
+                cfg_delays = menu->addAction("Интервалы");
+
+                menu->addSection("Линия");
+                a_connect = menu->addAction("Подключение");
+                a_init = menu->addAction("Инициализация");
+            }
+
+            // about
+            {
+                auto menu = mainMenu->addMenu("Справка");
+
+                help_about = menu->addAction("О программе");
+                help_qt = menu->addAction("О Qt");
             }
 
             return mainMenu;
