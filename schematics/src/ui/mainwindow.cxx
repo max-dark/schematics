@@ -154,6 +154,9 @@ namespace Schematics {
                     alarmsTab = new Widgets::LedList;
                     sensorsTab = new Widgets::LedList;
 
+                    // alarm state == On means OK, Off - failure
+                    alarmsTab->setColors(Widgets::Led::GREEN, Widgets::Led::RED);
+
                     tabList->addTab(schemeTab, QString::fromUtf8("Схема раскроя"));
                     tabList->addTab(coordsTab, QString::fromUtf8("Координаты оборудования"));
                     tabList->addTab(motorsTab, "Механизмы");

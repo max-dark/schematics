@@ -54,6 +54,7 @@ void LedList::createLeds(const LedList::LabelMap &labels)
     {
         auto label = new QLabel{labels[id]};
         auto led = new Led{};
+        led->setColor(selectColor(false));
         box->addWidget(led, row, col);
         box->addWidget(label, row, col + 1);
 
