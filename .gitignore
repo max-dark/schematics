@@ -3,4 +3,8 @@
 .vscode/
 /*build*
 
+venv/
+__pycache__/
+*.pyc
+
 *.user
