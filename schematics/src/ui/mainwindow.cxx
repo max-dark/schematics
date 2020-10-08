@@ -649,12 +649,16 @@ void MainWindow::on_initAxis()
 
 void MainWindow::on_about()
 {
-
+    QMessageBox::about(this, windowTitle(),
+                       "Разработано:\n"
+                       "Max Dark <maxim.dark@gmail.com>\n"
+                       "Репозиторий проекта:\n"
+                       "https://gitlab.com/andreevo-ldk/alpha/schematics");
 }
 
 void MainWindow::on_aboutQt()
 {
-
+    QMessageBox::aboutQt(this);
 }
 
 } // namespace Schematics
