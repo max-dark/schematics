@@ -33,6 +33,15 @@ namespace Schematics {
         void on_loadScheme();
         void on_saveScheme();
 
+        void on_cfgCoords();
+        void on_cfgSpeeds();
+        void on_cfgDelays();
+        void on_initConnection();
+        void on_initAxis();
+
+        void on_about();
+        void on_aboutQt();
+
         void schemeParamChanged();
 
         void calculateScheme();

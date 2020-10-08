@@ -260,6 +260,15 @@ namespace Schematics {
         bindAction(ui->scheme_new, this, &MainWindow::on_newScheme);
         bindAction(ui->scheme_load, this, &MainWindow::on_loadScheme);
         bindAction(ui->scheme_save, this, &MainWindow::on_saveScheme);
+
+        bindAction(ui->cfg_coords, this, &MainWindow::on_cfgCoords);
+        bindAction(ui->cfg_speeds, this, &MainWindow::on_cfgSpeeds);
+        bindAction(ui->cfg_delays, this, &MainWindow::on_cfgDelays);
+        bindAction(ui->a_connect, this, &MainWindow::on_initConnection);
+        bindAction(ui->a_init, this, &MainWindow::on_initAxis);
+
+        bindAction(ui->help_about, this, &MainWindow::on_about);
+        bindAction(ui->help_qt, this, &MainWindow::on_aboutQt);
     }
 
     void MainWindow::bindSchemeEditor() {
@@ -612,5 +621,40 @@ namespace Schematics {
             scheme->remove_pa350_poard();
         }
     }
+
+void MainWindow::on_cfgCoords()
+{
+
+}
+
+void MainWindow::on_cfgSpeeds()
+{
+
+}
+
+void MainWindow::on_cfgDelays()
+{
+
+}
+
+void MainWindow::on_initConnection()
+{
+
+}
+
+void MainWindow::on_initAxis()
+{
+
+}
+
+void MainWindow::on_about()
+{
+
+}
+
+void MainWindow::on_aboutQt()
+{
+
+}
 
 } // namespace Schematics
