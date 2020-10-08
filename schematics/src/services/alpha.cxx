@@ -90,6 +90,36 @@ Alpha::Alpha(Coords::OffsetRepository *offsets,
     initMemoryMap();
 }
 
+bool Alpha::axisInitIsDone() const
+{
+    return readCachedBit(Const::axisInitDone);
+}
+
+bool Alpha::axisStartInit() const
+{
+    BoolTag start{Const::axisStartInit};
+    start.set(true);
+    return writeTag(start);
+}
+
+bool Alpha::axisResetInit() const
+{
+
+    BoolTag reset_start{Const::axisStartInit};
+    BoolTag reset_done{Const::axisInitDone};
+    reset_start.set(false);
+    reset_done.set(false);
+    return writeTag(reset_start) && writeTag(reset_done);
+}
+
+bool Alpha::allowFeederToWork(bool allow)
+{
+    BoolTag allow_flag{Const::kdoIsRunning};
+    allow_flag.set(allow);
+
+    return writeTag(allow_flag);
+}
+
 bool Alpha::applyCoordById(Coords::PositionId id, libschema::Unit value)
 {
     auto ok = false;

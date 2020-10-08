@@ -121,7 +121,7 @@ void Facade::startSabPlc()
                 << ok << sab->errorMessage();
         ok = sab->updateCache();
         qInfo() << "Try update:" << sab->errorMessage()
-                << sab->readCachedBit({.area = Tag::Area::MEMORY, .byte = 30, .bit = 1});
+                << sab->axisInitIsDone();
     }
     qDebug() << ok << addr << interval;
 }
