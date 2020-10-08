@@ -1,31 +1,8 @@
 #include "mainwindow.hxx"
 
-#include <QLayout>
-#include <QHBoxLayout>
-#include <QGridLayout>
-#include <QVBoxLayout>
-
-#include <QWidget>
-#include <QPushButton>
-#include <QCheckBox>
-#include <QRadioButton>
-#include <QDoubleSpinBox>
-#include <QLabel>
-#include <QGraphicsView>
-#include <QGraphicsScene>
-#include <QGroupBox>
-#include <QGraphicsEllipseItem>
-#include <QSpacerItem>
-#include <QSizePolicy>
-#include <QDebug>
-#include <QMenuBar>
-#include <QFrame>
-#include <QMenu>
-#include <QAction>
-#include <QFileDialog>
-
-#include <QMessageBox>
-#include <QInputDialog>
+#include <QtWidgets>
+#include <QtGui>
+#include <QtCore>
 
 #include <ui/widgets/scheme/schemeview.hxx>
 #include <ui/widgets/scheme/schemeeditor.hxx>
