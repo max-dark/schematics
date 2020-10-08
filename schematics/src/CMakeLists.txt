@@ -56,6 +56,7 @@ target_sources(ui
         ui/tools/tool.cxx
         ui/widgets/numbereditor.cxx
         ui/widgets/leds.cxx
+        ui/widgets/ledlist.cxx
 
         ui/widgets/scheme/schemeview.cxx
         ui/widgets/scheme/schemescene.cxx
@@ -66,6 +67,7 @@ target_sources(ui
         ui/tools/tool.hxx
         ui/widgets/numbereditor.hxx
         ui/widgets/leds.hxx
+        ui/widgets/ledlist.hxx
 
         ui/widgets/scheme/schemeview.hxx
         ui/widgets/scheme/schemescene.hxx
