@@ -9,6 +9,7 @@
 
 #include <ui/widgets/coords/coordstab.hxx>
 #include <ui/widgets/leds.hxx>
+#include <ui/widgets/ledlist.hxx>
 #include <ui/tools/tool.hxx>
 
 #include <schema/schema.hxx>
@@ -58,6 +59,10 @@ namespace Schematics {
             Widgets::SchemeEditor* schemeEditor = nullptr;
 
             Widgets::CoordsTab* coordsTab = nullptr;
+
+            Widgets::LedList* motorsTab = nullptr;
+            Widgets::LedList* alarmsTab = nullptr;
+            Widgets::LedList* sensorsTab = nullptr;
 
             void buildView(QMainWindow *self);
 
@@ -145,8 +150,15 @@ namespace Schematics {
                     coordsTab = new Widgets::CoordsTab{};
                     coordsTab->setPreview(schemeView->scene());
 
+                    motorsTab = new Widgets::LedList;
+                    alarmsTab = new Widgets::LedList;
+                    sensorsTab = new Widgets::LedList;
+
                     tabList->addTab(schemeTab, QString::fromUtf8("Схема раскроя"));
                     tabList->addTab(coordsTab, QString::fromUtf8("Координаты оборудования"));
+                    tabList->addTab(motorsTab, "Механизмы");
+                    tabList->addTab(alarmsTab, "Индикаторы аварий");
+                    tabList->addTab(sensorsTab, "Датчики");
                 }
 
                 mainBox->addWidget(tabList);
