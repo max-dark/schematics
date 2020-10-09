@@ -5,7 +5,7 @@
 
 #include <ui/widgets/leds.hxx>
 
-#include <QMap>
+#include <map>
 
 namespace Schematics::Ui::Widgets
 {
@@ -14,9 +14,9 @@ class LedList: public QScrollArea
 {
     Q_OBJECT
 public:
-    using StateMap = QMap<int, bool>;
-    using LedMap = QMap<int, Led*>;
-    using LabelMap = QMap<int, QString>;
+    using StateMap = std::map<int, bool>;
+    using LedMap = std::map<int, Led*>;
+    using LabelMap = std::map<int, QString>;
     explicit LedList(QWidget* parent = nullptr);
     ~LedList() override;
 
@@ -26,7 +26,7 @@ public:
 private:
     Led::Color selectColor(bool state);
     Led::Color color_on = Led::Color::GREEN;
-    Led::Color color_off = Led::Color::RED;
+    Led::Color color_off = Led::Color::GRAY;
 
     LedMap leds;
 };

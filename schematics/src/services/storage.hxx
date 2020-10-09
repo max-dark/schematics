@@ -1,7 +1,7 @@
 #pragma once
 
 #include <QString>
-#include <QMap>
+#include <map>
 
 #include <services/tags.hxx>
 
@@ -13,7 +13,7 @@ struct Boolean
     QString description;
 };
 
-using BooleanMap = QMap<int, Boolean>;
+using BooleanMap = std::map<int, Boolean>;
 
 struct Number
 {
@@ -23,12 +23,15 @@ struct Number
     QString description;
 };
 
-using NumberMap = QMap<int, Number>;
+using NumberMap = std::map<int, Number>;
 
 struct Storage
 {
     virtual bool getValueByName(const QString &name, QString &value) = 0;
     virtual bool setValueByName(const QString &name, const QString &value) = 0;
+
+    virtual BooleanMap getBooleansByName(const QString &name) = 0;
+    virtual NumberMap getNumbersByName(const QString &name) = 0;
 protected:
     virtual ~Storage();
 };

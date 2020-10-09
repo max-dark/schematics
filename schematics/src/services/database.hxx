@@ -28,6 +28,8 @@ public:
     bool getValueByName(const QString& name, QString& value) override;
     bool setValueByName(const QString &name, const QString &value) override;
 
+    BooleanMap getBooleansByName(const QString &name) override;
+    NumberMap getNumbersByName(const QString &name) override;
 protected:
     bool try_save(PositionId id, OffsetType type, int32_t offset, double per_mm) override;
     bool try_load(OffsetList &list) override;

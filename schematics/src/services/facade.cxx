@@ -77,6 +77,12 @@ void Facade::startStorage()
         qInfo() << "Start db:" << ok;
         auto valid_db = database->checkStructure();
         qInfo() << "Validate db:" << valid_db;
+        if (valid_db)
+        {
+            alarms = database->getBooleansByName("alarms");
+            motors = database->getBooleansByName("motors");
+            sensors = database->getBooleansByName("sensors");
+        }
     }
     else {
         qWarning() << "db already started";
@@ -175,6 +181,75 @@ bool Facade::applyCoordinates(const Coordinates &coords)
     //  send coord variable to plc
     //  send "apply" command
     return sab->applyCoordinates(coords);
+}
+
+LabelMap Facade::getMotorLabels()
+{
+    LabelMap labels{};
+
+    for(const auto&[id, value]: motors)
+    {
+        labels[id] = value.description;
+    }
+    return labels;
+}
+
+LabelMap Facade::getAlarmLabels()
+{
+    LabelMap labels{};
+
+    for(const auto&[id, value]: alarms)
+    {
+        labels[id] = value.description;
+    }
+    return labels;
+}
+
+LabelMap Facade::getSensorLabels()
+{
+    LabelMap labels{};
+
+    for(const auto&[id, value]: sensors)
+    {
+        labels[id] = value.description;
+    }
+    return labels;
+}
+
+BoolMap Facade::getMotorState()
+{
+    BoolMap state{};
+
+    for(const auto&[id, value]: motors)
+    {
+        state[id] = sab->readCachedBit(value.address);
+    }
+
+    return state;
+}
+
+BoolMap Facade::getAlarmState()
+{
+    BoolMap state{};
+
+    for(const auto&[id, value]: alarms)
+    {
+        state[id] = sab->readCachedBit(value.address);
+    }
+
+    return state;
+}
+
+BoolMap Facade::getSensorState()
+{
+    BoolMap state{};
+
+    for(const auto&[id, value]: sensors)
+    {
+        state[id] = sab->readCachedBit(value.address);
+    }
+
+    return state;
 }
 
 Facade::~Facade() = default;

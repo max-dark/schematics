@@ -1,9 +1,12 @@
 #include "database.hxx"
 
 #include <QSqlDatabase>
+#include <QSqlError>
 #include <QSqlQuery>
 #include <QVariant>
 #include <QSet>
+
+#include <QDebug>
 
 namespace Schematics::Service
 {
@@ -84,6 +87,60 @@ bool Database::setValueByName(const QString &name, const QString &value)
         ok = set_query.exec();
     }
     return ok;
+}
+
+BooleanMap Database::getBooleansByName(const QString &name)
+{
+    QSqlQuery select{database()};
+    BooleanMap map{};
+
+    auto ok = select.prepare(QString{
+        "select id, address, description from '%1'"}.arg(name));
+    ok = ok && select.exec();
+    qInfo() << "Table:" << name << "select" << ok << select.lastError().text();
+    while (ok && select.next()) {
+        auto id = select.value("id").toInt();
+        auto addr = select.value("address").toString();
+        auto desc = select.value("description").toString();
+
+        bool addr_ok;
+        auto tag = BitAddress::from_string(addr.toStdString(), addr_ok);
+        if (addr_ok)
+        {
+            map.emplace(id, Boolean{.address = tag, .description = desc});
+        }
+    }
+    return map;
+}
+
+NumberMap Database::getNumbersByName(const QString &name)
+{
+    QSqlQuery select{database()};
+    NumberMap map{};
+
+    auto ok = select.prepare(QString{
+        "select id, address, base, offset, description from '%1'"}.arg(name));
+    ok = ok && select.exec();
+    while (ok && select.next()) {
+        auto id = select.value("id").toInt();
+        auto base = select.value("base").toInt();
+        auto offs = select.value("offset").toInt();
+        auto addr = select.value("address").toString();
+        auto desc = select.value("description").toString();
+
+        bool addr_ok;
+        auto tag = TagAddress::from_string(addr.toStdString(), addr_ok);
+        if (addr_ok)
+        {
+            map.emplace(id, Number{
+                               .address = tag,
+                               .base = base,
+                               .offset = offs,
+                               .description = desc
+                           });
+        }
+    }
+    return map;
 }
 
 bool Database::try_save(PositionId id, OffsetType type, int32_t offset, double per_mm)

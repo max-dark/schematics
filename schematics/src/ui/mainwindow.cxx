@@ -245,6 +245,10 @@ namespace Schematics {
     {
         this->app = app;
         ui->buildView(this);
+
+        ui->alarmsTab->createLeds(app->getAlarmLabels());
+        ui->motorsTab->createLeds(app->getMotorLabels());
+        ui->sensorsTab->createLeds(app->getSensorLabels());
         //setWindowState(Qt::WindowMaximized);
         bindEvents();
 
@@ -333,6 +337,10 @@ namespace Schematics {
         app->getConnectionState(sab, kdo);
         updateSab(sab);
         updateKdo(kdo);
+
+        ui->alarmsTab->updateState(app->getAlarmState());
+        ui->motorsTab->updateState(app->getMotorState());
+        ui->sensorsTab->updateState(app->getSensorState());
     }
 
     void MainWindow::updateSab(bool is_connected)

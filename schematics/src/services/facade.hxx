@@ -31,6 +31,14 @@ public:
     bool getConnectionParams(const QString &name, QString &address, int &interval) override;
     void getConnectionState(bool& sab, bool& kdo) override;
 
+    LabelMap getMotorLabels() override;
+    LabelMap getAlarmLabels() override;
+    LabelMap getSensorLabels() override;
+
+    BoolMap getMotorState() override;
+    BoolMap getAlarmState() override;
+    BoolMap getSensorState() override;
+
     void parseArguments(const QStringList& argv,
                            const QString& defaultPath,
                            const QString &defaultFile);
@@ -45,6 +53,11 @@ private /* methods */:
 private:
     QString configPath;
     QString configFile;
+
+    BooleanMap alarms;
+    BooleanMap motors;
+    BooleanMap sensors;
+
     bool is_prod_mode = false;
     Database* database = nullptr;
     Alpha* sab = nullptr;
