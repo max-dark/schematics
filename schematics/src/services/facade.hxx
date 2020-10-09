@@ -46,6 +46,7 @@ public:
     void startStorage();
     void startSabPlc();
     void startKdoPlc();
+    void startUpdateCycle();
 public slots:
     void updateState();
     void requestStateUpdate();

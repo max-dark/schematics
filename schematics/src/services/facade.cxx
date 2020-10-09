@@ -172,6 +172,11 @@ void Facade::startKdoPlc()
     }
 }
 
+void Facade::startUpdateCycle()
+{
+    requestStateUpdate();
+}
+
 void Facade::updateState()
 {
     auto kdo_ok = kdo->updateCache();
