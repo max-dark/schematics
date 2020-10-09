@@ -276,12 +276,18 @@ namespace Schematics {
 
     void MainWindow::updateSabFailure(const QString &error)
     {
-        //
+        updateViews();
+        QMessageBox::critical(this, windowTitle(),
+                              "Ошибка обмена с PLC линии лесопиления:\n" +
+                                  error);
     }
 
     void MainWindow::updateKdoFailure(const QString &error)
     {
-        //
+        updateViews();
+        QMessageBox::critical(this, windowTitle(),
+                              "Ошибка обмена с PLC линии КДО:\n" +
+                                  error);
     }
 
     void MainWindow::bindEvents() {
