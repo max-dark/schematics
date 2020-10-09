@@ -46,10 +46,17 @@ public:
     void startStorage();
     void startSabPlc();
     void startKdoPlc();
+public slots:
+    void updateState();
+    void requestStateUpdate();
 signals:
+    void updateSuccess();
+    void updateSabFailure(const QString& error);
+    void updateKdoFailure(const QString& error);
 private /* methods */:
     QString databaseFile();
     bool isProductionMode() const noexcept;
+    bool kdoIsRunning();
 private:
     QString configPath;
     QString configFile;

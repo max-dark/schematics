@@ -2,6 +2,7 @@
 
 #include <QCommandLineOption>
 #include <QCommandLineParser>
+#include <QTimer>
 
 #include <QDir>
 
@@ -66,6 +67,11 @@ QString Facade::databaseFile()
 bool Facade::isProductionMode() const noexcept
 {
     return is_prod_mode;
+}
+
+bool Facade::kdoIsRunning()
+{
+    return false;
 }
 
 void Facade::startStorage()
@@ -158,7 +164,42 @@ void Facade::startKdoPlc()
         qInfo() << "try connect to" << addr;
         ok = kdo->connect(addr);
         qInfo() << ok << kdo->errorMessage();
+        if (ok)
+        {
+            ok = kdo->updateCache();
+            qInfo() << "Update kdo:" << kdo->lastError() << kdo->errorMessage();
+        }
     }
+}
+
+void Facade::updateState()
+{
+    auto kdo_ok = kdo->updateCache();
+    auto kdo_run = kdo_ok && kdoIsRunning();
+
+    if (! kdo_ok)
+    {
+        emit updateKdoFailure(kdo->errorMessage());
+    }
+
+    ///TODO: раскоментировать для работы
+    auto sab_ok = true;//sab->allowFeederToWork(kdo_run);
+    sab_ok = sab_ok && sab->updateCache();
+
+    if (! sab_ok)
+    {
+        emit updateSabFailure(sab->errorMessage());
+    }
+
+    if (kdo_ok && sab_ok)
+    {
+        emit updateSuccess();
+    }
+}
+
+void Facade::requestStateUpdate()
+{
+    QTimer::singleShot(100, this, &Facade::updateState);
 }
 
 bool Facade::applyCoordById(PositionId id, libschema::Unit value)

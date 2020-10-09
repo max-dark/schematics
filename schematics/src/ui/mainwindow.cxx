@@ -268,6 +268,22 @@ namespace Schematics {
         delete ui;
     }
 
+    void MainWindow::updateSuccess()
+    {
+        updateViews();
+        emit needUpdates();
+    }
+
+    void MainWindow::updateSabFailure(const QString &error)
+    {
+        //
+    }
+
+    void MainWindow::updateKdoFailure(const QString &error)
+    {
+        //
+    }
+
     void MainWindow::bindEvents() {
         bindMenus();
         bindSchemeEditor();

@@ -28,6 +28,12 @@ namespace Schematics {
 
         ~MainWindow() override;
 
+    signals:
+        void needUpdates();
+    public slots:
+        void updateSuccess();
+        void updateSabFailure(const QString& error);
+        void updateKdoFailure(const QString& error);
     private slots:
         void on_newScheme();
         void on_loadScheme();
