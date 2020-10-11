@@ -114,10 +114,10 @@ bool Facade::getConnectionParams(const QString &name, QString &address, int &int
     return ok;
 }
 
-void Facade::getConnectionState(bool &sab, bool &kdo)
+void Facade::getConnectionState(bool &alphaPlc, bool &supportPlc)
 {
-    sab = this->sab->connected() && (!this->sab->hasError());
-    kdo = this->kdo->connected() && (!this->kdo->hasError());
+    alphaPlc = this->sab->connected() && (!this->sab->hasError());
+    supportPlc = this->kdo->connected() && (!this->kdo->hasError());
 }
 
 void Facade::startSabPlc()
@@ -146,7 +146,7 @@ void Facade::startKdoPlc()
     // connect to secondary PLC
 
     kdo = new AlphaSupport{this};
-    
+
     auto ok = getConnectionParams("kdo", addr, interval);
     qDebug() << ok << addr << interval;
 
