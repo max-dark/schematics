@@ -12,6 +12,9 @@ class AlphaSupport: public Machine
 public:
     explicit AlphaSupport(QObject* parent = nullptr);
     ~AlphaSupport() override;
+
+private:
+    void initMemoryMap();
 };
 
 } // namespace Schematics::Service
