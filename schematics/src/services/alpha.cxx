@@ -362,6 +362,8 @@ void Alpha::initMemoryMap()
     // Щитовая операторской
     {
         // SS01 / питание и пускатели
+        registerCacheArea({.area = Tag::Area::INPUT, .byte = 0}, 8);
+        // registerCacheArea({.area = Tag::Area::OUTPUT, .byte = 0}, 4);
         // SS20
         registerCacheArea({.area = Tag::Area::INPUT, .byte = 10}, 3);
         // registerCacheArea({.area = Tag::Area::OUTPUT, .byte = 10}, 1);
