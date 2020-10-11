@@ -25,6 +25,9 @@ struct Application
     virtual BoolMap getMotorState() = 0;
     virtual BoolMap getAlarmState() = 0;
     virtual BoolMap getSensorState() = 0;
+
+    virtual BoolMap getSupportMotorsState() = 0;
+    virtual BoolMap getSupportAlarmsState() = 0;
 protected:
     virtual ~Application();
 };

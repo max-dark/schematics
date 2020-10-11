@@ -12,6 +12,8 @@
 #include <services/alpha.hxx>
 #include <services/alphasupport.hxx>
 
+#include <algorithm>
+
 namespace Schematics::Service
 {
 Facade::Facade(QObject *parent)
@@ -72,7 +74,15 @@ bool Facade::isProductionMode() const noexcept
 
 bool Facade::kdoIsRunning()
 {
-    return false;
+    const auto motors_state = getSupportMotorsState();
+    const auto alarms_state = getSupportAlarmsState();
+    const auto motors_run = std::all_of(motors_state.begin(), motors_state.end(), [](const auto &item){
+        return item.second; // is running
+    });
+    const auto no_alarms = std::all_of(alarms_state.begin(), alarms_state.end(), [](const auto& item){
+        return item.second; // is ok
+    });
+    return motors_run && no_alarms;
 }
 
 void Facade::startStorage()
@@ -287,6 +297,16 @@ BoolMap Facade::getSensorState()
     }
 
     return state;
+}
+
+BoolMap Facade::getSupportMotorsState()
+{
+    return kdo->getMotorsState();
+}
+
+BoolMap Facade::getSupportAlarmsState()
+{
+    return kdo->getAlarmsState();
 }
 
 Facade::~Facade() = default;

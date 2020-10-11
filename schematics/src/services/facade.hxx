@@ -40,6 +40,10 @@ public:
     BoolMap getAlarmState() override;
     BoolMap getSensorState() override;
 
+
+    BoolMap getSupportMotorsState() override;
+    BoolMap getSupportAlarmsState() override;
+
     void parseArguments(const QStringList& argv,
                            const QString& defaultPath,
                            const QString &defaultFile);
