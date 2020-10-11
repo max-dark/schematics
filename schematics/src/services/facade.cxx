@@ -10,6 +10,7 @@
 
 #include <services/database.hxx>
 #include <services/alpha.hxx>
+#include <services/alphasupport.hxx>
 
 namespace Schematics::Service
 {
@@ -144,7 +145,7 @@ void Facade::startKdoPlc()
     int interval = 0;
     // connect to secondary PLC
 
-    kdo = new Machine{this};
+    kdo = new AlphaSupport{this};
     {
         // CPU 313C IO
         kdo->registerCacheArea({.area = Tag::Area::INPUT , .byte = 124}, 3);
@@ -167,7 +168,7 @@ void Facade::startKdoPlc()
         if (ok)
         {
             ok = kdo->updateCache();
-            qInfo() << "Update kdo:" << kdo->lastError() << kdo->errorMessage();
+            qInfo() << "Update kdo:" << ok << kdo->lastError() << kdo->errorMessage();
         }
     }
 }

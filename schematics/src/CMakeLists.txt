@@ -26,6 +26,7 @@ target_sources(services
         services/storage.cxx
 
         services/alpha.cxx
+        services/alphasupport.cxx
         services/facade.cxx
         services/database.cxx
         services/machine.cxx
@@ -35,6 +36,7 @@ target_sources(services
         services/storage.hxx
 
         services/alpha.hxx
+        services/alphasupport.hxx
         services/facade.hxx
         services/database.hxx
         services/machine.hxx

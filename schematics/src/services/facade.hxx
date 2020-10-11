@@ -17,6 +17,7 @@ using namespace Coords;
 
 class Database;
 class Alpha;
+class AlphaSupport;
 class Machine;
 
 class Facade : public QObject, public Application
@@ -69,7 +70,7 @@ private:
     bool is_prod_mode = false;
     Database* database = nullptr;
     Alpha* sab = nullptr;
-    Machine* kdo = nullptr;
+    AlphaSupport* kdo = nullptr;
 };
 
 } // namespace Schematics::Service
