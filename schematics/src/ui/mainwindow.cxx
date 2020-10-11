@@ -375,6 +375,22 @@ namespace Schematics {
     {
         using namespace Ui::Widgets;
         ui->kdo_plc->setColor(is_connected ? Led::GREEN : Led::RED);
+
+        const auto motors = app->getSupportMotorsState();
+        const auto alarms = app->getSupportAlarmsState();
+        auto idx = 0;
+        for (const auto led: ui->kdo_leds)
+        {
+            auto is_running = motors.at(idx);
+            auto is_ok = is_connected && alarms.at(idx);
+            auto color = Led::RED;
+            if (is_ok)
+            {
+                color = is_running ? Led::GREEN : Led::GRAY;
+            }
+            led->setColor(color);
+            ++idx;
+        }
     }
 
     void MainWindow::on_newScheme() {
