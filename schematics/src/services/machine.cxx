@@ -192,7 +192,7 @@ bool Machine::connect(const QString &address,
     return self()->connect(
         address.toLocal8Bit(),
         rack, slot
-        );
+    );
 }
 
 bool Machine::connected() const
@@ -219,7 +219,7 @@ bool Machine::readTag(Tag &tag) const
         tag.itemCount(),
         tag.typeCode(),
         tag.pointer()
-                );
+    );
 }
 
 bool Machine::writeTag(const Tag &tag) const
@@ -231,7 +231,7 @@ bool Machine::writeTag(const Tag &tag) const
         tag.itemCount(),
         tag.typeCode(),
         tag.pointer()
-                );
+    );
 }
 
 bool Machine::readBlock(const TagAddress &address, size_t size, void *block) const
@@ -243,7 +243,7 @@ bool Machine::readBlock(const TagAddress &address, size_t size, void *block) con
         size,
         Tag::typeCode(Tag::Type::BYTE),
         block
-        );
+    );
 }
 
 bool Machine::hasError() const

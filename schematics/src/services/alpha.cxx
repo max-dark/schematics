@@ -37,7 +37,7 @@ struct OffsetWriter: public Coords::OffsetVisitor
             qDebug() << "Write coord to" << (coord.address())
                      << "Write apply to" << (apply.address() >> 3) << (apply.address() & 3);
         }
-        //if constexpr(false) // TODO: remove it
+        if (m->connected())
         {
             return m->writeTag(coord) &&
                    m->writeTag(apply);
@@ -102,27 +102,38 @@ bool Alpha::axisInitIsStarted() const
 
 bool Alpha::axisStartInit() const
 {
-    BoolTag start{Const::axisStartInit};
-    start.set(true);
-    return writeTag(start);
+    if (connected())
+    {
+        BoolTag start{Const::axisStartInit};
+        start.set(true);
+        return writeTag(start);
+    }
+    return false;
 }
 
 bool Alpha::axisResetInit() const
 {
-
-    BoolTag reset_start{Const::axisStartInit};
-    BoolTag reset_done{Const::axisInitDone};
-    reset_start.set(false);
-    reset_done.set(false);
-    return writeTag(reset_start) && writeTag(reset_done);
+    if (connected())
+    {
+        BoolTag reset_start{Const::axisStartInit};
+        BoolTag reset_done{Const::axisInitDone};
+        reset_start.set(false);
+        reset_done.set(false);
+        return writeTag(reset_start) && writeTag(reset_done);
+    }
+    return false;
 }
 
 bool Alpha::allowFeederToWork(bool allow)
 {
-    BoolTag allow_flag{Const::kdoIsRunning};
-    allow_flag.set(allow);
+    if (connected())
+    {
+        BoolTag allow_flag{Const::kdoIsRunning};
+        allow_flag.set(allow);
 
-    return writeTag(allow_flag);
+        return writeTag(allow_flag);
+    }
+    return false;
 }
 
 bool Alpha::applyCoordById(Coords::PositionId id, libschema::Unit value)

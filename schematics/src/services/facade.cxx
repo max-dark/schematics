@@ -380,13 +380,17 @@ LabelMap Facade::getDoorsLabels()
 
 bool Facade::toggleDoorById(int doorId)
 {
-    auto address = doors.at(doorId).address;
-    auto is_open = sab->readCachedBit(address);
-    BoolTag door{address};
-    door.set(is_open);
-    door.invert();
+    if (sab->connected())
+    {
+        auto address = doors.at(doorId).address;
+        auto is_open = sab->readCachedBit(address);
+        BoolTag door{address};
+        door.set(is_open);
+        door.invert();
 
-    return sab->writeTag(door);
+        return sab->writeTag(door);
+    }
+    return false;
 }
 
 BoolMap Facade::getSupportMotorsState()
