@@ -50,6 +50,7 @@ namespace Schematics {
 
             Widgets::Led* sab_plc = nullptr;
             Widgets::Led* kdo_plc = nullptr;
+            QLabel* sab_status = nullptr;
             LedVector sab_leds;
             LedVector kdo_leds;
 
@@ -65,6 +66,10 @@ namespace Schematics {
             Widgets::LedList* sensorsTab = nullptr;
 
             void buildView(QMainWindow *self);
+            void setStatusMessage(const QString& message)
+            {
+                sab_status->setText(message);
+            }
 
         private:
             QLabel* createLabel(const QString& title);
@@ -89,40 +94,52 @@ namespace Schematics {
                 using namespace Ui::Widgets;
                 auto topBox = new QHBoxLayout;
 
+                auto mainGroup = new QGroupBox{"Лесопиление"};
                 {
-                    topBox->addWidget(createLabel("Лесопиление: "));
-                    sab_plc = new Led{};
-                    sab_plc->setColor(Led::RED);
-                    topBox->addWidget(sab_plc);
-                    topBox->addWidget(createLabel("PLC"));
-
-                    auto led_names = QStringList{}
-                                     << "Подача" << "ФБС1" << "ФБС2"
-                                     << "PA350 / PKA350" << "PA300 / DWS350"
-                                     << "Боковой конвейер";
-                    sab_leds.reserve(led_names.size());
-                    for (auto& name : led_names)
+                    auto vbox = new QVBoxLayout;
                     {
-                        auto led = new Led{};
-                        topBox->addWidget(led);
-                        sab_leds.push_back(led);
-                        auto lbl = createLabel(name);
-                        lbl->setWordWrap(true);
-                        topBox->addWidget(lbl);
+                        auto box = new QHBoxLayout;
+                        sab_plc = new Led{};
+                        sab_plc->setColor(Led::RED);
+                        box->addWidget(sab_plc);
+                        box->addWidget(createLabel("PLC"));
 
+                        auto led_names = QStringList{}
+                                         << "Подача" << "ФБС1" << "ФБС2"
+                                         << "PA350 / PKA350" << "PA300 / DWS350"
+                                         << "Боковой конвейер";
+                        sab_leds.reserve(led_names.size());
+                        for (auto& name : led_names)
+                        {
+                            auto led = new Led{};
+                            box->addWidget(led);
+                            sab_leds.push_back(led);
+                            auto lbl = createLabel(name);
+                            lbl->setWordWrap(true);
+                            box->addWidget(lbl);
+
+                        }
+                        vbox->addLayout(box);
                     }
+                    {
+                        auto box = new QHBoxLayout;
+                        box->addWidget(createLabel("Состояние: "));
+                        sab_status = createLabel("need init");
+                        box->addWidget(sab_status);
+                        box->addItem(tool::createHSpace());
+                        vbox->addLayout(box);
+                    }
+                    mainGroup->setLayout(vbox);
                 }
-                auto vline = new QFrame{};
-                vline->setFrameShape(QFrame::VLine);
-                vline->setFrameShadow(QFrame::Sunken);
-                topBox->addWidget(vline);
 
+                topBox->addWidget(mainGroup);
+                auto supportGroup = new QGroupBox{"КДО"};
                 {
-                    topBox->addWidget(createLabel("КДО: "));
+                    auto box = new QHBoxLayout;
                     kdo_plc = new Led{};
                     kdo_plc->setColor(Led::RED);
-                    topBox->addWidget(kdo_plc);
-                    topBox->addWidget(createLabel("PLC"));
+                    box->addWidget(kdo_plc);
+                    box->addWidget(createLabel("PLC"));
 
                     auto led_names = QStringList{}
                                      << "Улица / щепа" << "Улица / опилки"
@@ -132,14 +149,16 @@ namespace Schematics {
                     for (auto& name : led_names)
                     {
                         auto led = new Led{};
-                        topBox->addWidget(led);
+                        box->addWidget(led);
                         kdo_leds.push_back(led);
                         auto lbl = createLabel(name);
                         lbl->setWordWrap(true);
-                        topBox->addWidget(lbl);
+                        box->addWidget(lbl);
 
                     }
+                    supportGroup->setLayout(box);
                 }
+                topBox->addWidget(supportGroup);
                 mainBox->addLayout(topBox);
             }
             // add tabs
