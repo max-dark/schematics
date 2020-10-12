@@ -65,6 +65,7 @@ namespace Schematics {
             Widgets::LedList* motorsTab = nullptr;
             Widgets::LedList* alarmsTab = nullptr;
             Widgets::LedList* sensorsTab = nullptr;
+            QWidget* doorsTab = nullptr;
 
             void buildView(QMainWindow *self);
             void setStatusMessage(const QString& message)
@@ -72,6 +73,26 @@ namespace Schematics {
                 sab_status->setText(message);
             }
 
+            void createDoors(const Schematics::Service::LabelMap& doors,
+                             MainWindow* object)
+            {
+                auto box = new QGridLayout;
+
+                for(const auto&[id, name]: doors)
+                {
+                    auto label = createLabel(name);
+                    auto door = new QPushButton{"Открыть/закрыть"};
+                    QObject::connect(door, &QPushButton::clicked, [doorId=id, view=object](){
+                        view->toogleDoor(doorId);
+                    });
+                    auto row = box->rowCount();
+                    box->addWidget(label, row, 0);
+                    box->addWidget(door, row, 1);
+                    box->addItem(tool::createHSpace(), row, 2);
+                }
+                box->addItem(tool::createVSpace(), box->rowCount(), 0);
+                doorsTab->setLayout(box);
+            }
         private:
             QLabel* createLabel(const QString& title);
             QWidget *createEditorTab();
@@ -163,6 +184,7 @@ namespace Schematics {
                     motorsTab = new Widgets::LedList;
                     alarmsTab = new Widgets::LedList;
                     sensorsTab = new Widgets::LedList;
+                    doorsTab = new QWidget;
 
                     // alarm state == On means OK, Off - failure
                     alarmsTab->setColors(Widgets::Led::GREEN, Widgets::Led::RED);
@@ -172,6 +194,7 @@ namespace Schematics {
                     tabList->addTab(motorsTab, "Механизмы");
                     tabList->addTab(alarmsTab, "Индикаторы аварий");
                     tabList->addTab(sensorsTab, "Датчики");
+                    tabList->addTab(doorsTab, "Сервисные двери");
                 }
 
                 mainBox->addWidget(tabList);
@@ -259,6 +282,7 @@ namespace Schematics {
         ui->alarmsTab->createLeds(app->getAlarmLabels());
         ui->motorsTab->createLeds(app->getMotorLabels());
         ui->sensorsTab->createLeds(app->getSensorLabels());
+        ui->createDoors(app->getDoorsLabels(), this);
         //setWindowState(Qt::WindowMaximized);
         bindEvents();
 
@@ -297,7 +321,17 @@ namespace Schematics {
         updateViews();
         QMessageBox::critical(this, windowTitle(),
                               "Ошибка обмена с PLC линии КДО:\n" +
-                                  error);
+                              error);
+    }
+
+    void MainWindow::toogleDoor(int doorId)
+    {
+        auto ok = app->toggleDoorById(doorId);
+        if (!ok)
+        {
+            QMessageBox::critical(this, windowTitle(),
+                                  "Ошибка обмена с PLC");
+        }
     }
 
     void MainWindow::bindEvents() {
