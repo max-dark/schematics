@@ -34,7 +34,7 @@ namespace Schematics {
         void updateSuccess();
         void updateSabFailure(const QString& error);
         void updateKdoFailure(const QString& error);
-        void toogleDoor(int doorId);
+        void toggleDoor(int doorId);
     private slots:
         void on_newScheme();
         void on_loadScheme();
