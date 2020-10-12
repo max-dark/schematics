@@ -17,6 +17,7 @@ class Config:
     alarms: BitList = {}
     motors: BitList = {}
     sensors: BitList = {}
+    doors: BitList = {}
 
     delays: NumList = {}
     speeds: NumList = {}
@@ -26,6 +27,7 @@ class Config:
     {self.alarms},
     {self.motors},
     {self.sensors},
+    {self.doors},
     {self.delays},
     {self.speeds}
 ]"""
@@ -99,6 +101,7 @@ def load_config(cfg_dir: str) -> Config:
     config.alarms = parse_bits(cfg / 'alarm.xml')
     config.sensors = parse_bits(cfg / 'sensors.xml')
     config.motors = parse_bits(cfg / 'engines.xml')
+    config.doors = parse_bits(cfg / 'servdoor.xml')
     config.delays = parse_nums(cfg / 'delays.xml', 'delay')
     config.speeds = parse_nums(cfg / 'speeds.xml', 'speed')
 

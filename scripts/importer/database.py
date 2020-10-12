@@ -76,6 +76,7 @@ class DatabaseDialog(QDialog):
             log += '\talarms ' + import_bits(db, 'alarms', config.alarms)
             log += '\tsensors ' + import_bits(db, 'sensors', config.sensors)
             log += '\tmotors ' + import_bits(db, 'motors', config.motors)
+            log += '\tdoors ' + import_bits(db, 'doors', config.doors)
             log += '\tdelays ' + import_nums(db, 'delays', config.delays)
             log += '\tspeeds ' + import_nums(db, 'speeds', config.speeds)
 
