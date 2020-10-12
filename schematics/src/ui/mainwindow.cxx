@@ -294,6 +294,7 @@ MainWindow::MainWindow(Service::Application *app, QWidget *parent)
 {
     this->app = app;
     ui->buildView(this);
+    setMinimumWidth(1200);
 
     ui->alarmsTab->createLeds(app->getAlarmLabels());
     ui->motorsTab->createLeds(app->getMotorLabels());

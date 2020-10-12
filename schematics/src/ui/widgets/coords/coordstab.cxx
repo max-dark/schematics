@@ -246,7 +246,7 @@ namespace Schematics::Ui::Widgets
                 auto num = new QLabel{QString{"№%1"}.arg(id + 1)};
                 num->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
                 auto lbl = new QLabel{text};
-                lbl->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Minimum);
+                lbl->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Minimum);
                 lbl->setWordWrap(true);
 
                 auto btn = new QPushButton{QString{"Применить"}};
