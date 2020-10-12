@@ -197,25 +197,56 @@ namespace Schematics::Ui::Widgets
     {
         auto main = new QHBoxLayout;
         auto coordsView = new QScrollArea{};
+        //coordsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         auto coordsBox = new QGridLayout;
         {
             int col = 0;
             int row = 0;
             int id = 0;
-            for (auto& p : pos_list) {
+            QString prev_group{};
+            int group_row = 0;
+            int group_col = 0;
+            QGridLayout* box = nullptr;
+            for (auto& edit : pos_list) {
                 Coords::PositionId pos_id = Coords::PositionId(id);
+                auto name = QString{PositionName[id]};
+                auto groups = name.split("/ ");
+                auto group = groups.at(0);
+                auto text = groups.at(1);
 
-                p = new NumberEditor{};
-                p->setDecimals(2);
-                p->setRange(-1500, 1500);
+                if (prev_group != group)
+                {
+                    auto group_box = new QGroupBox{group};
+                    //group_box->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
+                    if (box != nullptr)
+                    {
+                        tool::addGridRow(box, tool::createVSpace());
+                    }
+                    box = new QGridLayout{};
+                    group_box->setLayout(box);
+                    coordsBox->addWidget(group_box, group_row, group_col);
+                    ++group_row;
+                    if (group_row % 2 == 0)
+                    {
+                        group_row = 0;
+                        group_col += 1;
+                    }
+                    prev_group = group;
+                }
 
-                connect(p, qOverload<double>(&NumberEditor::valueChanged), [this, pos_id](double value)
+                edit = new NumberEditor{};
+                edit->setDecimals(2);
+                edit->setRange(-1500, 1500);
+
+                connect(edit, qOverload<double>(&NumberEditor::valueChanged), [this, pos_id](double value)
                 {
                     coordChanged(pos_id, libschema::Unit::from_mm(value));
                 });
 
-                auto lbl = new QLabel{QString{"№%1 %2"}.arg(id + 1).arg(PositionName[id])};
-                lbl->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
+                auto num = new QLabel{QString{"№%1"}.arg(id + 1)};
+                num->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
+                auto lbl = new QLabel{text};
+                lbl->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Minimum);
                 lbl->setWordWrap(true);
 
                 auto btn = new QPushButton{QString{"Применить"}};
@@ -223,16 +254,18 @@ namespace Schematics::Ui::Widgets
                     applyBtnClicked(pos_id);
                 });
 
-                coordsBox->addWidget(lbl, row, col, 2, 1, Qt::AlignTop);
-                coordsBox->addWidget(p, row + 0, col + 1);
-                coordsBox->addWidget(btn, row + 1, col + 1);
-                row += 2;
-                if (row % 34 == 0)
-                {
-                    row = 0; col += 2;
-                }
+
+                btn->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
+                edit->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
+
+                box->addWidget( num, row + 0, col + 0/*, 1, 1, Qt::AlignTop*/);
+                box->addWidget( lbl, row + 0, col + 1);
+                box->addWidget(edit, row + 0, col + 2);
+                box->addWidget( btn, row + 0, col + 3);
+                row += 1;
                 ++id;
             }
+            tool::addGridRow(box, tool::createVSpace());
         }
 
         auto sideBox = new QVBoxLayout;
