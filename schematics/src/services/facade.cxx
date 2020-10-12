@@ -130,6 +130,25 @@ void Facade::getConnectionState(bool &alphaPlc, bool &supportPlc)
     supportPlc = this->kdo->connected() && (!this->kdo->hasError());
 }
 
+void Facade::resetConnection()
+{
+    sab->reconnect();
+    kdo->reconnect();
+}
+
+void Facade::getAxisInitState(bool &is_started, bool &is_done)
+{
+    is_started = sab->axisInitIsStarted();
+    is_done = sab->axisInitIsDone();
+}
+
+bool Facade::startAxisInit()
+{
+    auto reset_ok = sab->axisResetInit();
+    auto update_ok = sab->updateCache();
+    return reset_ok && update_ok && sab->axisStartInit();
+}
+
 void Facade::startSabPlc()
 {
     QString addr;

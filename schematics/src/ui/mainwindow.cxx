@@ -22,6 +22,7 @@
 #include <services/application.hxx>
 
 #include <QVector>
+#include <algorithm>
 
 using libschema::Unit;
 
@@ -51,7 +52,7 @@ namespace Schematics {
             Widgets::Led* sab_plc = nullptr;
             Widgets::Led* kdo_plc = nullptr;
             QLabel* sab_status = nullptr;
-            LedVector sab_leds;
+            Widgets::Led* sab_alarm = nullptr;
             LedVector kdo_leds;
 
             QTabWidget* tabList = nullptr;
@@ -104,21 +105,11 @@ namespace Schematics {
                         box->addWidget(sab_plc);
                         box->addWidget(createLabel("PLC"));
 
-                        auto led_names = QStringList{}
-                                         << "Подача" << "ФБС1" << "ФБС2"
-                                         << "PA350 / PKA350" << "PA300 / DWS350"
-                                         << "Боковой конвейер";
-                        sab_leds.reserve(led_names.size());
-                        for (auto& name : led_names)
-                        {
-                            auto led = new Led{};
-                            box->addWidget(led);
-                            sab_leds.push_back(led);
-                            auto lbl = createLabel(name);
-                            lbl->setWordWrap(true);
-                            box->addWidget(lbl);
-
-                        }
+                        sab_alarm = new Led{};
+                        sab_alarm->setColor(Led::RED);
+                        box->addWidget(sab_alarm);
+                        box->addWidget(createLabel("Авария"));
+                        box->addItem(tool::createHSpace());
                         vbox->addLayout(box);
                     }
                     {
@@ -388,6 +379,38 @@ namespace Schematics {
     {
         using namespace Ui::Widgets;
         ui->sab_plc->setColor(is_connected ? Led::GREEN : Led::RED);
+        if (is_connected)
+        {
+            const auto alarms = app->getAlarmState();
+            const auto all_ok = std::all_of(
+                std::begin(alarms), std::end(alarms), [](const auto& state){
+                    return state.second;
+                });
+            bool is_started, is_done;
+            app->getAxisInitState(is_started, is_done);
+
+            ui->sab_alarm->setColor(all_ok ? Led::GREEN : Led::RED);
+            if (is_done)
+            {
+                ui->setStatusMessage("Инициализация завершена");
+            }
+            else
+            {
+                if (is_started)
+                {
+                    ui->setStatusMessage("Идет инициализация...");
+                }
+                else
+                {
+                    ui->setStatusMessage("Необходим запуск инициализации");
+                }
+            }
+        }
+        else
+        {
+            ui->sab_alarm->setColor(Led::RED);
+            ui->setStatusMessage("Отсутствует соединение с PLC");
+        }
     }
 
     void MainWindow::updateKdo(bool is_connected)
@@ -719,12 +742,39 @@ void MainWindow::on_cfgDelays()
 
 void MainWindow::on_initConnection()
 {
-
+    auto run = QMessageBox::question(this, windowTitle(),
+                                     "Сбросить состояние подключения?");
+    if (run == QMessageBox::Yes)
+    {
+        bool sab_ok, kdo_ok;
+        app->getConnectionState(sab_ok, kdo_ok);
+        app->resetConnection();
+        auto need_updates = (!sab_ok) || (!kdo_ok);
+        if (need_updates)
+        {
+            emit needUpdates();
+        }
+    }
 }
 
 void MainWindow::on_initAxis()
 {
-
+    auto run = QMessageBox::question(this, windowTitle(),
+                                     "Запустить инициализацию?");
+    if (run == QMessageBox::Yes)
+    {
+        auto ok = app->startAxisInit();
+        if (ok)
+        {
+            QMessageBox::information(this, windowTitle(),
+                                     "Инициализация линии запущена");
+        }
+        else
+        {
+            QMessageBox::critical(this, windowTitle(),
+                                  "Ошибка запуска инициализации линии");
+        }
+    }
 }
 
 void MainWindow::on_about()

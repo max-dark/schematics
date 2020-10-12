@@ -18,6 +18,7 @@ public:
     { return connect(address, 0, 2); }
     bool connect(const QString& address, int rack, int slot) const;
     bool connected() const;
+    bool reconnect() const;
     void disconnect() const;
 
     void registerCacheArea(const TagAddress& start, std::size_t length) const;

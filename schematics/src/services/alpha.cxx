@@ -95,6 +95,11 @@ bool Alpha::axisInitIsDone() const
     return readCachedBit(Const::axisInitDone);
 }
 
+bool Alpha::axisInitIsStarted() const
+{
+    return readCachedBit(Const::axisStartInit);
+}
+
 bool Alpha::axisStartInit() const
 {
     BoolTag start{Const::axisStartInit};

@@ -25,6 +25,7 @@ public:
     /// получить статус завершения нинциализации
     /// перед вызовом нужно обновить кэш \see Machine::updateCache
     bool axisInitIsDone() const;
+    bool axisInitIsStarted() const;
     /// запускает инициализацию контроллеров "@xis"
     /// для работы нужно подключение к ПЛК
     bool axisStartInit() const;

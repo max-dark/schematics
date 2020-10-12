@@ -18,6 +18,11 @@ struct Application
     virtual bool getConnectionParams(const QString &name, QString &address, int &interval) = 0;
     virtual void getConnectionState(bool& alphaPlc, bool& supportPlc) = 0;
 
+    virtual void resetConnection() = 0;
+
+    virtual void getAxisInitState(bool& is_started, bool& is_done) = 0;
+    virtual bool startAxisInit() = 0;
+
     virtual LabelMap getMotorLabels() = 0;
     virtual LabelMap getAlarmLabels() = 0;
     virtual LabelMap getSensorLabels() = 0;

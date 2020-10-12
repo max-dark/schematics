@@ -24,6 +24,12 @@ struct Machine::Connection: protected TSnap7MicroClient
     {
         return Connected;
     }
+
+    bool resetConnection()
+    {
+        ClrError();
+        return ok(Reset(true));
+    }
     bool disconnect()
     {
         return ok(Disconnect());
@@ -192,6 +198,11 @@ bool Machine::connect(const QString &address,
 bool Machine::connected() const
 {
     return self()->connected();
+}
+
+bool Machine::reconnect() const
+{
+    return self()->resetConnection();
 }
 
 void Machine::disconnect() const

@@ -32,6 +32,11 @@ public:
     bool getConnectionParams(const QString &name, QString &address, int &interval) override;
     void getConnectionState(bool& alphaPlc, bool& supportPlc) override;
 
+    void resetConnection() override;
+
+    void getAxisInitState(bool& is_started, bool& is_done) override;
+    bool startAxisInit() override;
+
     LabelMap getMotorLabels() override;
     LabelMap getAlarmLabels() override;
     LabelMap getSensorLabels() override;
