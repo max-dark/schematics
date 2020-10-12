@@ -46,6 +46,7 @@ bool Database::checkStructure()
         ok = ok && table_exists("offsets");
         ok = ok && table_exists("speeds");
         ok = ok && table_exists("delays");
+        ok = ok && table_exists("doors");
         ok = ok && table_exists("alarms");
         ok = ok && table_exists("sensors");
         ok = ok && table_exists("motors");

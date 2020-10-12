@@ -75,6 +75,7 @@ private:
     BooleanMap alarms;
     BooleanMap motors;
     BooleanMap sensors;
+    BooleanMap doors;
 
     bool is_prod_mode = false;
     Database* database = nullptr;

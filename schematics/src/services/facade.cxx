@@ -99,6 +99,7 @@ void Facade::startStorage()
             alarms = database->getBooleansByName("alarms");
             motors = database->getBooleansByName("motors");
             sensors = database->getBooleansByName("sensors");
+            doors = database->getBooleansByName("doors");
         }
     }
     else {
