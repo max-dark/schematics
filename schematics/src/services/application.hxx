@@ -31,6 +31,9 @@ struct Application
     virtual BoolMap getAlarmState() = 0;
     virtual BoolMap getSensorState() = 0;
 
+    virtual LabelMap getDoorsLabels() = 0;
+    virtual bool toggleDoorById(int doorId) = 0;
+
     virtual BoolMap getSupportMotorsState() = 0;
     virtual BoolMap getSupportAlarmsState() = 0;
 protected:

@@ -319,6 +319,28 @@ BoolMap Facade::getSensorState()
     return state;
 }
 
+LabelMap Facade::getDoorsLabels()
+{
+    LabelMap labels{};
+
+    for(const auto&[id, value]: doors)
+    {
+        labels[id] = value.description;
+    }
+    return labels;
+}
+
+bool Facade::toggleDoorById(int doorId)
+{
+    auto address = doors.at(doorId).address;
+    auto is_open = sab->readCachedBit(address);
+    BoolTag door{address};
+    door.set(is_open);
+    door.invert();
+
+    return sab->writeTag(door);
+}
+
 BoolMap Facade::getSupportMotorsState()
 {
     return kdo->getMotorsState();

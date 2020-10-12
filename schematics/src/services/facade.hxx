@@ -46,6 +46,9 @@ public:
     BoolMap getSensorState() override;
 
 
+    LabelMap getDoorsLabels() override;
+    bool toggleDoorById(int doorId) override;
+
     BoolMap getSupportMotorsState() override;
     BoolMap getSupportAlarmsState() override;
 
