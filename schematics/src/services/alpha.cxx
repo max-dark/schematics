@@ -174,6 +174,11 @@ bool Alpha::applyCoordinates(const Coords::Coordinates &coords)
     return ok;
 }
 
+const CoordMap &Alpha::getCoordMap() const
+{
+    return coord_map;
+}
+
 void Alpha::initCoordMap()
 {
     using namespace Coords;

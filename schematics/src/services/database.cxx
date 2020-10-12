@@ -144,6 +144,47 @@ NumberMap Database::getNumbersByName(const QString &name)
     return map;
 }
 
+CoordMap Database::getCoordMap()
+{
+    QSqlQuery select{database()};
+    CoordMap map{};
+
+    auto ok = select.prepare("select id, address, apply_bit from offsets;");
+
+    ok = ok && select.exec();
+    qInfo() << "select offsets ok?" << ok;
+
+    while(select.next())
+    {
+        bool addr_ok, apply_ok, idx_ok;
+        auto str_idx = select.value("id").toString();
+        auto idx = str_idx.toInt(&idx_ok);
+        auto str_addr = select.value("address").toString().toStdString();
+        auto str_apply = select.value("apply_bit").toString().toStdString();
+
+        auto address = TagAddress::from_string(str_addr, addr_ok);
+        auto apply = BitAddress::from_string(str_apply, apply_ok);
+
+        auto all_ok = idx_ok && addr_ok && apply_ok;
+        if (all_ok)
+        {
+            map.try_emplace(PositionId(idx),
+                            CoordAddress{
+                                .coord = address,
+                                .apply = apply
+                            });
+        }
+        else
+        {
+            qWarning() << "Error while parse"
+                       << str_idx << '/' << str_addr.c_str()
+                       << '/' << str_apply.c_str();
+        }
+    }
+
+    return map;
+}
+
 bool Database::try_save(PositionId id, OffsetType type, int32_t offset, double per_mm)
 {
     QSqlQuery save{database()};

@@ -38,6 +38,7 @@ public:
 
     bool applyCoordById(Coords::PositionId id, libschema::Unit value);
     bool applyCoordinates(const Coords::Coordinates& coords);
+    const CoordMap& getCoordMap() const;
 private:
     void initCoordMap();
     void initMemoryMap();

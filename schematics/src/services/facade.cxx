@@ -156,6 +156,54 @@ void Facade::startSabPlc()
     int interval = 0;
     // connect to main PLC
     sab = new Alpha{database, this};
+
+    const auto mem_coords = sab->getCoordMap();
+    const auto db_coords = database->getCoordMap();
+
+    qInfo() << "start coords check...";
+    int errors = 0;
+    for(const auto&[id, value]: mem_coords)
+    {
+        auto item = db_coords.find(id);
+        if (item == db_coords.end())
+        {
+            qWarning() << "cant find id" << id << "in db map";
+            ++errors;
+        }
+        else
+        {
+            auto coord_ok = value.coord.to_string() == item->second.coord.to_string();
+            auto apply_ok = value.apply.to_string() == item->second.apply.to_string();
+            auto item_ok = coord_ok && apply_ok;
+            if (!item_ok)
+            {
+                qWarning() << "found diff in id" << id;
+                ++errors;
+            }
+        }
+    }
+    for(const auto&[id, value]: db_coords)
+    {
+        auto item = mem_coords.find(id);
+        if (item == mem_coords.end())
+        {
+            qWarning() << "cant find id" << id << "in mem map";
+            ++errors;
+        }
+        else
+        {
+            auto coord_ok = value.coord.to_string() == item->second.coord.to_string();
+            auto apply_ok = value.apply.to_string() == item->second.apply.to_string();
+            auto item_ok = coord_ok && apply_ok;
+            if (!item_ok)
+            {
+                qWarning() << "found diff in id" << id;
+                ++errors;
+            }
+        }
+    }
+    qInfo() << "coords check done / errors:" << errors;
+
     auto ok = getConnectionParams("sab", addr, interval);
     if (ok && isProductionMode())
     {
