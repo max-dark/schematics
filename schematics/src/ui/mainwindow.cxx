@@ -620,12 +620,20 @@ namespace Schematics {
 
     void MainWindow::applyCoordById(Coords::PositionId id, libschema::Unit value)
     {
-        app->applyCoordById(id, value);
+        auto ok = app->applyCoordById(id, value);
+        if (!ok)
+        {
+            QMessageBox::critical(this, windowTitle(), "Возникла ошибка связи при отправке координат в PLC");
+        }
     }
 
     void MainWindow::applyCoords()
     {
-        app->applyCoordinates(ui->coordsTab->coordinates());
+        auto ok = app->applyCoordinates(ui->coordsTab->coordinates());
+        if (!ok)
+        {
+            QMessageBox::critical(this, windowTitle(), "Возникла ошибка связи при отправке координат в PLC");
+        }
     }
 
     void MainWindow::centralWidthChanged(double width)
