@@ -38,7 +38,7 @@ AlphaSupport::StateMap AlphaSupport::getMotorsState() const
             {.area = Tag::Area::INPUT, .db = 0, .byte = 1, .bit = 4},
     };
     StateMap state;
-    for (auto idx = 0; idx < std::size(motor_on); ++idx)
+    for (auto idx = 0u; idx < std::size(motor_on); ++idx)
     {
         state[idx] = readCachedBit(motor_on[idx]);
     }
@@ -66,7 +66,7 @@ AlphaSupport::StateMap AlphaSupport::getAlarmsState() const
             {.area = Tag::Area::MEMORY, .db = 0, .byte = 1, .bit = 2}
     };
     StateMap state;
-    for (auto idx = 0; idx < std::size(motor_fault); ++idx)
+    for (auto idx = 0u; idx < std::size(motor_fault); ++idx)
     {
         // invert logic
         state[idx] = no_error(readCachedBit(motor_fault[idx]));
