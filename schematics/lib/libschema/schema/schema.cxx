@@ -14,7 +14,7 @@ void Schema::set_params(Params *params)
         if (m_params) {
             m_params->setParent(this);
             connect(m_params, &Params::changed,
-                    this, &Schema::on_params_changed);
+                    this, &Schema::on_paramsChanged);
         }
         emit schemeChanged();
     }
@@ -156,7 +156,7 @@ bool Schema::is_pa350_enabled() const
 }
 
 
-void Schema::on_params_changed(const Params* /* params */)
+void Schema::on_paramsChanged(const Params* /* params */)
 {
     emit schemeChanged();
 }

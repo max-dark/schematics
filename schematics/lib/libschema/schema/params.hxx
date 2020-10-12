@@ -29,7 +29,7 @@ namespace libschema
         void set_rot2_mode(bool is_disabled);
 
     signals:
-        void changed(const Params* params);
+        void changed(const libschema::Params* params);
     private:
         template<class MemberT>
         void update_field(MemberT& field, const MemberT& value)

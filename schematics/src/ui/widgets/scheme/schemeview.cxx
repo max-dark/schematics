@@ -317,7 +317,7 @@ namespace Schematics::Ui::Widgets
         void setCentralWidth(double width)
         {
             centralWidth = width;
-            for(auto b: dws350)
+            for(auto b: qAsConst(dws350))
             {
                 b->setWidth(width);
             }
@@ -429,7 +429,7 @@ namespace Schematics::Ui::Widgets
             auto dw = 0.0;
             auto dh = dws350.count() == 0 ? 0.0 : centralWidth;
 
-            for(auto b: dws350)
+            for(auto b: qAsConst(dws350))
             {
                 dw += b->rect().width() + dwsSaw();
             }
@@ -441,7 +441,7 @@ namespace Schematics::Ui::Widgets
             auto y_half = dh / 2;
 
             auto x = -x_half;
-            for(auto b: dws350)
+            for(auto b: qAsConst(dws350))
             {
                 auto r = b->rect();
 

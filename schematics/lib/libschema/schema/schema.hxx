@@ -93,7 +93,7 @@ public:
 signals:
     void schemeChanged();
 private slots:
-    void on_params_changed(const Params* params);
+    void on_paramsChanged(const libschema::Params* params);
 
 private:
     Params* m_params = nullptr;

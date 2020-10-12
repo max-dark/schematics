@@ -21,7 +21,7 @@
 
 #include <services/application.hxx>
 
-#include <QVector>
+#include <vector>
 #include <algorithm>
 
 using libschema::Unit;
@@ -29,12 +29,12 @@ using libschema::Unit;
 namespace Schematics
 {
 
-static const QString scheme_filter{"Cutting scheme (*.cut)"};
+static const char scheme_filter[]="Cutting scheme (*.cut)";
 
 namespace Ui
 {
 
-using LedVector = QVector<Widgets::Led *>;
+using LedVector = std::vector<Widgets::Led *>;
 
 struct MainView
 {
