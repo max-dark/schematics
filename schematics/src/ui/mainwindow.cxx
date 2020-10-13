@@ -12,6 +12,8 @@
 #include <ui/widgets/ledlist.hxx>
 #include <ui/tools/tool.hxx>
 
+#include <ui/dialogs/tabledialog.hxx>
+
 #include <schema/schema.hxx>
 #include <schema/params.hxx>
 #include <schema/units.hxx>
@@ -792,7 +794,8 @@ void MainWindow::pa350Changed(bool enabled, double width, double height)
 
 void MainWindow::on_cfgCoords()
 {
-
+    auto dlg = new Ui::Dialogs::TableDialog{this};
+    dlg->open();
 }
 
 void MainWindow::on_cfgSpeeds()

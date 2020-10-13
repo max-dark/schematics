@@ -7,6 +7,8 @@
 #include <QDialogButtonBox>
 #include <QPushButton>
 
+#include <QDebug>
+
 namespace Schematics::Ui::Dialogs
 {
 
@@ -14,6 +16,7 @@ struct TableDialog::View
 {
     QLineEdit * filter = nullptr;
     QTableView* table = nullptr;
+    QDialogButtonBox* buttons = nullptr;
 
     void buildUi(TableDialog* self)
     {
@@ -23,6 +26,8 @@ struct TableDialog::View
             auto label = new QLabel{"Найти по описанию"};
             filter = new QLineEdit{};
             auto button = new QPushButton{"Очистить"};
+            QObject::connect(button, &QPushButton::clicked,
+                             filter, &QLineEdit::clear);
             top->addWidget(label);
             top->addWidget(filter);
             top->addWidget(button);
@@ -31,7 +36,11 @@ struct TableDialog::View
         table = new QTableView{};
         box->addWidget(table);
         {
-            auto buttons = new QDialogButtonBox{};
+            buttons = new QDialogButtonBox{
+                QDialogButtonBox::Ok |
+                QDialogButtonBox::Save |
+                QDialogButtonBox::Cancel
+            };
 
             box->addWidget(buttons);
         }
@@ -44,6 +53,20 @@ TableDialog::TableDialog(QWidget *parent)
     , ui{new View}
 {
     ui->buildUi(this);
+    setAttribute(Qt::WA_DeleteOnClose);
+    setMinimumSize(600, 400);
+
+    connect(ui->filter, &QLineEdit::textChanged,
+            this, &TableDialog::doUpdateFilter);
+    connect(this, &TableDialog::rejected,
+            this, &TableDialog::doCancel);
+    connect(this, &TableDialog::accepted,
+            this, &TableDialog::doSaveAndClose);
+
+    connect(ui->buttons, &QDialogButtonBox::accepted,
+            this, &TableDialog::accept);
+//    connect(ui->buttons, &QDialogButtonBox::clicked,
+//            this, &TableDialog::);
 }
 
 TableDialog::~TableDialog()
@@ -58,22 +81,22 @@ void TableDialog::setData(Service::SettingsTable *model)
 
 void TableDialog::doSave()
 {
-    //
+    qDebug() << "save";
 }
 
 void TableDialog::doSaveAndClose()
 {
-    //
+    qDebug() << "save && close";
 }
 
 void TableDialog::doCancel()
 {
-    //
+    qDebug() << "cancel";
 }
 
-void TableDialog::doUpdateFilter()
+void TableDialog::doUpdateFilter(const QString &text)
 {
-    //
+    qDebug() << text;
 }
 
 } // namespace Schematics::Ui::Dialogs

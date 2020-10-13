@@ -19,7 +19,7 @@ private slots:
     void doSave();
     void doSaveAndClose();
     void doCancel();
-    void doUpdateFilter();
+    void doUpdateFilter(const QString& text);
 private:
     struct View;
     View * ui = nullptr;
