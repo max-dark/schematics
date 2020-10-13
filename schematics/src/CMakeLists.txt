@@ -24,6 +24,7 @@ target_sources(services
     PRIVATE
         services/application.cxx
         services/storage.cxx
+        services/settingstable.cxx
 
         services/alpha.cxx
         services/alphasupport.cxx
@@ -34,6 +35,7 @@ target_sources(services
     PUBLIC
         services/application.hxx
         services/storage.hxx
+        services/settingstable.hxx
 
         services/alpha.hxx
         services/alphasupport.hxx
