@@ -2,6 +2,7 @@
 
 #include <QSqlField>
 #include <QSqlDriver>
+#include <QSqlError>
 #include <QDebug>
 
 namespace Schematics::Service
@@ -18,6 +19,12 @@ DatabaseTable::DatabaseTable(const QString &table, const QString& connection, QO
 
 DatabaseTable::~DatabaseTable()
 {}
+
+DatabaseTable* DatabaseTable::setColumnTitle(int idx, const QString &title)
+{
+    model->setHeaderData(idx, Qt::Horizontal, title);
+    return this;
+}
 
 QAbstractTableModel *DatabaseTable::table()
 {
@@ -38,16 +45,15 @@ void DatabaseTable::setFilter(const QString &filter)
 {
     if (filter.isEmpty())
     {
-        model->setFilter("");
+        model->setFilter({});
     }
     else
     {
-        auto db = model->database();
-        QSqlField txt("", QVariant::String);
-        txt.setValue(filter);
-        auto like = db.driver()->formatValue(txt);
-        qDebug() << "raw" << filter << "formated" << like;
-        model->setFilter("description LIKE \"%" + filter + "%\"");
+        auto like = filter;
+        like.replace("'", ""); //TODO: костыль. Нужно нормальное решение
+
+        model->setFilter("description LIKE '%" + like + "%'");
+        // qInfo() << model->lastError().text();
     }
 }
 

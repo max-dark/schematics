@@ -44,7 +44,7 @@ private:
     QSqlDatabase database();
     QString db_name;
 
-    SettingsTable* coords = nullptr;
+    SettingsTable* offsets = nullptr;
     SettingsTable* delays = nullptr;
     SettingsTable* speeds = nullptr;
 };

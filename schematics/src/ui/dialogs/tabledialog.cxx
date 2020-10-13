@@ -2,6 +2,7 @@
 
 #include <QLineEdit>
 #include <QTableView>
+#include <QHeaderView>
 #include <QLabel>
 #include <QLayout>
 #include <QDialogButtonBox>
@@ -34,6 +35,7 @@ struct TableDialog::View
             box->addLayout(top);
         }
         table = new QTableView{};
+        table->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
         box->addWidget(table);
         {
             buttons = new QDialogButtonBox{};
@@ -64,6 +66,7 @@ TableDialog::TableDialog(QWidget *parent)
     ui->buildUi(this);
     setAttribute(Qt::WA_DeleteOnClose);
     setMinimumSize(600, 400);
+    resize(700, 800);
 
     connect(ui->filter, &QLineEdit::textChanged,
             this, &TableDialog::doUpdateFilter);
@@ -84,6 +87,14 @@ void TableDialog::setData(Service::SettingsTable *model)
     if (data)
     {
         ui->table->setModel(data->table());
+        data->setFilter({});
+        // показать только последние 3 столбца
+        int first_visible = data->table()->columnCount() - 3;
+        int column = 0;
+        while (column < first_visible) {
+            ui->table->hideColumn(column);
+            ++column;
+        }
     }
     else {
         ui->table->setModel(nullptr);

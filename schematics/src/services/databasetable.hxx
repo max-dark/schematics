@@ -13,6 +13,7 @@ class DatabaseTable: public SettingsTable
 public:
     explicit DatabaseTable(const QString& table, const QString &connection, QObject* parent = nullptr);
     ~DatabaseTable() override;
+    DatabaseTable* setColumnTitle(int idx, const QString& title);
 
     // SettingsTable interface
 public:

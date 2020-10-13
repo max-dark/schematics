@@ -58,18 +58,31 @@ bool Database::checkStructure()
 
 SettingsTable *Database::coordsTable()
 {
-    if (coords == nullptr)
+    if (offsets == nullptr)
     {
-        coords = new DatabaseTable{"offsets", db_name, this};
+        offsets = (new DatabaseTable{"offsets", db_name, this})
+                ->setColumnTitle(0, "ID")
+                ->setColumnTitle(1, "Тип")
+                ->setColumnTitle(2, "Участок")
+                ->setColumnTitle(3, "Адрес значения")
+                ->setColumnTitle(4, "Адрес команды")
+                ->setColumnTitle(5, "Коэфициэнт")
+                ->setColumnTitle(6, "Смещение")
+                ->setColumnTitle(7, "Описание");
     }
-    return coords;
+    return offsets;
 }
 
 SettingsTable *Database::delaysTable()
 {
     if (delays == nullptr)
     {
-        delays = new DatabaseTable{"delays", db_name, this};
+        delays = (new DatabaseTable{"delays", db_name, this})
+                ->setColumnTitle(0, "ID")
+                ->setColumnTitle(1, "Адрес")
+                ->setColumnTitle(2, "База")
+                ->setColumnTitle(3, "Смещение")
+                ->setColumnTitle(4, "Описание");
     }
     return delays;
 }
@@ -78,7 +91,12 @@ SettingsTable *Database::speedsTable()
 {
     if (speeds == nullptr)
     {
-        speeds = new DatabaseTable{"speeds", db_name, this};
+        speeds = (new DatabaseTable{"speeds", db_name, this})
+                ->setColumnTitle(0, "ID")
+                ->setColumnTitle(1, "Адресс")
+                ->setColumnTitle(2, "База")
+                ->setColumnTitle(3, "Смещение")
+                ->setColumnTitle(4, "Описание");
     }
     return speeds;
 }
