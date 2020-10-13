@@ -49,11 +49,15 @@ void DatabaseTable::setFilter(const QString &filter)
     }
     else
     {
-        auto like = filter;
-        like.replace("'", ""); //TODO: костыль. Нужно нормальное решение
+        auto db = model->database();
+        QSqlField like_filter{"", QVariant::String};
+        like_filter.setValue('%' + filter + '%');
 
-        model->setFilter("description LIKE '%" + like + "%'");
-        // qInfo() << model->lastError().text();
+        auto like_cause = QLatin1String("description LIKE ")
+                // чистка значения
+                + db.driver()->formatValue(like_filter);
+
+        model->setFilter(like_cause);
     }
 }
 
