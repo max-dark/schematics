@@ -88,6 +88,7 @@ target_sources(schematics
     PRIVATE
         main.cxx
         ui/mainwindow.cxx ui/mainwindow.hxx
+        ui/dialogs/tabledialog.cxx ui/dialogs/tabledialog.hxx
 )
 
 target_link_libraries(schematics
