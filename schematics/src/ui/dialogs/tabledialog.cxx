@@ -36,11 +36,20 @@ struct TableDialog::View
         table = new QTableView{};
         box->addWidget(table);
         {
-            buttons = new QDialogButtonBox{
-                QDialogButtonBox::Ok |
-                QDialogButtonBox::Save |
-                QDialogButtonBox::Cancel
-            };
+            buttons = new QDialogButtonBox{};
+            auto ok_btn = buttons->addButton("Ok", QDialogButtonBox::ActionRole);
+            auto save = buttons->addButton("Сохранить", QDialogButtonBox::ActionRole);
+            buttons->addButton(QDialogButtonBox::Cancel)->setText("Отмена");
+
+            QObject::connect(ok_btn, &QAbstractButton::clicked,
+                             buttons, &QDialogButtonBox::accepted);
+            QObject::connect(save, &QAbstractButton::clicked,
+                             self, &TableDialog::doSave);
+
+            QObject::connect(buttons, &QDialogButtonBox::accepted,
+                    self, &TableDialog::accept);
+            QObject::connect(buttons, &QDialogButtonBox::rejected,
+                    self, &TableDialog::reject);
 
             box->addWidget(buttons);
         }
@@ -61,12 +70,7 @@ TableDialog::TableDialog(QWidget *parent)
     connect(this, &TableDialog::rejected,
             this, &TableDialog::doCancel);
     connect(this, &TableDialog::accepted,
-            this, &TableDialog::doSaveAndClose);
-
-    connect(ui->buttons, &QDialogButtonBox::accepted,
-            this, &TableDialog::accept);
-//    connect(ui->buttons, &QDialogButtonBox::clicked,
-//            this, &TableDialog::);
+            this, &TableDialog::doSave);
 }
 
 TableDialog::~TableDialog()
@@ -77,26 +81,28 @@ TableDialog::~TableDialog()
 void TableDialog::setData(Service::SettingsTable *model)
 {
     data = model;
+    if (data)
+    {
+        ui->table->setModel(data->table());
+    }
+    else {
+        ui->table->setModel(nullptr);
+    }
 }
 
 void TableDialog::doSave()
 {
-    qDebug() << "save";
-}
-
-void TableDialog::doSaveAndClose()
-{
-    qDebug() << "save && close";
+    if (data) data->saveChanges();
 }
 
 void TableDialog::doCancel()
 {
-    qDebug() << "cancel";
+    if (data) data->cancelChanges();
 }
 
 void TableDialog::doUpdateFilter(const QString &text)
 {
-    qDebug() << text;
+    if (data) data->setFilter(text);
 }
 
 } // namespace Schematics::Ui::Dialogs

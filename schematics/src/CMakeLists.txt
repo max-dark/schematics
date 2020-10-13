@@ -30,6 +30,7 @@ target_sources(services
         services/alphasupport.cxx
         services/facade.cxx
         services/database.cxx
+        services/databasetable.cxx
         services/machine.cxx
         services/tags.cxx
     PUBLIC
@@ -41,6 +42,7 @@ target_sources(services
         services/alphasupport.hxx
         services/facade.hxx
         services/database.hxx
+        services/databasetable.hxx
         services/machine.hxx
         services/tags.hxx
 )

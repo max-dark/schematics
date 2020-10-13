@@ -8,6 +8,8 @@
 
 #include <QDebug>
 
+#include <services/databasetable.hxx>
+
 namespace Schematics::Service
 {
 
@@ -52,6 +54,33 @@ bool Database::checkStructure()
         ok = ok && table_exists("motors");
     }
     return ok;
+}
+
+SettingsTable *Database::coordsTable()
+{
+    if (coords == nullptr)
+    {
+        coords = new DatabaseTable{"offsets", db_name, this};
+    }
+    return coords;
+}
+
+SettingsTable *Database::delaysTable()
+{
+    if (delays == nullptr)
+    {
+        delays = new DatabaseTable{"delays", db_name, this};
+    }
+    return delays;
+}
+
+SettingsTable *Database::speedsTable()
+{
+    if (speeds == nullptr)
+    {
+        speeds = new DatabaseTable{"speeds", db_name, this};
+    }
+    return speeds;
 }
 
 bool Database::getValueByName(const QString &name, QString &value)

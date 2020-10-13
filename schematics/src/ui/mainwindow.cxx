@@ -795,17 +795,25 @@ void MainWindow::pa350Changed(bool enabled, double width, double height)
 void MainWindow::on_cfgCoords()
 {
     auto dlg = new Ui::Dialogs::TableDialog{this};
+    dlg->setWindowTitle("Настройка координатной системы");
+    dlg->setData(app->coordsTable());
     dlg->open();
 }
 
 void MainWindow::on_cfgSpeeds()
 {
-
+    auto dlg = new Ui::Dialogs::TableDialog{this};
+    dlg->setWindowTitle("Настройка скоростей двигателей");
+    dlg->setData(app->speedsTable());
+    dlg->open();
 }
 
 void MainWindow::on_cfgDelays()
 {
-
+    auto dlg = new Ui::Dialogs::TableDialog{this};
+    dlg->setWindowTitle("Настройка интервалов");
+    dlg->setData(app->delaysTable());
+    dlg->open();
 }
 
 void MainWindow::on_initConnection()

@@ -32,6 +32,10 @@ public:
     bool getConnectionParams(const QString &name, QString &address, int &interval) override;
     void getConnectionState(bool& alphaPlc, bool& supportPlc) override;
 
+    SettingsTable* coordsTable() override;
+    SettingsTable* delaysTable() override;
+    SettingsTable* speedsTable() override;
+
     void resetConnection() override;
 
     void getAxisInitState(bool& is_started, bool& is_done) override;

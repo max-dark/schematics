@@ -17,7 +17,6 @@ public:
     void setData(Schematics::Service::SettingsTable* model);
 private slots:
     void doSave();
-    void doSaveAndClose();
     void doCancel();
     void doUpdateFilter(const QString& text);
 private:
