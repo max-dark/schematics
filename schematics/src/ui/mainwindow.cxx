@@ -10,6 +10,7 @@
 #include <ui/widgets/coords/coordstab.hxx>
 #include <ui/widgets/leds.hxx>
 #include <ui/widgets/ledlist.hxx>
+#include <ui/widgets/speedcontrol.hxx>
 #include <ui/tools/tool.hxx>
 
 #include <ui/dialogs/tabledialog.hxx>
@@ -196,9 +197,15 @@ void MainView::buildView(QMainWindow *self)
             auto speeds = new QGroupBox{"Настройка скоростей"};
             {
                 auto box = new QGridLayout;
-                auto dial = new QDial;
-                box->addWidget(dial);
+                box->addWidget(new Widgets::SpeedControl{"Подача"}, 0, 0);
+                box->addWidget(new Widgets::SpeedControl{"ФБС 1"}, 1, 0);
+                box->addWidget(new Widgets::SpeedControl{"ФБС 2"}, 2, 0);
+                box->addWidget(new Widgets::SpeedControl{"PA350/PKA350"}, 0, 1);
+                box->addWidget(new Widgets::SpeedControl{"PA300/DWS350"}, 1, 1);
+                box->addWidget(new Widgets::SpeedControl{"Лента"}, 2, 1);
                 speeds->setLayout(box);
+                speeds->setSizePolicy(QSizePolicy::Minimum,
+                                      QSizePolicy::Minimum);
             }
             left->addWidget(speeds);
             left->addItem(tool::createVSpace());
