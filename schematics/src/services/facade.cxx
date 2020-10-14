@@ -131,6 +131,21 @@ void Facade::getConnectionState(bool &alphaPlc, bool &supportPlc)
     supportPlc = this->kdo->connected() && (!this->kdo->hasError());
 }
 
+SettingsTable *Facade::coordsTable()
+{
+    return database->coordsTable();
+}
+
+SettingsTable *Facade::delaysTable()
+{
+    return database->delaysTable();
+}
+
+SettingsTable *Facade::speedsTable()
+{
+    return database->speedsTable();
+}
+
 void Facade::resetConnection()
 {
     sab->reconnect();

@@ -8,6 +8,8 @@
 
 #include <QDebug>
 
+#include <services/databasetable.hxx>
+
 namespace Schematics::Service
 {
 
@@ -52,6 +54,51 @@ bool Database::checkStructure()
         ok = ok && table_exists("motors");
     }
     return ok;
+}
+
+SettingsTable *Database::coordsTable()
+{
+    if (offsets == nullptr)
+    {
+        offsets = (new DatabaseTable{"offsets", db_name, this})
+                ->setColumnTitle(0, "ID")
+                ->setColumnTitle(1, "Тип")
+                ->setColumnTitle(2, "Участок")
+                ->setColumnTitle(3, "Адрес значения")
+                ->setColumnTitle(4, "Адрес команды")
+                ->setColumnTitle(5, "Коэфициэнт")
+                ->setColumnTitle(6, "Смещение")
+                ->setColumnTitle(7, "Описание");
+    }
+    return offsets;
+}
+
+SettingsTable *Database::delaysTable()
+{
+    if (delays == nullptr)
+    {
+        delays = (new DatabaseTable{"delays", db_name, this})
+                ->setColumnTitle(0, "ID")
+                ->setColumnTitle(1, "Адрес")
+                ->setColumnTitle(2, "База")
+                ->setColumnTitle(3, "Смещение")
+                ->setColumnTitle(4, "Описание");
+    }
+    return delays;
+}
+
+SettingsTable *Database::speedsTable()
+{
+    if (speeds == nullptr)
+    {
+        speeds = (new DatabaseTable{"speeds", db_name, this})
+                ->setColumnTitle(0, "ID")
+                ->setColumnTitle(1, "Адресс")
+                ->setColumnTitle(2, "База")
+                ->setColumnTitle(3, "Смещение")
+                ->setColumnTitle(4, "Описание");
+    }
+    return speeds;
 }
 
 bool Database::getValueByName(const QString &name, QString &value)

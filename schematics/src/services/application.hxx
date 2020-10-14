@@ -7,6 +7,8 @@
 #include <coords/positionid.hxx>
 #include <schema/units.hxx>
 
+#include <services/settingstable.hxx>
+
 namespace Schematics::Service
 {
 using LabelMap = std::map<int, QString>;
@@ -17,6 +19,10 @@ struct Application
     virtual bool applyCoordinates(const Coords::Coordinates& coords) = 0;
     virtual bool getConnectionParams(const QString &name, QString &address, int &interval) = 0;
     virtual void getConnectionState(bool& alphaPlc, bool& supportPlc) = 0;
+
+    virtual SettingsTable* coordsTable() = 0;
+    virtual SettingsTable* delaysTable() = 0;
+    virtual SettingsTable* speedsTable() = 0;
 
     virtual void resetConnection() = 0;
 

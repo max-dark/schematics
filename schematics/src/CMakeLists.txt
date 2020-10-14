@@ -24,21 +24,25 @@ target_sources(services
     PRIVATE
         services/application.cxx
         services/storage.cxx
+        services/settingstable.cxx
 
         services/alpha.cxx
         services/alphasupport.cxx
         services/facade.cxx
         services/database.cxx
+        services/databasetable.cxx
         services/machine.cxx
         services/tags.cxx
     PUBLIC
         services/application.hxx
         services/storage.hxx
+        services/settingstable.hxx
 
         services/alpha.hxx
         services/alphasupport.hxx
         services/facade.hxx
         services/database.hxx
+        services/databasetable.hxx
         services/machine.hxx
         services/tags.hxx
 )
@@ -86,6 +90,8 @@ target_sources(schematics
     PRIVATE
         main.cxx
         ui/mainwindow.cxx ui/mainwindow.hxx
+        ui/dialogs/tabledialog.cxx ui/dialogs/tabledialog.hxx
+        ui/dialogs/editdelegate.cxx ui/dialogs/editdelegate.hxx
 )
 
 target_link_libraries(schematics

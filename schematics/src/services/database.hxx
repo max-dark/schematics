@@ -10,7 +10,9 @@
 
 namespace Schematics::Service
 {
-    using namespace Coords;
+class SettingsTable;
+
+using namespace Coords;
 class Database : public QObject
         , public Storage
         , public OffsetRepository
@@ -21,6 +23,10 @@ public:
     ~Database() override;
     bool open(const QString& database);
     bool checkStructure();
+
+    SettingsTable* coordsTable();
+    SettingsTable* delaysTable();
+    SettingsTable* speedsTable();
 signals:
 
     // Storage interface
@@ -37,6 +43,10 @@ protected:
 private:
     QSqlDatabase database();
     QString db_name;
+
+    SettingsTable* offsets = nullptr;
+    SettingsTable* delays = nullptr;
+    SettingsTable* speeds = nullptr;
 };
 
 } // namespace Schematics::Service
