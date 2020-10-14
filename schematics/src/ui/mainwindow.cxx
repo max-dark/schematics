@@ -186,9 +186,30 @@ void MainView::buildView(QMainWindow *self)
         topBox->addWidget(supportGroup);
         mainBox->addLayout(topBox);
     }
-    // add tabs
+
+    // main layout
     {
-        createTabs(mainBox);
+        auto main = new QHBoxLayout;
+        // left tool box
+        {
+            auto left = new QVBoxLayout;
+            auto speeds = new QGroupBox{"Настройка скоростей"};
+            {
+                auto box = new QGridLayout;
+                auto dial = new QDial;
+                box->addWidget(dial);
+                speeds->setLayout(box);
+            }
+            left->addWidget(speeds);
+            left->addItem(tool::createVSpace());
+            //
+            main->addLayout(left);
+        }
+        // add tabs
+        {
+            createTabs(main);
+        }
+        mainBox->addLayout(main);
     }
 
     // add main menu
