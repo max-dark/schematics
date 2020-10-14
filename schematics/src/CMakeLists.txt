@@ -91,6 +91,7 @@ target_sources(schematics
         main.cxx
         ui/mainwindow.cxx ui/mainwindow.hxx
         ui/dialogs/tabledialog.cxx ui/dialogs/tabledialog.hxx
+        ui/dialogs/editdelegate.cxx ui/dialogs/editdelegate.hxx
 )
 
 target_link_libraries(schematics

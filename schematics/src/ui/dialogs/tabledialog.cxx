@@ -10,6 +10,8 @@
 
 #include <QDebug>
 
+#include <ui/dialogs/editdelegate.hxx>
+
 namespace Schematics::Ui::Dialogs
 {
 
@@ -18,6 +20,7 @@ struct TableDialog::View
     QLineEdit * filter = nullptr;
     QTableView* table = nullptr;
     QDialogButtonBox* buttons = nullptr;
+    EditDelegate* editor = nullptr;
 
     void buildUi(TableDialog* self)
     {
@@ -56,6 +59,10 @@ struct TableDialog::View
             box->addWidget(buttons);
         }
         self->setLayout(box);
+
+        {
+            editor = new EditDelegate{self};
+        }
     }
 };
 
@@ -95,6 +102,8 @@ void TableDialog::setData(Service::SettingsTable *model)
             ui->table->hideColumn(column);
             ++column;
         }
+        ui->table->setItemDelegateForColumn(first_visible + 0, ui->editor);
+        ui->table->setItemDelegateForColumn(first_visible + 1, ui->editor);
     }
     else {
         ui->table->setModel(nullptr);
