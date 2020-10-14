@@ -1,5 +1,6 @@
 #include <services/alpha.hxx>
 #include <services/machine.hxx>
+#include <services/storage.hxx>
 
 #include <QDebug>
 
@@ -88,6 +89,7 @@ Alpha::Alpha(Coords::OffsetRepository *offsets,
 {
     initCoordMap();
     initMemoryMap();
+    initSpeedMap();
 }
 
 bool Alpha::axisInitIsDone() const
@@ -458,6 +460,87 @@ void Alpha::initMemoryMap()
         // статус инициализации "осей"
         registerCacheArea({.area = Tag::Area::MEMORY, .byte = 30}, 32);
     }
+}
+
+bool Alpha::setSpeedForZone(Storage *storage, int zone_id, int speed)
+{
+    if (connected())
+    {
+        auto zone_tag = speed_map.find(zone_id);
+        if (zone_tag != speed_map.end())
+        {
+            IntTag speed_tag{zone_tag->second};
+            speed_tag.set(speed);
+            auto ok = writeTag(speed_tag);
+            if (ok)
+            {
+                auto delays = storage->getNumbersByName("delays");
+                for (const auto&[_, delay]: delays)
+                {
+                    if (delay.zone_id == zone_id)
+                    {
+                        double base = delay.base;
+                        double offs = delay.offset;
+                        Tag::Int value = (offs + base * (30.0 / speed));
+                        if (value < 10) value = 10;
+
+                        IntTag delay_tag{delay.address};
+                        delay_tag.set(value);
+                        ok = writeTag(delay_tag);
+                        if (!ok)
+                        {
+                            break;
+                        }
+                    }
+                }
+            }
+            return ok;
+        }
+    }
+    return false;
+}
+
+SpeedMap Alpha::getCurrentSpeeds()
+{
+    SpeedMap map{};
+    if (connected())
+    {
+
+        for (const auto& [id, tag]: speed_map)
+        {
+            IntTag speed{tag};
+            auto ok = readTag(speed);
+            if (ok)
+            {
+                map[id] = speed.get();
+            }
+            else
+            {
+                return {};
+            }
+        }
+    }
+    return map;
+}
+
+void Alpha::initSpeedMap()
+{
+    auto area = Tag::Area::DATA;
+
+    // подача в цех
+    speed_map.emplace(0, TagAddress{.area = area, .db = 1112, .byte =  0});
+    // ФБС 1
+    speed_map.emplace(1, TagAddress{.area = area, .db = 1112, .byte =  4});
+    // ФБС 2
+    speed_map.emplace(2, TagAddress{.area = area, .db = 1112, .byte = 16});
+    // ПКА
+    speed_map.emplace(3, TagAddress{.area = area, .db = 1112, .byte = 28});
+    // Многопил
+    speed_map.emplace(4, TagAddress{.area = area, .db = 1112, .byte = 44});
+    // Боковые ленты
+    speed_map.emplace(5, TagAddress{.area = area, .db = 1113, .byte = 22});
+
+    //TODO: добавить остальное после проверки
 }
 
 } // namespace Schematics::Service

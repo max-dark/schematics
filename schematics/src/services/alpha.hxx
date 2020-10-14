@@ -6,6 +6,7 @@
 
 #include <schema/units.hxx>
 
+#include <services/application.hxx>
 #include <services/machine.hxx>
 #include <services/tags.hxx>
 
@@ -14,6 +15,8 @@
 
 namespace Schematics::Service
 {
+
+struct Storage;
 
 class Alpha: public Machine
 {
@@ -36,14 +39,19 @@ public:
     /// Обновить разрешение на работу участка подачи
     bool allowFeederToWork(bool allow);
 
+    bool setSpeedForZone(Storage* storage, int zone_id, int speed);
+    SpeedMap getCurrentSpeeds();
+
     bool applyCoordById(Coords::PositionId id, libschema::Unit value);
     bool applyCoordinates(const Coords::Coordinates& coords);
     const CoordMap& getCoordMap() const;
 private:
     void initCoordMap();
     void initMemoryMap();
+    void initSpeedMap();
     Coords::OffsetRepository* offsetList = nullptr;
     CoordMap coord_map;
+    std::map<int, TagAddress> speed_map;
 };
 
 } // namespace Schematics::Service

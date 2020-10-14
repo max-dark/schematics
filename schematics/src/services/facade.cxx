@@ -418,6 +418,16 @@ BoolMap Facade::getSupportAlarmsState()
     return kdo->getAlarmsState();
 }
 
+SpeedMap Facade::getCurrentSpeeds()
+{
+    return sab->getCurrentSpeeds();
+}
+
+bool Facade::setSpeedForZone(int zone_id, int speed)
+{
+    return sab->setSpeedForZone(database, zone_id, speed);
+}
+
 Facade::~Facade() = default;
 
 } // namespace Schematics::Service
