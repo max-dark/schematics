@@ -16,7 +16,7 @@ SpeedControl::SpeedControl(const QString &title, QWidget *parent)
     QSizePolicy policyX2{QSizePolicy::Maximum, QSizePolicy::Maximum};
 
     setSizePolicy(policyX2);
-    setMaximumWidth(100);
+    setMaximumWidth(120);
 
     dial = new QDial;
     {
