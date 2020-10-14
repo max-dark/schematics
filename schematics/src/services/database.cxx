@@ -167,10 +167,11 @@ NumberMap Database::getNumbersByName(const QString &name)
     NumberMap map{};
 
     auto ok = select.prepare(QString{
-        "select id, address, base, offset, description from '%1'"}.arg(name));
+        "select id, zone_id, address, base, offset, description from '%1'"}.arg(name));
     ok = ok && select.exec();
     while (ok && select.next()) {
         auto id = select.value("id").toInt();
+        auto zone = select.value("zone_id").toInt();
         auto base = select.value("base").toInt();
         auto offs = select.value("offset").toInt();
         auto addr = select.value("address").toString();
@@ -182,12 +183,14 @@ NumberMap Database::getNumbersByName(const QString &name)
         {
             map.emplace(id, Number{
                                .address = tag,
+                               .zone_id = zone,
                                .base = base,
                                .offset = offs,
                                .description = desc
                            });
         }
     }
+    qInfo() << "Table:" << name << "select" << ok << select.lastError().text();
     return map;
 }
 

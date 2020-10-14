@@ -18,6 +18,7 @@ using BooleanMap = std::map<int, Boolean>;
 struct Number
 {
     TagAddress address;
+    int32_t zone_id = 0;
     int32_t base = 0;
     int32_t offset = 0;
     QString description;
