@@ -540,7 +540,15 @@ void Alpha::initSpeedMap()
     // Боковые ленты
     speed_map.emplace(5, TagAddress{.area = area, .db = 1113, .byte = 22});
 
-    //TODO: добавить остальное после проверки
+    // Рольганг поз 24 / задание скорости
+    speed_map.emplace(6, TagAddress{.area = area, .db = 1112, .byte = 58});
+    // Множитель скорости / Поперечный отвод центральной доски
+    speed_map.emplace(7, TagAddress{.area = area, .db = 1113, .byte = 20});
+
+    // Задание скорости / поперечный транспортер боковых досок
+    speed_map.emplace(8, TagAddress{.area = area, .db = 1113, .byte =  4});
+    // Задание скорости / цепной транспортер боковых досок
+    speed_map.emplace(9, TagAddress{.area = area, .db = 1113, .byte = 10});
 }
 
 } // namespace Schematics::Service
