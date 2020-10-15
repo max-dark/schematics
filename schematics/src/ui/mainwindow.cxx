@@ -190,7 +190,7 @@ QLabel *MainView::createLabel(const QString &title)
 void MainView::buildView(QMainWindow *self)
 {
     self->setCentralWidget(new QWidget);
-    self->setWindowTitle("Schematics PoC Demo");
+    self->setWindowTitle("Schematics Alpha");
     auto mainBox = new QVBoxLayout;
 
     // add top panel
