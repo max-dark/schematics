@@ -126,7 +126,24 @@ struct MainView
             box->addItem(tool::createHSpace(), row, col);
             ++row; col = 0;
 
+            // Рольганг поз 24 / задание скорости
+            speeds.emplace_back(new Widgets::SpeedControl{"Рольганг поз 24"});
+            speeds.back()->setRange(0, 20480);
+            box->addWidget(speeds.back(), row, ++col);
 
+            // Множитель скорости / Поперечный отвод центральной доски
+            speeds.emplace_back(new Widgets::SpeedControl{"Сброс поз 24"});
+            box->addWidget(speeds.back(), row, ++col);
+
+            // Задание скорости / поперечный транспортер боковых досок
+            speeds.emplace_back(new Widgets::SpeedControl{"Поперечный поз 25"});
+            speeds.back()->setRange(0, 20480);
+            box->addWidget(speeds.back(), row, ++col);
+
+            // Задание скорости / цепной транспортер боковых досок
+            speeds.emplace_back(new Widgets::SpeedControl{"Цепной поз 25"});
+            speeds.back()->setRange(0, 20480);
+            box->addWidget(speeds.back(), row, ++col);
 
             tool::addGridRow(box, tool::createVSpace());
             speedsTab->setLayout(box);
