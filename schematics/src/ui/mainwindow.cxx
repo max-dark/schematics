@@ -38,6 +38,7 @@ namespace Ui
 {
 
 using LedVector = std::vector<Widgets::Led *>;
+using SpeedVector = std::vector<Widgets::SpeedControl *>;
 
 struct MainView
 {
@@ -61,6 +62,8 @@ struct MainView
     Widgets::Led *sab_alarm = nullptr;
     LedVector kdo_leds;
 
+    SpeedVector speeds;
+
     QTabWidget *tabList = nullptr;
 
     Widgets::SchemeView *schemeView = nullptr;
@@ -72,6 +75,7 @@ struct MainView
     Widgets::LedList *alarmsTab = nullptr;
     Widgets::LedList *sensorsTab = nullptr;
     QWidget *doorsTab = nullptr;
+    QWidget *speedsTab = nullptr;
 
     void buildView(QMainWindow *self);
 
@@ -100,6 +104,20 @@ struct MainView
         }
         box->addItem(tool::createVSpace(), box->rowCount(), 0);
         doorsTab->setLayout(box);
+    }
+
+    void createSpeedControls(MainWindow* self)
+    {
+        {
+            auto box = new QGridLayout;
+            box->addWidget(new Widgets::SpeedControl{"Подача"}, 0, 0);
+            box->addWidget(new Widgets::SpeedControl{"ФБС 1"}, 1, 0);
+            box->addWidget(new Widgets::SpeedControl{"ФБС 2"}, 2, 0);
+            box->addWidget(new Widgets::SpeedControl{"PA350/PKA350"}, 0, 1);
+            box->addWidget(new Widgets::SpeedControl{"PA300/DWS350"}, 1, 1);
+            box->addWidget(new Widgets::SpeedControl{"Лента"}, 2, 1);
+            speedsTab->setLayout(box);
+        }
     }
 
 private:
@@ -190,33 +208,10 @@ void MainView::buildView(QMainWindow *self)
 
     // main layout
     {
-        auto main = new QHBoxLayout;
-        // left tool box
-        {
-            auto left = new QVBoxLayout;
-            auto speeds = new QGroupBox{"Настройка скоростей"};
-            {
-                auto box = new QGridLayout;
-                box->addWidget(new Widgets::SpeedControl{"Подача"}, 0, 0);
-                box->addWidget(new Widgets::SpeedControl{"ФБС 1"}, 1, 0);
-                box->addWidget(new Widgets::SpeedControl{"ФБС 2"}, 2, 0);
-                box->addWidget(new Widgets::SpeedControl{"PA350/PKA350"}, 0, 1);
-                box->addWidget(new Widgets::SpeedControl{"PA300/DWS350"}, 1, 1);
-                box->addWidget(new Widgets::SpeedControl{"Лента"}, 2, 1);
-                speeds->setLayout(box);
-                speeds->setSizePolicy(QSizePolicy::Minimum,
-                                      QSizePolicy::Minimum);
-            }
-            left->addWidget(speeds);
-            left->addItem(tool::createVSpace());
-            //
-            main->addLayout(left);
-        }
         // add tabs
         {
-            createTabs(main);
+            createTabs(mainBox);
         }
-        mainBox->addLayout(main);
     }
 
     // add main menu
@@ -240,6 +235,7 @@ void MainView::createTabs(QLayout *mainBox)
         alarmsTab = new Widgets::LedList;
         sensorsTab = new Widgets::LedList;
         doorsTab = new QWidget;
+        speedsTab = new QWidget;
 
         // alarm state == On means OK, Off - failure
         alarmsTab->setColors(Widgets::Led::GREEN, Widgets::Led::RED);
@@ -250,6 +246,7 @@ void MainView::createTabs(QLayout *mainBox)
         tabList->addTab(alarmsTab, "Индикаторы аварий");
         tabList->addTab(sensorsTab, "Датчики");
         tabList->addTab(doorsTab, "Сервисные двери");
+        tabList->addTab(speedsTab, "Настройка скоростей");
     }
 
     mainBox->addWidget(tabList);
@@ -330,6 +327,8 @@ MainWindow::MainWindow(Service::Application *app, QWidget *parent)
     ui->motorsTab->createLeds(app->getMotorLabels());
     ui->sensorsTab->createLeds(app->getSensorLabels());
     ui->createDoors(app->getDoorsLabels(), this);
+    ui->createSpeedControls(this);
+
     bindEvents();
 
     auto params = new libschema::Params{};
