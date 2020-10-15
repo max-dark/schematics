@@ -106,17 +106,50 @@ struct MainView
         doorsTab->setLayout(box);
     }
 
-    void createSpeedControls(MainWindow* self)
+    void createSpeedControls(Service::Application *app)
     {
         {
             auto box = new QGridLayout;
-            box->addWidget(new Widgets::SpeedControl{"Подача"}, 0, 0);
-            box->addWidget(new Widgets::SpeedControl{"ФБС 1"}, 1, 0);
-            box->addWidget(new Widgets::SpeedControl{"ФБС 2"}, 2, 0);
-            box->addWidget(new Widgets::SpeedControl{"PA350/PKA350"}, 0, 1);
-            box->addWidget(new Widgets::SpeedControl{"PA300/DWS350"}, 1, 1);
-            box->addWidget(new Widgets::SpeedControl{"Лента"}, 2, 1);
+            auto const speedNames = QStringList{}
+                              << "Подача" << "ФБС 1" << "ФБС 2"
+                              << "PA350/PKA350" << "PA300/DWS350" << "Лента";
+            auto row = 0, col = 0;
+            speeds.reserve(12);
+            for(auto& name: speedNames)
+            {
+                auto control = new Widgets::SpeedControl{name};
+
+                speeds.emplace_back(control);
+                box->addWidget(control, row, col);
+                ++col;
+            }
+            box->addItem(tool::createHSpace(), row, col);
+            ++row; col = 0;
+
+
+
+            tool::addGridRow(box, tool::createVSpace());
             speedsTab->setLayout(box);
+
+
+            auto id = 0;
+            auto current = app->getCurrentSpeeds();
+            for (auto const control: speeds)
+            {
+                auto speed = current.find(id);
+                if (speed != current.end())
+                {
+                    control->setSpeed(speed->second);
+                }
+
+                QObject::connect(
+                    control,
+                    &Widgets::SpeedControl::apply, [app, id](int speed){
+                        qInfo() << "apply" << id << speed;
+                        app->setSpeedForZone(id, speed);
+                    });
+                ++id;
+            }
         }
     }
 
@@ -327,7 +360,7 @@ MainWindow::MainWindow(Service::Application *app, QWidget *parent)
     ui->motorsTab->createLeds(app->getMotorLabels());
     ui->sensorsTab->createLeds(app->getSensorLabels());
     ui->createDoors(app->getDoorsLabels(), this);
-    ui->createSpeedControls(this);
+    ui->createSpeedControls(app);
 
     bindEvents();
 
