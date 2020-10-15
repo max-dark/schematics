@@ -271,8 +271,7 @@ void Facade::updateState()
         emit updateKdoFailure(kdo->errorMessage());
     }
 
-    ///TODO: раскоментировать для работы
-    auto sab_ok = true;//sab->allowFeederToWork(kdo_run);
+    auto sab_ok = sab->allowFeederToWork(kdo_run);
     sab_ok = sab_ok && sab->updateCache();
 
     if (! sab_ok)
