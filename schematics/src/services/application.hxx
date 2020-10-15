@@ -13,6 +13,8 @@ namespace Schematics::Service
 {
 using LabelMap = std::map<int, QString>;
 using BoolMap = std::map<int, bool>;
+using SpeedMap = std::map<int, int>;
+
 struct Application
 {
     virtual bool applyCoordById(Coords::PositionId id, libschema::Unit value) = 0;
@@ -23,6 +25,9 @@ struct Application
     virtual SettingsTable* coordsTable() = 0;
     virtual SettingsTable* delaysTable() = 0;
     virtual SettingsTable* speedsTable() = 0;
+
+    virtual SpeedMap getCurrentSpeeds() = 0;
+    virtual bool setSpeedForZone(int zone_id, int speed) = 0;
 
     virtual void resetConnection() = 0;
 

@@ -79,10 +79,11 @@ SettingsTable *Database::delaysTable()
     {
         delays = (new DatabaseTable{"delays", db_name, this})
                 ->setColumnTitle(0, "ID")
-                ->setColumnTitle(1, "Адрес")
-                ->setColumnTitle(2, "База")
-                ->setColumnTitle(3, "Смещение")
-                ->setColumnTitle(4, "Описание");
+                ->setColumnTitle(1, "Участок")
+                ->setColumnTitle(2, "Адрес")
+                ->setColumnTitle(3, "Для 30 м/мин")
+                ->setColumnTitle(4, "Смещение")
+                ->setColumnTitle(5, "Описание");
     }
     return delays;
 }
@@ -93,10 +94,11 @@ SettingsTable *Database::speedsTable()
     {
         speeds = (new DatabaseTable{"speeds", db_name, this})
                 ->setColumnTitle(0, "ID")
-                ->setColumnTitle(1, "Адресс")
-                ->setColumnTitle(2, "База")
-                ->setColumnTitle(3, "Смещение")
-                ->setColumnTitle(4, "Описание");
+                ->setColumnTitle(1, "Участок")
+                ->setColumnTitle(2, "Адресс")
+                ->setColumnTitle(3, "Для 30 м/мин")
+                ->setColumnTitle(4, "Смещение")
+                ->setColumnTitle(5, "Описание");
     }
     return speeds;
 }
@@ -167,10 +169,11 @@ NumberMap Database::getNumbersByName(const QString &name)
     NumberMap map{};
 
     auto ok = select.prepare(QString{
-        "select id, address, base, offset, description from '%1'"}.arg(name));
+        "select id, zone_id, address, base, offset, description from '%1'"}.arg(name));
     ok = ok && select.exec();
     while (ok && select.next()) {
         auto id = select.value("id").toInt();
+        auto zone = select.value("zone_id").toInt();
         auto base = select.value("base").toInt();
         auto offs = select.value("offset").toInt();
         auto addr = select.value("address").toString();
@@ -182,12 +185,14 @@ NumberMap Database::getNumbersByName(const QString &name)
         {
             map.emplace(id, Number{
                                .address = tag,
+                               .zone_id = zone,
                                .base = base,
                                .offset = offs,
                                .description = desc
                            });
         }
     }
+    qInfo() << "Table:" << name << "select" << ok << select.lastError().text();
     return map;
 }
 

@@ -36,6 +36,9 @@ public:
     SettingsTable* delaysTable() override;
     SettingsTable* speedsTable() override;
 
+    SpeedMap getCurrentSpeeds() override;
+    bool setSpeedForZone(int zone_id, int speed) override;
+
     void resetConnection() override;
 
     void getAxisInitState(bool& is_started, bool& is_done) override;

@@ -10,6 +10,7 @@
 #include <ui/widgets/coords/coordstab.hxx>
 #include <ui/widgets/leds.hxx>
 #include <ui/widgets/ledlist.hxx>
+#include <ui/widgets/speedcontrol.hxx>
 #include <ui/tools/tool.hxx>
 
 #include <ui/dialogs/tabledialog.hxx>
@@ -37,6 +38,7 @@ namespace Ui
 {
 
 using LedVector = std::vector<Widgets::Led *>;
+using SpeedVector = std::vector<Widgets::SpeedControl *>;
 
 struct MainView
 {
@@ -60,6 +62,8 @@ struct MainView
     Widgets::Led *sab_alarm = nullptr;
     LedVector kdo_leds;
 
+    SpeedVector speeds;
+
     QTabWidget *tabList = nullptr;
 
     Widgets::SchemeView *schemeView = nullptr;
@@ -71,6 +75,7 @@ struct MainView
     Widgets::LedList *alarmsTab = nullptr;
     Widgets::LedList *sensorsTab = nullptr;
     QWidget *doorsTab = nullptr;
+    QWidget *speedsTab = nullptr;
 
     void buildView(QMainWindow *self);
 
@@ -99,6 +104,70 @@ struct MainView
         }
         box->addItem(tool::createVSpace(), box->rowCount(), 0);
         doorsTab->setLayout(box);
+    }
+
+    void createSpeedControls(Service::Application *app)
+    {
+        {
+            auto box = new QGridLayout;
+            auto const speedNames = QStringList{}
+                              << "Подача" << "ФБС 1" << "ФБС 2"
+                              << "PA350/PKA350" << "PA300/DWS350" << "Лента";
+            auto row = 0, col = 0;
+            speeds.reserve(12);
+            for(auto& name: speedNames)
+            {
+                auto control = new Widgets::SpeedControl{name};
+
+                speeds.emplace_back(control);
+                box->addWidget(control, row, col);
+                ++col;
+            }
+            box->addItem(tool::createHSpace(), row, col);
+            ++row; col = 0;
+
+            // Рольганг поз 24 / задание скорости
+            speeds.emplace_back(new Widgets::SpeedControl{"Рольганг поз 24"});
+            speeds.back()->setRange(0, 20480);
+            box->addWidget(speeds.back(), row, ++col);
+
+            // Множитель скорости / Поперечный отвод центральной доски
+            speeds.emplace_back(new Widgets::SpeedControl{"Сброс поз 24"});
+            box->addWidget(speeds.back(), row, ++col);
+
+            // Задание скорости / поперечный транспортер боковых досок
+            speeds.emplace_back(new Widgets::SpeedControl{"Поперечный поз 25"});
+            speeds.back()->setRange(0, 20480);
+            box->addWidget(speeds.back(), row, ++col);
+
+            // Задание скорости / цепной транспортер боковых досок
+            speeds.emplace_back(new Widgets::SpeedControl{"Цепной поз 25"});
+            speeds.back()->setRange(0, 20480);
+            box->addWidget(speeds.back(), row, ++col);
+
+            tool::addGridRow(box, tool::createVSpace());
+            speedsTab->setLayout(box);
+
+
+            auto id = 0;
+            auto current = app->getCurrentSpeeds();
+            for (auto const control: speeds)
+            {
+                auto speed = current.find(id);
+                if (speed != current.end())
+                {
+                    control->setSpeed(speed->second);
+                }
+
+                QObject::connect(
+                    control,
+                    &Widgets::SpeedControl::apply, [app, id](int speed){
+                        qInfo() << "apply" << id << speed;
+                        app->setSpeedForZone(id, speed);
+                    });
+                ++id;
+            }
+        }
     }
 
 private:
@@ -186,9 +255,13 @@ void MainView::buildView(QMainWindow *self)
         topBox->addWidget(supportGroup);
         mainBox->addLayout(topBox);
     }
-    // add tabs
+
+    // main layout
     {
-        createTabs(mainBox);
+        // add tabs
+        {
+            createTabs(mainBox);
+        }
     }
 
     // add main menu
@@ -212,6 +285,7 @@ void MainView::createTabs(QLayout *mainBox)
         alarmsTab = new Widgets::LedList;
         sensorsTab = new Widgets::LedList;
         doorsTab = new QWidget;
+        speedsTab = new QWidget;
 
         // alarm state == On means OK, Off - failure
         alarmsTab->setColors(Widgets::Led::GREEN, Widgets::Led::RED);
@@ -222,6 +296,7 @@ void MainView::createTabs(QLayout *mainBox)
         tabList->addTab(alarmsTab, "Индикаторы аварий");
         tabList->addTab(sensorsTab, "Датчики");
         tabList->addTab(doorsTab, "Сервисные двери");
+        tabList->addTab(speedsTab, "Настройка скоростей");
     }
 
     mainBox->addWidget(tabList);
@@ -302,6 +377,8 @@ MainWindow::MainWindow(Service::Application *app, QWidget *parent)
     ui->motorsTab->createLeds(app->getMotorLabels());
     ui->sensorsTab->createLeds(app->getSensorLabels());
     ui->createDoors(app->getDoorsLabels(), this);
+    ui->createSpeedControls(app);
+
     bindEvents();
 
     auto params = new libschema::Params{};
