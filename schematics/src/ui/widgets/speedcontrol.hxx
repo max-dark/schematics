@@ -16,6 +16,8 @@ public:
     void setSpeed(int speed);
     int speed() const;
 
+    void setRange(int minimum, int maximum);
+
 signals:
     void apply(int speed);
 

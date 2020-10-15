@@ -67,6 +67,14 @@ int SpeedControl::speed() const
     return edit->value();
 }
 
+void SpeedControl::setRange(int minimum, int maximum)
+{
+    QSignalBlocker block{this};
+
+    dial->setRange(minimum, maximum);
+    edit->setRange(minimum, maximum);
+}
+
 void SpeedControl::applyClicked()
 {
     emit apply(speed());
