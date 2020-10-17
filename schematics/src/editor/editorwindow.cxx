@@ -22,15 +22,15 @@ static constexpr auto scheme_filter = "Cutting scheme (*.cut)";
 
 struct EditorPrivate
 {
-    QAction *scheme_new = nullptr;
-    QAction *scheme_load = nullptr;
-    QAction *scheme_save = nullptr;
+    QAction *schema_new = nullptr;
+    QAction *schema_load = nullptr;
+    QAction *schema_save = nullptr;
 
     Schema* schema = nullptr;
     SchemeEditor* editor = nullptr;
     SchemeView* view = nullptr;
 
-    void create(EditorWindow* self);
+    void create(QMainWindow* self);
 
     void clear() const;
 
@@ -38,9 +38,31 @@ struct EditorPrivate
     void saveSchema(QWidget* parent = nullptr) const;
 
     void apply(const Schema* new_schema) const;
+
+
+    void schemeParamChanged() const;
+
+    void centralWidthChanged(double width) const;
+
+    void addCentralBoards(double height, size_t count) const;
+
+    void deleteAllCentralBoards() const;
+
+    void deleteCentralBoardByPos(QWidget* parent = nullptr) const;
+
+    void setAllCentralHeights(double height) const;
+
+    void setCentralHeightByPos(double height, QWidget* parent) const;
+
+    void pa300Changed(bool enabled, double width, double height) const;
+
+    void pka350Changed(bool enabled, double width, double height) const;
+
+    void pa350Changed(bool enabled, double width, double height) const;
+
 };
 
-void EditorPrivate::create(EditorWindow *self)
+void EditorPrivate::create(QMainWindow *self)
 {
     auto params = new Params{};
     schema = new Schema{self};
@@ -55,20 +77,21 @@ void EditorPrivate::create(EditorWindow *self)
     {
         auto menu = mainMenu->addMenu("Схема");
 
-        scheme_new = menu->addAction("Новая");
-        scheme_load = menu->addAction("Загрузить");
-        scheme_save = menu->addAction("Сохранить");
+        schema_new = menu->addAction("Новая");
+        schema_load = menu->addAction("Загрузить");
+        schema_save = menu->addAction("Сохранить");
     }
 
     editor = new SchemeEditor{};
     view = new SchemeView{};
 
-    box->addWidget(editor);
     box->addWidget(view);
+    box->addWidget(editor);
 
     centralView->setLayout(box);
     self->setMenuBar(mainMenu);
     self->setCentralWidget(centralView);
+    self->setWindowTitle("Schematics Editor");
 }
 
 void EditorPrivate::apply(const Schema *new_schema) const
@@ -197,6 +220,156 @@ void EditorPrivate::saveSchema(QWidget *parent) const
     }
 }
 
+void EditorPrivate::schemeParamChanged() const
+{
+    view->setDiameter(editor->minDiam());
+    view->setSawSizes(
+            editor->dwsSaw(),
+            editor->pkaSaw()
+    );
+    view->setVertical(editor->isVertical());
+
+    auto params = schema->params();
+
+    params->set_diameter(Unit::from_mm(editor->minDiam()));
+    params->set_dws_gap(Unit::from_mm(editor->dwsSaw()));
+    params->set_pka_gap(Unit::from_mm(editor->pkaSaw()));
+    params->set_rot2_mode(editor->isVertical());
+}
+
+void EditorPrivate::centralWidthChanged(double width) const
+{
+    view->setCentralWidth(width);
+    schema->set_dws_board_width(Unit::from_mm(width));
+}
+
+void EditorPrivate::addCentralBoards(double height, size_t count) const
+{
+    for (size_t i = 0; i < count; ++i)
+    {
+        view->addCentral(height);
+        schema->add_dws_board(Unit::from_mm(height));
+    }
+}
+
+void EditorPrivate::deleteAllCentralBoards() const
+{
+    auto count = schema->dws350().count().units();
+    while (count > 0)
+    {
+        count -= 1;
+        schema->remove_dws_board(count);
+        view->removeCentral(count);
+    }
+}
+
+void EditorPrivate::deleteCentralBoardByPos(QWidget *parent) const
+{
+    bool ok;
+    auto count = schema->dws350().count().units();
+
+    if (count > 0)
+    {
+        auto idx = QInputDialog::getInt(
+                parent,
+                "Введите номер доски",
+                "Введите номер доски для удаления (счет идет слева направо)",
+                1, 1, count, 1, &ok);
+        if (ok)
+        {
+            idx -= 1;
+            schema->remove_dws_board(idx);
+            view->removeCentral(idx);
+        }
+    }
+}
+
+void EditorPrivate::setAllCentralHeights(double height) const
+{
+    if (height > 0.0)
+    {
+        auto count = schema->dws350().count().units();
+        while (count > 0)
+        {
+            count -= 1;
+            schema->set_dws_board_height(count, Unit::from_mm(height));
+            view->setCentralHeight(count, height);
+        }
+    }
+}
+
+void EditorPrivate::setCentralHeightByPos(double height, QWidget *parent) const
+{
+    if (height > 0.0)
+    {
+        bool ok;
+        auto count = schema->dws350().count().units();
+
+        if (count > 0)
+        {
+            auto idx = QInputDialog::getInt(
+                    parent,
+                    "Введите номер доски",
+                    "Введите номер доски для замены (счет идет слева направо)",
+                    1, 1, count, 1, &ok);
+            if (ok)
+            {
+                idx -= 1;
+                schema->set_dws_board_height(idx, Unit::from_mm(height));
+                view->setCentralHeight(idx, height);
+            }
+        }
+    }
+}
+
+void EditorPrivate::pa300Changed(bool enabled, double width, double height) const
+{
+    view->setPA300Enabled(enabled);
+    view->setPA300Size(width, height);
+
+    if (enabled)
+    {
+        schema->set_pa300_board(Unit::from_mm(width),
+                                Unit::from_mm(height));
+    }
+    else
+    {
+        schema->remove_pa300_poard();
+    }
+}
+
+void EditorPrivate::pka350Changed(bool enabled, double width, double height) const
+{
+    view->setPKA350Enabled(enabled);
+    view->setPKA350Size(width, height);
+
+    if (enabled)
+    {
+        schema->set_pka350_board(Unit::from_mm(width),
+                                 Unit::from_mm(height));
+    }
+    else
+    {
+        schema->remove_pka350_poard();
+    }
+}
+
+void EditorPrivate::pa350Changed(bool enabled, double width, double height) const
+{
+    view->setPA350Enabled(enabled);
+    view->setPA350Size(width, height);
+
+    if (enabled)
+    {
+        schema->set_pa350_board(Unit::from_mm(width),
+                                Unit::from_mm(height));
+    }
+    else
+    {
+        schema->remove_pa350_poard();
+    }
+}
+
 EditorWindow::EditorWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui{new EditorPrivate}
@@ -219,9 +392,9 @@ void EditorWindow::bindEvents()
 {
     using MainWindow = EditorWindow;
 
-    bindAction(ui->scheme_new, this, &MainWindow::on_newScheme);
-    bindAction(ui->scheme_load, this, &MainWindow::on_loadScheme);
-    bindAction(ui->scheme_save, this, &MainWindow::on_saveScheme);
+    bindAction(ui->schema_new, this, &MainWindow::on_newScheme);
+    bindAction(ui->schema_load, this, &MainWindow::on_loadScheme);
+    bindAction(ui->schema_save, this, &MainWindow::on_saveScheme);
 
     connect(ui->editor, &SchemeEditor::schemeParamChanged,
             this, &MainWindow::schemeParamChanged);
@@ -264,154 +437,52 @@ void EditorWindow::on_saveScheme()
 
 void EditorWindow::schemeParamChanged()
 {
-    const auto editor = ui->editor;
-    const auto view = ui->view;
-    view->setDiameter(editor->minDiam());
-    view->setSawSizes(
-            editor->dwsSaw(),
-            editor->pkaSaw()
-    );
-    view->setVertical(editor->isVertical());
-
-    auto params = ui->schema->params();
-
-    params->set_diameter(Unit::from_mm(editor->minDiam()));
-    params->set_dws_gap(Unit::from_mm(editor->dwsSaw()));
-    params->set_pka_gap(Unit::from_mm(editor->pkaSaw()));
-    params->set_rot2_mode(editor->isVertical());
+    ui->schemeParamChanged();
 }
 
 void EditorWindow::centralWidthChanged(double width)
 {
-    ui->view->setCentralWidth(width);
-    ui->schema->set_dws_board_width(Unit::from_mm(width));
+    ui->centralWidthChanged(width);
 }
 
 void EditorWindow::addCentralBoards(double height, size_t count)
 {
-    for (size_t i = 0; i < count; ++i)
-    {
-        ui->view->addCentral(height);
-        ui->schema->add_dws_board(Unit::from_mm(height));
-    }
+    ui->addCentralBoards(height, count);
 }
 
 void EditorWindow::deleteAllCentralBoards()
 {
-    auto count = ui->schema->dws350().count().units();
-    while (count > 0)
-    {
-        count -= 1;
-        ui->schema->remove_dws_board(count);
-        ui->view->removeCentral(count);
-    }
+    ui->deleteAllCentralBoards();
 }
 
 void EditorWindow::deleteCentralBoardByPos()
 {
-    bool ok;
-    auto count = ui->schema->dws350().count().units();
-
-    if (count > 0)
-    {
-        auto idx = QInputDialog::getInt(
-                this,
-                "Введите номер доски",
-                "Введите номер доски для удаления (счет идет слева направо)",
-                1, 1, count, 1, &ok);
-        if (ok)
-        {
-            idx -= 1;
-            ui->schema->remove_dws_board(idx);
-            ui->view->removeCentral(idx);
-        }
-    }
+    ui->deleteCentralBoardByPos(this);
 }
 
 void EditorWindow::setAllCentralHeights(double height)
 {
-    if (height > 0.0)
-    {
-        auto count = ui->schema->dws350().count().units();
-        while (count > 0)
-        {
-            count -= 1;
-            ui->schema->set_dws_board_height(count, Unit::from_mm(height));
-            ui->view->setCentralHeight(count, height);
-        }
-    }
+    ui->setAllCentralHeights(height);
 }
 
 void EditorWindow::setCentralHeightByPos(double height)
 {
-    if (height > 0.0)
-    {
-        bool ok;
-        auto count = ui->schema->dws350().count().units();
-
-        if (count > 0)
-        {
-            auto idx = QInputDialog::getInt(
-                    this,
-                    "Введите номер доски",
-                    "Введите номер доски для замены (счет идет слева направо)",
-                    1, 1, count, 1, &ok);
-            if (ok)
-            {
-                idx -= 1;
-                ui->schema->set_dws_board_height(idx, Unit::from_mm(height));
-                ui->view->setCentralHeight(idx, height);
-            }
-        }
-    }
+    ui->setCentralHeightByPos(height, this);
 }
 
 void EditorWindow::pa300Changed(bool enabled, double width, double height)
 {
-    ui->view->setPA300Enabled(enabled);
-    ui->view->setPA300Size(width, height);
-
-    if (enabled)
-    {
-        ui->schema->set_pa300_board(Unit::from_mm(width),
-                                Unit::from_mm(height));
-    }
-    else
-    {
-        ui->schema->remove_pa300_poard();
-    }
+    ui->pa300Changed(enabled, width, height);
 }
 
 void EditorWindow::pka350Changed(bool enabled, double width, double height)
 {
-    ui->view->setPKA350Enabled(enabled);
-    ui->view->setPKA350Size(width, height);
-
-    if (enabled)
-    {
-        ui->schema->set_pka350_board(Unit::from_mm(width),
-                                 Unit::from_mm(height));
-    }
-    else
-    {
-        ui->schema->remove_pka350_poard();
-    }
+    ui->pka350Changed(enabled, width, height);
 }
 
 void EditorWindow::pa350Changed(bool enabled, double width, double height)
 {
-    ui->view->setPA350Enabled(enabled);
-    ui->view->setPA350Size(width, height);
-
-    if (enabled)
-    {
-        ui->schema->set_pa350_board(Unit::from_mm(width),
-                                Unit::from_mm(height));
-    }
-    else
-    {
-        ui->schema->remove_pa350_poard();
-    }
+    ui->pa350Changed(enabled, width, height);
 }
 
 } // namespace Schematics::Editor
