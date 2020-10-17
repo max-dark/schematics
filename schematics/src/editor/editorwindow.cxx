@@ -9,22 +9,16 @@
 #include <schema/xmlreader.hxx>
 #include <schema/xmlwriter.hxx>
 
+#include <ui/tools/tool.hxx>
+
 namespace Schematics::Editor
 {
 
 using namespace Schematics::Ui::Widgets;
+using namespace Schematics::Ui::tool;
 using namespace libschema;
 
 static constexpr auto scheme_filter = "Cutting scheme (*.cut)";
-
-template<class ObjectT, class MethodT>
-static auto bindAction(QAction *action, ObjectT *object, MethodT method)
-{
-    return QObject::connect(
-            action, &QAction::triggered,
-            object, method
-    );
-}
 
 struct EditorPrivate
 {
