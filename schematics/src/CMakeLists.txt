@@ -100,3 +100,16 @@ target_link_libraries(schematics
     PRIVATE
         schema coords services ui
 )
+
+add_executable(editor WIN32)
+
+target_sources(editor
+    PRIVATE
+        editor/editor.cxx
+        editor/editorwindow.cxx editor/editorwindow.hxx
+)
+
+target_link_libraries(editor
+    PRIVATE
+        ui schema Qt5::Widgets
+)
