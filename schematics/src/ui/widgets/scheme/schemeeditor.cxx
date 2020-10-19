@@ -83,8 +83,8 @@ namespace Schematics::Ui::Widgets
         group.height->setValue(height);
     }
 
-    SchemeEditor::SchemeEditor(QWidget *parent) : QGroupBox(parent) {
-        buildView();
+    SchemeEditor::SchemeEditor(bool addButtons, QWidget *parent) : QGroupBox(parent) {
+        buildView(addButtons);
     }
 
     double SchemeEditor::minDiam() const
@@ -155,7 +155,7 @@ namespace Schematics::Ui::Widgets
         setPA350(false, 0.0, 0.0);
     }
 
-    void SchemeEditor::buildView() {
+    void SchemeEditor::buildView(bool addButtons) {
         using namespace Schematics::Ui;
 
         setTitle("Редактор схем");
@@ -287,6 +287,7 @@ namespace Schematics::Ui::Widgets
         }
 
         // bottom buttons
+        if (addButtons)
         {
             auto btn_calcScheme = new QPushButton{"Рассчитать координаты"};
             auto btn_applyScheme = new QPushButton{"Выставить оборудование"};
