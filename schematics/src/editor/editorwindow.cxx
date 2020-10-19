@@ -82,7 +82,7 @@ void EditorPrivate::create(QMainWindow *self)
         schema_save = menu->addAction("Сохранить");
     }
 
-    editor = new SchemeEditor{};
+    editor = new SchemeEditor{false};
     view = new SchemeView{};
 
     box->addWidget(view);
