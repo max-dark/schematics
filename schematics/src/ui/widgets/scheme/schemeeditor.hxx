@@ -15,7 +15,7 @@ namespace Schematics::Ui::Widgets
     {
         Q_OBJECT
     public /* methods */:
-        explicit SchemeEditor(QWidget* parent = nullptr);
+        explicit SchemeEditor(bool addButtons = true,QWidget* parent = nullptr);
         ~SchemeEditor() override;
 
         double minDiam() const;
@@ -54,7 +54,6 @@ namespace Schematics::Ui::Widgets
         void applySchemeCoords();
 
     private slots:
-        void on_addBoardClicked();
         void on_addNBoardsClicked(size_t count);
         void on_pa300Changed();
         void on_pka350Changed();
@@ -67,7 +66,7 @@ namespace Schematics::Ui::Widgets
             NumberEditor* height = nullptr;
         };
     private /* methods */:
-        void buildView();
+        void buildView(bool addButtons);
 
         void bindButton(QPushButton* btn, void (SchemeEditor::* method)()) const;
         void bindEditor(NumberEditor* box, void (SchemeEditor::* method)()) const;

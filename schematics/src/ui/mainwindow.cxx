@@ -27,6 +27,7 @@
 #include <vector>
 #include <algorithm>
 
+using namespace Schematics::Ui::tool;
 using libschema::Unit;
 
 namespace Schematics
@@ -355,15 +356,6 @@ QMenuBar *MainView::createMainMenu()
     return mainMenu;
 }
 
-}
-
-template<class ObjectT, class MethodT>
-auto bindAction(QAction *action, ObjectT *object, MethodT method)
-{
-    return QObject::connect(
-            action, &QAction::triggered,
-            object, method
-    );
 }
 
 MainWindow::MainWindow(Service::Application *app, QWidget *parent)
