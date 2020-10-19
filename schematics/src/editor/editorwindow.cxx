@@ -390,34 +390,32 @@ EditorWindow::~EditorWindow()
 
 void EditorWindow::bindEvents()
 {
-    using MainWindow = EditorWindow;
-
-    bindAction(ui->schema_new, this, &MainWindow::on_newScheme);
-    bindAction(ui->schema_load, this, &MainWindow::on_loadScheme);
-    bindAction(ui->schema_save, this, &MainWindow::on_saveScheme);
+    bindAction(ui->schema_new, this, &EditorWindow::on_newScheme);
+    bindAction(ui->schema_load, this, &EditorWindow::on_loadScheme);
+    bindAction(ui->schema_save, this, &EditorWindow::on_saveScheme);
 
     connect(ui->editor, &SchemeEditor::schemeParamChanged,
-            this, &MainWindow::schemeParamChanged);
+            this, &EditorWindow::schemeParamChanged);
     connect(ui->editor, &SchemeEditor::centralWidthChanged,
-            this, &MainWindow::centralWidthChanged);
+            this, &EditorWindow::centralWidthChanged);
     connect(ui->editor, &SchemeEditor::addCentralBoards,
-            this, &MainWindow::addCentralBoards);
+            this, &EditorWindow::addCentralBoards);
     connect(ui->editor, &SchemeEditor::deleteAllCentralBoards,
-            this, &MainWindow::deleteAllCentralBoards);
+            this, &EditorWindow::deleteAllCentralBoards);
     connect(ui->editor, &SchemeEditor::deleteCentralBoardByPos,
-            this, &MainWindow::deleteCentralBoardByPos);
+            this, &EditorWindow::deleteCentralBoardByPos);
 
     connect(ui->editor, &SchemeEditor::setAllCentralHeights,
-            this, &MainWindow::setAllCentralHeights);
+            this, &EditorWindow::setAllCentralHeights);
     connect(ui->editor, &SchemeEditor::setCentralHeightByPos,
-            this, &MainWindow::setCentralHeightByPos);
+            this, &EditorWindow::setCentralHeightByPos);
 
     connect(ui->editor, &SchemeEditor::pa300Changed,
-            this, &MainWindow::pa300Changed);
+            this, &EditorWindow::pa300Changed);
     connect(ui->editor, &SchemeEditor::pka350Changed,
-            this, &MainWindow::pka350Changed);
+            this, &EditorWindow::pka350Changed);
     connect(ui->editor, &SchemeEditor::pa350Changed,
-            this, &MainWindow::pa350Changed);
+            this, &EditorWindow::pa350Changed);
 }
 
 void EditorWindow::on_newScheme()
