@@ -299,11 +299,6 @@ namespace Schematics::Ui::Widgets
         tool::addGridRow(editBox, tool::createVSpace());
     }
 
-    void SchemeEditor::on_addBoardClicked()
-    {
-        on_addNBoardsClicked(1);
-    }
-
     void SchemeEditor::on_addNBoardsClicked(size_t count)
     {
         auto width = scheme_dws350_width->value();
