@@ -1,0 +1,92 @@
+﻿<!--
+	Файл настройки задержек
+	base - общая задержка в миллисекундах до желаемого результата работы механизма на скорости линии 30м/м 
+	shift - постоянная задержка, время срабатывания механизмов, записывается всегда с минусом
+	min - минимальная суммарная задержка, всегда 10
+		
+-->
+<delays>
+	<delay id="0" address="748" base="300" shift="0" min="10" description ="задержка прижима роликов выгрузки фбс1 поз 9" vartype="16"/>
+	<delay id="1" address="752" base="300" shift="0" min="10" description ="задержка разжима роликов выгрузки фбс1 поз 9" vartype="16"/>
+	<delay id="2" address="756" base="1650" shift="-1500" min="10" description ="задержка прижима поворотных роликов 1 поз 8" vartype="16"/>
+	<delay id="3" address="760" base="10" shift="0" min="10" description ="задержка разжима поворотных роликов 1 поз 8" vartype="16"/>
+	<delay id="4" address="764" base="3580" shift="-1580" min="10"  description ="задержка прижима поворотных роликов 2 поз 8" vartype="16"/>
+	<delay id="5" address="768" base="1950" shift="0" min="10"  description ="задержка разжима поворотных роликов 2 поз 8" vartype="16"/><!-- было 10 -->
+	<delay id="6" address="772" base="5200" shift="0" min="10"  description ="задержка прижима прижима 1 поз 8" vartype="16"/>
+	<delay id="7" address="776" base="4900" shift="0" min="10"  description ="задержка разжима прижима 1 поз 8" vartype="16"/>
+	<delay id="8" address="780" base="5520" shift="-1520" min="10"  description ="задержка прижима центрирующих роликов поз 8" vartype="16"/>
+	<delay id="9" address="784" base="1800" shift="0" min="10"  description ="задержка выключения прижима центрирующих роликов поз 8" vartype="16"/>
+
+	<delay id="10" address="788" base="5300" shift="0" min="10"  description ="задержка разжима центрирующих роликов поз 8" vartype="16"/>
+	<delay id="11" address="792" base="1200" shift="0" min="10"  description ="задержка прижима прижима 2 поз 8" vartype="16"/>
+	<delay id="12" address="796" base="800" shift="0" min="10"  description ="задержка разжима прижима 2 поз 8" vartype="16"/>
+	<delay id="13" address="800" base="6300" shift="-1500" min="10"  description ="задержка прижима приемных роликов поз 8" vartype="16"/>
+	<delay id="14" address="804" base="2000" shift="0" min="10"  description ="задержка разжима приемных роликов поз 8" vartype="16"/><!-- было 1300 -->
+	<delay id="15" address="808" base="700" shift="0" min="10"  description ="задержка прижима роликов 1 поворотного устройства поз 11" vartype="16"/><!-- было 100 -->
+	<delay id="16" address="812" base="700" shift="0" min="10"  description ="задержка прижима роликов 2 поворотного устройства поз 11" vartype="16"/><!-- было 100 -->
+	<delay id="17" address="816" base="50" shift="0" min="10"  description ="задержка разжима роликов поворотного устройства поз 11" vartype="16"/>
+	<delay id="18" address="820" base="3000" shift="-2000" min="10"  description ="задержка поворота поворотного устройства поз 11" vartype="16"/>
+	<delay id="19" address="824" base="10" shift="0" min="10"  description ="задержка прижима центрирующих роликов 1 поз 13" vartype="16"/>
+
+	<delay id="20" address="828" base="10" shift="0" min="10"  description ="задержка разжима центрирующих роликов 1 поз 13" vartype="16"/>
+	<delay id="21" address="832" base="2550" shift="0" min="10"  description ="задержка прижима прижима 1 поз 13" vartype="16"/>
+	<delay id="22" address="836" base="2300" shift="0" min="10"  description ="задержка разжима прижима 1 поз 13" vartype="16"/>
+	<delay id="23" address="840" base="2910" shift="-1110" min="10"  description ="задержка прижима центрирующих роликов 2 поз 13" vartype="16"/>
+	<delay id="24" address="844" base="10" shift="0" min="10"  description ="задержка разжима центрирующих роликов 2 поз 13" vartype="16"/>
+	<delay id="25" address="848" base="4400" shift="0" min="10"  description ="задержка прижима прижима 2 поз 13" vartype="16"/>
+	<delay id="26" address="852" base="4100" shift="0" min="10"  description ="задержка разжима прижима 2 поз 13" vartype="16"/>
+	<delay id="27" address="856" base="5000" shift="-900" min="10"  description ="задержка прижима центрирующих роликов 3 поз 13" vartype="16"/>
+	<delay id="28" address="860" base="2000" shift="0" min="10"  description ="задержка выключения прижима центрирующих роликов 3 поз 13" vartype="16"/>
+	<delay id="29" address="864" base="4800" shift="0" min="10"  description ="задержка разжима центрирующих роликов 3 поз 13" vartype="16"/>
+
+	<delay id="30" address="868" base="900" shift="0" min="10"  description ="задержка прижима прижима 3 поз 13" vartype="16"/>
+	<delay id="31" address="872" base="700" shift="0" min="10"  description ="задержка разжима прижима 3 поз 13" vartype="16"/>
+	<delay id="32" address="876" base="5500" shift="-1500" min="10"  description ="задержка прижима приемных роликов поз 13" vartype="16"/>
+	<delay id="33" address="880" base="1000" shift="0" min="10"  description ="задержка разжима приемных роликов поз 13" vartype="16"/>
+	<delay id="34" address="884" base="100" shift="0" min="10"  description ="задержка прижима роликов выгрузки фбс2 поз 14" vartype="16"/>
+	<delay id="35" address="888" base="10" shift="0" min="10"  description ="задержка разжима роликов выгрузки фбс2 поз 14" vartype="16"/>
+	<delay id="36" address="892" base="10" shift="0" min="10"  description ="задержка прижима центрирующих роликов поз 16" vartype="16"/>
+	<delay id="37" address="896" base="100" shift="0" min="10"  description ="задержка разжима центрирующих роликов поз 16" vartype="16"/>
+	<delay id="38" address="900" base="10" shift="0" min="10"  description ="задержка прижима центрирующих роликов поз 17" vartype="16"/>
+	<delay id="39" address="904" base="100" shift="0" min="10"  description ="задержка разжима центрирующих роликов поз 17" vartype="16"/>
+
+	<delay id="40" address="908" base="10" shift="0" min="10"  description ="задержка прижима роликов выгрузки поз 17" vartype="16"/>
+	<delay id="41" address="912" base="100" shift="0" min="10"  description ="задержка разжима роликов выгрузки поз 17" vartype="16"/>
+	<delay id="42" address="916" base="900" shift="0" min="10"  description ="задержка прижима роликов боковых досок 1 поз 18" vartype="16"/>
+	<delay id="43" address="920" base="300" shift="0" min="10"  description ="задержка разжима роликов боковых досок 1 поз 18" vartype="16"/>
+	<delay id="44" address="924" base="2700" shift="0" min="10"  description ="задержка прижима роликов боковых досок 2 поз 18" vartype="16"/>
+	<delay id="45" address="928" base="300" shift="0" min="10"  description ="задержка разжима роликов боковых досок 2 поз 18" vartype="16"/>
+	<delay id="46" address="932" base="4700" shift="0" min="10"  description ="задержка прижима роликов боковых досок 3 поз 18" vartype="16"/>
+	<delay id="47" address="936" base="300" shift="0" min="10"  description ="задержка разжима роликов боковых досок 3 поз 18" vartype="16"/>
+	<delay id="48" address="940" base="6600" shift="0" min="10"  description ="задержка прижима роликов боковых досок 4 поз 18" vartype="16"/>
+	<delay id="49" address="944" base="300" shift="0" min="10"  description ="задержка разжима роликов боковых досок 4 поз 18" vartype="16"/>
+
+	<delay id="50" address="948" base="8600" shift="0" min="10"  description ="задержка прижима роликов боковых досок 5 поз 18" vartype="16"/>
+	<delay id="51" address="952" base="300" shift="0" min="10"  description ="задержка разжима роликов боковых досок 5 поз 18" vartype="16"/>
+	<delay id="52" address="956" base="10600" shift="0" min="10"  description ="задержка прижима роликов боковых досок 6 поз 18" vartype="16"/>
+	<delay id="53" address="960" base="300" shift="0" min="10"  description ="задержка разжима роликов боковых досок 6 поз 18" vartype="16"/>
+	<delay id="54" address="964" base="11500" shift="-10000" min="10"  description ="задержка прижима верхнего прижима поз 18" vartype="16"/>
+	<delay id="55" address="968" base="1000" shift="0" min="10"  description ="задержка разжима верхнего прижима поз 18" vartype="16"/>
+	<delay id="56" address="972" base="500" shift="0" min="10"  description ="задержка прижима выталкивателя досок поз 18" vartype="16"/>
+	<delay id="57" address="976" base="3500" shift="0" min="10"  description ="задержка разжима выталкивателя досок поз 18" vartype="16"/>
+	<delay id="58" address="980" base="10" shift="0" min="10"  description ="задержка прижима роликов поворотного устройства поз 19" vartype="16"/>
+	<delay id="59" address="984" base="2300" shift="0" min="10"  description ="задержка разжима роликов поворотного устройства поз 19" vartype="16"/>
+
+	<delay id="60" address="988" base="10" shift="0" min="10"  description ="задержка поворота поворотного устройства поз 19" vartype="16"/>
+	<delay id="61" address="992" base="2000" shift="0" min="10"  description ="задержка включения поперечного отвода" vartype="16"/><!-- 6м = 2000, 3м = 5000 -->
+	<delay id="62" address="996" base="10" shift="0" min="10"  description ="задержка прижима центрирующих роликов поз 21" vartype="16"/>
+	<delay id="63" address="1000" base="100" shift="0" min="10"  description ="задержка разжима центрирующих роликов поз 21" vartype="16"/>
+	<delay id="64" address="1004" base="10" shift="0" min="10"  description ="задержка прижима центрирующих роликов поз 22" vartype="16"/>
+	<delay id="65" address="1008" base="100" shift="0" min="10"  description ="задержка разжима центрирующих роликов поз 22" vartype="16"/>
+	<delay id="66" address="1012" base="950" shift="0" min="10"  description ="задержка прижима прижимных роликов 1 поз 23" vartype="16"/>
+	<delay id="67" address="1016" base="700" shift="0" min="10"  description ="задержка разжима прижимных роликов 1 поз 23" vartype="16"/>
+	<delay id="68" address="1020" base="10" shift="0" min="10"  description ="задержка прижима прижимных роликов 2 поз 23" vartype="16"/>
+	<delay id="69" address="1024" base="10" shift="0" min="10"  description ="задержка разжима прижимных роликов 2 поз 23" vartype="16"/>
+	
+	<delay id="70" address="1028" base="450" shift="0" min="10"  description ="задержка прижима прижимных роликов 3 поз 23" vartype="16"/>
+	<delay id="71" address="1032" base="200" shift="0" min="10"  description ="задержка разжима прижимных роликов 3 поз 23" vartype="16"/>
+	<delay id="72" address="1036" base="1400" shift="0" min="10"  description ="задержка прижима роликов выгрузки поз 23" vartype="16"/>
+	<delay id="73" address="1040" base="1100" shift="0" min="10"  description ="задержка разжима роликов выгрузки поз 23" vartype="16"/>
+	<delay id="74" address="1044" base="700" shift="0" min="10"  description ="задержка прижима роликов боковых досок пка350 поз 17" vartype="16"/>
+	<delay id="75" address="1048" base="700" shift="0" min="10"  description ="задержка разжима роликов боковых досок пка350 поз 17" vartype="16"/>
+</delays>

@@ -1,0 +1,13 @@
+﻿<bits>
+	<bit id="0" address = "48" bit="0" area="flag" min="0" max="1" description ="ФБС1 дверь слева" vartype="1"/>
+	<bit id="1" address = "48" bit="1" area="flag" min="0" max="1" description ="ФБС1 дверь справа" vartype="1"/>
+	<bit id="2" address = "48" bit="2" area="flag" min="0" max="1" description ="ФБС2 дверь слева" vartype="1"/>
+	<bit id="3" address = "48" bit="3" area="flag" min="0" max="1" description ="ФБС2 дверь справа" vartype="1"/>
+	<bit id="4" address = "48" bit="4" area="flag" min="0" max="1" description ="PKA350 кожух суппорта" vartype="1"/>
+	<bit id="5" address = "48" bit="5" area="flag" min="0" max="1" description ="Платформа  ФБС 1" vartype="1"/>
+	<bit id="6" address = "48" bit="6" area="flag" min="0" max="1" description ="Фиксатор платформы  ФБС 1" vartype="1"/>
+	<bit id="7" address = "48" bit="7" area="flag" min="0" max="1" description ="Платформа ФБС 2" vartype="1"/>
+	<bit id="8" address = "49" bit="0" area="flag" min="0" max="1" description ="Фиксатор платформы  ФБС 1" vartype="1"/>
+	<bit id="9" address = "49" bit="1" area="flag" min="0" max="1" description ="Платформа  PKA350" vartype="1"/>
+</bits>
+	

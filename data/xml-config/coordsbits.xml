@@ -1,0 +1,104 @@
+<bits>
+	<bit id="0" bit="0" address = "31" area="flag" min="0" max="1"  description ="ADDR__FBS1_LeftMillerWidth" vartype="1"/>
+	
+	<bit id="1" bit="1" address = "31" area="flag" min="0" max="1"  description ="ADDR__FBS1_RightMillerWidth" vartype="1"/>
+
+	<bit id="2" bit="0" address = "45" area="flag" min="0" max="1"  description ="ADDR__FBS1_PressHeight1" vartype="1"/>
+
+	<bit id="3" bit="1" address = "45" area="flag" min="0" max="1"  description ="ADDR__FBS1_PressHeight2" vartype="1"/>
+
+	<bit id="4" bit="7" address = "45" area="flag" min="0" max="1"  description ="ADDR__FBS1_RotatorHeight" vartype="1"/>
+
+	<bit id="5" bit="5" address = "45" area="flag" min="0" max="1"  description ="ADDR__FBS1_RotatorRollsWidth1" vartype="1"/>
+	
+	<bit id="6" bit="6" address = "45" area="flag" min="0" max="1"  description ="ADDR__FBS1_RotatorRollsWidth2" vartype="1"/>
+
+	<bit id="7" bit="5" address = "31" area="flag" min="0" max="1"  description ="ADDR__FBS2_LeftMillerWidth" vartype="1"/>
+
+	<bit id="8" bit="6" address = "31" area="flag" min="0" max="1"  description ="ADDR__FBS2_RightMillerWidth" vartype="1"/>
+
+	<bit id="9" bit="2" address = "32" area="flag" min="0" max="1"  description ="ADDR__FBS2_EqualRolls1" vartype="1"/>
+
+	<bit id="10" bit="3" address = "32" area="flag" min="0" max="1"  description ="ADDR__FBS2_EqualRolls2" vartype="1"/>
+
+	<bit id="11" bit="4" address = "32" area="flag" min="0" max="1"  description ="ADDR__FBS2_EqualRolls3" vartype="1"/>
+
+	<bit id="12" bit="2" address = "45" area="flag" min="0" max="1"  description ="ADDR__FBS2_PressHeight1" vartype="1"/>
+
+	<bit id="13" bit="3" address = "45" area="flag" min="0" max="1"  description ="ADDR__FBS2_PressHeight2" vartype="1"/>
+	
+	<bit id="14" bit="4" address = "45" area="flag" min="0" max="1"  description ="ADDR__FBS2_PressHeight3" vartype="1"/>
+	
+	<bit id="15" bit="1" address = "33" area="flag" min="0" max="1"  description ="ADDR__PA350_LeftMillerWidth" vartype="1"/>
+
+	<bit id="16" bit="2" address = "33" area="flag" min="0" max="1"  description ="ADDR__PA350_RightMillerWidth" vartype="1"/>
+		
+	<bit id="17" bit="0" address = "34" area="flag" min="0" max="1"  description ="ADDR__PA350_TopLeftMillerHeight" vartype="1"/>
+	
+	<bit id="18" bit="1" address = "34" area="flag" min="0" max="1"  description ="ADDR__PA350_TopRightMillerHeight" vartype="1"/>
+		
+	<bit id="19" bit="6" address = "33" area="flag" min="0" max="1"  description ="ADDR__PA350_BotLeftMillerHeight" vartype="1"/>
+
+	<bit id="20" bit="7" address = "33" area="flag" min="0" max="1"  description ="ADDR__PA350_BotRightMillerHeight" vartype="1"/>
+		
+	<bit id="21" bit="0" address = "46" area="flag" min="0" max="1"  description ="ADDR__PA350_CenterRollsWidth" vartype="1"/>
+
+	<bit id="22" bit="0" address = "36" area="flag" min="0" max="1"  description ="ADDR__PKA350_LeftMillerWidth" vartype="1"/>
+
+	<bit id="23" bit="1" address = "36" area="flag" min="0" max="1"  description ="ADDR__PKA350_RightMillerWidth" vartype="1"/>
+		
+	<bit id="24" bit="1" address = "35" area="flag" min="0" max="1"  description ="ADDR__PKA350_TopLeftMillerHeight" vartype="1"/>
+	
+	<bit id="25" bit="2" address = "35" area="flag" min="0" max="1"  description ="ADDR__PKA350_TopRightMillerHeight" vartype="1"/>
+	
+	<bit id="26" bit="7" address = "34" area="flag" min="0" max="1"  description ="ADDR__PKA350_BotLeftMillerHeight" vartype="1"/>
+	
+	<bit id="27" bit="0" address = "35" area="flag" min="0" max="1"  description ="ADDR__PKA350_BotRightMillerHeight" vartype="1"/>
+		
+	<bit id="28" bit="5" address = "36" area="flag" min="0" max="1"  description ="ADDR__PKA350_SideLeftRollWidth" vartype="1"/>
+
+	<bit id="29" bit="6" address = "36" area="flag" min="0" max="1"  description ="ADDR__PKA350_SideRightRollWidth" vartype="1"/>
+	
+	<bit id="30" bit="2" address = "37" area="flag" min="0" max="1"  description ="ADDR__PKA350_LeftSawsWidth" vartype="1"/>
+
+	<bit id="31" bit="3" address = "37" area="flag" min="0" max="1"  description ="ADDR__PKA350_RightSawsWidth" vartype="1"/>
+	
+	<bit id="32" bit="1" address = "46" area="flag" min="0" max="1"  description ="ADDR__PKA350_CenterRollsWidth" vartype="1"/>
+
+	<bit id="33" bit="2" address = "46" area="flag" min="0" max="1"  description ="ADDR__PKA350_OutRollsWidth" vartype="1"/>
+	
+	<bit id="34" bit="3" address = "46" area="flag" min="0" max="1"  description ="ADDR__PKA350_RotatorHeight" vartype="1"/>
+	
+	<bit id="35" bit="7" address = "46" area="flag" min="0" max="1"  description ="ADDR__PKA350_LeftSawsHeight" vartype="1"/>
+
+	<bit id="36" bit="0" address = "47" area="flag" min="0" max="1"  description ="ADDR__PKA350_RightSawsHeight" vartype="1"/>
+	
+	<bit id="37" bit="1" address = "47" area="flag" min="0" max="1"  description ="ADDR__PKA350_TopPressHeight" vartype="1"/>
+	
+	<bit id="38" bit="7" address = "37" area="flag" min="0" max="1"  description ="ADDR__PA300_LeftMillerWidth" vartype="1"/>
+	
+	<bit id="39" bit="0" address = "38" area="flag" min="0" max="1"  description ="ADDR__PA300_RightMillerWidth" vartype="1"/>
+		
+	<bit id="40" bit="6" address = "38" area="flag" min="0" max="1"  description ="ADDR__PA300_TopLeftMillerHeight" vartype="1"/>
+	
+	<bit id="41" bit="7" address = "38" area="flag" min="0" max="1"  description ="ADDR__PA300_TopRightMillerHeight" vartype="1"/>
+		
+	<bit id="42" bit="4" address = "38" area="flag" min="0" max="1"  description ="ADDR__PA300_BotLeftMillerHeight" vartype="1"/>
+
+	<bit id="43" bit="5" address = "38" area="flag" min="0" max="1"  description ="ADDR__PA300_BotRightMillerHeight" vartype="1"/>
+		
+	<bit id="44" bit="4" address = "46" area="flag" min="0" max="1"  description ="ADDR__PA300_CenterRollsWidth" vartype="1"/>
+
+	<bit id="45" bit="0" address = "29" area="flag" min="0" max="1"  description ="ADDR__DWS350_PressHeight1" vartype="1"/>
+	
+	<bit id="46" bit="1" address = "29" area="flag" min="0" max="1"  description ="ADDR__DWS350_PressHeight2" vartype="1"/>
+	
+	<bit id="47" bit="2" address = "29" area="flag" min="0" max="1"  description ="ADDR__DWS350_PressHeight3" vartype="1"/>
+	
+	<bit id="48" bit="5" address = "46" area="flag" min="0" max="1"  description ="ADDR__DWS350_CenterRollsWidth" vartype="1"/>
+
+	<bit id="49" bit="6" address = "46" area="flag" min="0" max="1"  description ="ADDR__DWS350_OutRollsWidth" vartype="1"/>
+	
+	<bit id="50" bit="2" address = "47" area="flag" min="0" max="1"  description ="ADDR__DWS350_BotSawsHeight" vartype="1"/>
+
+</bits>
